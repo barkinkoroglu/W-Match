@@ -2,7 +2,7 @@ import React from "react";
 import Notification from "./Notification";
 function NotificationFeed() {
   return (
-    <div className="flex-[0.6] flex-col mx-12">
+    <div className="flex-[0.5] flex-col mx-12">
       <Notification />
       <Notification />
       <Notification />

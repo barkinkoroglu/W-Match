@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import AbcIcon from "@mui/icons-material/Abc";
 import WorkIcon from "@mui/icons-material/Work";
 import Post from "./Post";
+import Createtest from "./Createtest";
 
 function Feed() {
+  const [showCreateTest, setShowCreateTest] = useState(false);
+  const [showCreateJob, setShowCreateJob] = useState(false);
   return (
-    <div className="flex-[0.6] flex-col mx-12">
+    <div className="flex-[0.5] flex-col mx-12">
       <div className="  p-4 bg-white flex flex-col rounded-lg gap-y-3">
         <div className="flex gap-x-4">
           <Avatar
@@ -22,16 +25,33 @@ function Feed() {
           </form>
         </div>
         <div className=" flex items-center justify-end gap-x-4">
-          <div className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-full">
+          <div
+            onClick={() => setShowCreateTest(!showCreateTest)}
+            className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-full cursor-pointer"
+          >
             <AbcIcon className="text-green-500" />
             <h3>Create Test</h3>
           </div>
-          <div className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-full">
+          <div
+            onClick={() => setShowCreateJob(!showCreateJob)}
+            className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-full cursor-pointer"
+          >
             <WorkIcon className="text-amber-900" />
             <h3>Create Job</h3>
           </div>
         </div>
       </div>
+      {(showCreateTest || showCreateJob) && (
+        <div className="fixed top-0 left-0 right-0 bottom-0 z-50 bg-slate-900 opacity-75"></div>
+      )}
+
+      {showCreateTest && (
+        <Createtest
+          showCreateTest={showCreateTest}
+          setShowCreateTest={setShowCreateTest}
+        />
+      )}
+
       <span className="flex w-full border-b-2 my-3  border-gray-300 border-solid"></span>
       <Post />
       <Post />
