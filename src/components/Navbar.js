@@ -71,7 +71,7 @@ function Navbar() {
                   </div>
                   <div className="flex flex-col py-1 gap-y-2  ">
                     <a
-                      href="/home"
+                      href="/profile"
                       className="flex justify-center w-full border border-blue-300 rounded-full hover:bg-slate-400"
                     >
                       View Profile
