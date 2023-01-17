@@ -1,4 +1,3 @@
-import { Widgets } from "@mui/icons-material";
 import React from "react";
 import Feed from "../components/Feed";
 import Navbar from "../components/Navbar";

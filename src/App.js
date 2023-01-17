@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/homepage";
 import Notifications from "./pages/notifications";
 import Profile from "./pages/profile";
+import Jobs from "./pages/jobs";
 function App() {
   return (
     <Router>
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<Homepage />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/jobs" element={<Jobs />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </Router>

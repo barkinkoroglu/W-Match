@@ -56,7 +56,7 @@ function Navbar() {
               <ArrowDropDownIcon />
             </div>
             {showdrop && (
-              <div className="absolute w-72 h-40 p-2 bg-slate-200 right-0 top-16 rounded-lg  ">
+              <div className="absolute w-72 h-40 p-2 bg-gray-100 shadow-lg right-0 top-16 rounded-lg  ">
                 <div className="flex flex-col">
                   <div className="flex border-b-2 border-gray-300 pb-2">
                     <div>
@@ -72,11 +72,11 @@ function Navbar() {
                   <div className="flex flex-col py-1 gap-y-2  ">
                     <a
                       href="/profile"
-                      className="flex justify-center w-full border border-blue-300 rounded-full hover:bg-slate-400"
+                      className="flex justify-center w-full border border-gray-500 rounded-full hover:bg-slate-400"
                     >
                       View Profile
                     </a>
-                    <button className=" w-full border border-blue-300 rounded-full hover:bg-slate-400">
+                    <button className=" w-full border border-gray-500 rounded-full hover:bg-slate-400">
                       Logout
                     </button>
                   </div>
