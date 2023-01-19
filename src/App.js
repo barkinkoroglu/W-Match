@@ -8,6 +8,7 @@ import Homepage from "./pages/homepage";
 import Notifications from "./pages/notifications";
 import Profile from "./pages/profile";
 import Jobs from "./pages/jobs";
+import Test from "./pages/test";
 function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/jobs" element={<Jobs />} />
+        <Route path="/test/:id" element={<Test />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </Router>
