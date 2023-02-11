@@ -35,7 +35,7 @@ function Register() {
         className="absolute top-0 left-0 h-full w-full object-cover  "
       />
       <div className="absolute top-0 left-0  h-full w-full  bg-slate-600 opacity-50"></div>
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 z-10 my-4">
+      <div className="container max-w-xl mx-auto flex-1 flex flex-col items-center justify-center px-2 z-10 my-4">
         <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
           <Formik
             validationSchema={RegisterSchema}

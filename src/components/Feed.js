@@ -4,6 +4,7 @@ import AbcIcon from "@mui/icons-material/Abc";
 import WorkIcon from "@mui/icons-material/Work";
 import Post from "./Post";
 import Createtest from "./Createtest";
+import CreateJob from "./CreateJob";
 
 function Feed() {
   const [showCreateTest, setShowCreateTest] = useState(false);
@@ -49,6 +50,13 @@ function Feed() {
         <Createtest
           showCreateTest={showCreateTest}
           setShowCreateTest={setShowCreateTest}
+        />
+      )}
+
+      {showCreateJob && (
+        <CreateJob
+          showCreateJob={showCreateJob}
+          setShowCreateJob={setShowCreateJob}
         />
       )}
 
