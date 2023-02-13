@@ -9,6 +9,8 @@ import Notifications from "./pages/notifications";
 import Profile from "./pages/profile";
 import Jobs from "./pages/jobs";
 import Test from "./pages/test";
+import UserRegister from "./pages/userRegister";
+import CompanyRegister from "./pages/companyRegister";
 function App() {
   return (
     <Router>
@@ -16,6 +18,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/register/user" element={<UserRegister />} />
+        <Route path="/register/company" element={<CompanyRegister />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/profile" element={<Profile />} />
