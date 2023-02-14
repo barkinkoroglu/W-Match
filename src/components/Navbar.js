@@ -5,8 +5,17 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import WorkIcon from "@mui/icons-material/Work";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Avatar } from "@mui/material";
+import { logout } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 function Navbar() {
   const [showdrop, setShowdrop] = useState(false);
+  const navigate = useNavigate();
+  const handlelogout = async () => {
+    await logout();
+    navigate("/");
+  };
   const handleSearch = () => {
     console.log("Arandi");
   };
@@ -76,7 +85,10 @@ function Navbar() {
                     >
                       View Profile
                     </a>
-                    <button className=" w-full border border-gray-500 rounded-full hover:bg-slate-400">
+                    <button
+                      onClick={() => handlelogout()}
+                      className=" w-full border border-gray-500 rounded-full hover:bg-slate-400"
+                    >
                       Logout
                     </button>
                   </div>

@@ -1,11 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import TestElement from "../components/Test/TestElement";
 import Data2 from "../questions/examquestion.json";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { updateExam } from "../firebase";
 function Test() {
   const [data, setData] = useState([]);
   const [score, setScore] = useState(0);
   const [examtime, setExamtime] = useState(500);
   const timerId = useRef();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  console.log("User bilgisi", user);
+  const param = useParams();
+  console.log("Param bilgisi", param.id);
   const fetchJson = () => {
     fetch("../questions/examquestion.json")
       .then((response) => response.json())
@@ -23,12 +31,20 @@ function Test() {
 
   useEffect(() => {
     if (examtime === 0) {
+      if (score >= 45) {
+        updateExam(user.uid, param.id);
+      }
       clearInterval(timerId.current);
+      navigate(`/home`);
     }
   }, [examtime]);
-  useEffect(() => {
-    //fetchJson();
-  }, []);
+
+  const handleSubmit = () => {
+    if (score >= 45) {
+      updateExam(user.uid, param.id);
+      navigate(`/home`);
+    }
+  };
 
   return (
     <div className="min-h-screenh-screen   bg-gray-100 relative ">
@@ -52,7 +68,10 @@ function Test() {
         })}
       </div>
       <div className="flex max-w-6xl px-3 py-5 mx-auto bg-white justify-end">
-        <button className=" p-2 px-3 bg-slate-200 rounded-full  text-lg text-gray-800 hover:bg-slate-400">
+        <button
+          onClick={() => handleSubmit()}
+          className=" p-2 px-3 bg-slate-200 rounded-full  text-lg text-gray-800 hover:bg-slate-400"
+        >
           {" "}
           Submit the answer
         </button>

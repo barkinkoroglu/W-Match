@@ -15,7 +15,6 @@ function UserRegister() {
   const [tNumber, setTNumber] = useState("");
   const options = useMemo(() => countryList().getData(), []);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleSubmit = async (values, actions) => {
     console.log(values, country.label, tNumber);
@@ -44,13 +43,11 @@ function UserRegister() {
       password
     );
     if (response) {
-      navigate(location.state?.return_url || "/home", {
-        replace: true,
-      });
+      navigate(`/test/${JobCategory}`);
     }
   };
   return (
-    <div class="bg-grey-lighter h-full flex flex-col relative">
+    <div className="bg-grey-lighter h-full flex flex-col relative">
       <Helmet>
         <title>Register • W-MATCH</title>
       </Helmet>
@@ -103,7 +100,7 @@ function UserRegister() {
                 {/* <p>{`You selected ${errors.firstname}`}</p> */}
                 <input
                   type="text"
-                  class="block border border-grey-light w-full p-3 rounded mt-4"
+                  className="block border border-grey-light w-full p-3 rounded mt-4"
                   name="lastname"
                   placeholder="Last Name"
                   value={values.lastname}
@@ -111,7 +108,7 @@ function UserRegister() {
                 />
                 <input
                   type="text"
-                  class="block border border-grey-light w-full p-3 rounded mt-4"
+                  className="block border border-grey-light w-full p-3 rounded mt-4"
                   name="username"
                   placeholder="Username"
                   value={values.username}
@@ -122,7 +119,7 @@ function UserRegister() {
                 )}
                 <input
                   type="text"
-                  class="block border border-grey-light w-full p-3 rounded mt-4"
+                  className="block border border-grey-light w-full p-3 rounded mt-4"
                   name="email"
                   placeholder="Email"
                   value={values.email}
@@ -141,7 +138,7 @@ function UserRegister() {
                   placeholder="Select Country"
                 />
                 {/* <p>{`You selected ${country.label}`}</p> */}
-                <p>{`You selected ${country.label}`}</p>
+                {/* <p>{`You selected ${country.label}`}</p> */}
                 {/* <RegionDropdown
             country={country}
             value={city}
@@ -159,7 +156,7 @@ function UserRegister() {
                 {errors.adressline1 && touched.adressline1 && (
                   <div className="text-red-600">{errors.adressline1}</div>
                 )}
-                <p>{`You selected ${values.adressline1}`}</p>
+                {/* <p>{`You selected ${values.adressline1}`}</p> */}
                 <input
                   type="text"
                   class="block border border-grey-light w-full p-3 rounded mt-4"
@@ -169,7 +166,7 @@ function UserRegister() {
                   value={values.adressline2}
                   onChange={handleChange}
                 />
-                <p>{`You selected ${values.adressline2}`}</p>
+                {/* <p>{`You selected ${values.adressline2}`}</p> */}
                 <PhoneInput
                   containerStyle={{
                     border: "none",
@@ -187,7 +184,7 @@ function UserRegister() {
                   //onChange={handleChange}
                   className=" w-full flex border   rounded mt-4"
                 />
-                <p>{`You selected ${tNumber}`}</p>
+                {/* <p>{`You selected ${tNumber}`}</p> */}
                 <input
                   type="text"
                   class="block border border-grey-light w-full p-3 rounded mt-4"
@@ -218,7 +215,7 @@ function UserRegister() {
                     <option value="React">React.js</option>
                   </select>
                   {/* <p>{`You selected ${jobcategory}`}</p> */}
-                  <p>{`You selected ${values.JobCategory}`}</p>
+                  {/* <p>{`You selected ${values.JobCategory}`}</p> */}
                 </div>
 
                 <input

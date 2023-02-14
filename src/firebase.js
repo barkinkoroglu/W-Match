@@ -8,7 +8,16 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
+import toast from "react-hot-toast";
+import { userHandle } from "./utils";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDye5cZ1SUj2NU4amRvK9uVxWtm_AVI7rU",
@@ -23,6 +32,36 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const dbUser = await getDoc(doc(db, "users", user.uid));
+    let data = {
+      uid: user.uid,
+      email: user.email,
+      ...dbUser.data(),
+    };
+    userHandle(data);
+  } else {
+    userHandle(false);
+  }
+});
+
+export const login = async (email, password) => {
+  try {
+    return await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    toast.error(err.code);
+  }
+};
+
+export const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    toast.error(err.code);
+  }
+};
 
 export const companyRegister = async (
   companyname,
@@ -62,7 +101,7 @@ export const companyRegister = async (
       return response.user;
     }
   } catch (error) {
-    console.log(error);
+    toast.error(error);
   }
 };
 
@@ -102,11 +141,19 @@ export const userRegister = async (
         jobfunct: jobfunct,
         JobCategory: JobCategory,
         notifications: [],
+        wmatchTests: [],
       });
-      console.log(response);
+      //console.log(response);
       return response.user;
     }
   } catch (error) {
-    console.log(error);
+    toast.error(error);
   }
+};
+
+export const updateExam = async (userid, test) => {
+  const dbUser = doc(db, "users", userid);
+  await updateDoc(dbUser, {
+    wmatchTests: arrayUnion(test),
+  });
 };
