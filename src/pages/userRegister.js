@@ -44,6 +44,7 @@ function UserRegister() {
     );
     if (response) {
       navigate(`/test/${JobCategory}`);
+      console.log(response);
     }
   };
   return (

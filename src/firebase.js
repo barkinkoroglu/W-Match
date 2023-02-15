@@ -119,35 +119,42 @@ export const userRegister = async (
   password
 ) => {
   try {
-    const response = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    if (response) {
-      await setDoc(doc(db, "usernames", username), {
-        user_id: response.user.uid,
-      });
+    const user = await getDoc(doc(db, "usernames", username));
+    if (user.exists()) {
+      toast.error(` The username "${username}" is being used by someone else.`);
+    } else {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (response.user) {
+        await setDoc(doc(db, "usernames", username), {
+          user_id: response.user.uid,
+        });
 
-      await setDoc(doc(db, "users", response.user.uid), {
-        type: 1,
-        name: name,
-        lastname: lastname,
-        username: username,
-        country: country,
-        addressline1: addressline1,
-        addressline2: addressline2,
-        tnumber: tnumber,
-        jobfunct: jobfunct,
-        JobCategory: JobCategory,
-        notifications: [],
-        wmatchTests: [],
-      });
-      //console.log(response);
+        await setDoc(doc(db, "users", response.user.uid), {
+          type: 1,
+          name: name,
+          lastname: lastname,
+          username: username,
+          country: country,
+          email: email,
+          addressline1: addressline1,
+          addressline2: addressline2,
+          tnumber: tnumber,
+          jobfunct: jobfunct,
+          JobCategory: JobCategory,
+          notifications: [],
+          wmatchTests: [],
+        });
+        //console.log(response);
+      }
       return response.user;
     }
   } catch (error) {
-    toast.error(error);
+    toast.error("This E-Mail Is Already Used");
+    throw new Error("E-Mail!");
   }
 };
 
