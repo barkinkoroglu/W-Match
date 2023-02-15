@@ -11,10 +11,20 @@ import { useSelector } from "react-redux";
 
 function Navbar() {
   const [showdrop, setShowdrop] = useState(false);
+  const [userProfile, setUserProfile] = useState("");
+  const user = useSelector((state) => state.auth.user);
+
   const navigate = useNavigate();
   const handlelogout = async () => {
     await logout();
     navigate("/");
+  };
+  const handleprofil = () => {
+    if (user.type === 1) {
+      navigate(`/profile/${user.username}`);
+    } else {
+      navigate(`/profile/${user.companyname}`);
+    }
   };
   const handleSearch = () => {
     console.log("Arandi");
@@ -79,12 +89,12 @@ function Navbar() {
                     </div>
                   </div>
                   <div className="flex flex-col py-1 gap-y-2  ">
-                    <a
-                      href="/profile"
+                    <button
+                      onClick={() => handleprofil()}
                       className="flex justify-center w-full border border-gray-500 rounded-full hover:bg-slate-400"
                     >
                       View Profile
-                    </a>
+                    </button>
                     <button
                       onClick={() => handlelogout()}
                       className=" w-full border border-gray-500 rounded-full hover:bg-slate-400"

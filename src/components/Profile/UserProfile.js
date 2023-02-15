@@ -5,9 +5,10 @@ import React from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
-function UserProfile() {
+function UserProfile({ user }) {
+  console.log(user.wmatchTests);
   return (
-    <div className="flex flex-[0.7]   flex-col mx-12 gap-y-3 pb-3 ">
+    <div className="flex flex-[0.7] min-h-screen   flex-col mx-12 gap-y-3 pb-3 ">
       <div className="max-h-[490px] bg-white rounded-lg flex flex-col ">
         <div className=" flex flex-1 items-end relative min-h-[237px] ">
           <div className="p-2">
@@ -43,21 +44,20 @@ function UserProfile() {
         </div>
         <div className="flex flex-1 p-2">
           <div>
-            <h1 className="text-lg font-medium">Barkin Köroğlu</h1>
-            <h1 className="text-gray-500 font-light">
-              Student at Yaşar University, Computer Engineering
-            </h1>
-            <p className="text-gray-500 font-light text-sm">Manisa, Turkey</p>
+            <h1 className="text-lg font-medium">{`${user.name} ${user.lastname}`}</h1>
+            <h1 className="text-gray-500 font-light">{user.jobfunct}</h1>
+            <p className="text-gray-500 font-light text-sm">{user.country}</p>
             <div className="flex gap-x-2 pt-2">
-              <div className="py-1 px-2 bg-slate-300 rounded-full text-sm font-light">
-                HTML
-              </div>
-              <div className="py-1 px-2 bg-slate-300 rounded-full text-sm font-light">
-                CSS
-              </div>
-              <div className="py-1 px-2 bg-slate-300 rounded-full text-sm font-light">
-                Java
-              </div>
+              {user.wmatchTests.map((hero, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="py-1 px-2 bg-slate-300 rounded-full text-sm font-light"
+                  >
+                    {hero}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

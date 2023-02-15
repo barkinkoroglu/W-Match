@@ -3,7 +3,12 @@ import Navbar from "../components/Navbar";
 import NotificationFeed from "../components/Notification/NotificationFeed";
 import Sidebar from "../components/Sidebar";
 import Widget from "../components/Widget";
+import { useSelector } from "react-redux";
 function Notifications() {
+  const user = useSelector((state) => state.auth.user);
+  if (user === null) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="w-full  ">
       <Navbar />

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import PhoneInput from "react-phone-input-2";
@@ -9,7 +9,6 @@ import { RegisterSchema } from "../validation/index";
 import { Formik, Form, ErrorMessage } from "formik";
 import { userRegister } from "../firebase";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { getCountryCode } from "../utils";
 
 function UserRegister() {
   const [country, setCountry] = useState("");
@@ -47,14 +46,6 @@ function UserRegister() {
       navigate(`/test/${JobCategory}`);
     }
   };
-
-  useEffect(() => {
-    const countryShortName = country.value || country;
-    console.log(`countryShortName`,countryShortName)
-  if (country) setTNumber(getCountryCode(countryShortName.toUpperCase()));
-}, [country])
-  
-  console.log(country)
   return (
     <div className="bg-grey-lighter h-full flex flex-col relative">
       <Helmet>

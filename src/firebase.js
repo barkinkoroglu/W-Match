@@ -157,3 +157,13 @@ export const updateExam = async (userid, test) => {
     wmatchTests: arrayUnion(test),
   });
 };
+
+export const getUserInfo = async (uname) => {
+  const username = await getDoc(doc(db, "usernames", uname));
+  if (username.exists()) {
+    return (await getDoc(doc(db, "users", username.data().user_id))).data();
+  } else {
+    toast.error("User not found!");
+    throw new Error("User not found!");
+  }
+};
