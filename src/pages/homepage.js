@@ -16,11 +16,7 @@ function Homepage() {
       <Navbar />
       <div className=" bg-gray-50">
         <div className="flex max-w-6xl px-3 pt-3 mx-auto  ">
-          <Sidebar
-            name={user.name}
-            lastname={user.lastname}
-            jobfunct={user.jobfunct}
-          />
+          <Sidebar />
           <Feed usertype={user.type} />
           <Widget />
         </div>

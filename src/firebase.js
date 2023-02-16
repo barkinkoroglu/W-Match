@@ -35,13 +35,23 @@ const db = getFirestore(app);
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    const dbUser = await getDoc(doc(db, "users", user.uid));
-    let data = {
-      uid: user.uid,
-      email: user.email,
-      ...dbUser.data(),
-    };
-    userHandle(data);
+    let dbUser = await getDoc(doc(db, "user", user.uid));
+    if (dbUser.data() === undefined) {
+      const dbUser = await getDoc(doc(db, "companies", user.uid));
+      let data = {
+        uid: user.uid,
+        email: user.email,
+        ...dbUser.data(),
+      };
+      userHandle(data);
+    } else {
+      let data = {
+        uid: user.uid,
+        email: user.email,
+        ...dbUser.data(),
+      };
+      userHandle(data);
+    }
   } else {
     userHandle(false);
   }
@@ -80,7 +90,7 @@ export const companyRegister = async (
       password
     );
     if (response) {
-      await setDoc(doc(db, "companynames", companyname), {
+      await setDoc(doc(db, "users", companyname), {
         user_id: response.user.uid,
       });
 
@@ -168,7 +178,18 @@ export const updateExam = async (userid, test) => {
 export const getUserInfo = async (uname) => {
   const username = await getDoc(doc(db, "usernames", uname));
   if (username.exists()) {
-    return (await getDoc(doc(db, "users", username.data().user_id))).data();
+    const res = (
+      await getDoc(doc(db, "users", username.data().user_id))
+    ).data();
+    console.log("RESS", res);
+    if (res === undefined) {
+      const res2 = (
+        await getDoc(doc(db, "companies", username.data().user_id))
+      ).data();
+      console.log("RESS2", res2);
+      return res2;
+    }
+    return res;
   } else {
     toast.error("User not found!");
     throw new Error("User not found!");
