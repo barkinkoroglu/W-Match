@@ -42,8 +42,8 @@ function Test() {
   const handleSubmit = () => {
     if (score >= 45) {
       updateExam(user.uid, param.id);
-      navigate(`/home`);
     }
+    navigate(`/home`);
   };
 
   return (

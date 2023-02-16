@@ -195,3 +195,10 @@ export const getUserInfo = async (uname) => {
     throw new Error("User not found!");
   }
 };
+
+export const createPost = async (userid, test) => {
+  const dbUser = doc(db, "companies", userid);
+  await updateDoc(dbUser, {
+    posts: arrayUnion(test),
+  });
+};

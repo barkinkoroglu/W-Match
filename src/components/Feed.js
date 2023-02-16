@@ -5,10 +5,32 @@ import WorkIcon from "@mui/icons-material/Work";
 import Post from "./Post";
 import Createtest from "./Createtest";
 import CreateJob from "./CreateJob";
+import { useSelector } from "react-redux";
+import { createPost } from "../firebase";
 
 function Feed({ usertype }) {
   const [showCreateTest, setShowCreateTest] = useState(false);
   const [showCreateJob, setShowCreateJob] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const user = useSelector((state) => state.auth.user);
+  console.log("POSTLARRRR", user.posts[0]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (inputValue !== "") {
+      const att = {
+        name: user.companyname,
+        email: user.email,
+        likes: [],
+        comments: [],
+        data: inputValue,
+        time: Date.now(),
+      };
+      console.log(att);
+      await createPost(user.uid, att);
+      setInputValue("");
+    }
+  };
 
   return (
     <div className="flex-[0.5] flex-col mx-12">
@@ -20,11 +42,13 @@ function Feed({ usertype }) {
                 alt="profilphoto"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Brad_Pitt_Fury_2014.jpg/800px-Brad_Pitt_Fury_2014.jpg"
               />
-              <form className="flex flex-1">
+              <form onSubmit={(e) => handleSubmit(e)} className="flex flex-1">
                 <input
                   className=" w-full rounded-full border pl-5"
                   type="text"
                   placeholder="Start a post"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
                 />
               </form>
             </div>
@@ -68,9 +92,13 @@ function Feed({ usertype }) {
       )}
 
       <div>
-        <Post />
-        <Post />
-        <Post />
+        {user.posts.map((index, post) => {
+          return (
+            <div>
+              <Post key={index} post={user.posts[post]} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

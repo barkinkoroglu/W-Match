@@ -5,25 +5,21 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import Like from "./Like";
 import CloseIcon from "@mui/icons-material/Close";
 import Comment from "./Comment";
-function Post() {
+function Post(prop) {
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
+  const { email, name, comments, likes, data } = prop.post;
   return (
     <div className="  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4">
       <div className=" flex gap-x-3 ">
         <Avatar />
         <div>
-          <h3 className=" text-lg font-medium">Vestel</h3>
-          <h3 className="text-xs">vestel@hotmail.com</h3>
+          <h3 className=" text-lg font-medium">{name}</h3>
+          <h3 className="text-xs">{email}</h3>
         </div>
       </div>
       <div>
-        <p>
-          Bu bir denemedirBu bir denemedirBu bir denemedirBu bir denemedirBu bir
-          denemedir Bu bir denemedir Bu bir denemedir Bu bir denemedir Bu bir
-          denemedir Bu bir denemedir Bu bir denemedir Bu bir denemedir Bu bir
-          denemedir Bu bir denemedir Bu bir denemedir
-        </p>
+        <p>{data}</p>
       </div>
       <div className="flex justify-between items-center text-xs">
         <div className="flex items-center gap-x-1">
