@@ -35,7 +35,7 @@ const db = getFirestore(app);
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    let dbUser = await getDoc(doc(db, "user", user.uid));
+    const dbUser = await getDoc(doc(db, "users", user.uid));
     if (dbUser.data() === undefined) {
       const dbUser = await getDoc(doc(db, "companies", user.uid));
       let data = {
@@ -90,7 +90,7 @@ export const companyRegister = async (
       password
     );
     if (response) {
-      await setDoc(doc(db, "users", companyname), {
+      await setDoc(doc(db, "usernames", companyname), {
         user_id: response.user.uid,
       });
 
@@ -107,7 +107,6 @@ export const companyRegister = async (
         notifications: [],
         posts: [],
       });
-      console.log(response);
       return response.user;
     }
   } catch (error) {
@@ -158,7 +157,6 @@ export const userRegister = async (
           notifications: [],
           wmatchTests: [],
         });
-        //console.log(response);
       }
       return response.user;
     }
@@ -181,12 +179,12 @@ export const getUserInfo = async (uname) => {
     const res = (
       await getDoc(doc(db, "users", username.data().user_id))
     ).data();
-    console.log("RESS", res);
+
     if (res === undefined) {
       const res2 = (
         await getDoc(doc(db, "companies", username.data().user_id))
       ).data();
-      console.log("RESS2", res2);
+
       return res2;
     }
     return res;
@@ -201,4 +199,20 @@ export const createPost = async (userid, test) => {
   await updateDoc(dbUser, {
     posts: arrayUnion(test),
   });
+};
+
+export const createComment = async (userid, test, index) => {
+  // const dbUser = doc(db, "companies", userid);
+  // let updatedComments = {
+  //   ...dbUser.data(),
+  //   post: {
+  //     ...dbUser.data().posts,
+  //     posts[0]: dbUser.data().posts[index],
+  //   }
+  // };
+  // await updateDoc(dbUser, {
+  //   posts: {
+  //     comments: arrayUnion(test),
+  //   },
+  // });
 };
