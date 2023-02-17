@@ -91,13 +91,15 @@ function Feed({ usertype }) {
       )}
 
       <div>
-        {user.posts.map((index, post) => {
+        {user.posts ? user.posts.map((index, post) => {
           return (
             <div>
               <Post key={index} post={user.posts[post]} />
             </div>
           );
-        })}
+        }) : <div>
+          No posts to show
+        </div>}
       </div>
     </div>
   );
