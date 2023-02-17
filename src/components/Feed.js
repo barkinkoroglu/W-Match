@@ -13,7 +13,6 @@ function Feed({ usertype }) {
   const [showCreateJob, setShowCreateJob] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const user = useSelector((state) => state.auth.user);
-  console.log("POSTLARRRR", user.posts[0]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
