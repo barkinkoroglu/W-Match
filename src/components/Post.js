@@ -5,10 +5,27 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import Like from "./Like";
 import CloseIcon from "@mui/icons-material/Close";
 import Comment from "./Comment";
+import { createComment } from "../firebase";
 function Post(prop) {
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
+  const [commentValue, setCommentValue] = useState("");
   const { email, name, comments, likes, data } = prop.post;
+  console.log("Post propları", prop);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (commentValue !== "") {
+      const att = {
+        name: prop.name,
+        comment: commentValue,
+      };
+      console.log(att);
+      await createComment(prop.userid, att, 0);
+      setCommentValue("");
+    }
+  };
   return (
     <div className="  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4">
       <div className=" flex gap-x-3 ">
@@ -55,11 +72,13 @@ function Post(prop) {
         <div className="flex flex-col gap-y-3">
           <div className="flex gap-x-2">
             <Avatar />
-            <form className="flex w-full   ">
+            <form onSubmit={(e) => handleSubmit(e)} className="flex w-full    ">
               <input
                 className="w-full border rounded-lg  outline-none px-2 focus:border-gray-500 "
                 type="text"
                 placeholder="Add a comment..."
+                value={commentValue}
+                onChange={(e) => setCommentValue(e.target.value)}
               />
             </form>
           </div>

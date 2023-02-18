@@ -13,6 +13,7 @@ function Feed({ usertype }) {
   const [showCreateJob, setShowCreateJob] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const user = useSelector((state) => state.auth.user);
+  console.log("User attributes", user);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -32,7 +33,7 @@ function Feed({ usertype }) {
   };
 
   return (
-    <div className="flex-[0.5] flex-col mx-12">
+    <div className="flex-[0.5]  flex-col mx-12">
       {usertype === 2 && (
         <div>
           <div className="  p-4 bg-white flex flex-col rounded-lg gap-y-3">
@@ -91,15 +92,18 @@ function Feed({ usertype }) {
       )}
 
       <div>
-        {user.posts ? user.posts.map((index, post) => {
+        {user.posts?.map((index, post) => {
           return (
             <div>
-              <Post key={index} post={user.posts[post]} />
+              <Post
+                key={index}
+                post={user.posts[post]}
+                userid={user.uid}
+                name={user.companyname}
+              />
             </div>
           );
-        }) : <div>
-          No posts to show
-        </div>}
+        })}
       </div>
     </div>
   );

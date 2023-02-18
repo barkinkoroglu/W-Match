@@ -22,9 +22,9 @@ function Login() {
       <img
         src="https://img.freepik.com/free-photo/side-view-cropped-unrecognizable-business-people-working-common-desk_1098-20474.jpg?w=1060&t=st=1673169877~exp=1673170477~hmac=94ebd6bf3c88b11997d9ef383652990376f38e10fdcd809e1bc97f7f2bda444a"
         alt="background"
-        className="absolute top-0 left-0  h-screen w-screen object-fill   "
+        className="absolute top-0 left-0  h-screen w-full object-fill   "
       />
-      <div className="absolute top-0 left-0  h-screen w-screen bg-slate-600 opacity-50"></div>
+      <div className="absolute top-0 left-0  h-screen w-full bg-slate-600 opacity-50"></div>
       <a
         className="text-white z-10 flex w-full p-3 md:pl-10 justify-start items-center h-16 font-bold text-4xl"
         href="/"

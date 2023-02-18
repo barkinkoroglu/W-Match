@@ -107,6 +107,7 @@ export const companyRegister = async (
         notifications: [],
         posts: [],
       });
+      console.log(response);
       return response.user;
     }
   } catch (error) {
@@ -157,6 +158,7 @@ export const userRegister = async (
           notifications: [],
           wmatchTests: [],
         });
+        //console.log(response);
       }
       return response.user;
     }
@@ -179,7 +181,6 @@ export const getUserInfo = async (uname) => {
     const res = (
       await getDoc(doc(db, "users", username.data().user_id))
     ).data();
-
     if (res === undefined) {
       const res2 = (
         await getDoc(doc(db, "companies", username.data().user_id))

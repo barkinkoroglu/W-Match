@@ -86,7 +86,6 @@ function CompanyRegister() {
                   <div className=" text-red-600">{errors.companyname}</div>
                 )}
                 {/* <p>{`You selected ${errors.firstname}`}</p> */}
-
                 <textarea
                   className="block border border-grey-light w-full p-3 rounded mt-4  outline-none   overflow-y-auto resize-none scrollbar-hide "
                   name="about"
@@ -118,7 +117,6 @@ function CompanyRegister() {
                   placeholder="Select Country"
                 />
                 {/* <p>{`You selected ${country.label}`}</p> */}
-                <p>{`You selected ${country.label}`}</p>
                 {/* <RegionDropdown
             country={country}
             value={city}
@@ -136,7 +134,6 @@ function CompanyRegister() {
                 {errors.adressline1 && touched.adressline1 && (
                   <div className="text-red-600">{errors.adressline1}</div>
                 )}
-                <p>{`You selected ${values.adressline1}`}</p>
                 <input
                   type="text"
                   class="block border border-grey-light w-full p-3 rounded mt-4"
@@ -146,7 +143,6 @@ function CompanyRegister() {
                   value={values.adressline2}
                   onChange={handleChange}
                 />
-                <p>{`You selected ${values.adressline2}`}</p>
                 <PhoneInput
                   containerStyle={{
                     border: "none",
@@ -164,8 +160,7 @@ function CompanyRegister() {
                   //onChange={handleChange}
                   className=" w-full flex border   rounded mt-4"
                 />
-                <p>{`You selected ${tNumber}`}</p>
-
+                -
                 <input
                   type="password"
                   class="block border border-grey-light w-full p-3 rounded mt-4"
