@@ -203,17 +203,33 @@ export const createPost = async (userid, test) => {
 };
 
 export const createComment = async (userid, test, index) => {
-  // const dbUser = doc(db, "companies", userid);
-  // let updatedComments = {
-  //   ...dbUser.data(),
-  //   post: {
-  //     ...dbUser.data().posts,
-  //     posts[0]: dbUser.data().posts[index],
-  //   }
-  // };
-  // await updateDoc(dbUser, {
-  //   posts: {
-  //     comments: arrayUnion(test),
-  //   },
-  // });
+  const dbUser = await getDoc(doc(db, "companies", userid));
+  const postlar = dbUser.data().posts;
+  postlar[index].comments.push(test);
+  console.log("POSLARIN DEGERİ BURDA", postlar);
+  await setDoc(doc(db, "companies", userid), {
+    ...dbUser.data(),
+    posts: postlar,
+  });
+};
+
+export const createLike = async (userid, test, index) => {
+  let flag = 0;
+  const dbUser = await getDoc(doc(db, "companies", userid));
+  const postlar = dbUser.data().posts;
+  for (let i = 0; i < postlar[index].likes.length; i++) {
+    if (postlar[index].likes[i]?.name === test.name) {
+      flag = -1;
+      break;
+    }
+  }
+  if (flag === -1) {
+    postlar[index].likes.splice(index, 1);
+  } else {
+    postlar[index].likes.push(test);
+  }
+  await setDoc(doc(db, "companies", userid), {
+    ...dbUser.data(),
+    posts: postlar,
+  });
 };

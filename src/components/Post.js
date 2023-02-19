@@ -4,14 +4,21 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import Like from "./Like";
 import CloseIcon from "@mui/icons-material/Close";
+import { createComment, createLike } from "../firebase";
 import Comment from "./Comment";
-import { createComment } from "../firebase";
 function Post(prop) {
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [commentValue, setCommentValue] = useState("");
   const { email, name, comments, likes, data } = prop.post;
-  console.log("Post propları", prop);
+  console.log("Post propları", comments);
+
+  const handleLike = async (e) => {
+    const att = {
+      name: prop.name,
+    };
+    await createLike(prop.userid, att, 0);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +63,10 @@ function Post(prop) {
         </h3>
       </div>
       <div className="flex justify-evenly border-t-2 pt-2   ">
-        <div className=" flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center ">
+        <div
+          onClick={() => handleLike()}
+          className=" flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center "
+        >
           <ThumbUpOffAltIcon className="group-hover:text-blue-400" />
           <h3>Like</h3>
         </div>
@@ -83,6 +93,14 @@ function Post(prop) {
             </form>
           </div>
           <div>
+            {/* Bu kisim fallow sistemi gelidiginde güncellenecek */}
+            {/* {comments.map((index, comm) => {
+              return (
+                <div>
+                  <Comment key={index} val={comments[comm]} />
+                </div>
+              );
+            })} */}
             <Comment />
             <Comment />
           </div>
