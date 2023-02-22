@@ -75,6 +75,7 @@ export const logout = async () => {
 
 export const companyRegister = async (
   companyname,
+  username,
   about,
   email,
   country,
@@ -84,37 +85,60 @@ export const companyRegister = async (
   password
 ) => {
   try {
-    const response = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    if (response) {
-      await setDoc(doc(db, "usernames", companyname), {
-        user_id: response.user.uid,
-      });
+    const user = await getDoc(doc(db, "usernames", username));
+    if (user.exists()) {
+      toast.error(` The username "${username}" is being used by someone else.`);
+    } else {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (response.user) {
+        await setDoc(doc(db, "usernames", username), {
+          user_id: response.user.uid,
+        });
 
-      await setDoc(doc(db, "companies", response.user.uid), {
-        type: 2,
-        companyname: companyname,
-        about: about,
-        country: country,
-        addressline1: addressline1,
-        addressline2: addressline2,
-        tnumber: tnumber,
-        followers: [],
-        following: [],
-        notifications: [],
-        posts: [],
-      });
-      console.log(response);
+        let data = {
+          email: email,
+          type: 2,
+          companyname: companyname,
+          username: username,
+          about: about,
+          country: country,
+          addressline1: addressline1,
+          addressline2: addressline2,
+          tnumber: tnumber,
+          followers: [],
+          following: [],
+          notifications: [],
+          posts: [],
+        };
+        userHandle(data);
+        await setDoc(doc(db, "companies", response.user.uid), {
+          email: email,
+          type: 2,
+          companyname: companyname,
+          username: username,
+          about: about,
+          country: country,
+          addressline1: addressline1,
+          addressline2: addressline2,
+          tnumber: tnumber,
+          followers: [],
+          following: [],
+          notifications: [],
+          posts: [],
+        });
+        console.log(response);
+      }
       return response.user;
     }
   } catch (error) {
-    toast.error(error);
+    toast.error("This E-Mail Is Already Used");
+    throw new Error("E-Mail!");
   }
 };
-
 export const userRegister = async (
   name,
   lastname,
@@ -231,5 +255,47 @@ export const createLike = async (userid, test, index) => {
   await setDoc(doc(db, "companies", userid), {
     ...dbUser.data(),
     posts: postlar,
+  });
+};
+
+export const fallowUser = async (companyid, userid, test) => {
+  let flag = 0;
+  const dbCompanyUser = await getDoc(doc(db, "companies", userid));
+  const dbUser = await getDoc(doc(db, "users", userid));
+  const followers = dbCompanyUser.data().followers;
+  const companyname = dbCompanyUser.data().name;
+  const username = dbUser.data().name;
+  // Company -> add to follower
+  for (let i = 0; i < followers.length; i++) {
+    if (followers[i]?.name === username) {
+      flag = -1;
+      followers.splice(i, 1);
+      break;
+    }
+  }
+  if (flag !== -1) {
+    followers.push(test);
+  }
+  await setDoc(doc(db, "companies", userid), {
+    ...dbCompanyUser.data(),
+    followers: followers,
+  });
+
+  flag = 0;
+  // User -> for following
+  const following = dbUser.data().following;
+  for (let i = 0; i < following.length; i++) {
+    if (following[i]?.name === companyname) {
+      flag = -1;
+      following.splice(i, 1);
+      break;
+    }
+  }
+  if (flag !== -1) {
+    following.push(test);
+  }
+  await setDoc(doc(db, "users", userid), {
+    ...dbUser.data(),
+    following: following,
   });
 };

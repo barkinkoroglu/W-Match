@@ -18,11 +18,19 @@ function CompanyRegister() {
   const location = useLocation();
 
   const handleSubmit = async (values, actions) => {
-    const { companyname, about, email, adressline1, adressline2, password } =
-      values;
+    const {
+      companyname,
+      username,
+      about,
+      email,
+      adressline1,
+      adressline2,
+      password,
+    } = values;
 
     const response = await companyRegister(
       companyname,
+      username,
       about,
       email,
       country.label,
@@ -54,6 +62,7 @@ function CompanyRegister() {
             validationSchema={CompanyRegisterSchema}
             initialValues={{
               companyname: "",
+              username: "",
               about: "",
               email: "",
               adressline1: "",
@@ -84,6 +93,17 @@ function CompanyRegister() {
                 />
                 {errors.companyname && touched.companyname && (
                   <div className=" text-red-600">{errors.companyname}</div>
+                )}
+                <input
+                  type="text"
+                  className="block border border-grey-light w-full p-3 rounded mt-4"
+                  name="username"
+                  placeholder="Username"
+                  value={values.username}
+                  onChange={handleChange}
+                />
+                {errors.username && touched.username && (
+                  <div className=" text-red-600">{errors.username}</div>
                 )}
                 {/* <p>{`You selected ${errors.firstname}`}</p> */}
                 <textarea

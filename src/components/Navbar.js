@@ -23,7 +23,7 @@ function Navbar() {
     if (user.type === 1) {
       navigate(`/profile/${user.username}`);
     } else {
-      navigate(`/profile/${user.companyname}`);
+      navigate(`/profile/${user.username}`);
     }
   };
   const handleSearch = () => {

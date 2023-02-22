@@ -4,7 +4,7 @@ export const CompanyRegisterSchema = Yup.object().shape({
   companyname: Yup.string("String dedik")
     .required()
     .max(50, "Maximum 50 Characters"),
-
+  username: Yup.string().required(),
   about: Yup.string().required().max(120, "Maximum 120 Characters"),
   email: Yup.string().required().email(),
   adressline1: Yup.string().required(),
