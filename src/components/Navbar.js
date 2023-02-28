@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import WorkIcon from "@mui/icons-material/Work";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Avatar } from "@mui/material";
-import { logout } from "../firebase";
+import { logout, getCompany } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 function Navbar() {
   const [showdrop, setShowdrop] = useState(false);
   const [userProfile, setUserProfile] = useState("");
+  const [search, setSearch] = useState('')
+  const [results, setResults] = useState()
+
   const user = useSelector((state) => state.auth.user);
 
   const navigate = useNavigate();
@@ -26,9 +30,24 @@ function Navbar() {
       navigate(`/profile/${user.username}`);
     }
   };
-  const handleSearch = () => {
-    console.log("Arandi");
+  const handleSearch = (e) => {
+    setSearch(e.target.value.trim().toLowerCase());
   };
+
+  useEffect(() => {
+    const callValue = async () => {
+      await getCompany(search)
+        .then((user) => {
+          if(user){
+            setResults(user);
+          }
+        })
+    };
+    search.length > 0 && callValue(); 
+  }, [search])
+
+  console.log("results",results)
+
   return (
     <nav className="bg-slate-100 sticky top-0 z-50">
       <div className="flex max-w-6xl px-3 py-1 mx-auto justify-between items-center   ">
@@ -41,6 +60,7 @@ function Navbar() {
               className="px-2 py-1 pl-8 w-72 rounded-lg   "
               type="text"
               placeholder="Search"
+              onChange={handleSearch}
             />
             <SearchIcon
               className="absolute left-1 top-0 bottom-0 my-auto mx-0 "
