@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { setCompanies } from "../store/widget";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -7,17 +8,15 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Avatar } from "@mui/material";
 import { logout, getCompany } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import toast from "react-hot-toast";
+import { useSelector, useDispatch } from "react-redux";
 
 function Navbar() {
   const [showdrop, setShowdrop] = useState(false);
   const [userProfile, setUserProfile] = useState("");
   const [search, setSearch] = useState('')
-  const [results, setResults] = useState()
 
   const user = useSelector((state) => state.auth.user);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handlelogout = async () => {
     await logout();
@@ -38,15 +37,13 @@ function Navbar() {
     const callValue = async () => {
       await getCompany(search)
         .then((user) => {
-          if(user){
-            setResults(user);
+          if (user) {
+            dispatch(setCompanies(user));
           }
         })
     };
-    search.length > 0 && callValue(); 
+    search.length > 0 && callValue();
   }, [search])
-
-  console.log("results",results)
 
   return (
     <nav className="bg-slate-100 sticky top-0 z-50">
