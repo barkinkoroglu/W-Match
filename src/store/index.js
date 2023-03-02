@@ -5,8 +5,7 @@ import widget from "./widget";
 const store = configureStore({
   reducer: {
     auth,
-    widget
+    widget,
   },
 });
-
 export default store;

@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 function Navbar() {
   const [showdrop, setShowdrop] = useState(false);
   const [userProfile, setUserProfile] = useState("");
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("");
 
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -35,15 +35,14 @@ function Navbar() {
 
   useEffect(() => {
     const callValue = async () => {
-      await getCompany(search)
-        .then((user) => {
-          if (user) {
-            dispatch(setCompanies(user));
-          }
-        })
+      await getCompany(search).then((user) => {
+        if (user) {
+          dispatch(setCompanies(user));
+        }
+      });
     };
     search.length > 0 && callValue();
-  }, [search])
+  }, [search]);
 
   return (
     <nav className="bg-slate-100 sticky top-0 z-50">

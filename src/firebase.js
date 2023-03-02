@@ -11,10 +11,12 @@ import {
 import {
   doc,
   getDoc,
+  getDocs,
   getFirestore,
   setDoc,
   updateDoc,
   arrayUnion,
+  collection,
 } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { userHandle } from "./utils";
@@ -180,6 +182,7 @@ export const userRegister = async (
           jobfunct: jobfunct,
           JobCategory: JobCategory,
           notifications: [],
+          following: [],
           wmatchTests: [],
         });
         //console.log(response);
@@ -258,25 +261,32 @@ export const createLike = async (userid, test, index) => {
   });
 };
 
-export const fallowUser = async (companyid, userid, test) => {
+export const fallowUser = async (companyname, username, test) => {
   let flag = 0;
-  const dbCompanyUser = await getDoc(doc(db, "companies", userid));
-  const dbUser = await getDoc(doc(db, "users", userid));
+  const usedataid = await getDoc(doc(db, "usernames", username));
+  const userdataid = usedataid.data();
+  console.log(userdataid);
+  const compdataid = await getDoc(doc(db, "usernames", companyname));
+  const companydataid = compdataid.data();
+  console.log(companydataid.user_id);
+  const dbUser = await getDoc(doc(db, "users", userdataid.user_id));
+  const dbCompanyUser = await getDoc(
+    doc(db, "companies", companydataid.user_id)
+  );
+
   const followers = dbCompanyUser.data().followers;
-  const companyname = dbCompanyUser.data().name;
-  const username = dbUser.data().name;
   // Company -> add to follower
   for (let i = 0; i < followers.length; i++) {
-    if (followers[i]?.name === username) {
+    if (followers[i] === username) {
       flag = -1;
       followers.splice(i, 1);
       break;
     }
   }
   if (flag !== -1) {
-    followers.push(test);
+    followers.push(username);
   }
-  await setDoc(doc(db, "companies", userid), {
+  await setDoc(doc(db, "companies", companydataid.user_id), {
     ...dbCompanyUser.data(),
     followers: followers,
   });
@@ -285,17 +295,28 @@ export const fallowUser = async (companyid, userid, test) => {
   // User -> for following
   const following = dbUser.data().following;
   for (let i = 0; i < following.length; i++) {
-    if (following[i]?.name === companyname) {
+    if (following[i] === companyname) {
       flag = -1;
       following.splice(i, 1);
       break;
     }
   }
   if (flag !== -1) {
-    following.push(test);
+    following.push(companyname);
   }
-  await setDoc(doc(db, "users", userid), {
+  await setDoc(doc(db, "users", userdataid.user_id), {
     ...dbUser.data(),
     following: following,
   });
+};
+
+export const getCompany = async () => {
+  let temp = [];
+  const querySnapshot = await getDocs(collection(db, "companies"));
+  querySnapshot.forEach((doc) => {
+    // console.log(doc.id, " => ", doc.data());
+    temp.push(doc.data());
+  });
+  // console.log(temp);
+  return temp;
 };

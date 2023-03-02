@@ -9,7 +9,6 @@ const widget = createSlice({
   initialState,
   reducers: {
     setCompanies: (state, action) => {
-      console.log("hallo", action)
       state.widget = action.payload;
     },
   },
