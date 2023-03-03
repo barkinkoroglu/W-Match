@@ -7,11 +7,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { createComment, createLike } from "../firebase";
 import Comment from "./Comment";
 function Post(prop) {
+  console.log("Post propları", prop);
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [commentValue, setCommentValue] = useState("");
   const { email, name, comments, likes, data } = prop.post;
-  console.log("Post propları", comments);
 
   const handleLike = async (e) => {
     const att = {

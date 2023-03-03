@@ -320,3 +320,19 @@ export const getCompany = async () => {
   // console.log(temp);
   return temp;
 };
+
+export const getAllPost = async (userid) => {
+  const nposts = [];
+  let user = await getDoc(doc(db, "users", userid));
+  let followers = user.data().following;
+  followers.forEach(async (follower) => {
+    const usedataid = await getDoc(doc(db, "usernames", follower));
+    const userdataid = usedataid.data();
+    const cUser = await getDoc(doc(db, "companies", userdataid.user_id));
+    cUser.data().posts.forEach((post) => {
+      nposts.push(post);
+    });
+  });
+  console.log("FİREBASE POSTLAR ", nposts);
+  return nposts;
+};

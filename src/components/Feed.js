@@ -1,19 +1,27 @@
 import { Avatar } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AbcIcon from "@mui/icons-material/Abc";
 import WorkIcon from "@mui/icons-material/Work";
 import Post from "./Post";
 import Createtest from "./Createtest";
 import CreateJob from "./CreateJob";
 import { useSelector } from "react-redux";
-import { createPost } from "../firebase";
+import { createPost, getAllPost } from "../firebase";
 
 function Feed({ usertype }) {
   const [showCreateTest, setShowCreateTest] = useState(false);
   const [showCreateJob, setShowCreateJob] = useState(false);
+  const [allposts, setAllPost] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const user = useSelector((state) => state.auth.user);
   console.log("User attributes", user);
+  console.log("FEEDEKİ POSTLAR ", allposts);
+  useEffect(() => {
+    console.log("bas deger", user.uid);
+    getAllPost(user.uid)
+      .then((data) => setAllPost(data))
+      .catch((error) => console.log(error));
+  }, [user.uid]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -92,18 +100,22 @@ function Feed({ usertype }) {
       )}
 
       <div>
-        {user.posts?.map((index, post) => {
-          return (
-            <div>
-              <Post
-                key={index}
-                post={user.posts[post]}
-                userid={user.uid}
-                name={user.companyname}
-              />
-            </div>
-          );
-        })}
+        {allposts !== null ? (
+          allposts.map((index, post) => {
+            return (
+              <div>
+                <Post
+                  key={index}
+                  post={post}
+                  userid={user.uid}
+                  name={post.name}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <div>Loading </div>
+        )}
       </div>
     </div>
   );
