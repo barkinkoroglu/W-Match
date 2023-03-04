@@ -8,13 +8,13 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
   const [time, setTime] = useState(0);
   const [qindex, setQindex] = useState(0);
 
-  const Questions = () => {
-    const options = [];
-    for (let index = 0; index < nquestions; index++) {
-      options.push(<Question />);
-    }
-    return options;
-  };
+  // const Questions = () => {
+  //   const options = [];
+  //   for (let index = 0; index < nquestions; index++) {
+  //     options.push(<Question />);
+  //   }
+  //   return options;
+  // };
   return (
     <div className="fixed flex flex-col items-center z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[calc(100vh-64px)] px-4 py-3 rounded bg-white ">
       <div className=" relative py-2 text-lg font-medium border-b-2 w-full text-center">
@@ -52,7 +52,10 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
         </div>
       ) : (
         <div className="flex flex-col overflow-y-auto w-full scrollbar  items-start">
-          {Questions()}
+          <Question
+            nquestions={nquestions}
+            setShowCreateTest={setShowCreateTest}
+          />
         </div>
       )}
       <div className="flex  gap-x-10 mt-3 w-full relative justify-center">
@@ -67,10 +70,6 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
           className="p-1 hover:bg-slate-500 rounded-full flex items-center justify-center"
         >
           <ArrowForwardIosIcon />
-        </button>
-
-        <button className="flex justify-end rounded-full  bg-slate-300 py-1 px-2 absolute right-2 hover:bg-slate-400 ">
-          Create Test
         </button>
       </div>
     </div>

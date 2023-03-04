@@ -338,3 +338,17 @@ export const getAllPost = async (userid) => {
 
   return nposts;
 };
+
+export const createCompanyTest = async (companyid, data) => {
+  const dbUser = await getDoc(doc(db, "companies", companyid));
+  // notifications will be changed
+  const tests = dbUser.data().notifications;
+  data.forEach((temp) => {
+    tests.push(temp);
+  });
+
+  await setDoc(doc(db, "companies", companyid), {
+    ...dbUser.data(),
+    notifications: tests,
+  });
+};
