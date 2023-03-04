@@ -345,20 +345,30 @@ export const getRandomCompany = async () => {
   });
 
   return shuffle(temp);
-}; 
-export const getAllPost = async (userid) => {
-  const nposts = [];
+};
+export const getAllPost = async (userid,userType) => {
+  let nposts = [];
+
   let user = await getDoc(doc(db, "users", userid));
   let followers = user.data().following;
-  followers.forEach(async (follower) => {
-    const usedataid = await getDoc(doc(db, "usernames", follower));
-    const userdataid = usedataid.data();
-    const cUser = await getDoc(doc(db, "companies", userdataid.user_id));
-    const posts = cUser.data().posts;
-    posts.forEach((post) => {
-      nposts.push(post);
+
+  if (followers.length > 0) {
+    followers.forEach(async (follower) => {
+      const usedataid = await getDoc(doc(db, "usernames", follower));
+      const userdataid = usedataid.data();
+      const cUser = await getDoc(doc(db, "companies", userdataid.user_id));
+      const posts = cUser.data().posts;
+      posts.forEach((post) => {
+        nposts.push(post);
+      });
     });
-  });
+  } 
+
+  //when company want to see their own posts
+  if(userType === 2) {
+    const company = await getDoc(doc(db, "companies", userid));
+    nposts = company.data().posts;
+  }
 
   return nposts;
 };

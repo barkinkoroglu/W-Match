@@ -14,15 +14,19 @@ function Feed({ usertype }) {
   const [allposts, setAllPost] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const user = useSelector((state) => state.auth.user);
+  const userType = useSelector((state) => state.auth.user.type);
+
   console.log("User attributes", user);
   console.log("FEEDEKİ POSTLAR ", allposts);
 
-  // useEffect(() => {
-  //   console.log("bas deger", user.uid);
-  //   getAllPost(user.uid, allposts)
-  //     .then((data) => setAllPost(data))
-  //     .catch((error) => console.log(error));
-  // }, [user.uid]);
+  useEffect(() => {
+    (async () => {
+      await getAllPost(user.uid, userType)
+        .then((data) => setAllPost(data))
+        .catch((error) => console.log('ERROR',error));
+    })();
+  }, [user.uid]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -102,7 +106,7 @@ function Feed({ usertype }) {
 
       <div>
         {allposts !== null ? (
-          allposts.map((index, post) => {
+          allposts.map((post, index) => {
             return (
               <Post
                 key={index}
