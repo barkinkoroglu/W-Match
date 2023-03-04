@@ -11,17 +11,18 @@ import { createPost, getAllPost } from "../firebase";
 function Feed({ usertype }) {
   const [showCreateTest, setShowCreateTest] = useState(false);
   const [showCreateJob, setShowCreateJob] = useState(false);
-  const [allposts, setAllPost] = useState(null);
+  const [allposts, setAllPost] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const user = useSelector((state) => state.auth.user);
   console.log("User attributes", user);
   console.log("FEEDEKİ POSTLAR ", allposts);
-  useEffect(() => {
-    console.log("bas deger", user.uid);
-    getAllPost(user.uid)
-      .then((data) => setAllPost(data))
-      .catch((error) => console.log(error));
-  }, [user.uid]);
+
+  // useEffect(() => {
+  //   console.log("bas deger", user.uid);
+  //   getAllPost(user.uid, allposts)
+  //     .then((data) => setAllPost(data))
+  //     .catch((error) => console.log(error));
+  // }, [user.uid]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -103,14 +104,12 @@ function Feed({ usertype }) {
         {allposts !== null ? (
           allposts.map((index, post) => {
             return (
-              <div>
-                <Post
-                  key={index}
-                  post={post}
-                  userid={user.uid}
-                  name={post.name}
-                />
-              </div>
+              <Post
+                key={index}
+                post={post}
+                userid={user.uid}
+                name={post.name}
+              />
             );
           })
         ) : (

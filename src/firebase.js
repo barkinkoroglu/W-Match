@@ -313,11 +313,12 @@ export const fallowUser = async (companyname, username, test) => {
 export const getCompany = async () => {
   let temp = [];
   const querySnapshot = await getDocs(collection(db, "companies"));
+
   querySnapshot.forEach((doc) => {
     // console.log(doc.id, " => ", doc.data());
     temp.push(doc.data());
   });
-  // console.log(temp);
+  console.log("SEARCH BAR", temp);
   return temp;
 };
 
@@ -329,10 +330,11 @@ export const getAllPost = async (userid) => {
     const usedataid = await getDoc(doc(db, "usernames", follower));
     const userdataid = usedataid.data();
     const cUser = await getDoc(doc(db, "companies", userdataid.user_id));
-    cUser.data().posts.forEach((post) => {
+    const posts = cUser.data().posts;
+    posts.forEach((post) => {
       nposts.push(post);
     });
   });
-  console.log("FİREBASE POSTLAR ", nposts);
+
   return nposts;
 };
