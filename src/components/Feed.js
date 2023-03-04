@@ -14,14 +14,14 @@ function Feed({ usertype }) {
   const [allposts, setAllPost] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const user = useSelector((state) => state.auth.user);
-  const userType = useSelector((state) => state.auth.user.type);
+
 
   console.log("User attributes", user);
   console.log("FEEDEKİ POSTLAR ", allposts);
 
   useEffect(() => {
     (async () => {
-      await getAllPost(user.username, userType)
+      await getAllPost(user)
         .then((data) => setAllPost(data))
         .catch((error) => console.log('ERROR',error));
     })();

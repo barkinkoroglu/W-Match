@@ -331,9 +331,9 @@ export const getRandomCompany = async () => {
 
   return shuffle(temp);
 };
-export const getAllPost = async (username,userType) => {
+export const getAllPost = async (userInfo) => {
   let nposts = [];
-
+  const { username, uid, type } = userInfo;
   let user = await getDoc(doc(db, "usernames", username));
   let followers = user.data().following;
 
@@ -347,11 +347,11 @@ export const getAllPost = async (username,userType) => {
         nposts.push(post);
       });
     });
-  } 
+  }
 
   //when company want to see their own posts
-  if(userType === 2) {
-    const company = await getDoc(doc(db, "companies", userid));
+  if (type === 2) {
+    const company = await getDoc(doc(db, "companies", uid));
     nposts = company.data().posts;
   }
 
