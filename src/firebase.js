@@ -19,7 +19,7 @@ import {
   collection,
 } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { userHandle } from "./utils";
+import { shuffle, userHandle } from "./utils";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDye5cZ1SUj2NU4amRvK9uVxWtm_AVI7rU",
@@ -321,7 +321,16 @@ export const getCompany = async () => {
   console.log("SEARCH BAR", temp);
   return temp;
 };
+export const getRandomCompany = async () => {
+  let temp = [];
+  const querySnapshot = await getDocs(collection(db, "companies"));
+  querySnapshot.forEach((doc) => {
+    // console.log(doc.id, " => ", doc.data());
+    temp.push(doc.data());
+  });
 
+  return shuffle(temp);
+}; 
 export const getAllPost = async (userid) => {
   const nposts = [];
   let user = await getDoc(doc(db, "users", userid));
