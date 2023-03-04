@@ -132,21 +132,6 @@ export const companyRegister = async (
           notifications: [],
           posts: [],
         });
-        await setDoc(doc(db, "users", response.user.uid), {
-          email: email,
-          type: 2,
-          companyname: companyname,
-          username: username,
-          about: about,
-          country: country,
-          addressline1: addressline1,
-          addressline2: addressline2,
-          tnumber: tnumber,
-          followers: [],
-          following: [],
-          notifications: [],
-          posts: [],
-        });
         console.log(response);
       }
       return response.user;
@@ -346,10 +331,10 @@ export const getRandomCompany = async () => {
 
   return shuffle(temp);
 };
-export const getAllPost = async (userid,userType) => {
+export const getAllPost = async (username,userType) => {
   let nposts = [];
 
-  let user = await getDoc(doc(db, "users", userid));
+  let user = await getDoc(doc(db, "usernames", username));
   let followers = user.data().following;
 
   if (followers.length > 0) {

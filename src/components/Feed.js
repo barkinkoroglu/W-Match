@@ -21,7 +21,7 @@ function Feed({ usertype }) {
 
   useEffect(() => {
     (async () => {
-      await getAllPost(user.uid, userType)
+      await getAllPost(user.username, userType)
         .then((data) => setAllPost(data))
         .catch((error) => console.log('ERROR',error));
     })();
