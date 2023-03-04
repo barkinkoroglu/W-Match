@@ -25,7 +25,7 @@ function Feed({ usertype }) {
         .then((data) => setAllPost(data))
         .catch((error) => console.log('ERROR',error));
     })();
-  }, [user.uid]);
+  }, [user,inputValue]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
