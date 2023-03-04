@@ -132,6 +132,21 @@ export const companyRegister = async (
           notifications: [],
           posts: [],
         });
+        await setDoc(doc(db, "users", response.user.uid), {
+          email: email,
+          type: 2,
+          companyname: companyname,
+          username: username,
+          about: about,
+          country: country,
+          addressline1: addressline1,
+          addressline2: addressline2,
+          tnumber: tnumber,
+          followers: [],
+          following: [],
+          notifications: [],
+          posts: [],
+        });
         console.log(response);
       }
       return response.user;
