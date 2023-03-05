@@ -335,21 +335,6 @@ export const getRandomCompany = async () => {
 export const getAllPost = async (userInfo) => {
   let nposts = [];
   const { uid, type } = userInfo;
-  let user = type === 2 ? await getDoc(doc(db, "companies", uid)) : await getDoc(doc(db, "users", uid));
-
-  let followers = user.data().following;
-
-  if (followers.length > 0) {
-    followers.forEach(async (follower) => {
-      const usedataid = await getDoc(doc(db, "usernames", follower));
-      const userdataid = usedataid.data();
-      const cUser = await getDoc(doc(db, "companies", userdataid.user_id));
-      const posts = cUser.data().posts;
-      posts.forEach((post) => {
-        nposts.push(post);
-      });
-    });
-  }
 
   //when company want to see their own posts
   if (type === 2) {
@@ -357,6 +342,16 @@ export const getAllPost = async (userInfo) => {
     nposts = company.data().posts;
   }
 
+  //when user wants to see their  posts
+  if (type === 1) {
+    const user = await getDoc(doc(db, "users", uid));
+    const companyUsername = user.data().following;
+    for (let i = 0; i < companyUsername.length; i++) {
+      const companyID = await getDoc(doc(db, "usernames", companyUsername[i]));
+      const company = await getDoc(doc(db, "companies", companyID.data().user_id)).then(company => company);
+      company.data().posts.map(post => nposts.push(post))
+    }
+  }
   return nposts;
 };
 
