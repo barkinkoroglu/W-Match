@@ -83,7 +83,7 @@ function Navbar() {
           >
             <Avatar
               alt="profilphoto"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Brad_Pitt_Fury_2014.jpg/800px-Brad_Pitt_Fury_2014.jpg"
+              src={user.ProfileUrl}
               sx={{ width: 24, height: 24 }}
             />
             <div className=" flex ">
@@ -95,7 +95,7 @@ function Navbar() {
                 <div className="flex flex-col">
                   <div className="flex border-b-2 border-gray-300 pb-2">
                     <div>
-                      <Avatar />
+                      <Avatar src={user.ProfileUrl} />
                     </div>
                     <div className="pl-3 ">
                       <h1 className="text-xl font-semibold leading-6 ">

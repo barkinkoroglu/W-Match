@@ -20,7 +20,7 @@ import {
 } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { shuffle, userHandle } from "./utils";
-
+import { getStorage } from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyDye5cZ1SUj2NU4amRvK9uVxWtm_AVI7rU",
   authDomain: "w-match-4f47d.firebaseapp.com",
@@ -34,6 +34,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
+export const storage = getStorage(app);
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
@@ -115,6 +116,8 @@ export const companyRegister = async (
           following: [],
           notifications: [],
           posts: [],
+          ProfileUrl: "",
+          BackUrl: "",
         };
         userHandle(data);
         await setDoc(doc(db, "companies", response.user.uid), {
@@ -131,6 +134,8 @@ export const companyRegister = async (
           following: [],
           notifications: [],
           posts: [],
+          ProfileUrl: "",
+          BackUrl: "",
         });
         console.log(response);
       }
@@ -184,6 +189,8 @@ export const userRegister = async (
           notifications: [],
           following: [],
           wmatchTests: [],
+          ProfileUrl: "",
+          BackUrl: "",
         });
         //console.log(response);
       }
@@ -395,4 +402,44 @@ export const getUserInfobyID = async (userid) => {
     return res2;
   }
   return res;
+};
+
+export const changeCompanyProfilePhoto = async (username, url) => {
+  const compdataid = await getDoc(doc(db, "usernames", username));
+  const companydataid = compdataid.data();
+  const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
+  await setDoc(doc(db, "users", companydataid.user_id), {
+    ...dbUser.data(),
+    ProfileUrl: url,
+  });
+};
+
+export const changeUserProfilePhoto = async (username, url) => {
+  const userdataid = await getDoc(doc(db, "usernames", username));
+  const ruserdataid = userdataid.data();
+  const dbUser = await getDoc(doc(db, "users", ruserdataid.user_id));
+  await setDoc(doc(db, "users", ruserdataid.user_id), {
+    ...dbUser.data(),
+    ProfileUrl: url,
+  });
+};
+
+export const changeCompanyBackProfilePhoto = async (username, url) => {
+  const compdataid = await getDoc(doc(db, "usernames", username));
+  const companydataid = compdataid.data();
+  const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
+  await setDoc(doc(db, "users", companydataid.user_id), {
+    ...dbUser.data(),
+    BackUrl: url,
+  });
+};
+
+export const changeUserBackProfilePhoto = async (username, url) => {
+  const userdataid = await getDoc(doc(db, "usernames", username));
+  const ruserdataid = userdataid.data();
+  const dbUser = await getDoc(doc(db, "users", ruserdataid.user_id));
+  await setDoc(doc(db, "users", ruserdataid.user_id), {
+    ...dbUser.data(),
+    BackUrl: url,
+  });
 };

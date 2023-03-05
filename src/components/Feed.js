@@ -50,10 +50,7 @@ function Feed() {
         <div>
           <div className="  p-4 bg-white flex flex-col rounded-lg gap-y-3">
             <div className="flex gap-x-4">
-              <Avatar
-                alt="profilphoto"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Brad_Pitt_Fury_2014.jpg/800px-Brad_Pitt_Fury_2014.jpg"
-              />
+              <Avatar alt="profilphoto" src={user.ProfileUrl} />
               <form onSubmit={(e) => handleSubmit(e)} className="flex flex-1">
                 <input
                   className=" w-full rounded-full border pl-5"
