@@ -17,7 +17,7 @@ function Homepage() {
       <div className=" bg-gray-50  min-h-[calc(100vh-60px)]">
         <div className="flex max-w-6xl px-3 pt-3 mx-auto  ">
           <Sidebar />
-          <Feed usertype={user.type} />
+          <Feed />
           <Widget />
         </div>
       </div>

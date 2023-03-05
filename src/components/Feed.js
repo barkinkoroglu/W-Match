@@ -8,30 +8,29 @@ import CreateJob from "./CreateJob";
 import { useSelector } from "react-redux";
 import { createPost, getAllPost } from "../firebase";
 
-function Feed({ usertype }) {
+function Feed() {
   const [showCreateTest, setShowCreateTest] = useState(false);
   const [showCreateJob, setShowCreateJob] = useState(false);
   const [allposts, setAllPost] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const user = useSelector((state) => state.auth.user);
 
-
   console.log("User attributes", user);
-  console.log("FEEDEKİ POSTLAR ", allposts);
+  console.log("FEEDEKİ POSTLAR ", allposts[0]);
 
   useEffect(() => {
     (async () => {
       await getAllPost(user)
         .then((data) => setAllPost(data))
-        .catch((error) => console.log('ERROR',error));
+        .catch((error) => console.log("ERROR", error));
     })();
-  }, [user,inputValue]);
-
+  }, [user, inputValue]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (inputValue !== "") {
       const att = {
+        username: user.username,
         name: user.companyname,
         email: user.email,
         likes: [],
@@ -47,7 +46,7 @@ function Feed({ usertype }) {
 
   return (
     <div className="flex-[0.5]  flex-col mx-12">
-      {usertype === 2 && (
+      {user.type === 2 && (
         <div>
           <div className="  p-4 bg-white flex flex-col rounded-lg gap-y-3">
             <div className="flex gap-x-4">
@@ -113,6 +112,10 @@ function Feed({ usertype }) {
                 post={post}
                 userid={user.uid}
                 name={post.name}
+                username={user.username}
+                about={user.jobfunct}
+                //It will change for company comments
+                uname={`${user.name} ${user.lastname}`}
               />
             );
           })

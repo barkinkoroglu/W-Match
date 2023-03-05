@@ -11,13 +11,10 @@ function Post(prop) {
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [commentValue, setCommentValue] = useState("");
-  const { email, name, comments, likes, data } = prop.post;
+  const { email, name, comments, likes, data, username, time } = prop.post;
 
   const handleLike = async (e) => {
-    const att = {
-      name: prop.name,
-    };
-    await createLike(prop.userid, att, 0);
+    await createLike(username, prop.userid, time);
   };
 
   const handleSubmit = async (e) => {
@@ -25,11 +22,14 @@ function Post(prop) {
 
     if (commentValue !== "") {
       const att = {
-        name: prop.name,
+        name: prop.uname,
+        username: prop.username,
+        about: prop.about,
         comment: commentValue,
+        ctime: Date.now(),
       };
-      console.log(att);
-      await createComment(prop.userid, att, 0);
+      //console.log("COMMENT", att);
+      await createComment(username, att, time);
       setCommentValue("");
     }
   };
@@ -52,27 +52,27 @@ function Post(prop) {
             style={{ width: "16px", height: "16px" }}
           />
           <p onClick={() => setshowLikes(true)} className="hover:underline">
-            Barkin Koroglu and 46 others
+            {likes.length} likes
           </p>
         </div>
         <h3
           onClick={() => setShowComments(!showComments)}
           className="hover:underline"
         >
-          1 comment
+          {comments.length} comments
         </h3>
       </div>
       <div className="flex justify-evenly border-t-2 pt-2   ">
         <div
           onClick={() => handleLike()}
-          className=" flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center "
+          className=" flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center cursor-pointer "
         >
           <ThumbUpOffAltIcon className="group-hover:text-blue-400" />
           <h3>Like</h3>
         </div>
         <div
           onClick={() => setShowComments(!showComments)}
-          className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-lg group items-center  justify-center "
+          className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-lg group items-center  justify-center cursor-pointer "
         >
           <ChatBubbleOutlineIcon className="group-hover:text-blue-400" />
           <h3>Comment</h3>
@@ -94,15 +94,13 @@ function Post(prop) {
           </div>
           <div>
             {/* Bu kisim fallow sistemi gelidiginde güncellenecek */}
-            {/* {comments.map((index, comm) => {
+            {comments.map((comm, index) => {
               return (
                 <div>
-                  <Comment key={index} val={comments[comm]} />
+                  <Comment key={index} val={comm} />
                 </div>
               );
-            })} */}
-            <Comment />
-            <Comment />
+            })}
           </div>
         </div>
       )}
@@ -115,7 +113,7 @@ function Post(prop) {
               <h1 className=" text-lg ">Reactions</h1>
               <div className="border-b-4 -mb-[1.7px] border-slate-500">
                 <h1 className="p-2">
-                  All <span className="font-medium 	"> 74</span>
+                  All <span className="font-medium 	">{likes.length}</span>
                 </h1>
               </div>
               <button
@@ -126,19 +124,13 @@ function Post(prop) {
               </button>
             </div>
             <div className="flex flex-col gap-y-3 py-3 overflow-y-auto">
-              <Like />
-              <Like />
-              <Like />
-              <Like />
-              <Like />
-              <Like />
-              <Like />
-              <Like />
-              <Like />
-              <Like />
-              <Like />
-              <Like />
-              <Like />
+              {likes !== null ? (
+                likes.map((element, index) => {
+                  return <Like key={index} likeid={element} />;
+                })
+              ) : (
+                <div>Loading </div>
+              )}
             </div>
           </div>
         </div>

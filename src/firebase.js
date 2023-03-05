@@ -22,13 +22,12 @@ import toast from "react-hot-toast";
 import { shuffle, userHandle } from "./utils";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBNJHsD3HR1dbQkjUdtwlaHjU54Pt_0fVA",
-  authDomain: "wmatch-63d46.firebaseapp.com",
-  projectId: "wmatch-63d46",
-  storageBucket: "wmatch-63d46.appspot.com",
-  messagingSenderId: "753093784532",
-  appId: "1:753093784532:web:114c0959a3d34fbe191c41",
-  measurementId: "G-1FV42G1WJ3"
+  apiKey: "AIzaSyDye5cZ1SUj2NU4amRvK9uVxWtm_AVI7rU",
+  authDomain: "w-match-4f47d.firebaseapp.com",
+  projectId: "w-match-4f47d",
+  storageBucket: "w-match-4f47d.appspot.com",
+  messagingSenderId: "30956022016",
+  appId: "1:30956022016:web:527a4c29144642b1726be5",
 };
 
 // Initialize Firebase
@@ -230,33 +229,50 @@ export const createPost = async (userid, test) => {
   });
 };
 
-export const createComment = async (userid, test, index) => {
-  const dbUser = await getDoc(doc(db, "companies", userid));
+export const createComment = async (cusername, test, time) => {
+  const compdataid = await getDoc(doc(db, "usernames", cusername));
+  const companydataid = compdataid.data();
+  const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
   const postlar = dbUser.data().posts;
-  postlar[index].comments.push(test);
-  console.log("POSLARIN DEGERİ BURDA", postlar);
-  await setDoc(doc(db, "companies", userid), {
+  for (let i = 0; i < postlar.length; i++) {
+    if (postlar[i].time === time) {
+      postlar[i].comments.push(test);
+      break;
+    }
+  }
+  await setDoc(doc(db, "companies", companydataid.user_id), {
     ...dbUser.data(),
     posts: postlar,
   });
 };
 
-export const createLike = async (userid, test, index) => {
+export const createLike = async (username, test, time) => {
   let flag = 0;
-  const dbUser = await getDoc(doc(db, "companies", userid));
+  let index = 0;
+  let dindex = 0;
+  const compdataid = await getDoc(doc(db, "usernames", username));
+  const companydataid = compdataid.data();
+  const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
   const postlar = dbUser.data().posts;
+  for (let i = 0; i < postlar.length; i++) {
+    if (postlar[i].time === time) {
+      index = i;
+      break;
+    }
+  }
   for (let i = 0; i < postlar[index].likes.length; i++) {
-    if (postlar[index].likes[i]?.name === test.name) {
+    if (postlar[index].likes[i] === test) {
       flag = -1;
+      dindex = i;
       break;
     }
   }
   if (flag === -1) {
-    postlar[index].likes.splice(index, 1);
+    postlar[index].likes.splice(dindex, 1);
   } else {
     postlar[index].likes.push(test);
   }
-  await setDoc(doc(db, "companies", userid), {
+  await setDoc(doc(db, "companies", companydataid.user_id), {
     ...dbUser.data(),
     posts: postlar,
   });
@@ -348,8 +364,10 @@ export const getAllPost = async (userInfo) => {
     const companyUsername = user.data().following;
     for (let i = 0; i < companyUsername.length; i++) {
       const companyID = await getDoc(doc(db, "usernames", companyUsername[i]));
-      const company = await getDoc(doc(db, "companies", companyID.data().user_id)).then(company => company);
-      company.data().posts.map(post => nposts.push(post))
+      const company = await getDoc(
+        doc(db, "companies", companyID.data().user_id)
+      ).then((company) => company);
+      company.data().posts.map((post) => nposts.push(post));
     }
   }
   return nposts;
@@ -367,4 +385,14 @@ export const createCompanyTest = async (companyid, data) => {
     ...dbUser.data(),
     notifications: tests,
   });
+};
+
+export const getUserInfobyID = async (userid) => {
+  const res = (await getDoc(doc(db, "users", userid))).data();
+  if (res === undefined) {
+    const res2 = (await getDoc(doc(db, "companies", userid))).data();
+
+    return res2;
+  }
+  return res;
 };

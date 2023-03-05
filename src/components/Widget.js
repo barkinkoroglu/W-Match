@@ -4,18 +4,17 @@ import { useSelector } from "react-redux";
 import { getRandomCompany } from "../firebase";
 function Widget() {
   const user = useSelector((state) => state.auth.user);
-  const [companies, setCompanies] = useState()
+  const [companies, setCompanies] = useState();
 
   useEffect(() => {
     (async () => {
       await getRandomCompany().then((results) => {
-        if(results) {
-          setCompanies(results)
+        if (results) {
+          setCompanies(results);
         }
       });
     })();
   }, []);
-
 
   return (
     <div className="flex-[0.3]   ">
@@ -24,7 +23,7 @@ function Widget() {
           <h1 className=" border-b-2 p-2 w-full text-center font-medium border-gray-100">
             Add to your feed
           </h1>
-          {companies?.slice(0,3).map((widg, index) => {
+          {companies?.slice(0, 3).map((widg, index) => {
             return <WidgetElement key={index} widg={widg} />;
           })}
         </div>

@@ -11,4 +11,4 @@ export const shuffle = (a) => {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
-}
+};

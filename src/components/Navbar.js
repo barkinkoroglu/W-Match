@@ -91,7 +91,7 @@ function Navbar() {
               <ArrowDropDownIcon />
             </div>
             {showdrop && (
-              <div className="absolute w-72 h-40 p-2 bg-gray-100 shadow-lg right-0 top-16 rounded-lg  ">
+              <div className="absolute w-72 min-h-40 p-2 bg-gray-100 shadow-lg right-0 top-16 rounded-lg  ">
                 <div className="flex flex-col">
                   <div className="flex border-b-2 border-gray-300 pb-2">
                     <div>
@@ -99,9 +99,10 @@ function Navbar() {
                     </div>
                     <div className="pl-3 ">
                       <h1 className="text-xl font-semibold leading-6 ">
-                        Barkın Köroğlu
+                        {user.type === 2 && user.companyname}
+                        {user.type === 1 && `${user.name} ${user.lastname}`}
                       </h1>
-                      <p className="text-xs">Vestel, Student</p>
+                      <p className="text-xs">{user.country}</p>
                     </div>
                   </div>
                   <div className="flex flex-col py-1 gap-y-2  ">
