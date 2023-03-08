@@ -22,6 +22,7 @@ function UserProfile({ user, param }) {
   const [openProfile, setOpenProfile] = useState(false);
   const [openBackProfile, setOpenBackProfile] = useState(false);
   const [imageurl, setImageurl] = useState(null);
+  const [openSettingProfile, setOpenSettingProfile] = useState(false);
 
   const uploadImage = () => {
     if (imageUpload == null) return;
@@ -59,6 +60,10 @@ function UserProfile({ user, param }) {
     // });
     // setOpenBackProfile(false);
   };
+  // It will be changed according to user attributes
+  const handleUpdateedit = () => {
+    console.log("Test");
+  };
   return (
     <div className="flex flex-[0.7] min-h-screen   flex-col mx-12 gap-y-3 pb-3 ">
       <div className="max-h-[490px] bg-white rounded-lg flex flex-col ">
@@ -87,11 +92,9 @@ function UserProfile({ user, param }) {
               </button>
             )}
           </div>
+
           {openProfile && (
             <div className=" ">
-              <div className="fixed top-0 left-0 right-0 bottom-0 bg-slate-800 opacity-40 z-50">
-                Hey
-              </div>
               <div className="fixed flex flex-col z-[51] top-5 left-0 right-0 mx-auto max-w-md max-h-[calc(100vh-64px)] px-4 py-3 gap-y-3 rounded bg-white items-center">
                 <div className=" relative py-2 text-lg font-medium border-b-2 w-full text-center items-center ">
                   Upload Profile Photo
@@ -117,12 +120,12 @@ function UserProfile({ user, param }) {
               </div>
             </div>
           )}
+          {(openBackProfile || openProfile || openSettingProfile) && (
+            <div className="fixed top-0 left-0 right-0 bottom-0 bg-slate-800 opacity-40 z-50"></div>
+          )}
           {/* BACKGROUND */}
           {openBackProfile && (
             <div className=" ">
-              <div className="fixed top-0 left-0 right-0 bottom-0 bg-slate-800 opacity-40 z-50">
-                Hey
-              </div>
               <div className="fixed flex flex-col z-[51] top-5 left-0 right-0 mx-auto max-w-md max-h-[calc(100vh-64px)] px-4 py-3 gap-y-3 rounded bg-white items-center">
                 <div className=" relative py-2 text-lg font-medium border-b-2 w-full text-center items-center ">
                   Upload Background Photo
@@ -157,9 +160,70 @@ function UserProfile({ user, param }) {
             }
             alt=""
           />
+
           {ruser.username === param.id && (
-            <div className="absolute right-3 bottom-3 text-gray-400 p-1 rounded-full hover:bg-slate-700 cursor-pointer ">
+            <button
+              onClick={() => setOpenSettingProfile(!openSettingProfile)}
+              className="absolute right-3 bottom-3 text-gray-400 p-1 rounded-full hover:bg-slate-700 cursor-pointer "
+            >
               <SettingsIcon />
+            </button>
+          )}
+          {openSettingProfile && (
+            <div className=" ">
+              <div className="fixed flex flex-col z-[51] top-5 left-0 right-0 mx-auto max-w-md max-h-[calc(100vh-64px)] px-4 py-3 gap-y-3 rounded bg-white items-center">
+                <div className=" relative py-2  w-full text-center items-center ">
+                  <h1 className="text-lg font-medium border-b-2">Edit</h1>
+
+                  <div className="p-3 space-y-3 whitespace-nowrap">
+                    <div className="flex gap-3 w-full">
+                      <h1>Email:</h1>
+                      <input
+                        className=" border px-2 w-full"
+                        defaultValue={ruser.email}
+                        type="text"
+                      />
+                    </div>
+                    <div className="flex gap-3 w-full ">
+                      <h1 className="">Adress Line 1:</h1>
+                      <input
+                        className=" border px-2 w-full"
+                        defaultValue={ruser.addressline1}
+                        type="text"
+                      />
+                    </div>
+                    <div className="flex gap-3 w-full">
+                      <h1>Adress Line 2:</h1>
+                      <input
+                        className=" border px-2 w-full"
+                        defaultValue={ruser.addressline2}
+                        type="text"
+                      />
+                    </div>
+                    <div className="flex gap-3 w-full">
+                      <h1>About</h1>
+                      <input
+                        className=" border px-2 w-full"
+                        defaultValue={ruser.about}
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setOpenSettingProfile(false)}
+                    className="absolute top-0 right-0 p-1 rounded-lg flex justify-center items-center hover:bg-slate-400"
+                  >
+                    <CloseIcon />
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => handleUpdateedit()}
+                  className="bg-gray-300 px-2 py-1 rounded-lg hover:bg-slate-400"
+                >
+                  Change
+                </button>
+              </div>
             </div>
           )}
 

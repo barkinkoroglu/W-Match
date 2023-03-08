@@ -61,13 +61,15 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
       <div className="flex  gap-x-10 mt-3 w-full relative justify-center">
         <button
           onClick={() => setQindex(0)}
-          className="p-1 hover:bg-slate-500 rounded-full flex items-center justify-center"
+          className="p-1 hover:bg-slate-500 rounded-full flex items-center justify-center disabled:opacity-10 disabled:hover:bg-white"
+          disabled={qindex === 0 && true}
         >
           <ArrowBackIosNewIcon />
         </button>
         <button
           onClick={() => setQindex(1)}
-          className="p-1 hover:bg-slate-500 rounded-full flex items-center justify-center"
+          className="p-1 hover:bg-slate-500 rounded-full flex items-center justify-center disabled:opacity-10 disabled:hover:bg-white"
+          disabled={qindex === 1 && true}
         >
           <ArrowForwardIosIcon />
         </button>

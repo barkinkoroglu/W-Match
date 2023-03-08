@@ -46,14 +46,18 @@ function Navbar() {
 
   return (
     <nav className="bg-slate-100 sticky top-0 z-50">
-      <div className="flex max-w-6xl px-3 py-1 mx-auto justify-between items-center   ">
+      <div className="flex max-w-6xl px-3 sm: py-3 lg:py-1  mx-auto justify-between items-center   ">
         <div className=" flex flex-1 items-center gap-x-4 ">
-          <a href="/home" className=" font-bold text-2xl ">
-            WMATCH
+          <a href="/home" className=" font-bold  ">
+            <img
+              src={require("../images/logo.png")}
+              className=" w-[160px] h-12 object-cover"
+              alt=""
+            />
           </a>
           <form className=" flex w-full relative   " onSubmit={handleSearch}>
             <input
-              className="px-2 py-1 pl-8 w-72 rounded-lg   "
+              className="px-2 py-1 pl-8 sm:w-72  rounded-lg   "
               type="text"
               placeholder="Search"
               onChange={handleSearch}
@@ -64,18 +68,31 @@ function Navbar() {
             />
           </form>
         </div>
-        <div className="flex justify-center items-center gap-x-6">
-          <a className="flex flex-col items-center w-20" href="/home">
+        <div className="flex justify-center items-center sm:gap-x-3  lg:gap-x-6">
+          <a
+            className="flex flex-col items-center sm:w-10 lg:w-20"
+            href="/home"
+          >
             <HomeIcon />
-            <h3 className=" text-sm font-medium">Homepage</h3>
+            <h3 className=" text-sm font-medium hidden lg:inline  ">
+              Homepage
+            </h3>
           </a>
-          <a className="flex flex-col items-center w-20" href="/notifications">
+          <a
+            className="flex flex-col items-center sm:w-10 lg:w-20"
+            href="/notifications"
+          >
             <NotificationsIcon />
-            <h3 className=" text-sm font-medium">Notifications</h3>
+            <h3 className=" text-sm font-medium hidden lg:inline">
+              Notifications
+            </h3>
           </a>
-          <a className="flex flex-col items-center w-20" href="/jobs">
+          <a
+            className="flex flex-col items-center sm:w-10 lg:w-20"
+            href="/jobs"
+          >
             <WorkIcon />
-            <h3 className=" text-sm font-medium">Jobs</h3>
+            <h3 className=" text-sm font-medium hidden lg:inline">Jobs</h3>
           </a>
           <div
             onClick={() => setShowdrop(!showdrop)}
@@ -83,10 +100,10 @@ function Navbar() {
           >
             <Avatar
               alt="profilphoto"
-              src={user.ProfileUrl}
+              src={user?.ProfileUrl}
               sx={{ width: 24, height: 24 }}
             />
-            <div className=" flex ">
+            <div className="  hidden lg:flex">
               <h3 className=" text-sm font-medium">Me</h3>
               <ArrowDropDownIcon />
             </div>
