@@ -5,7 +5,7 @@ import { QuestionSchema } from "../validation/index";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { createCompanyTest } from "../firebase";
-
+import { useId } from "react";
 function Question({ nquestions, setShowCreateTest }) {
   const user = useSelector((state) => state.auth.user);
   const [nindex, setNindex] = useState(0);
@@ -16,7 +16,7 @@ function Question({ nquestions, setShowCreateTest }) {
   const [value4, setvalue4] = useState(false);
 
   const [darray, setDarray] = useState([]);
-
+  const testID = useId();
   const handleBack = () => {
     setTempData(darray.pop());
     setNindex(nindex - 1);
@@ -71,6 +71,7 @@ function Question({ nquestions, setShowCreateTest }) {
       option4: values.option4,
       correct: trueAns,
       time: Date.now(),
+      id: testID,
     };
 
     setDarray((prev) => [...prev, data]);
@@ -89,6 +90,7 @@ function Question({ nquestions, setShowCreateTest }) {
     if (!isEmpty(darray)) {
       (async () => {
         if (nindex + 1 === parseInt(nquestions)) {
+          await createCompanyTest(user.uid, darray);
           setShowCreateTest(false);
         } else {
           setNindex(nindex + 1);
