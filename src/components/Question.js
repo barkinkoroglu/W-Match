@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Formik } from "formik";
+import { isEmpty } from "lodash";
 import { QuestionSchema } from "../validation/index";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -72,8 +73,8 @@ function Question({ nquestions, setShowCreateTest }) {
       time: Date.now(),
     };
 
-    darray.push(data);
-    console.log(darray);
+    setDarray((prev) => [...prev, data]);
+
     values.question = "";
     values.option1 = "";
     values.option2 = "";
@@ -83,15 +84,19 @@ function Question({ nquestions, setShowCreateTest }) {
     setvalue2(false);
     setvalue3(false);
     setvalue4(false);
-
-    if (nindex + 1 === parseInt(nquestions)) {
-      await createCompanyTest(user.uid, darray);
-      setShowCreateTest(false);
-    } else {
-      setNindex(nindex + 1);
-    }
   };
-
+  useEffect(() => {
+    if (!isEmpty(darray)) {
+      (async () => {
+        if (nindex + 1 === parseInt(nquestions)) {
+          setShowCreateTest(false);
+        } else {
+          setNindex(nindex + 1);
+        }
+      })();
+    }
+  }, [user.uid, darray]);
+  //console.log("ss", darray);
   if (parseInt(nquestions) <= 0) {
     return (
       <div className="text-center w-full text-xl ">

@@ -380,17 +380,16 @@ export const getAllPost = async (userInfo) => {
   return nposts;
 };
 
-export const createCompanyTest = async (companyid, data) => {
-  const dbUser = await getDoc(doc(db, "companies", companyid));
-  // notifications will be changed
-  const tests = dbUser.data().notifications;
-  data.forEach((temp) => {
-    tests.push(temp);
+export const createCompanyTest = async (companyid, createdTests) => {
+  const company = await getDoc(doc(db, "companies", companyid));
+  const dbTests = company.data().tests;
+
+  createdTests.forEach((test) => {
+    dbTests.push(test);
   });
 
-  await setDoc(doc(db, "companies", companyid), {
-    ...dbUser.data(),
-    notifications: tests,
+  await updateDoc(company, {
+    tests: createdTests,
   });
 };
 
