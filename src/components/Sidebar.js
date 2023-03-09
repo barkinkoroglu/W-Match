@@ -31,7 +31,7 @@ function Sidebar() {
               <div className="px-4">
                 <div className="flex justify-between items-center text-sm mt-2 ">
                   <h1 className="">Followers</h1>
-                  <h1 className="">{user?.followers.length}</h1>
+                  <h1 className="">{user?.followers?.length}</h1>
                 </div>
               </div>
             </div>
