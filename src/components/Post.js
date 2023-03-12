@@ -4,13 +4,13 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import Like from "./Like";
 import CloseIcon from "@mui/icons-material/Close";
-import { createComment, createLike, getUserInfo } from "../firebase";
+import { createComment, createLike, getUserInfo, applyJob } from "../firebase";
 import Comment from "./Comment";
 
 function Post(prop) {
   const [data, setData] = useState(null);
 
-  // console.log("DATA PROBLARI", prop.user.uid);
+  console.log("DATA PROBLARI", prop.post);
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [commentValue, setCommentValue] = useState("");
@@ -49,6 +49,9 @@ function Post(prop) {
   };
 
   const JobPost = () => {
+    const handleApply = async () => {
+      await applyJob(prop.post.username, prop.user.uid, prop.post.time);
+    };
     return (
       <div className="  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4">
         <div className=" flex gap-x-3 ">
@@ -63,7 +66,10 @@ function Post(prop) {
 
           <h1 className="text-base"> {prop.post.information} </h1>
           <h1 className="text-sm">{prop.post.salary} </h1>
-          <button className="bg-slate-200 p-1 rounded-lg absolute right-0 bottom-0">
+          <button
+            onClick={() => handleApply()}
+            className="bg-slate-200 p-1 rounded-lg absolute right-0 bottom-0"
+          >
             Apply
           </button>
         </div>

@@ -502,3 +502,24 @@ export const updateCompanyTestScore = async (
     posts: posts,
   });
 };
+
+export const applyJob = async (companyname, userid, time) => {
+  const compdataid = await getDoc(doc(db, "usernames", companyname));
+  const companydataid = compdataid.data();
+  const dbCompanyUser = await getDoc(
+    doc(db, "companies", companydataid.user_id)
+  );
+
+  const posts = dbCompanyUser.data().posts;
+
+  for (let i = 0; i < posts.length; i++) {
+    if (posts[i].time === time) {
+      posts[i].candidates.push(userid);
+      break;
+    }
+  }
+  await setDoc(doc(db, "companies", companydataid.user_id), {
+    ...dbCompanyUser.data(),
+    posts: posts,
+  });
+};
