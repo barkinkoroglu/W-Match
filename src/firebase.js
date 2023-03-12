@@ -377,6 +377,7 @@ export const getAllPost = async (userInfo) => {
       company.data().posts.map((post) => nposts.push(post));
     }
   }
+  nposts.sort((a, b) => b.time - a.time);
   return nposts;
 };
 
