@@ -1,12 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Form, Formik } from "formik";
-import { isEmpty } from "lodash";
 import { QuestionSchema } from "../validation/index";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { createCompanyTest } from "../firebase";
 import { useId } from "react";
-function Question({ nquestions, setShowCreateTest }) {
+import { v4 } from "uuid";
+
+function Question({
+  nquestions,
+  setShowCreateTest,
+  time,
+  companyname,
+  email,
+  qinform,
+}) {
   const user = useSelector((state) => state.auth.user);
   const [nindex, setNindex] = useState(0);
   const [tempData, setTempData] = useState(null);
@@ -14,9 +22,9 @@ function Question({ nquestions, setShowCreateTest }) {
   const [value2, setvalue2] = useState(false);
   const [value3, setvalue3] = useState(false);
   const [value4, setvalue4] = useState(false);
-
-  const [darray, setDarray] = useState([]);
   const testID = useId();
+  const [darray, setDarray] = useState([]);
+
   const handleBack = () => {
     setTempData(darray.pop());
     setNindex(nindex - 1);
@@ -70,12 +78,10 @@ function Question({ nquestions, setShowCreateTest }) {
       option3: values.option3,
       option4: values.option4,
       correct: trueAns,
-      time: Date.now(),
-      id: testID,
     };
 
-    setDarray((prev) => [...prev, data]);
-
+    darray.push(data);
+    console.log(darray);
     values.question = "";
     values.option1 = "";
     values.option2 = "";
@@ -85,20 +91,29 @@ function Question({ nquestions, setShowCreateTest }) {
     setvalue2(false);
     setvalue3(false);
     setvalue4(false);
-  };
-  useEffect(() => {
-    if (!isEmpty(darray)) {
-      (async () => {
-        if (nindex + 1 === parseInt(nquestions)) {
-          await createCompanyTest(user.uid, darray);
-          setShowCreateTest(false);
-        } else {
-          setNindex(nindex + 1);
-        }
-      })();
+
+    if (nindex + 1 === parseInt(nquestions)) {
+      //await createCompanyTest(user.uid, darray);
+      const finaldata = {
+        type: 2,
+        id: v4(),
+        questions: darray,
+        time: Date.now(),
+        qtime: time,
+        scores: [],
+        uid: user.uid,
+        name: companyname,
+        email: email,
+        information: qinform,
+      };
+      await createCompanyTest(user.uid, finaldata);
+      // console.log("Fınal", finaldata);
+      setShowCreateTest(false);
+    } else {
+      setNindex(nindex + 1);
     }
-  }, [user.uid, darray]);
-  //console.log("ss", darray);
+  };
+
   if (parseInt(nquestions) <= 0) {
     return (
       <div className="text-center w-full text-xl ">

@@ -3,7 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Form, Formik } from "formik";
 import { CompanyjobSchema } from "../validation/index";
 import { useSelector } from "react-redux";
-import { createPost } from "../firebase";
+import { createCompanyJob } from "../firebase";
 
 function CreateJob({ showCreateJob, setShowCreateJob }) {
   const user = useSelector((state) => state.auth.user);
@@ -15,10 +15,13 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
       time: Date.now(),
       name: user.companyname,
       username: user.username,
+      email: user.email,
+      candidates: [],
       type: 3,
     };
     console.log(data);
-    //createPost(user.uid,data)
+    createCompanyJob(user.uid, data);
+    setShowCreateJob(false);
   };
   return (
     <div className="fixed flex flex-col z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[calc(100vh-64px)] px-4 py-3 rounded bg-white ">

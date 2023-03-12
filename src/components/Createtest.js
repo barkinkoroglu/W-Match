@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Question from "./Question";
+import { useSelector } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 function Createtest({ showCreateTest, setShowCreateTest }) {
   const [nquestions, setNquestions] = useState(0);
   const [time, setTime] = useState(0);
   const [qindex, setQindex] = useState(0);
-
+  const [qinform, setQinform] = useState("");
+  const user = useSelector((state) => state.auth.user);
   // const Questions = () => {
   //   const options = [];
   //   for (let index = 0; index < nquestions; index++) {
@@ -49,12 +51,26 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
               value={time}
             />
           </div>
+
+          <div className="flex items-center gap-x-2">
+            <h1>Information about the test</h1>
+            <textarea
+              className=" flex flex-1 px-2 py-1 outline-none border rounded-lg  overflow-y-auto resize-none scrollbar-hide text-sm"
+              type="text"
+              onChange={(e) => setQinform(e.currentTarget.value)}
+              value={qinform}
+            ></textarea>
+          </div>
         </div>
       ) : (
         <div className="flex flex-col overflow-y-auto w-full scrollbar  items-start">
           <Question
             nquestions={nquestions}
             setShowCreateTest={setShowCreateTest}
+            time={time}
+            companyname={user.companyname}
+            email={user.email}
+            qinform={qinform}
           />
         </div>
       )}

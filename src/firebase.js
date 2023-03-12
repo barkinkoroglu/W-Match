@@ -380,16 +380,26 @@ export const getAllPost = async (userInfo) => {
   return nposts;
 };
 
-export const createCompanyTest = async (companyid, createdTests) => {
-  const company = await getDoc(doc(db, "companies", companyid));
-  const dbTests = company.data().tests;
+export const createCompanyTest = async (companyid, data) => {
+  const dbUser = await getDoc(doc(db, "companies", companyid));
+  const posts = dbUser.data().posts;
+  posts.push(data);
 
-  createdTests.forEach((test) => {
-    dbTests.push(test);
+  await setDoc(doc(db, "companies", companyid), {
+    ...dbUser.data(),
+    posts: posts,
   });
+};
 
-  await updateDoc(company, {
-    tests: createdTests,
+//In the future, different operations can be performed according to the above function.
+export const createCompanyJob = async (companyid, data) => {
+  const dbUser = await getDoc(doc(db, "companies", companyid));
+  const posts = dbUser.data().posts;
+  posts.push(data);
+
+  await setDoc(doc(db, "companies", companyid), {
+    ...dbUser.data(),
+    posts: posts,
   });
 };
 
