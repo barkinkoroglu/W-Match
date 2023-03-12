@@ -8,7 +8,7 @@ function Widget() {
 
   useEffect(() => {
     (async () => {
-      await getRandomCompany().then((results) => {
+      await getRandomCompany(user.uid).then((results) => {
         if (results) {
           setCompanies(results);
         }

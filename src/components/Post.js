@@ -1,23 +1,29 @@
 import { Avatar } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import Like from "./Like";
 import CloseIcon from "@mui/icons-material/Close";
-import { createComment, createLike } from "../firebase";
+import { createComment, createLike, getUserInfo } from "../firebase";
 import Comment from "./Comment";
 
 function Post(prop) {
-  console.log("Post propları", prop);
+  const [data, setData] = useState(null);
+
+  console.log("DATA PROBLARI", data);
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [commentValue, setCommentValue] = useState("");
+
+  useEffect(() => {
+    getUserInfo(prop.post.username).then((temp) => setData(temp));
+  }, [prop.post.username]);
 
   const TestPost = () => {
     return (
       <div className="  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4">
         <div className=" flex gap-x-3 ">
-          <Avatar />
+          <Avatar src={data?.ProfileUrl} />
           <div>
             <h3 className=" text-lg font-medium">{prop.post.name}</h3>
             <h3 className="text-xs">{prop.post.email}</h3>
@@ -46,7 +52,7 @@ function Post(prop) {
     return (
       <div className="  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4">
         <div className=" flex gap-x-3 ">
-          <Avatar />
+          <Avatar src={data?.ProfileUrl} />
           <div>
             <h3 className=" text-lg font-medium">{prop.post.name}</h3>
             <h3 className="text-xs">{prop.post.email}</h3>
@@ -96,7 +102,7 @@ function Post(prop) {
   return (
     <div className="  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4">
       <div className=" flex gap-x-3 ">
-        <Avatar />
+        <Avatar src={data?.ProfileUrl} />
         <div>
           <h3 className=" text-lg font-medium">{prop.post.name}</h3>
           <h3 className="text-xs">{prop.post.email}</h3>

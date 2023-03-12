@@ -40,7 +40,7 @@ function UserProfile({ user, param }) {
       });
     });
 
-    setOpenProfile(false);
+    //setOpenProfile(false);
   };
 
   const uploadBackImage = () => {

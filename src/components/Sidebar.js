@@ -10,14 +10,17 @@ function Sidebar() {
           <Avatar src={user.ProfileUrl} sx={{ width: 48, height: 48 }} />
         </div>
         {user.type === 1 ? (
-          <div>
-            <div className="flex flex-col text-center ">
+          <div className="w-full space-y-3 ">
+            <div className="flex flex-col text-center px-4 ">
               <h1 className="text-lg font-medium">{`${user.name} ${user.lastname}`}</h1>
               <p className=" text-xs">{user.jobfunct}</p>
             </div>
-            <div>
-              <div>
-                <h1>Following</h1>
+            <div className="flex flex-col border-t-2 gap-y-3">
+              <div className="px-4">
+                <div className="flex justify-between items-center text-sm mt-2 ">
+                  <h1 className="">Following</h1>
+                  <h1 className="">{user?.following?.length}</h1>
+                </div>
               </div>
             </div>
           </div>
