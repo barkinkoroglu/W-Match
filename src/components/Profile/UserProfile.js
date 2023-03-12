@@ -278,6 +278,10 @@ function UserProfile({ user, param }) {
           distinctio deleniti excepturi non aspernatur perspiciatis error
         </p>
       </div>
+      {/* Post Section will come here */}
+      <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
+        <h1 className="text-lg">Posts</h1>
+      </div>
     </div>
   );
 }

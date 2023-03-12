@@ -22,7 +22,7 @@ function WidgetElement({ widg, index }) {
           onClick={async () => fallowUser(widg.username, user.username)}
           className="text-center text-sm font-medium bg-slate-200 hover:bg-slate-300 w-20 py-1 px-2 my-2 rounded-full"
         >
-          Fallow
+          Follow
         </button>
       </div>
     </div>
