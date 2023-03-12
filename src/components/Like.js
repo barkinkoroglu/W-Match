@@ -21,7 +21,7 @@ function Like({ likeid }) {
   return (
     <div className="flex gap-x-2 border-b-2 pb-3 border-gray-100">
       <div>
-        <Avatar />
+        <Avatar src={data.ProfileUrl} />
       </div>
       <div className="leading-5">
         <a

@@ -262,7 +262,7 @@ export const createLike = async (username, test, time) => {
   const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
   const postlar = dbUser.data().posts;
   for (let i = 0; i < postlar.length; i++) {
-    if (postlar[i].time === time) {
+    if (postlar[i].type === 1 && postlar[i].time === time) {
       index = i;
       break;
     }

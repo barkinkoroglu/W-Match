@@ -107,7 +107,7 @@ function Feed() {
               <Post
                 key={index}
                 post={post}
-                userid={user.uid}
+                user={user}
                 name={post.name}
                 username={user.username}
                 about={user.jobfunct}

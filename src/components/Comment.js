@@ -1,12 +1,18 @@
 import { Avatar } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getUserInfo } from "../firebase";
 
 function Comment({ val }) {
   console.log("comment prop", val);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    getUserInfo(val.username).then((temp) => setData(temp));
+  }, [val.username]);
   return (
     <div className=" flex gap-x-2 mb-2 relative">
       <div>
-        <Avatar />
+        <Avatar src={data?.ProfileUrl} />
       </div>
       <div className="bg-slate-100 w-full rounded-lg p-2  ">
         <div className="pr-14 pb-2">

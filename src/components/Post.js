@@ -10,7 +10,7 @@ import Comment from "./Comment";
 function Post(prop) {
   const [data, setData] = useState(null);
 
-  console.log("DATA PROBLARI", data);
+  // console.log("DATA PROBLARI", prop.user.uid);
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [commentValue, setCommentValue] = useState("");
@@ -80,7 +80,7 @@ function Post(prop) {
   }
 
   const handleLike = async (e) => {
-    await createLike(prop.user.username, prop.user.userid, prop.post.time);
+    await createLike(prop.post.username, prop.user.uid, prop.post.time);
   };
 
   const handleSubmit = async (e) => {
@@ -147,7 +147,7 @@ function Post(prop) {
       {showComments && (
         <div className="flex flex-col gap-y-3">
           <div className="flex gap-x-2">
-            <Avatar />
+            <Avatar src={prop.user.ProfileUrl} />
             <form onSubmit={(e) => handleSubmit(e)} className="flex w-full    ">
               <input
                 className="w-full border rounded-lg  outline-none px-2 focus:border-gray-500 "
