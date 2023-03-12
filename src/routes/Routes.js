@@ -3,6 +3,7 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import UserRegister from "../pages/userRegister";
 import CompanyRegister from "../pages/companyRegister";
+import CompanyTest from "../pages/companyTest";
 import Test from "../pages/test";
 import Jobs from "../pages/jobs";
 import Profile from "../pages/profile";
@@ -58,6 +59,11 @@ const AppRoutes = [
   {
     path: "/test/:id",
     Component: Test,
+    isPrivate: true,
+  },
+  {
+    path: "/test/:id/:id2",
+    Component: CompanyTest,
     isPrivate: true,
   },
   {

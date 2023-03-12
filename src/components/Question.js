@@ -14,6 +14,7 @@ function Question({
   companyname,
   email,
   qinform,
+  username,
 }) {
   const user = useSelector((state) => state.auth.user);
   const [nindex, setNindex] = useState(0);
@@ -105,6 +106,7 @@ function Question({
         name: companyname,
         email: email,
         information: qinform,
+        username: username,
       };
       await createCompanyTest(user.uid, finaldata);
       // console.log("Fınal", finaldata);

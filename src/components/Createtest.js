@@ -71,6 +71,7 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
             companyname={user.companyname}
             email={user.email}
             qinform={qinform}
+            username={user.username}
           />
         </div>
       )}

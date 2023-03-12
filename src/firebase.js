@@ -453,3 +453,48 @@ export const changeUserBackProfilePhoto = async (username, url) => {
     BackUrl: url,
   });
 };
+
+export const getCompanyTest = async (companyname, testid) => {
+  const compdataid = await getDoc(doc(db, "usernames", companyname));
+  const companydataid = compdataid.data();
+  const dbCompanyUser = await getDoc(
+    doc(db, "companies", companydataid.user_id)
+  );
+
+  const posts = dbCompanyUser.data().posts;
+
+  const foundtyp2 = posts.filter((element) => element.type === 2);
+  const foundpost = foundtyp2.find((element) => element.id === testid);
+
+  return foundpost;
+};
+
+export const updateCompanyTestScore = async (
+  companyname,
+  userid,
+  testid,
+  score
+) => {
+  let data = {
+    userid: userid,
+    score: score,
+  };
+  const compdataid = await getDoc(doc(db, "usernames", companyname));
+  const companydataid = compdataid.data();
+  const dbCompanyUser = await getDoc(
+    doc(db, "companies", companydataid.user_id)
+  );
+
+  const posts = dbCompanyUser.data().posts;
+  for (let i = 0; i < posts.length; i++) {
+    if (posts[i].type === 2 && posts[i].id === testid) {
+      posts[i].scores.push(data);
+      break;
+    }
+  }
+
+  await setDoc(doc(db, "companies", companydataid.user_id), {
+    ...dbCompanyUser.data(),
+    posts: posts,
+  });
+};
