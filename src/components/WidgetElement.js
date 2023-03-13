@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { fallowUser } from "../firebase";
 function WidgetElement({ widg, index }) {
   const user = useSelector((state) => state.auth.user);
+  const userFollowing = useSelector((state) => state.auth.user.following);
+  const isFollowing = userFollowing?.includes(widg.username) || false;
 
   return (
     <div className="flex gap-x-2 items-start">
@@ -18,11 +20,13 @@ function WidgetElement({ widg, index }) {
           {widg.companyname}
         </a>
         <p className=" text-xs">{widg.about}</p>
+        {/* if isFollowing true ise butona solukluk ver */}
         <button
+          disabled={isFollowing}
           onClick={async () => fallowUser(widg.username, user.username)}
           className="text-center text-sm font-medium bg-slate-200 hover:bg-slate-300 w-20 py-1 px-2 my-2 rounded-full"
         >
-          Follow
+          {!isFollowing ? "Follow" : "Following"}
         </button>
       </div>
     </div>
