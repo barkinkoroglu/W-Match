@@ -46,8 +46,11 @@ function Post(prop) {
             href={`test/${prop.post.username}/${prop.post.id}`}
           >
             <button className="bg-slate-200 p-1 rounded-lg">
-              Take the exam.
-            </button>
+            {prop.user?.type === 1 && (
+              <button className="bg-slate-200 p-1 rounded-lg">
+                Take the exam.
+              </button>
+            )}
           </a>
         </div>
       </div>
