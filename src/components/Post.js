@@ -14,6 +14,8 @@ function Post(prop) {
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [commentValue, setCommentValue] = useState("");
+  const isTest =
+    (prop.post.questions && prop.post.questions.length > 0) || false;
 
   useEffect(() => {
     getUserInfo(prop.post.username).then((temp) => setData(temp));
@@ -30,7 +32,11 @@ function Post(prop) {
           </div>
         </div>
         <div className="relative">
-          <h1 className="text-base"> {prop.post.information} </h1>
+          <h1 className="text-base">
+            {isTest
+              ? `Test Name: ${prop.post.information}`
+              : prop.post.information}
+          </h1>
 
           <h1 className="text-sm">
             Test Time : <span className="font-medium">{prop.post.qtime}</span>{" "}
