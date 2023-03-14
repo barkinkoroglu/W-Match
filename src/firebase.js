@@ -523,3 +523,40 @@ export const applyJob = async (companyname, userid, time) => {
     posts: posts,
   });
 };
+
+export const userEditInformation = async (
+  name,
+  lastname,
+  address,
+  address2,
+  username
+) => {
+  const userid = await getDoc(doc(db, "usernames", username));
+  const userdata = userid.data();
+  const dbUser = await getDoc(doc(db, "users", userdata.user_id));
+
+  await setDoc(doc(db, "users", userdata.user_id), {
+    ...dbUser.data(),
+    name: name,
+    lastname: lastname,
+    addressline1: address,
+    addressline2: address2,
+  });
+};
+
+export const companyEditInformation = async (
+  companyname,
+  address,
+  address2,
+  username
+) => {
+  const userid = await getDoc(doc(db, "usernames", username));
+  const userdata = userid.data();
+  const dbUser = await getDoc(doc(db, "companies", userdata.user_id));
+  await setDoc(doc(db, "companies", userdata.user_id), {
+    ...dbUser.data(),
+    companyname: companyname,
+    addressline1: address,
+    addressline2: address2,
+  });
+};

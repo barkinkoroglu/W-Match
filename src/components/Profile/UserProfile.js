@@ -11,6 +11,8 @@ import {
   changeUserProfilePhoto,
   changeCompanyBackProfilePhoto,
   changeUserBackProfilePhoto,
+  userEditInformation,
+  companyEditInformation,
 } from "../../firebase";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -23,7 +25,35 @@ function UserProfile({ user, param }) {
   const [openBackProfile, setOpenBackProfile] = useState(false);
   const [imageurl, setImageurl] = useState(null);
   const [openSettingProfile, setOpenSettingProfile] = useState(false);
+  const [editName, setEditname] = useState("");
+  const [editLname, setEditlname] = useState("");
+  const [editAddress, setEditAddress] = useState("");
+  const [editAddress2, setEditAddress2] = useState("");
 
+  const handleEditChange = async (e) => {
+    e.preventDefault();
+    editAddress === "" && setEditAddress(ruser.addressline1);
+    editAddress2 === "" && setEditAddress2(ruser.addressline2);
+    if (ruser.type === 1) {
+      editName === "" && setEditname(ruser.name);
+      editLname === "" && setEditlname(ruser.lastname);
+      await userEditInformation(
+        editName,
+        editLname,
+        editAddress,
+        editAddress2,
+        ruser.username
+      );
+    } else {
+      editName === "" && setEditname(ruser.companyname);
+      await companyEditInformation(
+        editName,
+        editAddress,
+        editAddress2,
+        ruser.username
+      );
+    }
+  };
   const uploadImage = () => {
     if (imageUpload == null) return;
     const imageRef = ref(
@@ -44,21 +74,21 @@ function UserProfile({ user, param }) {
   };
 
   const uploadBackImage = () => {
-    // if (backimageUpload == null) return;
-    // const imageRef2 = ref(
-    //   storage,
-    //   `background/${ruser.username}/${backimageUpload.name + v4()}`
-    // );
-    // uploadBytes(imageRef2, backimageUpload).then((snaphsot) => {
-    //   getDownloadURL(snaphsot.ref).then((url) => {
-    //     if (ruser.type === 1) {
-    //       changeUserBackProfilePhoto(ruser.username, url);
-    //     } else {
-    //       changeCompanyBackProfilePhoto(ruser.username, url);
-    //     }
-    //   });
-    // });
-    // setOpenBackProfile(false);
+    if (backimageUpload == null) return;
+    const imageRef2 = ref(
+      storage,
+      `background/${ruser.username}/${backimageUpload.name + v4()}`
+    );
+    uploadBytes(imageRef2, backimageUpload).then((snaphsot) => {
+      getDownloadURL(snaphsot.ref).then((url) => {
+        if (ruser.type === 1) {
+          changeUserBackProfilePhoto(ruser.username, url);
+        } else {
+          changeCompanyBackProfilePhoto(ruser.username, url);
+        }
+      });
+    });
+    setOpenBackProfile(false);
   };
   // It will be changed according to user attributes
   const handleUpdateedit = () => {
@@ -175,20 +205,53 @@ function UserProfile({ user, param }) {
                 <div className=" relative py-2  w-full text-center items-center ">
                   <h1 className="text-lg font-medium border-b-2">Edit</h1>
 
-                  <div className="p-3 space-y-3 whitespace-nowrap">
-                    <div className="flex gap-3 w-full">
-                      <h1>Email:</h1>
-                      <input
-                        className=" border px-2 w-full"
-                        defaultValue={ruser.email}
-                        type="text"
-                      />
-                    </div>
+                  <form
+                    onSubmit={(e) => handleEditChange(e)}
+                    className="p-3 space-y-3 whitespace-nowrap"
+                  >
+                    {ruser?.type === 1 && (
+                      <div className="flex flex-col gap-y-3">
+                        <div className="flex gap-3 w-full">
+                          <h1>Name:</h1>
+                          <input
+                            className=" border px-2 w-full"
+                            defaultValue={ruser.name}
+                            onChange={(e) => setEditname(e.target.value)}
+                            type="text"
+                          />
+                        </div>
+                        <div className="flex gap-3 w-full">
+                          <h1>Lastname:</h1>
+                          <input
+                            className=" border px-2 w-full"
+                            defaultValue={ruser.lastname}
+                            onChange={(e) => setEditlname(e.target.value)}
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {ruser?.type === 2 && (
+                      <div className="flex flex-col gap-y-3">
+                        <div className="flex gap-3 w-full">
+                          <h1>CompanyName:</h1>
+                          <input
+                            className=" border px-2 w-full"
+                            defaultValue={ruser.companyname}
+                            onChange={(e) => setEditname(e.target.value)}
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                    )}
+
                     <div className="flex gap-3 w-full ">
                       <h1 className="">Adress Line 1:</h1>
                       <input
                         className=" border px-2 w-full"
                         defaultValue={ruser.addressline1}
+                        onChange={(e) => setEditAddress(e.target.value)}
                         type="text"
                       />
                     </div>
@@ -197,18 +260,18 @@ function UserProfile({ user, param }) {
                       <input
                         className=" border px-2 w-full"
                         defaultValue={ruser.addressline2}
+                        onChange={(e) => setEditAddress2(e.target.value)}
                         type="text"
                       />
                     </div>
-                    <div className="flex gap-3 w-full">
-                      <h1>About</h1>
-                      <input
-                        className=" border px-2 w-full"
-                        defaultValue={ruser.about}
-                        type="text"
-                      />
-                    </div>
-                  </div>
+                    <button
+                      onClick={() => handleUpdateedit()}
+                      className="bg-gray-300 px-2 py-1 rounded-lg hover:bg-slate-400"
+                    >
+                      Change
+                    </button>
+                  </form>
+
                   <button
                     onClick={() => setOpenSettingProfile(false)}
                     className="absolute top-0 right-0 p-1 rounded-lg flex justify-center items-center hover:bg-slate-400"
@@ -216,13 +279,6 @@ function UserProfile({ user, param }) {
                     <CloseIcon />
                   </button>
                 </div>
-
-                <button
-                  onClick={() => handleUpdateedit()}
-                  className="bg-gray-300 px-2 py-1 rounded-lg hover:bg-slate-400"
-                >
-                  Change
-                </button>
               </div>
             </div>
           )}
