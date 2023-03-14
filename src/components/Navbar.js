@@ -6,7 +6,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import WorkIcon from "@mui/icons-material/Work";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Avatar } from "@mui/material";
-import { logout, getCompany } from "../firebase";
+import { logout, getCompany, searchCompany } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -14,14 +14,16 @@ function Navbar() {
   const [showdrop, setShowdrop] = useState(false);
   const [userProfile, setUserProfile] = useState("");
   const [search, setSearch] = useState("");
-
   const user = useSelector((state) => state.auth.user);
+  const searchdata = useSelector((state) => state.widget.widget);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handlelogout = async () => {
     await logout();
     navigate("/");
   };
+  const searchuserdata = () => {};
   const handleprofil = () => {
     if (user.type === 1) {
       navigate(`/profile/${user.username}`);
@@ -35,10 +37,12 @@ function Navbar() {
 
   useEffect(() => {
     const callValue = async () => {
-      await getCompany(search).then((user) => {
-        if (user) {
-          dispatch(setCompanies(user));
-        }
+      await getCompany().then((data) => {
+        searchCompany(data, search).then((user) => {
+          if (user) {
+            dispatch(setCompanies(user));
+          }
+        });
       });
     };
     search.length > 0 && callValue();
@@ -60,12 +64,30 @@ function Navbar() {
               className="px-2 py-1 pl-8 sm:w-72  rounded-lg   "
               type="text"
               placeholder="Search"
-              onChange={handleSearch}
+              onChange={(e) => handleSearch(e)}
             />
             <SearchIcon
               className="absolute left-1 top-0 bottom-0 my-auto mx-0 "
               style={{ height: "20px", width: "20px" }}
             />
+
+            {searchdata?.length > 0 && (
+              <div className="  sm:min-w-[290px] flex flex-col  gap-y-2  rounded-lg absolute left-0 top-9 bg-slate-300 ">
+                {searchdata?.map((element, index) => {
+                  return (
+                    <div
+                      className="flex gap-x-2 items-center border-b-2 hover:bg-slate-500 px-2 py-1"
+                      key={index}
+                    >
+                      <Avatar src={element.ProfileUrl} />
+                      <a href={`/profile/${element.username}`}>
+                        {element.companyname}
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </form>
         </div>
         <div className="flex justify-center items-center sm:gap-x-3  lg:gap-x-6">

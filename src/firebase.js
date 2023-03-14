@@ -341,7 +341,7 @@ export const getCompany = async () => {
     // console.log(doc.id, " => ", doc.data());
     temp.push(doc.data());
   });
-  console.log("SEARCH BAR", temp);
+  // console.log("SEARCH BAR", temp);
   return temp;
 };
 
@@ -557,4 +557,15 @@ export const companyEditInformation = async (
     addressline1: address,
     addressline2: address2,
   });
+};
+
+export const searchCompany = async (companydata, search) => {
+  // console.log(companydata);
+  const result = companydata.filter(
+    (element) => element?.companyname?.toLowerCase().includes(search) === true
+  );
+  // console.log(result);
+  const temp = result.slice(0, 3);
+  console.log(temp);
+  return temp;
 };
