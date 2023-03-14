@@ -27,7 +27,12 @@ function Post(prop) {
         <div className=" flex gap-x-3 ">
           <Avatar src={data?.ProfileUrl} />
           <div>
-            <h3 className=" text-lg font-medium">{data?.companyname}</h3>
+            <a
+              href={`profile/${data?.username}`}
+              className=" text-lg font-medium hover:underline"
+            >
+              {data?.companyname}
+            </a>
             <h3 className="text-xs">{prop.post.email}</h3>
           </div>
         </div>
@@ -65,7 +70,12 @@ function Post(prop) {
         <div className=" flex gap-x-3 ">
           <Avatar src={data?.ProfileUrl} />
           <div>
-            <h3 className=" text-lg font-medium">{data?.companyname}</h3>
+            <a
+              href={`profile/${data?.username}`}
+              className=" text-lg font-medium hover:underline"
+            >
+              {data?.companyname}
+            </a>
             <h3 className="text-xs">{prop.post.email}</h3>
           </div>
         </div>
@@ -118,7 +128,12 @@ function Post(prop) {
       <div className=" flex gap-x-3 ">
         <Avatar src={data?.ProfileUrl} />
         <div>
-          <h3 className=" text-lg font-medium">{data?.companyname}</h3>
+          <a
+            href={`profile/${data?.username}`}
+            className=" text-lg font-medium hover:underline"
+          >
+            {data?.companyname}
+          </a>
           <h3 className="text-xs">{prop.post.email}</h3>
         </div>
       </div>

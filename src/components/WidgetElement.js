@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
 import { fallowUser } from "../firebase";
 function WidgetElement({ widg, index }) {
   const user = useSelector((state) => state.auth.user);
-  const userFollowing = useSelector((state) => state.auth.user.following);
-  const isFollowing = userFollowing?.includes(widg.username) || false;
+  const [followTrue, setfollowTrue] = useState(false);
+  const handleFollow = async () => {
+    await fallowUser(widg.username, user.username);
+    setfollowTrue(!followTrue);
+  };
 
   return (
     <div className="flex gap-x-2 items-start">
@@ -22,11 +25,10 @@ function WidgetElement({ widg, index }) {
         <p className=" text-xs">{widg.about}</p>
         {/* if isFollowing true ise butona solukluk ver */}
         <button
-          disabled={isFollowing}
-          onClick={async () => fallowUser(widg.username, user.username)}
+          onClick={() => handleFollow()}
           className="text-center text-sm font-medium bg-slate-200 hover:bg-slate-300 w-20 py-1 px-2 my-2 rounded-full"
         >
-          {!isFollowing ? "Follow" : "Following"}
+          {followTrue ? "Unfollow" : "Follow"}
         </button>
       </div>
     </div>
