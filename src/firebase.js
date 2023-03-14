@@ -337,7 +337,6 @@ export const fallowUser = async (companyname, username, test) => {
 export const getCompany = async () => {
   let temp = [];
   const querySnapshot = await getDocs(collection(db, "companies"));
-
   querySnapshot.forEach((doc) => {
     // console.log(doc.id, " => ", doc.data());
     temp.push(doc.data());
@@ -345,18 +344,17 @@ export const getCompany = async () => {
   console.log("SEARCH BAR", temp);
   return temp;
 };
-//This function will be updated
-export const getRandomCompany = async (userid) => {
+
+export const getRandomCompany = async (username) => {
   let temp = [];
-  // const user = await getDoc(doc(db, "users", userid));
-  // const following = user.data().following;
   const querySnapshot = await getDocs(collection(db, "companies"));
-
   querySnapshot.forEach((doc) => {
-    // console.log(doc.id, " => ", doc.data());
-    temp.push(doc.data());
+    let temp2 = doc.data();
+    let flag = temp2.followers?.find((element) => element === username);
+    if (typeof flag === "undefined") {
+      temp.push(temp2);
+    }
   });
-
   return shuffle(temp);
 };
 export const getAllPost = async (userInfo) => {

@@ -10,7 +10,7 @@ import Comment from "./Comment";
 function Post(prop) {
   const [data, setData] = useState(null);
 
-  console.log("DATA PROBLARI", prop.post);
+  // console.log("DATA PROBLARI", prop.post);
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [commentValue, setCommentValue] = useState("");
