@@ -142,22 +142,25 @@ function Post(prop) {
           {prop.post.comments.length} comments
         </h3>
       </div>
-      <div className="flex justify-evenly border-t-2 pt-2   ">
-        <div
-          onClick={() => handleLike()}
-          className=" flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center cursor-pointer "
-        >
-          <ThumbUpOffAltIcon className="group-hover:text-blue-400" />
-          <h3>Like</h3>
+      {prop.user?.type === 1 && (
+        <div className="flex justify-evenly border-t-2 pt-2   ">
+          <div
+            onClick={() => handleLike()}
+            className=" flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center cursor-pointer "
+          >
+            <ThumbUpOffAltIcon className="group-hover:text-blue-400" />
+            <h3>Like</h3>
+          </div>
+          <div
+            onClick={() => setShowComments(!showComments)}
+            className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-lg group items-center  justify-center cursor-pointer "
+          >
+            <ChatBubbleOutlineIcon className="group-hover:text-blue-400" />
+            <h3>Comment</h3>
+          </div>
         </div>
-        <div
-          onClick={() => setShowComments(!showComments)}
-          className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-lg group items-center  justify-center cursor-pointer "
-        >
-          <ChatBubbleOutlineIcon className="group-hover:text-blue-400" />
-          <h3>Comment</h3>
-        </div>
-      </div>
+      )}
+
       {showComments && (
         <div className="flex flex-col gap-y-3">
           <div className="flex gap-x-2">
