@@ -1,5 +1,5 @@
 import { Avatar } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { useSelector } from "react-redux";
@@ -15,7 +15,7 @@ import {
   companyEditInformation,
 } from "../../firebase";
 import CloseIcon from "@mui/icons-material/Close";
-
+import Post from "../Post";
 function UserProfile({ user, param }) {
   // console.log(user.wmatchTests);
   const ruser = useSelector((state) => state.auth.user);
@@ -30,6 +30,7 @@ function UserProfile({ user, param }) {
   const [editAddress, setEditAddress] = useState("");
   const [editAddress2, setEditAddress2] = useState("");
 
+  console.log("PROFİLE USER", user);
   const handleEditChange = async (e) => {
     e.preventDefault();
     editAddress === "" && setEditAddress(ruser.addressline1);
@@ -335,9 +336,33 @@ function UserProfile({ user, param }) {
         </p>
       </div>
       {/* Post Section will come here */}
-      <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
-        <h1 className="text-lg">Posts</h1>
-      </div>
+
+      {user.type === 2 && (
+        <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
+          <h1 className="text-lg">Posts</h1>
+          <div>
+            {user.posts.length > 0 ? (
+              user.posts.sort((a, b) => b.time - a.time) &&
+              user.posts.map((post, index) => {
+                return (
+                  <Post
+                    key={index}
+                    post={post}
+                    user={ruser}
+                    name={post.name}
+                    username={ruser?.username}
+                    about={ruser?.jobfunct}
+                    //It will change for company comments
+                    uname={`${ruser?.name} ${ruser?.lastname}`}
+                  />
+                );
+              })
+            ) : (
+              <div className="font-medium">No Post to Show </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
