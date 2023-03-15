@@ -5,7 +5,8 @@
     "b": "Coleoptera",
     "c": "Formicidae",
     "d": "Rhopalocera",
-    "correct": "d"
+    "correct": "d",
+   "level":"hard"
   },
   {
     "question": "How hot is the surface of the sun?",
@@ -13,7 +14,8 @@
     "b": "5,778 K",
     "c": "12,130 K",
     "d": "101,300 K",
-    "correct": "b"
+    "correct": "b",
+    "level":"easy"
   },
   {
     "question": "Who are the actors in The Internship?",
@@ -21,7 +23,8 @@
     "b": "Courteney Cox, Matt LeBlanc",
     "c": "Kaley Cuoco, Jim Parsons",
     "d": "Vince Vaughn, Owen Wilson",
-    "correct": "d"
+    "correct": "d",
+    "level":"normal"
   },
   {
     "question": "What is the capital of Spain?",
@@ -29,7 +32,8 @@
     "b": "Buenos Aires",
     "c": "Madrid",
     "d": "San Juan",
-    "correct": "c"
+    "correct": "c",
+    "level":"hard"
   },
   {
     "question": "What are the school colors of the University of Texas at Austin?",
@@ -37,7 +41,8 @@
     "b": "Blue, Orange",
     "c": "White, Burnt Orange",
     "d": "White, Old gold, Gold",
-    "correct": "c"
+    "correct": "c",
+    "level":"easy"
   },
   {
     "question": "What is 70 degrees Fahrenheit in Celsius?",
@@ -45,7 +50,8 @@
     "b": "20",
     "c": "21.1111",
     "d": "158",
-    "correct": "c"
+    "correct": "c",
+    "level":"normal"
   },
   {
     "question": "When was Mahatma Gandhi born?",
@@ -53,7 +59,8 @@
     "b": "December 15, 1872",
     "c": "July 18, 1918",
     "d": "January 15, 1929",
-    "correct": "a"
+    "correct": "a",
+    "level":"hard"
   },
   {
     "question": "How far is the moon from Earth?",
@@ -61,7 +68,8 @@
     "b": "86,881 miles (139,822 km)",
     "c": "238,400 miles (384,400 km)",
     "d": "35,980,000 miles (57,910,000 km)",
-    "correct": "c"
+    "correct": "c",
+    "level":"easy"
   },
   {
     "question": "What is 65 times 52?",
@@ -69,7 +77,8 @@
     "b": "3120",
     "c": "3380",
     "d": "3520",
-    "correct": "c"
+    "correct": "c",
+    "level":"normal"
   },
   {
     "question": "How tall is Mount Everest?",
@@ -77,7 +86,8 @@
     "b": "7,918 ft (2,413 m)",
     "c": "19,341 ft (5,895 m)",
     "d": "29,029 ft (8,847 m)",
-    "correct": "d"
+    "correct": "d",
+    "level":"hard"
   },
   {
     "question": "When did The Avengers come out?",
@@ -85,7 +95,8 @@
     "b": "May 4, 2012",
     "c": "May 3, 2013",
     "d": "April 4, 2014",
-    "correct": "b"
+    "correct": "b",
+    "level":"easy"
   },
   {
     "question": "What is 48,879 in hexidecimal?",
@@ -93,6 +104,7 @@
     "b": "0xBEEF",
     "c": "0xDEAD",
     "d": "0x12D591",
-    "correct": "b"
+    "correct": "b",
+    "level":"normal"
   }
 ]
