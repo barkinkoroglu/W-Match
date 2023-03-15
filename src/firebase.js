@@ -580,3 +580,17 @@ export const searchCompany = async (companydata, search) => {
   console.log(temp);
   return temp;
 };
+
+export const fetchQuestions = async () => {
+  let questions = [];
+  try {
+    const docsSnap = await getDocs(collection(db, "questions"));
+    if (docsSnap.docs.length > 0) {
+      docsSnap.forEach(async (doc) => {
+        const question = await getDoc(doc(db, "questions", doc.id));
+        questions.push(question.data());
+      });
+    }
+    return questions;
+  } catch (error) {}
+};
