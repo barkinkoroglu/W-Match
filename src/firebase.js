@@ -201,6 +201,15 @@ export const userRegister = async (
     throw new Error("E-Mail!");
   }
 };
+export const createLevel = async (username, level) => {
+  const userID = await getDoc(doc(db, "usernames", username));
+  const user = userID.data();
+  const dbUser = await getDoc(doc(db, "users", user.user_id));
+  return await setDoc(doc(db, "users", user.user_id), {
+    ...dbUser.data(),
+    level,
+  });
+};
 
 export const updateExam = async (userid, test) => {
   const dbUser = doc(db, "users", userid);

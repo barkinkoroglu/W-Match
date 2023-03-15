@@ -43,7 +43,7 @@ function UserRegister() {
       password
     );
     if (response) {
-      navigate(`/test/${JobCategory}`);
+      navigate(`/level`);
       console.log(response);
     }
   };

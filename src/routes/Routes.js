@@ -10,6 +10,7 @@ import Profile from "../pages/profile";
 import Homepage from "../pages/homepage";
 import Notifications from "../pages/notifications";
 import Notfound from "../pages/notfound";
+import Level from "../pages/level";
 const AppRoutes = [
   {
     path: "/",
@@ -54,6 +55,11 @@ const AppRoutes = [
   {
     path: "/notifications",
     Component: Notifications,
+    isPrivate: true,
+  },
+  {
+    path: "/level",
+    Component: Level,
     isPrivate: true,
   },
   {

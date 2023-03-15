@@ -10,7 +10,7 @@ function Test() {
   const [score, setScore] = useState(0);
   const [disButton, setdisButton] = useState(false);
   const [cquestion, setCquestion] = useState(0);
-  const [examtime, setExamtime] = useState(500);
+  const [examtime, setExamtime] = useState(99999999);
   const timerId = useRef();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
