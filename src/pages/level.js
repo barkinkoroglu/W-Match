@@ -12,10 +12,8 @@ function Level() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("dlevel", user?.username, dlevel);
-    const response = await createLevel(user?.username, dlevel);
-    console.log("response", response);
-    if (response) {
+    if (dlevel.length > 0 && user?.JobCategory) {
+      await createLevel(user?.username, dlevel);
       navigate(`/test/${user?.JobCategory}`);
     }
   };
