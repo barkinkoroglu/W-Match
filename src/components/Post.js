@@ -50,11 +50,14 @@ function Post(prop) {
             className="absolute right-0 bottom-0"
             href={`test/${prop.post.username}/${prop.post.id}`}
           >
-            {prop.user?.type === 1 && (
-              <button className="bg-slate-200 p-1 rounded-lg">
-                Take the exam.
-              </button>
-            )}
+            {prop.user?.type === 1 &&
+              prop.post.scores?.find(
+                (element) => element.userid === prop.user.uid
+              ) === undefined && (
+                <button className="bg-slate-200 p-1 rounded-lg">
+                  Take the exam.
+                </button>
+              )}
           </a>
         </div>
       </div>
@@ -84,12 +87,17 @@ function Post(prop) {
 
           <h1 className="text-base"> {prop.post.information} </h1>
           <h1 className="text-sm">{prop.post.salary} </h1>
-          <button
-            onClick={() => handleApply()}
-            className="bg-slate-200 p-1 rounded-lg absolute right-0 bottom-0"
-          >
-            Apply
-          </button>
+          {prop.user?.type === 1 &&
+            prop.post.candidates?.find(
+              (element) => element === prop.user.uid
+            ) === undefined && (
+              <button
+                onClick={() => handleApply()}
+                className="bg-slate-200 p-1 rounded-lg absolute right-0 bottom-0"
+              >
+                Apply
+              </button>
+            )}
         </div>
       </div>
     );

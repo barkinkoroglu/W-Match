@@ -9,11 +9,14 @@ function WidgetElement({ widg, index }) {
     await fallowUser(widg.username, user.username);
     setfollowTrue(!followTrue);
   };
-
   return (
     <div className="flex gap-x-2 items-start">
       <div className="pt-1">
-        <Avatar className="" sx={{ width: 40, height: 40 }} />
+        <Avatar
+          src={widg.ProfileUrl}
+          className=""
+          sx={{ width: 40, height: 40 }}
+        />
       </div>
       <div className="flex flex-col">
         <a
