@@ -2,6 +2,8 @@ import { Avatar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 import { useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -13,9 +15,12 @@ import {
   changeUserBackProfilePhoto,
   userEditInformation,
   companyEditInformation,
+  getUserInfo,
+  fallowUser,
 } from "../../firebase";
 import CloseIcon from "@mui/icons-material/Close";
 import Post from "../Post";
+import { async } from "@firebase/util";
 function UserProfile({ user, param }) {
   // console.log(user.wmatchTests);
   const ruser = useSelector((state) => state.auth.user);
@@ -29,6 +34,12 @@ function UserProfile({ user, param }) {
   const [editLname, setEditlname] = useState("");
   const [editAddress, setEditAddress] = useState("");
   const [editAddress2, setEditAddress2] = useState("");
+  const [prodata, setProdata] = useState(null);
+
+  // console.log("PROFİLE USER INFO", prodata);
+  useEffect(() => {
+    getUserInfo(ruser.username).then((temp) => setProdata(temp));
+  }, [ruser.username]);
 
   console.log("PROFİLE USER", user);
   const handleEditChange = async (e) => {
@@ -94,6 +105,10 @@ function UserProfile({ user, param }) {
   // It will be changed according to user attributes
   const handleUpdateedit = () => {
     console.log("Test");
+  };
+
+  const handleFollowProfile = async () => {
+    await fallowUser(user.username, ruser.username);
   };
   return (
     <div className="flex flex-[0.7] min-h-screen   flex-col mx-12 gap-y-3 pb-3 ">
@@ -195,11 +210,32 @@ function UserProfile({ user, param }) {
           {ruser.username === param.id && (
             <button
               onClick={() => setOpenSettingProfile(!openSettingProfile)}
-              className="absolute right-3 bottom-3 text-gray-400 p-1 rounded-full hover:bg-slate-700 cursor-pointer "
+              className="absolute right-3 bottom-3 text-gray-400 p-1 rounded-full hover:bg-slate-700 cursor-pointer transition-colors duration-300 "
             >
               <SettingsIcon />
             </button>
           )}
+
+          {ruser.type === 1 && ruser.username !== param.id && (
+            <button
+              className="absolute right-3 bottom-3 flex items-center text-gray-100 bg-slate-400 py-1 px-2 rounded-full hover:bg-slate-500 cursor-pointer transition-colors duration-300"
+              onClick={() => handleFollowProfile()}
+            >
+              {prodata?.following.find((element) => element === param.id) ===
+              undefined ? (
+                <div className="flex items-center">
+                  <AddIcon />
+                  <h1>Follow</h1>
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  <RemoveIcon />
+                  <h1>Unfollow</h1>
+                </div>
+              )}
+            </button>
+          )}
+
           {openSettingProfile && (
             <div className=" ">
               <div className="fixed flex flex-col z-[51] top-5 left-0 right-0 mx-auto max-w-md max-h-[calc(100vh-64px)] px-4 py-3 gap-y-3 rounded bg-white items-center">
