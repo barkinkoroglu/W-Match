@@ -9,8 +9,14 @@ function Home() {
   return (
     <div className=" ">
       <div className="flex flex-col  max-w-6xl px-3 mx-auto   ">
-        <nav className="flex   justify-between items-center ">
-          <div className=" py-3  h-16 font-bold text-4xl">W-MATCH</div>
+        <nav className="flex   justify-between items-center pt-2 ">
+          <a href="/" className=" font-bold  ">
+            <img
+              src={require("../images/logo.png")}
+              className=" w-[160px] h-16 object-cover"
+              alt=""
+            />
+          </a>
           <div className="flex gap-x-5 items-center ">
             <a
               href="/register"
