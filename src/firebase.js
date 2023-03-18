@@ -240,6 +240,19 @@ export const getUserInfo = async (uname) => {
   }
 };
 
+export const getCompanyInfo = async (uname) => {
+  const username = await getDoc(doc(db, "usernames", uname));
+  if (username.exists()) {
+    const res2 = (
+      await getDoc(doc(db, "companies", username.data().user_id))
+    ).data();
+    return res2;
+  } else {
+    toast.error("User not found!");
+    throw new Error("User not found!");
+  }
+};
+
 export const createPost = async (userid, test) => {
   const dbUser = doc(db, "companies", userid);
   await updateDoc(dbUser, {
@@ -593,4 +606,26 @@ export const fetchQuestions = async () => {
     }
     return questions;
   } catch (error) {}
+};
+
+export const getRandomCompanyJobs = async (userid) => {
+  let temp = [];
+  const querySnapshot = await getDocs(collection(db, "companies"));
+  querySnapshot.forEach((doc) => {
+    let temp2 = doc.data();
+    for (let i = 0; i < temp2.posts?.length; i++) {
+      if (temp2.posts[i].type === 3) {
+        let flag = temp2.posts[i].candidates.find(
+          (element) => element === userid
+        );
+        if (typeof flag === "undefined") {
+          temp.push(temp2.posts[i]);
+        }
+      }
+    }
+  });
+  // console.log("FİREBASE TEMP", temp);
+  //return temp;
+  const result = temp.slice(0, 5);
+  return shuffle(result);
 };

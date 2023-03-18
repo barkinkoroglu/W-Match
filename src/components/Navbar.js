@@ -55,7 +55,7 @@ function Navbar() {
           <a href="/home" className=" font-bold  ">
             <img
               src={require("../images/logo.png")}
-              className=" w-[160px] h-12 object-cover"
+              className=" w-[160px] h-12 object-cover border-none outline-none"
               alt=""
             />
           </a>
