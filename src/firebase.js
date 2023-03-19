@@ -629,3 +629,22 @@ export const getRandomCompanyJobs = async (userid) => {
   const result = temp.slice(0, 5);
   return shuffle(result);
 };
+
+export const deletePostdata = async (username, time) => {
+  const compdataid = await getDoc(doc(db, "usernames", username));
+  const companydataid = compdataid.data();
+  const dbCompanyUser = await getDoc(
+    doc(db, "companies", companydataid.user_id)
+  );
+
+  const posts = dbCompanyUser.data().posts;
+
+  const result = posts.filter((element) => element.time !== time);
+
+  toast.success("The post is deleted!");
+
+  await setDoc(doc(db, "companies", companydataid.user_id), {
+    ...dbCompanyUser.data(),
+    posts: result,
+  });
+};
