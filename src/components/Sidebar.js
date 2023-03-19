@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 function Sidebar() {
   const user = useSelector((state) => state.auth.user);
   return (
-    <div className="flex-[0.2]   ">
+    <div className="flex-[0.2]  mx-12 mb-6 md:mx-0 md:mb-0    ">
       <div className="flex flex-col sticky top-[72px] z-40 py-2  gap-y-3 items-center justify-center rounded-lg shadow-lg     bg-white">
         <div>
           <Avatar src={user.ProfileUrl} sx={{ width: 48, height: 48 }} />

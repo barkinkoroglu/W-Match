@@ -35,7 +35,7 @@ function Profile() {
     <div className="">
       <Navbar />
       <div className=" bg-gray-50">
-        <div className="flex max-w-6xl px-3 pt-3 mx-auto  ">
+        <div className="flex flex-col md:flex-row max-w-6xl px-3 pt-3 mx-auto  ">
           <UserProfile user={user} param={param} />
           <Widget />
         </div>

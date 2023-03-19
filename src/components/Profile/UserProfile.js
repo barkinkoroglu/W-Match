@@ -111,7 +111,7 @@ function UserProfile({ user, param }) {
     await fallowUser(user.username, ruser.username);
   };
   return (
-    <div className="flex flex-[0.7] min-h-screen   flex-col mx-12 gap-y-3 pb-3 ">
+    <div className="flex flex-[0.7]   md:min-h-screen   flex-col mx-12 gap-y-3 pb-3 ">
       <div className="max-h-[490px] bg-white rounded-lg flex flex-col ">
         <div className=" flex flex-1 items-end relative min-h-[237px] ">
           <div className="p-2 relative group">

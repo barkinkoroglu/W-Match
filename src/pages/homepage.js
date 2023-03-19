@@ -15,7 +15,7 @@ function Homepage() {
     <div className="w-full  ">
       <Navbar />
       <div className=" bg-gray-50  min-h-[calc(100vh-60px)]">
-        <div className="flex max-w-6xl px-3 pt-3 mx-auto  ">
+        <div className=" flex flex-col md:flex-row  max-w-6xl px-3 pt-3 mx-auto  ">
           <Sidebar />
           <Feed />
           <Widget />
