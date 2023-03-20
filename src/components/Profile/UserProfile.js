@@ -75,14 +75,17 @@ function UserProfile({ user, param }) {
     uploadBytes(imageRef, imageUpload).then((snaphsot) => {
       getDownloadURL(snaphsot.ref).then((url) => {
         if (ruser.type === 1) {
-          changeUserProfilePhoto(ruser.username, url);
+          changeUserProfilePhoto(ruser.username, url).then(() =>
+            getUserInfo(ruser.username).then((temp) => setProdata(temp))
+          );
         } else {
-          changeCompanyProfilePhoto(ruser.username, url);
+          changeCompanyProfilePhoto(ruser.username, url).then(() =>
+            getUserInfo(ruser.username).then((temp) => setProdata(temp))
+          );
         }
       });
     });
-
-    //setOpenProfile(false);
+    setOpenProfile(false);
   };
 
   const uploadBackImage = () => {
@@ -94,9 +97,13 @@ function UserProfile({ user, param }) {
     uploadBytes(imageRef2, backimageUpload).then((snaphsot) => {
       getDownloadURL(snaphsot.ref).then((url) => {
         if (ruser.type === 1) {
-          changeUserBackProfilePhoto(ruser.username, url);
+          changeUserBackProfilePhoto(ruser.username, url).then(() =>
+            getUserInfo(ruser.username).then((temp) => setProdata(temp))
+          );
         } else {
-          changeCompanyBackProfilePhoto(ruser.username, url);
+          changeCompanyBackProfilePhoto(ruser.username, url).then(() =>
+            getUserInfo(ruser.username).then((temp) => setProdata(temp))
+          );
         }
       });
     });
@@ -108,7 +115,9 @@ function UserProfile({ user, param }) {
   };
 
   const handleFollowProfile = async () => {
-    await fallowUser(user.username, ruser.username);
+    await fallowUser(user.username, ruser.username).then(() => {
+      getUserInfo(ruser.username).then((temp) => setProdata(temp));
+    });
   };
   return (
     <div className="flex flex-[0.7]   md:min-h-screen   flex-col mx-12 gap-y-3 pb-3 ">
@@ -118,7 +127,9 @@ function UserProfile({ user, param }) {
             {}
             <Avatar
               src={
-                ruser.username === param.id ? ruser.ProfileUrl : user.ProfileUrl
+                ruser.username === param.id
+                  ? prodata?.ProfileUrl || ruser.ProfileUrl
+                  : user.ProfileUrl
               }
               sx={{
                 width: "120px",

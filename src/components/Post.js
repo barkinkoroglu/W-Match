@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import Like from "./Like";
+import TestResultElement from "./TestResultElement";
 import CloseIcon from "@mui/icons-material/Close";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
 import {
   createComment,
   createLike,
@@ -19,6 +21,7 @@ function Post(prop) {
   // console.log("DATA PROBLARI", prop.post);
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
+  const [showtresults, setshowtresults] = useState(false);
   const [commentValue, setCommentValue] = useState("");
   const isTest =
     (prop.post.questions && prop.post.questions.length > 0) || false;
@@ -80,6 +83,49 @@ function Post(prop) {
             className="absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline "
           >
             <CloseIcon />
+          </div>
+        )}
+        {prop.post.username === prop.user.username && (
+          <button
+            onClick={() => setshowtresults(true)}
+            className="absolute right-2 bottom-2 cursor-pointer text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200 "
+          >
+            Show Results
+          </button>
+        )}
+
+        {showtresults && (
+          <div>
+            {console.log("HEYYY")}
+            <div className="fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75"></div>
+            <div className="fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white">
+              <div className="flex flex-col items-center border-b-2 relative">
+                <h1 className=" text-lg ">Test Results</h1>
+                <div className="border-b-4 -mb-[1.7px] border-slate-500">
+                  <h1 className="p-2">
+                    All{" "}
+                    <span className="font-medium 	">
+                      {prop.post.scores.length}
+                    </span>
+                  </h1>
+                </div>
+                <button
+                  onClick={() => setshowtresults(false)}
+                  className="absolute hover:bg-slate-400 rounded-lg p-1 right-0"
+                >
+                  <CloseIcon />
+                </button>
+              </div>
+              <div className="flex flex-col gap-y-3 py-3 overflow-y-auto">
+                {prop.post.scores !== null ? (
+                  prop.post.scores.map((element, index) => {
+                    return <TestResultElement key={index} data={element} />;
+                  })
+                ) : (
+                  <div>Loading </div>
+                )}
+              </div>
+            </div>
           </div>
         )}
       </div>
