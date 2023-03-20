@@ -281,16 +281,19 @@ export const createLike = async (username, test, time) => {
   let flag = 0;
   let index = 0;
   let dindex = 0;
+
   const compdataid = await getDoc(doc(db, "usernames", username));
   const companydataid = compdataid.data();
   const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
-  const postlar = dbUser.data().posts;
+  const postlar = await dbUser.data().posts;
+
   for (let i = 0; i < postlar.length; i++) {
     if (postlar[i].type === 1 && postlar[i].time === time) {
       index = i;
       break;
     }
   }
+  console.log("buldugu index", index);
   for (let i = 0; i < postlar[index].likes.length; i++) {
     if (postlar[index].likes[i] === test) {
       flag = -1;

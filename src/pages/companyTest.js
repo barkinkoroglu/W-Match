@@ -13,6 +13,7 @@ function CompanyTest() {
   const [score, setScore] = useState(0);
   const [disButton, setdisButton] = useState(false);
   const [cquestion, setCquestion] = useState(0);
+  const [questpoint, setQuestpoint] = useState(0);
   const navigate = useNavigate();
   const timerId = useRef();
   const user = useSelector((state) => state.auth.user);
@@ -21,6 +22,7 @@ function CompanyTest() {
     getCompanyTest(param.id, param.id2).then((temp) => {
       setData(temp);
       setExamtime(parseInt(temp.qtime));
+      setQuestpoint(parseInt(temp.qscore));
     });
 
     timerId.current = setInterval(() => {
@@ -71,6 +73,7 @@ function CompanyTest() {
             record={data.questions[cquestion]}
             score={score}
             setScore={setScore}
+            questpoint={questpoint}
           />
         </div>
         <div className="flex  px-3 py-5 mx-auto bg-white justify-center ">

@@ -28,7 +28,9 @@ function Post(prop) {
   }, [prop.post.username]);
 
   const deletePost = async () => {
-    await deletePostdata(prop.post.username, prop.post.time);
+    await deletePostdata(prop.post.username, prop.post.time).then(async () => {
+      await prop.refreshData();
+    });
   };
 
   const TestPost = () => {
@@ -142,7 +144,9 @@ function Post(prop) {
   }
 
   const handleLike = async (e) => {
-    await createLike(prop.post.username, prop.user.uid, prop.post.time);
+    await createLike(prop.post.username, prop.user.uid, prop.post.time).then(
+      async () => await prop.refreshData()
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -157,7 +161,9 @@ function Post(prop) {
         ctime: Date.now(),
       };
       //console.log("COMMENT", att);
-      await createComment(prop.post.username, att, prop.post.time);
+      await createComment(prop.post.username, att, prop.post.time).then(
+        async () => await prop.refreshData()
+      );
       setCommentValue("");
     }
   };

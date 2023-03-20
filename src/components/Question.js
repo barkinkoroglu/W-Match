@@ -13,7 +13,9 @@ function Question({
   time,
   companyname,
   email,
+  tname,
   qinform,
+  qscore,
   username,
 }) {
   const user = useSelector((state) => state.auth.user);
@@ -105,7 +107,9 @@ function Question({
         uid: user.uid,
         name: companyname,
         email: email,
+        testname: tname,
         information: qinform,
+        qscore: qscore,
         username: username,
       };
       await createCompanyTest(user.uid, finaldata);
@@ -159,9 +163,7 @@ function Question({
                   onChange={handleChange}
                 ></textarea>
               </div>
-              {errors.question && touched.question && (
-                <div className=" text-red-600">{errors.question}</div>
-              )}
+
               <div className="flex gap-x-3 ">
                 <h1>Option 1:</h1>
                 <textarea
@@ -178,9 +180,7 @@ function Question({
                   checked={value === true}
                 />
               </div>
-              {errors.option1 && touched.option1 && (
-                <div className=" text-red-600">{errors.option1}</div>
-              )}
+
               <div className="flex gap-x-3">
                 <h1>Option 2:</h1>
                 <textarea
@@ -197,9 +197,7 @@ function Question({
                   checked={value2 === true}
                 />
               </div>
-              {errors.option2 && touched.option2 && (
-                <div className=" text-red-600">{errors.option2}</div>
-              )}
+
               <div className="flex gap-x-3">
                 <h1>Option 3:</h1>
                 <textarea
@@ -216,9 +214,7 @@ function Question({
                   checked={value3 === true}
                 />
               </div>
-              {errors.option3 && touched.option3 && (
-                <div className=" text-red-600">{errors.option3}</div>
-              )}
+
               <div className="flex gap-x-3">
                 <h1>Option 4:</h1>
                 <textarea
@@ -235,9 +231,6 @@ function Question({
                   checked={value4 === true}
                 />
               </div>
-              {errors.option4 && touched.option4 && (
-                <div className=" text-red-600">{errors.option4}</div>
-              )}
             </div>
             <div className="flex  gap-x-10 mt-3 w-full relative justify-center">
               <button

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-function CompanyTestElement({ record, index, score, setScore }) {
+function CompanyTestElement({ record, index, score, setScore, questpoint }) {
   const [chosen, setchosen] = useState("");
   let [flag, setFlag] = useState(false);
   const handleScore = () => {
     if (flag === true) {
-      setScore(score - 5);
+      setScore(score - questpoint);
       setFlag(false);
     }
     if (chosen === record?.correct) {
-      setScore(score + 5);
+      setScore(score + questpoint);
       setFlag(true);
     }
   };

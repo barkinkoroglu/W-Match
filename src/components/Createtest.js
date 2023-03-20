@@ -8,7 +8,9 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
   const [nquestions, setNquestions] = useState(0);
   const [time, setTime] = useState(0);
   const [qindex, setQindex] = useState(0);
+  const [tname, setTname] = useState("");
   const [qinform, setQinform] = useState("");
+  const [qscore, setQscore] = useState(0);
   const user = useSelector((state) => state.auth.user);
   // const Questions = () => {
   //   const options = [];
@@ -30,7 +32,7 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
       </div>
       {qindex === 0 ? (
         <div className=" p-2 flex flex-col gap-y-1">
-          <div className="flex items-center gap-x-2">
+          <div className="flex items-center gap-x-2 justify-between">
             <h1>How many questions will you ask?</h1>
             <input
               placeholder="Number of Questions "
@@ -41,14 +43,36 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
             />
           </div>
 
-          <div className="flex items-center gap-x-2">
+          <div className="flex items-center gap-x-2 justify-between">
             <h1>How long will the test take?</h1>
             <input
-              placeholder="Time "
+              placeholder="Time (in seconds) "
               className=" border p-1 rounded-lg"
               type="text"
               onChange={(e) => setTime(e.currentTarget.value)}
               value={time}
+            />
+          </div>
+
+          <div className="flex items-center gap-x-2 justify-between">
+            <h1>How many points will each question be?</h1>
+            <input
+              placeholder="Question Score "
+              className=" border p-1 rounded-lg"
+              type="text"
+              onChange={(e) => setQscore(e.currentTarget.value)}
+              value={qscore}
+            />
+          </div>
+
+          <div className="flex items-center gap-x-2 justify-between">
+            <h1>Test Name:</h1>
+            <input
+              placeholder="Test Name "
+              className=" border p-1 rounded-lg"
+              type="text"
+              onChange={(e) => setTname(e.currentTarget.value)}
+              value={tname}
             />
           </div>
 
@@ -70,7 +94,9 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
             time={time}
             companyname={user.companyname}
             email={user.email}
+            tname={tname}
             qinform={qinform}
+            qscore={qscore}
             username={user.username}
           />
         </div>

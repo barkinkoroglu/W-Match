@@ -18,6 +18,12 @@ function Feed() {
   console.log("User attributes", user);
   console.log("FEEDEKİ POSTLAR ", allposts[0]);
 
+  const refreshData = async () => {
+    await getAllPost(user)
+      .then((data) => setAllPost(data))
+      .catch((error) => console.log("ERROR", error));
+  };
+
   useEffect(() => {
     (async () => {
       await getAllPost(user)
@@ -37,6 +43,7 @@ function Feed() {
         comments: [],
         data: inputValue,
         time: Date.now(),
+        type: 1,
       };
       console.log(att);
       await createPost(user.uid, att);
@@ -113,6 +120,7 @@ function Feed() {
                 about={user.jobfunct}
                 //It will change for company comments
                 uname={`${user.name} ${user.lastname}`}
+                refreshData={refreshData}
               />
             );
           })
