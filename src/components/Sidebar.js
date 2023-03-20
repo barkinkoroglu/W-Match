@@ -80,14 +80,16 @@ function Sidebar() {
               {user.type === 2 ? (
                 user.followers !== null ? (
                   user.followers.map((element, index) => {
-                    return <SideBarElement key={index} data={element} />;
+                    return (
+                      <SideBarElement key={index} data={element} type={2} />
+                    );
                   })
                 ) : (
                   <div>Loading </div>
                 )
               ) : user.following !== null ? (
-                user.followers.map((element, index) => {
-                  return <SideBarElement key={index} data={element} />;
+                user.following.map((element, index) => {
+                  return <SideBarElement key={index} data={element} type={1} />;
                 })
               ) : (
                 <div>Loading </div>

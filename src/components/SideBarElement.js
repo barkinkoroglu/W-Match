@@ -5,10 +5,10 @@ import { useState } from "react";
 import { getUserInfo } from "../firebase";
 
 function SideBarElement(prop) {
+  console.log(prop.data);
   const [data, setData] = useState({});
-  console.log(prop.data.userid);
   const getData = async () => {
-    setData(await getUserInfo(prop.data));
+    await getUserInfo(prop.data).then((temp) => setData(temp));
   };
   useEffect(() => {
     getData();
@@ -23,12 +23,22 @@ function SideBarElement(prop) {
       <div>
         <Avatar src={data.ProfileUrl} />
       </div>
-      <div className="flex items-center justify-between w-full pr-6 ">
-        <a href={`/profile/${data?.username}`} className=" hover:underline ">
-          {data?.name} {data?.lastname}
-        </a>
-        <h1 className="text-lg font-semibold">{prop.data.score}</h1>
-      </div>
+      {prop.type === 2}
+      {
+        <div className="flex  ">
+          <a href={`/profile/${data?.username}`} className=" hover:underline ">
+            {data?.name} {data?.lastname}
+          </a>
+        </div>
+      }
+      {prop.type === 1}
+      {
+        <div className="flex  ">
+          <a href={`/profile/${data?.username}`} className=" hover:underline ">
+            {data?.companyname}
+          </a>
+        </div>
+      }
     </div>
   );
 }
