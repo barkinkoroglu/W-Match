@@ -5,7 +5,6 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import Like from "./Like";
 import TestResultElement from "./TestResultElement";
 import CloseIcon from "@mui/icons-material/Close";
-import ShowChartIcon from "@mui/icons-material/ShowChart";
 import {
   createComment,
   createLike,
