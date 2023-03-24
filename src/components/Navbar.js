@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { setCompanies } from "../store/widget";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
@@ -19,6 +19,8 @@ function Navbar() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const ref = useRef();
+  const ref2 = useRef();
   const handlelogout = async () => {
     await logout();
     navigate("/");
@@ -48,6 +50,23 @@ function Navbar() {
     search.length > 0 && callValue();
   }, [search]);
 
+  useEffect(() => {
+    const closeNavSearch = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        dispatch(setCompanies(null));
+      }
+
+      if (ref2.current && !ref2.current.contains(e.target)) {
+        setShowdrop(false);
+      }
+    };
+    document.body.addEventListener("click", closeNavSearch);
+
+    return () => {
+      document.body.removeEventListener("click", closeNavSearch);
+    };
+  }, []);
+
   return (
     <nav className="bg-slate-100 sticky top-0 z-50">
       <div className="flex max-w-6xl px-3 sm: py-3 lg:py-1  mx-auto justify-between items-center   ">
@@ -59,7 +78,11 @@ function Navbar() {
               alt=""
             />
           </a>
-          <form className=" flex w-full relative   " onSubmit={handleSearch}>
+          <form
+            ref={ref}
+            className=" flex w-full relative   "
+            onSubmit={handleSearch}
+          >
             <input
               className="px-2 py-1 pl-8 sm:w-72  rounded-lg   "
               type="text"
@@ -117,6 +140,7 @@ function Navbar() {
             <h3 className=" text-sm font-medium hidden lg:inline">Jobs</h3>
           </a>
           <div
+            ref={ref2}
             onClick={() => setShowdrop(!showdrop)}
             className="flex flex-col items-center pt-1 relative  "
           >
