@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RecommendedJob from "../components/Job/RecommendedJob";
+import MyTests from "../components/Job/MyTests";
 import SavedJob from "../components/Job/SavedJob";
 import Navbar from "../components/Navbar";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
@@ -46,6 +47,7 @@ function Jobs() {
             </div>
           </div>
           {selectFunction === 0 && <RecommendedJob />}
+          {selectFunction === 2 && <MyTests />}
         </div>
       </div>
     </div>

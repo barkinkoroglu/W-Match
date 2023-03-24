@@ -19,6 +19,11 @@ function TestElement({ record, index, score, setScore }) {
     handleScore();
   }, [chosen]);
 
+  useEffect(() => {
+    setFlag(false);
+    setchosen("");
+  }, [index]);
+
   return (
     <div className="flex flex-col gap-y-1">
       <div className="flex gap-x-1 items-center">

@@ -414,7 +414,7 @@ function UserProfile({ user, param }) {
             <span className="bg-slate-300 px-2 py-1 rounded-lg text-lg  ">
               View
             </span>{" "}
-            <span className="">{`${user.name}${user.lastname}'sCV.doc`}</span>
+            <span className="">{`${user.name} ${user.lastname}'s CV`}</span>
           </a>
 
           {ruser.username === param.id && (
