@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppRoutes from "./routes/Routes";
 import PrivateRoute from "./components/PrivateRoute";
 import { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
         </Routes>
       </Router>
       <Toaster position="top-right" />
+      <Helmet>
+        <title>W-MATCH</title>
+      </Helmet>
     </>
   );
 }

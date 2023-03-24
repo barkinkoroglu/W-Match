@@ -236,13 +236,16 @@ function Post(prop) {
               className="text-blue-400 "
               style={{ width: "16px", height: "16px" }}
             />
-            <p onClick={() => setshowLikes(true)} className="hover:underline">
+            <p
+              onClick={() => setshowLikes(true)}
+              className="hover:underline cursor-pointer "
+            >
               {prop.post.likes.length} likes
             </p>
           </div>
           <h3
             onClick={() => setShowComments(!showComments)}
-            className="hover:underline"
+            className="hover:underline cursor-pointer"
           >
             {prop.post.comments.length} comments
           </h3>

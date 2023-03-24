@@ -17,6 +17,7 @@ import {
   companyEditInformation,
   getUserInfo,
   fallowUser,
+  changeUserCV,
 } from "../../firebase";
 import CloseIcon from "@mui/icons-material/Close";
 import Post from "../Post";
@@ -26,8 +27,10 @@ function UserProfile({ user, param }) {
   const ruser = useSelector((state) => state.auth.user);
   const [imageUpload, setImageUpload] = useState(null);
   const [backimageUpload, setBackImageUpload] = useState(null);
+  const [cvupload, setCvupload] = useState(null);
   const [openProfile, setOpenProfile] = useState(false);
   const [openBackProfile, setOpenBackProfile] = useState(false);
+  const [openCVedit, setOpenCVedit] = useState(false);
   const [imageurl, setImageurl] = useState(null);
   const [openSettingProfile, setOpenSettingProfile] = useState(false);
   const [editName, setEditname] = useState("");
@@ -35,7 +38,6 @@ function UserProfile({ user, param }) {
   const [editAddress, setEditAddress] = useState("");
   const [editAddress2, setEditAddress2] = useState("");
   const [prodata, setProdata] = useState(null);
-
   // console.log("PROFİLE USER INFO", prodata);
   useEffect(() => {
     getUserInfo(ruser.username).then((temp) => setProdata(temp));
@@ -109,6 +111,19 @@ function UserProfile({ user, param }) {
     });
     setOpenBackProfile(false);
   };
+
+  const uploadCVfile = () => {
+    if (cvupload == null) return;
+    const cvRef = ref(storage, `CV/${ruser.username}/${v4() + cvupload.name}`);
+    uploadBytes(cvRef, cvupload).then((snaphsot) => {
+      getDownloadURL(snaphsot.ref).then((url) => {
+        changeUserCV(ruser.username, url).then(() =>
+          getUserInfo(ruser.username).then((temp) => setProdata(temp))
+        );
+      });
+    });
+    setOpenCVedit(false);
+  };
   // It will be changed according to user attributes
   const handleUpdateedit = () => {
     console.log("Test");
@@ -177,7 +192,10 @@ function UserProfile({ user, param }) {
               </div>
             </div>
           )}
-          {(openBackProfile || openProfile || openSettingProfile) && (
+          {(openBackProfile ||
+            openProfile ||
+            openSettingProfile ||
+            openCVedit) && (
             <div className="fixed top-0 left-0 right-0 bottom-0 bg-slate-800 opacity-40 z-50"></div>
           )}
           {/* BACKGROUND */}
@@ -382,8 +400,62 @@ function UserProfile({ user, param }) {
           distinctio deleniti excepturi non aspernatur perspiciatis error
         </p>
       </div>
-      {/* Post Section will come here */}
+      {user.type === 1 && (
+        <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2  relative group ">
+          <a
+            href={
+              ruser.username === param.id
+                ? prodata?.CVdoc || ruser.CVdoc
+                : user.CVdoc
+            }
+            file
+            download={`${user.name} ${user.lastname}'s CV`}
+          >
+            <span className="bg-slate-300 px-2 py-1 rounded-lg text-lg  ">
+              View
+            </span>{" "}
+            <span className="">{`${user.name}${user.lastname}'sCV.doc`}</span>
+          </a>
 
+          {ruser.username === param.id && (
+            <button
+              onClick={() => setOpenCVedit(!openCVedit)}
+              className="absolute hidden group-hover:inline text-gray-400 top-2 right-2 z-50 hover:text-gray-600 duration-300 transition-colors"
+            >
+              <SettingsIcon />
+            </button>
+          )}
+
+          {openCVedit && (
+            <div className=" ">
+              <div className="fixed flex flex-col z-[51] top-5 left-0 right-0 mx-auto max-w-md max-h-[calc(100vh-64px)] px-4 py-3 gap-y-3 rounded bg-white items-center">
+                <div className=" relative py-2 text-lg font-medium border-b-2 w-full text-center items-center ">
+                  Upload a CV
+                  <button
+                    onClick={() => setOpenCVedit(!openCVedit)}
+                    className="absolute top-0 right-0 p-1 rounded-lg flex justify-center items-center hover:bg-slate-400"
+                  >
+                    <CloseIcon />
+                  </button>
+                </div>
+                <input
+                  type="file"
+                  onChange={(e) => {
+                    setCvupload(e.target.files[0]);
+                  }}
+                />
+                <button
+                  onClick={() => uploadCVfile()}
+                  className="bg-gray-300 px-2 py-1 rounded-lg hover:bg-slate-400"
+                >
+                  Upload CV
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      {/* Post Section will come here */}
       {user.type === 2 && (
         <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
           <h1 className="text-lg">Posts</h1>

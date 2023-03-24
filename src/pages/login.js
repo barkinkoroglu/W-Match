@@ -33,9 +33,6 @@ function Login() {
         W-MATCH
       </a>
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 z-10 ">
-        <Helmet>
-          <title>Login W-MATCH</title>
-        </Helmet>
         <div className="bg-white px-6 py-8 mt-10 rounded shadow-md text-black w-full">
           <Formik
             validationSchema={LoginSchema}

@@ -191,6 +191,7 @@ export const userRegister = async (
           wmatchTests: [],
           ProfileUrl: "",
           BackUrl: "",
+          CVdoc: "",
         });
         //console.log(response);
       }
@@ -480,6 +481,16 @@ export const changeUserBackProfilePhoto = async (username, url) => {
   await setDoc(doc(db, "users", ruserdataid.user_id), {
     ...dbUser.data(),
     BackUrl: url,
+  });
+};
+
+export const changeUserCV = async (username, url) => {
+  const userdataid = await getDoc(doc(db, "usernames", username));
+  const ruserdataid = userdataid.data();
+  const dbUser = await getDoc(doc(db, "users", ruserdataid.user_id));
+  await setDoc(doc(db, "users", ruserdataid.user_id), {
+    ...dbUser.data(),
+    CVdoc: url,
   });
 };
 

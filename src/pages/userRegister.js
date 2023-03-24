@@ -9,11 +9,15 @@ import { RegisterSchema } from "../validation/index";
 import { Formik, Form, ErrorMessage } from "formik";
 import { userRegister } from "../firebase";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-
+import { v4 } from "uuid";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage, changeUserCV } from "../firebase";
 function UserRegister() {
   const [country, setCountry] = useState("");
   const [tNumber, setTNumber] = useState("");
   const options = useMemo(() => countryList().getData(), []);
+  const [cvUpload, setCvUpload] = useState(null);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (values, actions) => {
@@ -43,15 +47,17 @@ function UserRegister() {
       password
     );
     if (response) {
-      navigate(`/level`);
-      console.log(response);
+      if (cvUpload == null) return navigate(`/level`);
+      const imageRef = ref(storage, `CV/${username}/${cvUpload.name + v4()}`);
+      uploadBytes(imageRef, cvUpload).then((snaphsot) => {
+        getDownloadURL(snaphsot.ref).then((url) => {
+          changeUserCV(username, url).then(() => navigate(`/level`));
+        });
+      });
     }
   };
   return (
     <div className="bg-grey-lighter h-full flex flex-col relative">
-      <Helmet>
-        <title>Register • W-MATCH</title>
-      </Helmet>
       <img
         src={require("../images/image1.jpg")}
         alt="background"
@@ -70,6 +76,7 @@ function UserRegister() {
               adressline1: "",
               adressline2: "",
               jobfunct: "",
+
               JobCategory: "",
               password: "",
               confirmpassword: "",
@@ -197,6 +204,17 @@ function UserRegister() {
                 {errors.jobfunct && touched.jobfunct && (
                   <div className="text-red-600">{errors.jobfunct}</div>
                 )}
+
+                <input
+                  type="file"
+                  class="block border border-grey-light w-full p-3 rounded mt-4"
+                  onChange={(e) => {
+                    setCvUpload(e.target.files[0]);
+                  }}
+                />
+                {errors.jobfunct && touched.jobfunct && (
+                  <div className="text-red-600">{errors.jobfunct}</div>
+                )}
                 {/* <p>{`You selected ${values.jobfunct}`}</p> */}
                 <div className="w-full flex flex-col gap-y-3 justify-center mt-4 ">
                   <label className="block" for="jobs">
@@ -210,6 +228,7 @@ function UserRegister() {
                     //value={jobcategory}
                     //onChange={(e) => setJobcategory(e.target.value)}
                   >
+                    <option value="">Choose a test</option>
                     <option value="HTML">HTML</option>
                     <option value="CSS">CSS</option>
                     <option value="JavaScript">JavaScript</option>
