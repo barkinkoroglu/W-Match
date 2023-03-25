@@ -22,6 +22,7 @@ function CompanyRegister() {
       companyname,
       username,
       about,
+      longabout,
       email,
       adressline1,
       adressline2,
@@ -32,6 +33,7 @@ function CompanyRegister() {
       companyname,
       username,
       about,
+      longabout,
       email,
       country.label,
       adressline1,
@@ -64,6 +66,7 @@ function CompanyRegister() {
               companyname: "",
               username: "",
               about: "",
+              longabout: "",
               email: "",
               adressline1: "",
               adressline2: "",
@@ -109,12 +112,23 @@ function CompanyRegister() {
                 <textarea
                   className="block border border-grey-light w-full p-3 rounded mt-4  outline-none   overflow-y-auto resize-none scrollbar-hide "
                   name="about"
-                  placeholder="Please provide information about your company"
+                  placeholder="Please provide short information about your company (max 80 characters)"
                   value={values.about}
                   onChange={handleChange}
                 ></textarea>
                 {errors.about && touched.about && (
                   <div className=" text-red-600">{errors.about}</div>
+                )}
+                <textarea
+                  className=" block border border-grey-light w-full p-3 rounded mt-4 overflow-y-auto resize-none scrollbar-hide"
+                  type="text"
+                  name="longabout"
+                  placeholder="Detailed About the company "
+                  value={values.longabout}
+                  onChange={handleChange}
+                ></textarea>
+                {errors.longabout && touched.longabout && (
+                  <div className="text-red-600">{errors.longabout}</div>
                 )}
                 <input
                   type="text"
@@ -180,7 +194,7 @@ function CompanyRegister() {
                   //onChange={handleChange}
                   className=" w-full flex border   rounded mt-4"
                 />
-                -
+
                 <input
                   type="password"
                   class="block border border-grey-light w-full p-3 rounded mt-4"

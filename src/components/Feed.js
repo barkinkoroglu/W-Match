@@ -108,7 +108,7 @@ function Feed() {
       )}
 
       <div>
-        {allposts !== null ? (
+        {allposts.length > 0 ? (
           allposts.map((post, index) => {
             return (
               <Post
@@ -125,7 +125,7 @@ function Feed() {
             );
           })
         ) : (
-          <div>Loading </div>
+          <div></div>
         )}
       </div>
     </div>

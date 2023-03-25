@@ -18,6 +18,7 @@ import {
   getUserInfo,
   fallowUser,
   changeUserCV,
+  getAllPostbyname,
 } from "../../firebase";
 import CloseIcon from "@mui/icons-material/Close";
 import Post from "../Post";
@@ -38,9 +39,17 @@ function UserProfile({ user, param }) {
   const [editAddress, setEditAddress] = useState("");
   const [editAddress2, setEditAddress2] = useState("");
   const [prodata, setProdata] = useState(null);
-  // console.log("PROFİLE USER INFO", prodata);
+  const [allposts, setAllPost] = useState([]);
+
+  console.log("BÜTÜN POSTLAR", user.uid);
+  const refreshData = async () => {
+    await getAllPostbyname(user)
+      .then((data) => setAllPost(data))
+      .catch((error) => console.log("ERROR", error));
+  };
   useEffect(() => {
     getUserInfo(ruser.username).then((temp) => setProdata(temp));
+    refreshData();
   }, [ruser.username]);
 
   console.log("PROFİLE USER", user);
@@ -394,11 +403,7 @@ function UserProfile({ user, param }) {
       </div>
       <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
         <h1 className="text-lg">About</h1>
-        <p className="text-sm">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore, hic!
-          Doloremque, corrupti obcaecati! Doloremque iure repellat enim
-          distinctio deleniti excepturi non aspernatur perspiciatis error
-        </p>
+        <p className="text-sm">{user?.longabout}</p>
       </div>
       {user.type === 1 && (
         <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2  relative group ">
@@ -460,9 +465,9 @@ function UserProfile({ user, param }) {
         <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
           <h1 className="text-lg">Posts</h1>
           <div>
-            {user.posts.length > 0 ? (
-              user.posts.sort((a, b) => b.time - a.time) &&
-              user.posts.map((post, index) => {
+            {allposts.length > 0 ? (
+              allposts.sort((a, b) => b.time - a.time) &&
+              allposts.map((post, index) => {
                 return (
                   <Post
                     key={index}
@@ -473,6 +478,7 @@ function UserProfile({ user, param }) {
                     about={ruser?.jobfunct}
                     //It will change for company comments
                     uname={`${ruser?.name} ${ruser?.lastname}`}
+                    refreshData={refreshData}
                   />
                 );
               })

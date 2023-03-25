@@ -14,7 +14,8 @@ export const RegisterSchema = Yup.object().shape({
   email: Yup.string().required().email(),
   adressline1: Yup.string().required(),
   adressline2: Yup.string(),
-  jobfunct: Yup.string().required(),
+  jobfunct: Yup.string().required().max(80, "Maximum 80 Characters"),
+  longabout: Yup.string().required(),
   JobCategory: Yup.string().required(),
   password: Yup.string()
     .required("Please Enter your password")

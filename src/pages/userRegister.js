@@ -31,6 +31,7 @@ function UserRegister() {
       adressline2,
       password,
       jobfunct,
+      longabout,
       JobCategory,
     } = values;
     const response = await userRegister(
@@ -43,15 +44,16 @@ function UserRegister() {
       adressline2,
       tNumber,
       jobfunct,
+      longabout,
       JobCategory,
       password
     );
     if (response) {
-      if (cvUpload == null) return navigate(`/level`);
+      if (cvUpload == null) return navigate(`/home`);
       const imageRef = ref(storage, `CV/${username}/${cvUpload.name + v4()}`);
       uploadBytes(imageRef, cvUpload).then((snaphsot) => {
         getDownloadURL(snaphsot.ref).then((url) => {
-          changeUserCV(username, url).then(() => navigate(`/level`));
+          changeUserCV(username, url).then(() => navigate(`/home`));
         });
       });
     }
@@ -76,7 +78,7 @@ function UserRegister() {
               adressline1: "",
               adressline2: "",
               jobfunct: "",
-
+              longabout: "",
               JobCategory: "",
               password: "",
               confirmpassword: "",
@@ -197,12 +199,24 @@ function UserRegister() {
                   type="text"
                   class="block border border-grey-light w-full p-3 rounded mt-4"
                   name="jobfunct"
-                  placeholder="Job Function (CV) "
+                  placeholder="Short About yourself (max 60 character) "
                   value={values.jobfunct}
                   onChange={handleChange}
                 />
                 {errors.jobfunct && touched.jobfunct && (
                   <div className="text-red-600">{errors.jobfunct}</div>
+                )}
+
+                <textarea
+                  className=" block border border-grey-light w-full p-3 rounded mt-4 overflow-y-auto resize-none scrollbar-hide"
+                  type="text"
+                  name="longabout"
+                  placeholder="Detailed About yourself "
+                  value={values.longabout}
+                  onChange={handleChange}
+                ></textarea>
+                {errors.longabout && touched.longabout && (
+                  <div className="text-red-600">{errors.longabout}</div>
                 )}
 
                 <input

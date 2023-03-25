@@ -80,6 +80,7 @@ export const companyRegister = async (
   companyname,
   username,
   about,
+  longabout,
   email,
   country,
   addressline1,
@@ -108,6 +109,7 @@ export const companyRegister = async (
           companyname: companyname,
           username: username,
           about: about,
+          longabout: longabout,
           country: country,
           addressline1: addressline1,
           addressline2: addressline2,
@@ -126,6 +128,7 @@ export const companyRegister = async (
           companyname: companyname,
           username: username,
           about: about,
+          longabout: longabout,
           country: country,
           addressline1: addressline1,
           addressline2: addressline2,
@@ -156,6 +159,7 @@ export const userRegister = async (
   addressline2 = " ",
   tnumber,
   jobfunct,
+  longabout,
   JobCategory,
   password
 ) => {
@@ -174,6 +178,27 @@ export const userRegister = async (
           user_id: response.user.uid,
         });
 
+        let data = {
+          type: 1,
+          name: name,
+          lastname: lastname,
+          username: username,
+          country: country,
+          email: email,
+          addressline1: addressline1,
+          addressline2: addressline2,
+          tnumber: tnumber,
+          jobfunct: jobfunct,
+          JobCategory: JobCategory,
+          notifications: [],
+          following: [],
+          wmatchTests: [],
+          ProfileUrl: "",
+          BackUrl: "",
+          CVdoc: "",
+          longabout: longabout,
+        };
+        userHandle(data);
         await setDoc(doc(db, "users", response.user.uid), {
           type: 1,
           name: name,
@@ -192,6 +217,7 @@ export const userRegister = async (
           ProfileUrl: "",
           BackUrl: "",
           CVdoc: "",
+          longabout: longabout,
         });
         //console.log(response);
       }
@@ -407,6 +433,22 @@ export const getAllPost = async (userInfo) => {
       company.data().posts.map((post) => nposts.push(post));
     }
   }
+  nposts.sort((a, b) => b.time - a.time);
+  return nposts;
+};
+
+export const getAllPostbyname = async (userInfo) => {
+  let nposts = [];
+  const { username, type } = userInfo;
+
+  //when company want to see their own posts
+  if (type === 2) {
+    const compdataid = await getDoc(doc(db, "usernames", username));
+    const companydataid = compdataid.data();
+    const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
+    nposts = dbUser.data().posts;
+  }
+
   nposts.sort((a, b) => b.time - a.time);
   return nposts;
 };
