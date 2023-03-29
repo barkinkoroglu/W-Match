@@ -9,14 +9,16 @@ import { Avatar } from "@mui/material";
 import { logout, getCompany, searchCompany } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import LogoutIcon from "@mui/icons-material/Logout";
 function Navbar() {
   const [showdrop, setShowdrop] = useState(false);
   const [userProfile, setUserProfile] = useState("");
   const [search, setSearch] = useState("");
   const user = useSelector((state) => state.auth.user);
   const searchdata = useSelector((state) => state.widget.widget);
-
+  const [menuOpen, setMenuOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const ref = useRef();
@@ -113,7 +115,7 @@ function Navbar() {
             )}
           </form>
         </div>
-        <div className="flex justify-center items-center sm:gap-x-3  lg:gap-x-6">
+        <div className="justify-center items-center hidden sm:gap-x-3 sm:flex  lg:gap-x-6">
           <a
             className="flex flex-col items-center sm:w-10 lg:w-20"
             href="/home"
@@ -168,6 +170,7 @@ function Navbar() {
                       <p className="text-xs">{user.country}</p>
                     </div>
                   </div>
+
                   <div className="flex flex-col py-1 gap-y-2  ">
                     <button
                       onClick={() => handleprofil()}
@@ -185,6 +188,75 @@ function Navbar() {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+        {menuOpen ? (
+          <div className="bg-black/80 fixed w-full h-screen z-10 top-0 left-0"></div>
+        ) : (
+          ""
+        )}
+        <div className="sm:hidden flex items-center">
+          <button
+            onClick={() => setMenuOpen(true)}
+            className=" hover:bg-slate-200 cursor-pointer py-2 px-1 rounded-sm items-center"
+          >
+            <MenuIcon sx={{ width: 35, height: 30 }} />
+          </button>
+          <div
+            className={
+              menuOpen
+                ? "fixed top-0 right-0 w-[200px] h-screen bg-white z-10 duration-300"
+                : "fixed top-0 right-[-100%] w-[200px] h-screen bg-white z-10 duration-300"
+            }
+          >
+            <CloseIcon
+              onClick={() => setMenuOpen(false)}
+              size={30}
+              className="absolute right-4 top-4 cursor-pointer hover:bg-gray-200"
+            />
+            <nav>
+              <ul className="flex mt-5 flex-col p-4 text-gray-800">
+                <a
+                  href="/home"
+                  className="text-xl py-4 flex items-center cursor-pointer"
+                >
+                  <HomeIcon className="mr-4" /> Home
+                </a>
+                <a
+                  href="/notifications"
+                  className="text-xl py-4 flex items-center cursor-pointer"
+                >
+                  <NotificationsIcon className="mr-4" /> Notifications
+                </a>
+                <a
+                  href="/jobs"
+                  className="text-xl py-4 flex items-center cursor-pointer"
+                >
+                  <WorkIcon className="mr-4" /> Jobs
+                </a>
+
+                <li
+                  onClick={() => handleprofil()}
+                  className="text-xl py-4 flex items-center cursor-pointer"
+                >
+                  <Avatar
+                    alt="profilphoto"
+                    src={user?.ProfileUrl}
+                    sx={{ width: 24, height: 24 }}
+                    className="mr-4"
+                  />{" "}
+                  Profile
+                </li>
+
+                <li
+                  onClick={() => handlelogout()}
+                  className="text-xl py-4 flex items-center cursor-pointer"
+                >
+                  <LogoutIcon className="mr-4" />
+                  Logout
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
