@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Formik, Form } from "formik";
 import { LoginSchema } from "../validation/index";
-import { login } from "../firebase";
+import { login, forgetPassword } from "../firebase";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 function Login() {
   const user = useSelector((state) => state.auth.user);
   console.log(user);
+  const ref = useRef(null);
 
   if (user) {
     return <Navigate to="/home" />;
@@ -16,6 +17,10 @@ function Login() {
 
   const handleSubmit = async (values, actions) => {
     await login(values.email, values.password);
+  };
+
+  const handleReset = async () => {
+    await forgetPassword(ref.current.values.email);
   };
   return (
     <div className="bg-grey-lighter max-h-screen flex flex-col  items-center relative">
@@ -35,6 +40,7 @@ function Login() {
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 z-10 ">
         <div className="bg-white px-6 py-8 mt-10 rounded shadow-md text-black w-full">
           <Formik
+            innerRef={ref}
             validationSchema={LoginSchema}
             initialValues={{
               email: "",
@@ -93,6 +99,12 @@ function Login() {
             Sign up now.
           </a>
         </div>
+        <button
+          onClick={() => handleReset()}
+          className="text-white mt-1 hover:underline cur"
+        >
+          Forgot your password?
+        </button>
       </div>
     </div>
   );

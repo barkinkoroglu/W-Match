@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -703,4 +704,19 @@ export const deletePostdata = async (username, time) => {
     ...dbCompanyUser.data(),
     posts: result,
   });
+};
+
+export const forgetPassword = async (email) => {
+  try {
+    return await sendPasswordResetEmail(auth, email).then((data) => {
+      console.log(data);
+      toast.success("Password reset email sent!");
+    });
+  } catch (err) {
+    if (err.code === "auth/user-not-found") {
+      toast.error("User not found!");
+    } else {
+      toast.error("Missing Email!");
+    }
+  }
 };
