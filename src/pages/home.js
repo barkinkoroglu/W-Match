@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
+import Footer from "../components/Footer";
 
 function Home() {
   useEffect(() => {
@@ -32,12 +33,45 @@ function Home() {
             </a>
           </div>
         </nav>
+        <div className="md:flex mx-auto  justify-center min-h-[calc(100vh-100px)] mt-6 md:mt-0  items-center">
+          <div className="z-10 md:basis-1/2">
+            <div className=" md:gap-8  flex flex-col">
+              <h1 className="text-5xl font-medium">Your Perfect Job Match</h1>
+              <p className=" md:text-start h-full">
+                Welcome to W-Match, the ultimate web application for job seekers
+                and companies to connect! Our platform is designed to bridge the
+                gap between job seekers and companies through a seamless and
+                efficient process. With W-Match, you can take advantage of our
+                cutting-edge features, including comprehensive testing and post
+                sharing, to find the perfect match for your employment needs.
+              </p>
+            </div>
+            {/* ACTIONS */}
+            <div className="mt-8 flex items-center">
+              <a
+                href="/register"
+                className="bg-slate-200 px-4 py-2 rounded-lg hover:bg-slate-300"
+              >
+                Join Now
+              </a>
+            </div>
+          </div>
+
+          {/* IMAGE */}
+          <div className="flex basis-3/5 justify-center md:z-10 md:ml-40 h-full  md:justify-items-end">
+            <img
+              className="object-cover rounded-md"
+              src={require("../images/home1.png")}
+              alt="home-page-graphic"
+            />
+          </div>
+        </div>
         <div
           className=" flex flex-col sm:flex-row  py-5 mx-auto justify-between h-[calc(100vh-64px)] gap-x-4  "
           data-aos="fade-up"
         >
           <div className="flex flex-1 text-5xl sm:text-5xl lg:text-7xl items-center">
-            <h1>Millions of jobs and people hiring </h1>
+            <h1>Streamlined Recruitment, Seamless Connections. </h1>
           </div>
           <div className="flex flex-1  ">
             <img
@@ -79,6 +113,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
