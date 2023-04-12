@@ -25,7 +25,7 @@ function Login() {
   return (
     <div className="bg-grey-lighter max-h-screen flex flex-col  items-center relative">
       <img
-        src="https://img.freepik.com/free-photo/side-view-cropped-unrecognizable-business-people-working-common-desk_1098-20474.jpg?w=1060&t=st=1673169877~exp=1673170477~hmac=94ebd6bf3c88b11997d9ef383652990376f38e10fdcd809e1bc97f7f2bda444a"
+        src={require("../images/desk.jpg")}
         alt="background"
         className="absolute top-0 left-0  h-screen w-full object-fill   "
       />
