@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 
 const modalBackgroundStyle = {
   position: 'fixed',
@@ -27,6 +28,8 @@ const discoverBtnStyle = {
 };
 
 const DiscoverBtn = () => {
+  const navigate = useNavigate();
+
   const handleMouseOver = (e) => {
     e.target.style.backgroundColor = '#4B5563';
   };
@@ -38,6 +41,7 @@ const DiscoverBtn = () => {
   return ReactDOM.createPortal(
     <div style={modalBackgroundStyle}>
       <button
+        onClick={() => navigate('/companies')}
         style={discoverBtnStyle}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
