@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import RecommendedJob from '../components/Job/RecommendedJob';
-import MyTests from '../components/Job/MyTests';
-import SavedJob from '../components/Job/SavedJob';
 import Navbar from '../components/Navbar';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import AbcIcon from '@mui/icons-material/Abc';
 import Business from '@mui/icons-material/Business';
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import CompanyList from '../components/Company/CompanyList';
 function Companies() {
   return (

@@ -23,9 +23,11 @@ const CompanyList = () => {
           </h1>
         </div>
         <div className=''>
-          {companies.map((company) => {
-            return <CompanyItem key={company} company={company} />;
-          })}
+          {companies &&
+            companies.length > 0 &&
+            companies.map((company, index) => {
+              return <CompanyItem key={index} company={company} />;
+            })}
         </div>
       </div>
     </div>

@@ -50,10 +50,11 @@ function Feed() {
       setInputValue('');
     }
   };
-  console.log('user', user.following.length);
   return (
     <div className='flex-[0.5]  flex-col mx-12'>
-      {user.following.length === 0 && <DiscoverBtn />}
+      {user?.type === 1 && user?.following && user.following.length === 0 && (
+        <DiscoverBtn />
+      )}
       {user.type === 2 && (
         <div>
           <div className='  p-4 bg-white flex flex-col rounded-lg gap-y-3'>
