@@ -40,7 +40,7 @@ export const storage = getStorage(app);
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     const dbUser = await getDoc(doc(db, 'users', user.uid));
-    if (dbUser.data() === undefined && user.type === 2) {
+    if (dbUser.data() === undefined || user.type === 2) {
       const dbUser = await getDoc(doc(db, 'companies', user.uid));
       let data = {
         uid: user.uid,
