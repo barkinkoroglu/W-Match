@@ -250,7 +250,7 @@ function Post(prop) {
             {prop.post.comments.length} comments
           </h3>
         </div>
-        {prop.user?.type === 1 && (
+        {(prop.user?.type === 1 || prop.user?.type === 2) && (
           <div className='flex justify-evenly border-t-2 pt-2   '>
             <div
               onClick={() => handleLike()}
