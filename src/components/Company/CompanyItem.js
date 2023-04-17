@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { fallowUser } from '../../firebase';
 
 const CompanyItem = (props) => {
   const user = useSelector((state) => state.auth.user);
-
   const [followTrue, setfollowTrue] = useState(false);
 
   const aboutStyle = {
@@ -12,7 +12,10 @@ const CompanyItem = (props) => {
     fontSize: '14px',
     color: '#6B7280',
   };
-
+  const handleFollow = async () => {
+    await fallowUser(props.company.username, user.username);
+    setfollowTrue(!followTrue);
+  };
   return (
     <div className='relative last:border-none border-b-2 '>
       <div className='flex  justify-between pt-3 group  pb-2 '>
@@ -30,7 +33,10 @@ const CompanyItem = (props) => {
           </div>
         </div>
         <div className='flex flex-col'>
-          <button className='text-center text-sm font-medium bg-slate-200 hover:bg-slate-300 w-20 py-1 px-2 my-2 rounded-full'>
+          <button
+            onClick={() => handleFollow()}
+            className='text-center text-sm font-medium bg-slate-200 hover:bg-slate-300 w-20 py-1 px-2 my-2 rounded-full'
+          >
             {followTrue ? 'Unfollow' : 'Follow'}
           </button>
         </div>
