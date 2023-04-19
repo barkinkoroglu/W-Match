@@ -85,12 +85,23 @@ function Navbar() {
             className=" flex w-full relative   "
             onSubmit={handleSearch}
           >
-            <input
-              className="px-2 py-1 pl-8 sm:w-72  rounded-lg   "
-              type="text"
-              placeholder="Search"
-              onChange={(e) => handleSearch(e)}
-            />
+            <div className="relative">
+              <input
+                className="px-2 py-1 pl-8 sm:w-72  rounded-lg pr-6  "
+                type="text"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => handleSearch(e)}
+              />
+              {search && (
+                <CloseIcon
+                  className="absolute right-1 top-0 bottom-0 my-auto mx-0 cursor-pointer z-50 "
+                  style={{ height: "20px", width: "20px" }}
+                  onClick={() => setSearch("")}
+                />
+              )}
+            </div>
+
             <SearchIcon
               className="absolute left-1 top-0 bottom-0 my-auto mx-0 "
               style={{ height: "20px", width: "20px" }}
