@@ -1,18 +1,18 @@
-import { Avatar } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import Like from './Like';
-import TestResultElement from './TestResultElement';
-import CloseIcon from '@mui/icons-material/Close';
+import { Avatar } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import Like from "./Like";
+import TestResultElement from "./TestResultElement";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   createComment,
   createLike,
   getUserInfo,
   applyJob,
   deletePostdata,
-} from '../firebase';
-import Comment from './Comment';
+} from "../firebase";
+import Comment from "./Comment";
 
 function Post(prop) {
   const [data, setData] = useState(null);
@@ -21,7 +21,7 @@ function Post(prop) {
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [showtresults, setshowtresults] = useState(false);
-  const [commentValue, setCommentValue] = useState('');
+  const [commentValue, setCommentValue] = useState("");
   const isTest =
     (prop.post.questions && prop.post.questions.length > 0) || false;
 
@@ -37,39 +37,39 @@ function Post(prop) {
 
   const TestPost = () => {
     return (
-      <div className='relative group/edit'>
-        <div className='  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4'>
-          <div className=' flex gap-x-3 '>
+      <div className="relative group/edit">
+        <div className="  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4 border border-gray-200">
+          <div className=" flex gap-x-3 ">
             <Avatar src={data?.ProfileUrl} />
             <div>
               <a
                 href={`profile/${data?.username}`}
-                className=' text-lg font-medium hover:underline'
+                className=" text-lg font-medium hover:underline"
               >
                 {data?.companyname}
               </a>
-              <h3 className='text-xs'>{prop.post.email}</h3>
+              <h3 className="text-xs">{prop.post.email}</h3>
             </div>
           </div>
-          <div className='relative'>
-            <h1 className='text-base'>
+          <div className="relative">
+            <h1 className="text-base">
               {isTest
                 ? `Test Name: ${prop.post.information}`
                 : prop.post.information}
             </h1>
 
-            <h1 className='text-sm'>
-              Test Time : <span className='font-medium'>{prop.post.qtime}</span>{' '}
+            <h1 className="text-sm">
+              Test Time : <span className="font-medium">{prop.post.qtime}</span>{" "}
             </h1>
             <a
-              className='absolute right-0 bottom-0'
+              className="absolute right-0 bottom-0"
               href={`test/${prop.post.username}/${prop.post.id}`}
             >
               {prop.user?.type === 1 &&
                 prop.post.scores?.find(
                   (element) => element.userid === prop.user.uid
                 ) === undefined && (
-                  <button className='bg-slate-200 p-1 rounded-lg'>
+                  <button className="bg-slate-200 p-1 rounded-lg">
                     Take the exam.
                   </button>
                 )}
@@ -79,7 +79,7 @@ function Post(prop) {
         {prop.post.username === prop.user.username && (
           <div
             onClick={() => deletePost()}
-            className='absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline '
+            className="absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline "
           >
             <CloseIcon />
           </div>
@@ -87,7 +87,7 @@ function Post(prop) {
         {prop.post.username === prop.user.username && (
           <button
             onClick={() => setshowtresults(true)}
-            className='absolute right-2 bottom-2 cursor-pointer text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200 '
+            className="absolute right-2 bottom-2 cursor-pointer text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200 "
           >
             Show Results
           </button>
@@ -95,27 +95,27 @@ function Post(prop) {
 
         {showtresults && (
           <div>
-            {console.log('HEYYY')}
-            <div className='fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75'></div>
-            <div className='fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white'>
-              <div className='flex flex-col items-center border-b-2 relative'>
-                <h1 className=' text-lg '>Test Results</h1>
-                <div className='border-b-4 -mb-[1.7px] border-slate-500'>
-                  <h1 className='p-2'>
-                    All{' '}
-                    <span className='font-medium 	'>
+            {console.log("HEYYY")}
+            <div className="fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75"></div>
+            <div className="fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white">
+              <div className="flex flex-col items-center border-b-2 relative">
+                <h1 className=" text-lg ">Test Results</h1>
+                <div className="border-b-4 -mb-[1.7px] border-slate-500">
+                  <h1 className="p-2">
+                    All{" "}
+                    <span className="font-medium 	">
                       {prop.post.scores.length}
                     </span>
                   </h1>
                 </div>
                 <button
                   onClick={() => setshowtresults(false)}
-                  className='absolute hover:bg-slate-400 rounded-lg p-1 right-0'
+                  className="absolute hover:bg-slate-400 rounded-lg p-1 right-0"
                 >
                   <CloseIcon />
                 </button>
               </div>
-              <div className='flex flex-col gap-y-3 py-3 overflow-y-auto'>
+              <div className="flex flex-col gap-y-3 py-3 overflow-y-auto">
                 {prop.post.scores !== null ? (
                   prop.post.scores.map((element, index) => {
                     return <TestResultElement key={index} data={element} />;
@@ -136,32 +136,32 @@ function Post(prop) {
       await applyJob(prop.post.username, prop.user.uid, prop.post.time);
     };
     return (
-      <div className='relative group/edit'>
-        <div className='  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4'>
-          <div className=' flex gap-x-3 '>
+      <div className="relative group/edit ">
+        <div className="  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4  border border-gray-200">
+          <div className=" flex gap-x-3 ">
             <Avatar src={data?.ProfileUrl} />
             <div>
               <a
                 href={`profile/${data?.username}`}
-                className=' text-lg font-medium hover:underline'
+                className=" text-lg font-medium hover:underline"
               >
                 {data?.companyname}
               </a>
-              <h3 className='text-xs'>{prop.post.email}</h3>
+              <h3 className="text-xs">{prop.post.email}</h3>
             </div>
           </div>
-          <div className='relative'>
-            <h1 className='text- font-medium'> {prop.post.jobname} </h1>
+          <div className="relative">
+            <h1 className="text- font-medium"> {prop.post.jobname} </h1>
 
-            <h1 className='text-base'> {prop.post.information} </h1>
-            <h1 className='text-sm'>{prop.post.salary} </h1>
+            <h1 className="text-base"> {prop.post.information} </h1>
+            <h1 className="text-sm">{prop.post.salary} </h1>
             {prop.user?.type === 1 &&
               prop.post.candidates?.find(
                 (element) => element === prop.user.uid
               ) === undefined && (
                 <button
                   onClick={() => handleApply()}
-                  className='bg-slate-200 p-1 rounded-lg absolute right-0 bottom-0'
+                  className="bg-slate-200 p-1 rounded-lg absolute right-0 bottom-0"
                 >
                   Apply
                 </button>
@@ -171,7 +171,7 @@ function Post(prop) {
         {prop.post.username === prop.user.username && (
           <div
             onClick={() => deletePost()}
-            className='absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline '
+            className="absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline "
           >
             <CloseIcon />
           </div>
@@ -197,7 +197,7 @@ function Post(prop) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (commentValue !== '') {
+    if (commentValue !== "") {
       const att = {
         name: prop.uname,
         username: prop.user.username,
@@ -209,77 +209,77 @@ function Post(prop) {
       await createComment(prop.post.username, att, prop.post.time).then(
         async () => await prop.refreshData()
       );
-      setCommentValue('');
+      setCommentValue("");
     }
   };
   return (
-    <div className='relative group/edit'>
-      <div className='px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4 border border-gray-200'>
-        <div className=' flex gap-x-3 '>
+    <div className="relative group/edit">
+      <div className="px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4 border border-gray-200">
+        <div className=" flex gap-x-3 ">
           <Avatar src={data?.ProfileUrl} />
           <div>
             <a
               href={`profile/${data?.username}`}
-              className=' text-lg font-medium hover:underline'
+              className=" text-lg font-medium hover:underline"
             >
               {data?.companyname}
             </a>
-            <h3 className='text-xs'>{prop.post.email}</h3>
+            <h3 className="text-xs">{prop.post.email}</h3>
           </div>
         </div>
         <div>
           <p>{prop.post.data}</p>
         </div>
-        <div className='flex justify-between items-center text-xs'>
-          <div className='flex items-center gap-x-1'>
+        <div className="flex justify-between items-center text-xs">
+          <div className="flex items-center gap-x-1">
             <ThumbUpOffAltIcon
-              className='text-blue-400 '
-              style={{ width: '16px', height: '16px' }}
+              className="text-blue-400 "
+              style={{ width: "16px", height: "16px" }}
             />
             <p
               onClick={() => setshowLikes(true)}
-              className='hover:underline cursor-pointer '
+              className="hover:underline cursor-pointer "
             >
               {prop.post.likes.length} likes
             </p>
           </div>
           <h3
             onClick={() => setShowComments(!showComments)}
-            className='hover:underline cursor-pointer'
+            className="hover:underline cursor-pointer"
           >
             {prop.post.comments.length} comments
           </h3>
         </div>
         {(prop.user?.type === 1 || prop.user?.type === 2) && (
-          <div className='flex justify-evenly border-t-2 pt-2   '>
+          <div className="flex justify-evenly border-t-2 pt-2   ">
             <div
               onClick={() => handleLike()}
-              className=' flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center cursor-pointer '
+              className=" flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center cursor-pointer "
             >
-              <ThumbUpOffAltIcon className='group-hover:text-blue-400' />
+              <ThumbUpOffAltIcon className="group-hover:text-blue-400" />
               <h3>Like</h3>
             </div>
             <div
               onClick={() => setShowComments(!showComments)}
-              className='flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-lg group items-center  justify-center cursor-pointer '
+              className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-lg group items-center  justify-center cursor-pointer "
             >
-              <ChatBubbleOutlineIcon className='group-hover:text-blue-400' />
+              <ChatBubbleOutlineIcon className="group-hover:text-blue-400" />
               <h3>Comment</h3>
             </div>
           </div>
         )}
         {showComments && (
-          <div className='flex flex-col gap-y-3'>
-            <div className='flex gap-x-2'>
+          <div className="flex flex-col gap-y-3">
+            <div className="flex gap-x-2">
               <Avatar src={prop.user.ProfileUrl} />
               <form
                 onSubmit={(e) => handleSubmit(e)}
-                className='flex w-full    '
+                className="flex w-full    "
               >
                 <input
-                  className='w-full border rounded-lg  outline-none px-2 focus:border-gray-500 '
-                  type='text'
-                  placeholder='Add a comment...'
+                  className="w-full border rounded-lg  outline-none px-2 focus:border-gray-500 "
+                  type="text"
+                  placeholder="Add a comment..."
                   value={commentValue}
                   onChange={(e) => setCommentValue(e.target.value)}
                 />
@@ -299,26 +299,26 @@ function Post(prop) {
         )}
         {showlikes && (
           <div>
-            <div className='fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75'></div>
-            <div className='fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white'>
-              <div className='flex flex-col items-center border-b-2 relative'>
-                <h1 className=' text-lg '>Reactions</h1>
-                <div className='border-b-4 -mb-[1.7px] border-slate-500'>
-                  <h1 className='p-2'>
-                    All{' '}
-                    <span className='font-medium 	'>
+            <div className="fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75"></div>
+            <div className="fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white">
+              <div className="flex flex-col items-center border-b-2 relative">
+                <h1 className=" text-lg ">Reactions</h1>
+                <div className="border-b-4 -mb-[1.7px] border-slate-500">
+                  <h1 className="p-2">
+                    All{" "}
+                    <span className="font-medium 	">
                       {prop.post.likes.length}
                     </span>
                   </h1>
                 </div>
                 <button
                   onClick={() => setshowLikes(false)}
-                  className='absolute hover:bg-slate-400 rounded-lg p-1 right-0'
+                  className="absolute hover:bg-slate-400 rounded-lg p-1 right-0"
                 >
                   <CloseIcon />
                 </button>
               </div>
-              <div className='flex flex-col gap-y-3 py-3 overflow-y-auto'>
+              <div className="flex flex-col gap-y-3 py-3 overflow-y-auto">
                 {prop.post.likes !== null ? (
                   prop.post.likes.map((element, index) => {
                     return <Like key={index} likeid={element} />;
@@ -334,7 +334,7 @@ function Post(prop) {
       {prop.post.username === prop.user.username && (
         <div
           onClick={() => deletePost()}
-          className='absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline '
+          className="absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline "
         >
           <CloseIcon />
         </div>

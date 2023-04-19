@@ -1,6 +1,6 @@
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { Form, Formik } from "formik";
+import { Form, Formik, Field } from "formik";
 import { CompanyjobSchema } from "../validation/index";
 import { useSelector } from "react-redux";
 import { createCompanyJob } from "../firebase";
@@ -11,6 +11,12 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
     const data = {
       jobname: values.job,
       information: values.information,
+      testvalue: values.testvalue,
+      mintestvalue: values.mintestvalue,
+      testvaluescore: values.testvaluescore,
+      wtestvalue: values.wtestvalue,
+      wmintestvalue: values.wmintestvalue,
+      wtestvaluescore: values.wtestvaluescore,
       salary: values.salary,
       time: Date.now(),
       name: user.companyname,
@@ -19,7 +25,7 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
       candidates: [],
       type: 3,
     };
-    console.log(data);
+    console.log(values);
     createCompanyJob(user.uid, data);
     setShowCreateJob(false);
   };
@@ -39,6 +45,12 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
         initialValues={{
           job: "",
           information: "",
+          testvalue: "",
+          mintestvalue: "",
+          testvaluescore: "",
+          wtestvalue: "",
+          wmintestvalue: "",
+          wtestvaluescore: "",
           salary: "",
         }}
         onSubmit={handleSubmit}
@@ -78,6 +90,75 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
               </div>
               {errors.information && touched.information && (
                 <div className=" text-red-600">{errors.information}</div>
+              )}
+              <div className="flex justify-between gap-x-3 items-center whitespace-nowrap  h-8">
+                <h1>Tests:</h1>
+                <Field className="w-full h-full" as="select" name="testvalue">
+                  <option value="">Choose</option>
+                  {user.posts.map((value, index) => {
+                    return (
+                      value.type === 2 && (
+                        <option value={value.testname}>{value.testname}</option>
+                      )
+                    );
+                  })}
+                </Field>
+                <div className="flex">
+                  <h1>If greater than</h1>
+                  <Field
+                    className="w-12 text-center "
+                    name="mintestvalue"
+                    placeholder="0"
+                    type="number"
+                    min={0}
+                  />
+                </div>
+                <div className="flex">
+                  <h1 className="font-medium">Score:</h1>
+                  <Field
+                    className="w-12 text-center "
+                    name="testvaluescore"
+                    placeholder="0"
+                    type="number"
+                    min={0}
+                  />
+                </div>
+              </div>
+              {errors.testvalue && touched.testvalue && (
+                <div className=" text-red-600">{errors.testvalue}</div>
+              )}
+              <div className="flex justify-between gap-x-3 items-center whitespace-nowrap  h-8">
+                <h1>W-MATCH Tests:</h1>
+                <Field className="w-full h-full" as="select" name="wtestvalue">
+                  <option value="">Choose</option>
+                  <option value="CSS">CSS</option>
+                  <option value="HTML">HTML</option>
+                  <option value="JavaScript">JavaScript</option>
+                  <option value="React">React.js</option>
+                </Field>
+                <div className="flex">
+                  <h1>If greater than</h1>
+                  <Field
+                    className="w-12 text-center "
+                    name="wmintestvalue"
+                    placeholder="0"
+                    type="number"
+                    min={0}
+                  />
+                </div>
+                <div className="flex">
+                  <h1 className="font-medium">Score:</h1>
+                  <Field
+                    className="w-12 text-center "
+                    name="wtestvaluescore"
+                    placeholder="0"
+                    type="number"
+                    min={0}
+                  />
+                </div>
+              </div>
+              {errors.wtestvalue && touched.wtestvalue && (
+                <div className=" text-red-600">{errors.wtestvalue}</div>
               )}
               <div className="flex gap-x-3 ">
                 <h1>Salary:</h1>
