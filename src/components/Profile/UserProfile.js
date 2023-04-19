@@ -22,7 +22,9 @@ import {
 } from "../../firebase";
 import CloseIcon from "@mui/icons-material/Close";
 import Post from "../Post";
-import { async } from "@firebase/util";
+import { Formik, Form, ErrorMessage, Field } from "formik";
+import { UpdateCompanySchema } from "../../validation/updateCompany-scheme";
+
 function UserProfile({ user, param }) {
   // console.log(user.wmatchTests);
   const ruser = useSelector((state) => state.auth.user);
@@ -53,29 +55,26 @@ function UserProfile({ user, param }) {
   }, [ruser.username]);
 
   console.log("PROFİLE USER", user);
+  const handleEdit = async (values, actions) => {
+    if (ruser.type === 1) {
+      await userEditInformation();
+    } else {
+      console.log(values);
+      await companyEditInformation(
+        values.companyname,
+        values.about,
+        values.longabout,
+        values.email,
+        values.adressline1,
+        values.adressline2,
+        ruser.username
+      );
+    }
+  };
   const handleEditChange = async (e) => {
     e.preventDefault();
     editAddress === "" && setEditAddress(ruser.addressline1);
     editAddress2 === "" && setEditAddress2(ruser.addressline2);
-    if (ruser.type === 1) {
-      editName === "" && setEditname(ruser.name);
-      editLname === "" && setEditlname(ruser.lastname);
-      await userEditInformation(
-        editName,
-        editLname,
-        editAddress,
-        editAddress2,
-        ruser.username
-      );
-    } else {
-      editName === "" && setEditname(ruser.companyname);
-      await companyEditInformation(
-        editName,
-        editAddress,
-        editAddress2,
-        ruser.username
-      );
-    }
   };
   const uploadImage = () => {
     if (imageUpload == null) return;
@@ -132,10 +131,6 @@ function UserProfile({ user, param }) {
       });
     });
     setOpenCVedit(false);
-  };
-  // It will be changed according to user attributes
-  const handleUpdateedit = () => {
-    console.log("Test");
   };
 
   const handleFollowProfile = async () => {
@@ -280,72 +275,153 @@ function UserProfile({ user, param }) {
                 <div className=" relative py-2  w-full text-center items-center ">
                   <h1 className="text-lg font-medium border-b-2">Edit</h1>
 
-                  <form
-                    onSubmit={(e) => handleEditChange(e)}
-                    className="p-3 space-y-3 whitespace-nowrap"
-                  >
-                    {ruser?.type === 1 && (
-                      <div className="flex flex-col gap-y-3">
-                        <div className="flex gap-3 w-full">
-                          <h1>Name:</h1>
-                          <input
-                            className=" border px-2 w-full"
-                            defaultValue={ruser.name}
-                            onChange={(e) => setEditname(e.target.value)}
-                            type="text"
-                          />
-                        </div>
-                        <div className="flex gap-3 w-full">
-                          <h1>Lastname:</h1>
-                          <input
-                            className=" border px-2 w-full"
-                            defaultValue={ruser.lastname}
-                            onChange={(e) => setEditlname(e.target.value)}
-                            type="text"
-                          />
-                        </div>
+                  {ruser?.type === 1 && (
+                    <div className="flex flex-col gap-y-3">
+                      <div className="flex gap-3 w-full">
+                        <h1>Name:</h1>
+                        <input
+                          className=" border px-2 w-full"
+                          defaultValue={ruser.name}
+                          onChange={(e) => setEditname(e.target.value)}
+                          type="text"
+                        />
                       </div>
-                    )}
-
-                    {ruser?.type === 2 && (
-                      <div className="flex flex-col gap-y-3">
-                        <div className="flex gap-3 w-full">
-                          <h1>CompanyName:</h1>
-                          <input
-                            className=" border px-2 w-full"
-                            defaultValue={ruser.companyname}
-                            onChange={(e) => setEditname(e.target.value)}
-                            type="text"
-                          />
-                        </div>
+                      <div className="flex gap-3 w-full">
+                        <h1>Lastname:</h1>
+                        <input
+                          className=" border px-2 w-full"
+                          defaultValue={ruser.lastname}
+                          onChange={(e) => setEditlname(e.target.value)}
+                          type="text"
+                        />
                       </div>
-                    )}
+                    </div>
+                  )}
 
-                    <div className="flex gap-3 w-full ">
-                      <h1 className="">Adress Line 1:</h1>
-                      <input
-                        className=" border px-2 w-full"
-                        defaultValue={ruser.addressline1}
-                        onChange={(e) => setEditAddress(e.target.value)}
-                        type="text"
-                      />
-                    </div>
-                    <div className="flex gap-3 w-full">
-                      <h1>Adress Line 2:</h1>
-                      <input
-                        className=" border px-2 w-full"
-                        defaultValue={ruser.addressline2}
-                        onChange={(e) => setEditAddress2(e.target.value)}
-                        type="text"
-                      />
-                    </div>
-                    <button
-                      onClick={() => handleUpdateedit()}
-                      className="bg-gray-300 px-2 py-1 rounded-lg hover:bg-slate-400"
+                  {ruser?.type === 2 && (
+                    <Formik
+                      validationSchema={UpdateCompanySchema}
+                      initialValues={{
+                        companyname: ruser.companyname,
+                        about: ruser.about,
+                        longabout: ruser.longabout,
+                        email: ruser.email,
+                        adressline1: ruser.addressline1,
+                        adressline2: ruser.addressline2,
+                      }}
+                      onSubmit={handleEdit}
                     >
-                      Change
-                    </button>
-                  </form>
+                      {({
+                        isSubmitting,
+                        isValid,
+                        dirty,
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                      }) => (
+                        <Form>
+                          <div className="flex flex-col gap-y-3 py-2 ">
+                            <div className="flex gap-3 w-full">
+                              <h1>Name:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="companyname"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.companyname && touched.companyname && (
+                              <div className=" text-red-600">
+                                {errors.companyname}
+                              </div>
+                            )}
+                            <div className="flex gap-3 w-full">
+                              <h1>About:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="about"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.about && touched.about && (
+                              <div className=" text-red-600">
+                                {errors.about}
+                              </div>
+                            )}
+
+                            <div className="flex gap-3 w-full">
+                              <h1>Detailed:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="longabout"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.longabout && touched.longabout && (
+                              <div className=" text-red-600">
+                                {errors.longabout}
+                              </div>
+                            )}
+
+                            <div className="flex gap-3 w-full">
+                              <h1>Email:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="email"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.email && touched.email && (
+                              <div className=" text-red-600">
+                                {errors.email}
+                              </div>
+                            )}
+
+                            <div className="flex gap-3 w-full">
+                              <h1>Adressline:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="adressline1"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.adressline1 && touched.adressline1 && (
+                              <div className=" text-red-600">
+                                {errors.adressline1}
+                              </div>
+                            )}
+
+                            <div className="flex gap-3 w-full whitespace-nowrap">
+                              <h1>Adressline 2:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="adressline2"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.adressline2 && touched.adressline2 && (
+                              <div className=" text-red-600">
+                                {errors.adressline2}
+                              </div>
+                            )}
+
+                            <button
+                              type="submit"
+                              className="bg-gray-300 px-2 py-1 rounded-lg hover:bg-slate-400"
+                            >
+                              Change
+                            </button>
+                          </div>
+                        </Form>
+                      )}
+                    </Formik>
+                  )}
 
                   <button
                     onClick={() => setOpenSettingProfile(false)}
