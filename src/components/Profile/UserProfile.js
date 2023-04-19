@@ -23,10 +23,9 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import Post from "../Post";
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { UpdateCompanySchema } from "../../validation/updateCompany-scheme";
+import { UpdateCompanySchema, UpdateUserSchema } from "../../validation/index";
 
 function UserProfile({ user, param }) {
-  // console.log(user.wmatchTests);
   const ruser = useSelector((state) => state.auth.user);
   const [imageUpload, setImageUpload] = useState(null);
   const [backimageUpload, setBackImageUpload] = useState(null);
@@ -34,12 +33,7 @@ function UserProfile({ user, param }) {
   const [openProfile, setOpenProfile] = useState(false);
   const [openBackProfile, setOpenBackProfile] = useState(false);
   const [openCVedit, setOpenCVedit] = useState(false);
-  const [imageurl, setImageurl] = useState(null);
   const [openSettingProfile, setOpenSettingProfile] = useState(false);
-  const [editName, setEditname] = useState("");
-  const [editLname, setEditlname] = useState("");
-  const [editAddress, setEditAddress] = useState("");
-  const [editAddress2, setEditAddress2] = useState("");
   const [prodata, setProdata] = useState(null);
   const [allposts, setAllPost] = useState([]);
 
@@ -57,7 +51,14 @@ function UserProfile({ user, param }) {
   console.log("PROFİLE USER", user);
   const handleEdit = async (values, actions) => {
     if (ruser.type === 1) {
-      await userEditInformation();
+      await userEditInformation(
+        values.jobfunct,
+        values.longabout,
+        values.email,
+        values.adressline1,
+        values.adressline2,
+        ruser.username
+      );
     } else {
       console.log(values);
       await companyEditInformation(
@@ -70,12 +71,10 @@ function UserProfile({ user, param }) {
         ruser.username
       );
     }
+
+    setOpenSettingProfile(false);
   };
-  const handleEditChange = async (e) => {
-    e.preventDefault();
-    editAddress === "" && setEditAddress(ruser.addressline1);
-    editAddress2 === "" && setEditAddress2(ruser.addressline2);
-  };
+
   const uploadImage = () => {
     if (imageUpload == null) return;
     const imageRef = ref(
@@ -276,26 +275,113 @@ function UserProfile({ user, param }) {
                   <h1 className="text-lg font-medium border-b-2">Edit</h1>
 
                   {ruser?.type === 1 && (
-                    <div className="flex flex-col gap-y-3">
-                      <div className="flex gap-3 w-full">
-                        <h1>Name:</h1>
-                        <input
-                          className=" border px-2 w-full"
-                          defaultValue={ruser.name}
-                          onChange={(e) => setEditname(e.target.value)}
-                          type="text"
-                        />
-                      </div>
-                      <div className="flex gap-3 w-full">
-                        <h1>Lastname:</h1>
-                        <input
-                          className=" border px-2 w-full"
-                          defaultValue={ruser.lastname}
-                          onChange={(e) => setEditlname(e.target.value)}
-                          type="text"
-                        />
-                      </div>
-                    </div>
+                    <Formik
+                      validationSchema={UpdateUserSchema}
+                      initialValues={{
+                        jobfunct: ruser.jobfunct,
+                        longabout: ruser.longabout,
+                        email: ruser.email,
+                        adressline1: ruser.addressline1,
+                        adressline2: ruser.addressline2,
+                      }}
+                      onSubmit={handleEdit}
+                    >
+                      {({
+                        isSubmitting,
+                        isValid,
+                        dirty,
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                      }) => (
+                        <Form>
+                          <div className="flex flex-col gap-y-3 py-2 ">
+                            <div className="flex gap-3 w-full">
+                              <h1>About:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="jobfunct"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.jobfunct && touched.jobfunct && (
+                              <div className=" text-red-600">
+                                {errors.jobfunct}
+                              </div>
+                            )}
+
+                            <div className="flex gap-3 w-full">
+                              <h1>Detailed:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="longabout"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.longabout && touched.longabout && (
+                              <div className=" text-red-600">
+                                {errors.longabout}
+                              </div>
+                            )}
+
+                            <div className="flex gap-3 w-full">
+                              <h1>Email:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="email"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.email && touched.email && (
+                              <div className=" text-red-600">
+                                {errors.email}
+                              </div>
+                            )}
+
+                            <div className="flex gap-3 w-full">
+                              <h1>Adressline:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="adressline1"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.adressline1 && touched.adressline1 && (
+                              <div className=" text-red-600">
+                                {errors.adressline1}
+                              </div>
+                            )}
+
+                            <div className="flex gap-3 w-full whitespace-nowrap">
+                              <h1>Adressline 2:</h1>
+                              <Field
+                                className=" border px-2 w-full"
+                                name="adressline2"
+                                onChange={handleChange}
+                                type="text"
+                              />
+                            </div>
+                            {errors.adressline2 && touched.adressline2 && (
+                              <div className=" text-red-600">
+                                {errors.adressline2}
+                              </div>
+                            )}
+
+                            <button
+                              type="submit"
+                              className="bg-gray-300 px-2 py-1 rounded-lg hover:bg-slate-400"
+                            >
+                              Change
+                            </button>
+                          </div>
+                        </Form>
+                      )}
+                    </Formik>
                   )}
 
                   {ruser?.type === 2 && (

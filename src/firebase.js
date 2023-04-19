@@ -604,8 +604,9 @@ export const applyJob = async (companyname, userid, time) => {
 };
 
 export const userEditInformation = async (
-  name,
-  lastname,
+  jobfunct,
+  longabout,
+  email,
   address,
   address2,
   username
@@ -616,8 +617,9 @@ export const userEditInformation = async (
 
   await setDoc(doc(db, "users", userdata.user_id), {
     ...dbUser.data(),
-    name: name,
-    lastname: lastname,
+    jobfunct: jobfunct,
+    longabout: longabout,
+    email: email,
     addressline1: address,
     addressline2: address2,
   });
