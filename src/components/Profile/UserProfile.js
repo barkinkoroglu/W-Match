@@ -234,7 +234,7 @@ function UserProfile({ user, param }) {
             className="absolute top-0 left-0 w-full h-3/4 rounded-t-lg  "
             src={
               (ruser.username === param.id ? ruser.BackUrl : user.BackUrl) ||
-              "https://img.freepik.com/free-vector/bedouins-walk-egypt-pyramids-camel-night-desert_107791-4619.jpg?w=1380&t=st=1673794053~exp=1673794653~hmac=590e998325efe77dd329ded70cdd636bc17bed5d6d585dd5722e2527cfdbd537"
+              require("../../images/defaultcover2.jpg")
             }
             alt=""
           />
