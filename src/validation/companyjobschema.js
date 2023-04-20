@@ -9,6 +9,7 @@ export const CompanyjobSchema = Yup.object().shape({
   wtestvalue: Yup.string(),
   wmintestvalue: Yup.number(),
   wtestvaluescore: Yup.number(),
-
+  data: Yup.date(),
+  recomnumber: Yup.number(),
   salary: Yup.string().required(),
 });

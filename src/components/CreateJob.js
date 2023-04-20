@@ -4,10 +4,14 @@ import { Form, Formik, Field } from "formik";
 import { CompanyjobSchema } from "../validation/index";
 import { useSelector } from "react-redux";
 import { createCompanyJob } from "../firebase";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function CreateJob({ showCreateJob, setShowCreateJob }) {
   const user = useSelector((state) => state.auth.user);
   const handleSubmit = async (values, actions) => {
+    const milliseconds = values.startDate.getTime();
+    //console.log("Milliseconds:", milliseconds);
     const data = {
       jobname: values.job,
       information: values.information,
@@ -19,13 +23,15 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
       wtestvaluescore: values.wtestvaluescore,
       salary: values.salary,
       time: Date.now(),
+      endtime: milliseconds,
       name: user.companyname,
       username: user.username,
       email: user.email,
       candidates: [],
+      numberRec: values.recomnumber,
       type: 3,
     };
-    console.log(values);
+    //console.log(data);
     createCompanyJob(user.uid, data);
     setShowCreateJob(false);
   };
@@ -51,6 +57,8 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
           wtestvalue: "",
           wmintestvalue: "",
           wtestvaluescore: "",
+          startDate: new Date(),
+          recomnumber: "",
           salary: "",
         }}
         onSubmit={handleSubmit}
@@ -93,7 +101,11 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
               )}
               <div className="flex justify-between gap-x-3 items-center whitespace-nowrap  h-8">
                 <h1>Tests:</h1>
-                <Field className="w-full h-full" as="select" name="testvalue">
+                <Field
+                  className="w-full h-full border-2"
+                  as="select"
+                  name="testvalue"
+                >
                   <option value="">Choose</option>
                   {user.posts.map((value, index) => {
                     return (
@@ -129,7 +141,11 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
               )}
               <div className="flex justify-between gap-x-3 items-center whitespace-nowrap  h-8">
                 <h1>W-MATCH Tests:</h1>
-                <Field className="w-full h-full" as="select" name="wtestvalue">
+                <Field
+                  className="w-full h-full border-2"
+                  as="select"
+                  name="wtestvalue"
+                >
                   <option value="">Choose</option>
                   <option value="CSS">CSS</option>
                   <option value="HTML">HTML</option>
@@ -160,6 +176,32 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
               {errors.wtestvalue && touched.wtestvalue && (
                 <div className=" text-red-600">{errors.wtestvalue}</div>
               )}
+              <div className="flex justify-between whitespace-nowrap gap-3 ">
+                <h1>End Date:</h1>
+                <Field name="startDate">
+                  {({ field, form }) => (
+                    <DatePicker
+                      {...field}
+                      selected={values.startDate}
+                      onChange={(date) => form.setFieldValue("startDate", date)}
+                      className="border w-full"
+                    />
+                  )}
+                </Field>
+              </div>
+
+              <div className="flex justify-between whitespace-nowrap gap-3">
+                <h1>How many people do you want recommended?</h1>
+
+                <Field
+                  className="w-full text-center border "
+                  name="recomnumber"
+                  placeholder="0"
+                  type="number"
+                  min={0}
+                />
+              </div>
+
               <div className="flex gap-x-3 ">
                 <h1>Salary:</h1>
                 <input
