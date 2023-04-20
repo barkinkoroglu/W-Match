@@ -27,7 +27,7 @@ function App() {
       </Router>
       <Toaster position="top-right" />
       <Helmet>
-        <title>W-MATCH</title>
+        <title>W-Match</title>
       </Helmet>
     </>
   );

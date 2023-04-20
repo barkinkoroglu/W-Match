@@ -16,6 +16,7 @@ import Comment from "./Comment";
 
 function Post(prop) {
   const [data, setData] = useState(null);
+  const [datetime, setDatetime] = useState(null);
 
   // console.log("DATA PROBLARI", prop.post);
   const [showComments, setShowComments] = useState(false);
@@ -25,8 +26,32 @@ function Post(prop) {
   const isTest =
     (prop.post.questions && prop.post.questions.length > 0) || false;
 
+  const findPassedDay = () => {
+    const al = Date.now();
+    const temp = al / 86400000;
+    const temp2 = prop.post.time / 86400000;
+    const diff = Math.floor(temp - temp2);
+
+    const dayDiff = diff;
+    if (dayDiff !== 0) {
+      setDatetime(`${dayDiff}d`);
+    } else {
+      const hourDiff = Math.floor(((temp - temp2) % 1) * 24);
+      if (hourDiff !== 0) {
+        setDatetime(`${hourDiff}h`);
+      } else {
+        const minuteDiff = Math.floor(((((temp - temp2) % 1) * 24) % 1) * 60);
+        if (minuteDiff !== 0) {
+          setDatetime(`${minuteDiff}m`);
+        } else {
+          setDatetime("Now");
+        }
+      }
+    }
+  };
   useEffect(() => {
     getUserInfo(prop.post.username).then((temp) => setData(temp));
+    findPassedDay();
   }, [prop.post.username]);
 
   const deletePost = async () => {
@@ -76,6 +101,14 @@ function Post(prop) {
             </a>
           </div>
         </div>
+        <h1
+          className={`${
+            prop.post.username === prop.user.username &&
+            `group-hover/edit:hidden`
+          } absolute right-4 top-3 text-sm c text-gray-400  inline `}
+        >
+          {datetime}
+        </h1>
         {prop.post.username === prop.user.username && (
           <div
             onClick={() => deletePost()}
@@ -167,6 +200,14 @@ function Post(prop) {
               )}
           </div>
         </div>
+        <h1
+          className={`${
+            prop.post.username === prop.user.username &&
+            `group-hover/edit:hidden`
+          } absolute right-4 top-3 text-sm c text-gray-400  inline `}
+        >
+          {datetime}
+        </h1>
         {prop.post.username === prop.user.username && (
           <div
             onClick={() => deletePost()}
@@ -330,6 +371,14 @@ function Post(prop) {
           </div>
         )}
       </div>
+      <h1
+        className={`${
+          prop.post.username === prop.user.username && `group-hover/edit:hidden`
+        } absolute right-4 top-3 text-sm c text-gray-400  inline `}
+      >
+        {datetime}
+      </h1>
+
       {prop.post.username === prop.user.username && (
         <div
           onClick={() => deletePost()}
