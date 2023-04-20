@@ -6,7 +6,6 @@ import { getUserInfobyID } from "../firebase";
 
 function TestResultElement(prop) {
   const [data, setData] = useState({});
-  console.log(prop.data.userid);
   const getData = async () => {
     setData(await getUserInfobyID(prop.data.userid));
   };

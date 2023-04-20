@@ -93,9 +93,8 @@ function Post(prop) {
           </button>
         )}
 
-        {showtresults && (
+        {showtresults && prop.post.scores.sort((a, b) => b.score - a.score) && (
           <div>
-            {console.log("HEYYY")}
             <div className="fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75"></div>
             <div className="fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white">
               <div className="flex flex-col items-center border-b-2 relative">
