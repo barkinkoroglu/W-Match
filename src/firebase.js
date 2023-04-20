@@ -321,7 +321,6 @@ export const createLike = async (username, test, time) => {
       break;
     }
   }
-  console.log("buldugu index", index);
   for (let i = 0; i < postlar[index].likes.length; i++) {
     if (postlar[index].likes[i] === test) {
       flag = -1;
@@ -344,10 +343,8 @@ export const fallowUser = async (companyname, username, test) => {
   let flag = 0;
   const usedataid = await getDoc(doc(db, "usernames", username));
   const userdataid = usedataid.data();
-  console.log(userdataid);
   const compdataid = await getDoc(doc(db, "usernames", companyname));
   const companydataid = compdataid.data();
-  console.log(companydataid.user_id);
   const dbUser = await getDoc(doc(db, "users", userdataid.user_id));
   const dbCompanyUser = await getDoc(
     doc(db, "companies", companydataid.user_id)
@@ -393,10 +390,8 @@ export const getCompany = async () => {
   let temp = [];
   const querySnapshot = await getDocs(collection(db, "companies"));
   querySnapshot.forEach((doc) => {
-    // console.log(doc.id, " => ", doc.data());
     temp.push(doc.data());
   });
-  // console.log("SEARCH BAR", temp);
   return temp;
 };
 
@@ -455,26 +450,36 @@ export const getAllPostbyname = async (userInfo) => {
 };
 
 export const createCompanyTest = async (companyid, data) => {
-  const dbUser = await getDoc(doc(db, "companies", companyid));
-  const posts = dbUser.data().posts;
-  posts.push(data);
+  try {
+    const dbUser = await getDoc(doc(db, "companies", companyid));
+    const posts = dbUser.data().posts;
+    posts.push(data);
 
-  await setDoc(doc(db, "companies", companyid), {
-    ...dbUser.data(),
-    posts: posts,
-  });
+    await setDoc(doc(db, "companies", companyid), {
+      ...dbUser.data(),
+      posts: posts,
+    });
+    toast.success("The test has been successfully created.");
+  } catch (error) {
+    toast.error("Oops! Something went wrong!");
+  }
 };
 
 //In the future, different operations can be performed according to the above function.
 export const createCompanyJob = async (companyid, data) => {
-  const dbUser = await getDoc(doc(db, "companies", companyid));
-  const posts = dbUser.data().posts;
-  posts.push(data);
+  try {
+    const dbUser = await getDoc(doc(db, "companies", companyid));
+    const posts = dbUser.data().posts;
+    posts.push(data);
 
-  await setDoc(doc(db, "companies", companyid), {
-    ...dbUser.data(),
-    posts: posts,
-  });
+    await setDoc(doc(db, "companies", companyid), {
+      ...dbUser.data(),
+      posts: posts,
+    });
+    toast.success("The job has been successfully created.");
+  } catch (error) {
+    toast.error("Oops! Something went wrong!");
+  }
 };
 
 export const getUserInfobyID = async (userid) => {
@@ -488,23 +493,33 @@ export const getUserInfobyID = async (userid) => {
 };
 
 export const changeCompanyProfilePhoto = async (username, url) => {
-  const compdataid = await getDoc(doc(db, "usernames", username));
-  const companydataid = compdataid.data();
-  const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
-  await setDoc(doc(db, "companies", companydataid.user_id), {
-    ...dbUser.data(),
-    ProfileUrl: url,
-  });
+  try {
+    const compdataid = await getDoc(doc(db, "usernames", username));
+    const companydataid = compdataid.data();
+    const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
+    await setDoc(doc(db, "companies", companydataid.user_id), {
+      ...dbUser.data(),
+      ProfileUrl: url,
+    });
+    toast.success("Profile photo has been successfully changed.");
+  } catch (error) {
+    toast.error("Oops! Something went wrong!");
+  }
 };
 
 export const changeUserProfilePhoto = async (username, url) => {
-  const userdataid = await getDoc(doc(db, "usernames", username));
-  const ruserdataid = userdataid.data();
-  const dbUser = await getDoc(doc(db, "users", ruserdataid.user_id));
-  await setDoc(doc(db, "users", ruserdataid.user_id), {
-    ...dbUser.data(),
-    ProfileUrl: url,
-  });
+  try {
+    const userdataid = await getDoc(doc(db, "usernames", username));
+    const ruserdataid = userdataid.data();
+    const dbUser = await getDoc(doc(db, "users", ruserdataid.user_id));
+    await setDoc(doc(db, "users", ruserdataid.user_id), {
+      ...dbUser.data(),
+      ProfileUrl: url,
+    });
+    toast.success("Profile photo has been successfully changed.");
+  } catch (error) {
+    toast.error("Oops! Something went wrong!");
+  }
 };
 
 export const changeCompanyBackProfilePhoto = async (username, url) => {
@@ -649,11 +664,9 @@ export const companyEditInformation = async (
 };
 
 export const searchCompany = async (companydata, search) => {
-  // console.log(companydata);
   const result = companydata.filter(
     (element) => element?.companyname?.toLowerCase().includes(search) === true
   );
-  // console.log(result);
   const temp = result.slice(0, 3);
   console.log(temp);
   return temp;
@@ -689,8 +702,6 @@ export const getRandomCompanyJobs = async (userid) => {
       }
     }
   });
-  // console.log("FİREBASE TEMP", temp);
-  //return temp;
   const result = temp.slice(0, 5);
   return shuffle(result);
 };
@@ -717,7 +728,6 @@ export const deletePostdata = async (username, time) => {
 export const forgetPassword = async (email) => {
   try {
     return await sendPasswordResetEmail(auth, email).then((data) => {
-      console.log(data);
       toast.success("Password reset email sent!");
     });
   } catch (err) {

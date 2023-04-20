@@ -17,6 +17,7 @@ function Question({
   qinform,
   qscore,
   username,
+  refreshData,
 }) {
   const user = useSelector((state) => state.auth.user);
   const [nindex, setNindex] = useState(0);
@@ -112,7 +113,9 @@ function Question({
         qscore: qscore,
         username: username,
       };
-      await createCompanyTest(user.uid, finaldata);
+      await createCompanyTest(user.uid, finaldata).then(
+        async () => await refreshData()
+      );
       // console.log("Fınal", finaldata);
       setShowCreateTest(false);
     } else {

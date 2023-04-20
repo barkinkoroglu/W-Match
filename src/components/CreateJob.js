@@ -7,7 +7,7 @@ import { createCompanyJob } from "../firebase";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function CreateJob({ showCreateJob, setShowCreateJob }) {
+function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
   const user = useSelector((state) => state.auth.user);
   const handleSubmit = async (values, actions) => {
     const milliseconds = values.startDate.getTime();
@@ -32,7 +32,7 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
       type: 3,
     };
     //console.log(data);
-    createCompanyJob(user.uid, data);
+    createCompanyJob(user.uid, data).then(async () => await refreshData());
     setShowCreateJob(false);
   };
   return (

@@ -119,6 +119,7 @@ function Feed() {
             <Createtest
               showCreateTest={showCreateTest}
               setShowCreateTest={setShowCreateTest}
+              refreshData={refreshData}
             />
           )}
 
@@ -126,6 +127,7 @@ function Feed() {
             <CreateJob
               showCreateJob={showCreateJob}
               setShowCreateJob={setShowCreateJob}
+              refreshData={refreshData}
             />
           )}
 

@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Question from "./Question";
 import { useSelector } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
-function Createtest({ showCreateTest, setShowCreateTest }) {
+function Createtest({ showCreateTest, setShowCreateTest, refreshData }) {
   const [nquestions, setNquestions] = useState(0);
   const [time, setTime] = useState(0);
   const [qindex, setQindex] = useState(0);
@@ -98,6 +98,7 @@ function Createtest({ showCreateTest, setShowCreateTest }) {
             qinform={qinform}
             qscore={qscore}
             username={user.username}
+            refreshData={refreshData}
           />
         </div>
       )}
