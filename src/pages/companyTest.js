@@ -24,7 +24,6 @@ function CompanyTest() {
       setExamtime(parseInt(temp.qtime));
       setQuestpoint(parseInt(temp.qscore));
     });
-
     timerId.current = setInterval(() => {
       setExamtime((examtime) => examtime - 1);
     }, 1000);
@@ -38,16 +37,19 @@ function CompanyTest() {
       navigate(`/home`);
     }
   }, [examtime]);
+
+  useEffect(() => {
+    if (data?.questions.length === cquestion + 1) {
+      setdisButton(true);
+    }
+  }, [data, cquestion]);
+
   if (data === null) {
     return <div>Loading...</div>;
   }
 
   const handleCurrentIndex = () => {
     setCquestion(cquestion + 1);
-
-    if (data.questions.length === cquestion + 2) {
-      setdisButton(true);
-    }
   };
 
   const handleSubmit = () => {

@@ -39,12 +39,12 @@ function CreateJob({ showCreateJob, setShowCreateJob }) {
     <div className="fixed flex flex-col z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[calc(100vh-64px)] px-4 py-3 rounded bg-white ">
       <div className=" relative py-2 text-lg font-medium border-b-2 w-full text-center items-center ">
         Create a Job
-        <div
+        <button
           onClick={() => setShowCreateJob(!showCreateJob)}
-          className="absolute top-0 right-0 p-1 rounded-lg flex justify-center items-center hover:bg-slate-400"
+          className="absolute top-0 right-0 p-1 rounded-lg flex justify-center items-center hover:bg-slate-400 "
         >
           <CloseIcon />
-        </div>
+        </button>
       </div>
       <Formik
         validationSchema={CompanyjobSchema}
