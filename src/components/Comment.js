@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getUserInfo } from "../firebase";
 
 function Comment({ val }) {
-  console.log("comment prop", val);
+  // console.log("comment prop", val);
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -16,7 +16,12 @@ function Comment({ val }) {
       </div>
       <div className="bg-slate-100 w-full rounded-lg p-2  ">
         <div className="pr-14 pb-2">
-          <h3 className="text-base leading-5 font-medium">{val.name}</h3>
+          <a
+            href={`/profile/${data?.username}`}
+            className="text-base leading-5 font-medium hover:underline"
+          >
+            {val.name}
+          </a>
           <h1 className="text-xs text-gray-500  w-full ">{val.about}</h1>
         </div>
         <p className="text-sm">{val.comment}</p>

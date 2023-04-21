@@ -17,7 +17,7 @@ function Like({ likeid }) {
   if (data === null) {
     return <div>Loading</div>;
   }
-  console.log(likeid);
+  console.log(data);
   return (
     <div className="flex gap-x-2 border-b-2 pb-3 border-gray-100">
       <div>
@@ -28,9 +28,13 @@ function Like({ likeid }) {
           href={`/profile/${data?.username}`}
           className="font-medium hover:underline "
         >
-          {data?.name} {data?.lastname}
+          {`${
+            data.type === 1 ? data.name + " " + data.lastname : data.companyname
+          }`}
         </a>
-        <h1 className="text-sm">{data?.jobfunct}</h1>
+        <h1 className="text-sm">
+          {`${data.type === 1 ? data.jobfunct : data.about}`}
+        </h1>
       </div>
     </div>
   );

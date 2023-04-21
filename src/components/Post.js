@@ -24,7 +24,7 @@ function Post(prop) {
   const [commentValue, setCommentValue] = useState("");
   const isTest =
     (prop.post.questions && prop.post.questions.length > 0) || false;
-
+  console.log("KENDİM", data);
   const findPassedDay = () => {
     const al = Date.now();
     const temp = al / 86400000;
@@ -234,21 +234,33 @@ function Post(prop) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (commentValue !== "") {
+    if (data.type === 1) {
+      if (commentValue !== "") {
+        const att = {
+          name: prop.uname,
+          username: prop.user.username,
+          about: prop.about,
+          comment: commentValue,
+          ctime: Date.now(),
+        };
+        await createComment(prop.post.username, att, prop.post.time).then(
+          async () => await prop.refreshData()
+        );
+      }
+    } else {
       const att = {
-        name: prop.uname,
-        username: prop.user.username,
-        about: prop.about,
+        name: data.companyname,
+        username: data.username,
+        about: data.about,
         comment: commentValue,
         ctime: Date.now(),
       };
-      //console.log("COMMENT", att);
       await createComment(prop.post.username, att, prop.post.time).then(
         async () => await prop.refreshData()
       );
-      setCommentValue("");
     }
+
+    setCommentValue("");
   };
   return (
     <div className="relative group/edit">
