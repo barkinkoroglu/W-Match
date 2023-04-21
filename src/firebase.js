@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 
 import {
   createUserWithEmailAndPassword,
@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-} from "firebase/auth";
+} from 'firebase/auth';
 import {
   doc,
   getDoc,
@@ -18,30 +18,32 @@ import {
   updateDoc,
   arrayUnion,
   collection,
-} from "firebase/firestore";
-import toast from "react-hot-toast";
-import { shuffle, userHandle } from "./utils";
-import { getStorage } from "firebase/storage";
+  addDoc,
+} from 'firebase/firestore';
+import toast from 'react-hot-toast';
+import { shuffle, userHandle } from './utils';
+import { getStorage } from 'firebase/storage';
 const firebaseConfig = {
-  apiKey: "AIzaSyDye5cZ1SUj2NU4amRvK9uVxWtm_AVI7rU",
-  authDomain: "w-match-4f47d.firebaseapp.com",
-  projectId: "w-match-4f47d",
-  storageBucket: "w-match-4f47d.appspot.com",
-  messagingSenderId: "30956022016",
-  appId: "1:30956022016:web:527a4c29144642b1726be5",
+  apiKey: 'AIzaSyA79zkWyGOwlIsJeG1z0RW3GA4bk1I4b70',
+  authDomain: 'w-match-11cdf.firebaseapp.com',
+  projectId: 'w-match-11cdf',
+  storageBucket: 'w-match-11cdf.appspot.com',
+  messagingSenderId: '1058663068949',
+  appId: '1:1058663068949:web:ae8a630b7692abc5f0651c',
 };
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+
 const auth = getAuth();
 const db = getFirestore(app);
 export const storage = getStorage(app);
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    const dbUser = await getDoc(doc(db, "users", user.uid));
+    const dbUser = await getDoc(doc(db, 'users', user.uid));
     if (dbUser.data() === undefined || user.type === 2) {
-      const dbUser = await getDoc(doc(db, "companies", user.uid));
+      const dbUser = await getDoc(doc(db, 'companies', user.uid));
       let data = {
         uid: user.uid,
         email: user.email,
@@ -85,12 +87,12 @@ export const companyRegister = async (
   email,
   country,
   addressline1,
-  addressline2 = " ",
+  addressline2 = ' ',
   tnumber,
   password
 ) => {
   try {
-    const user = await getDoc(doc(db, "usernames", username));
+    const user = await getDoc(doc(db, 'usernames', username));
     if (user.exists()) {
       toast.error(` The username "${username}" is being used by someone else.`);
     } else {
@@ -100,7 +102,7 @@ export const companyRegister = async (
         password
       );
       if (response.user) {
-        await setDoc(doc(db, "usernames", username), {
+        await setDoc(doc(db, 'usernames', username), {
           user_id: response.user.uid,
         });
 
@@ -119,11 +121,11 @@ export const companyRegister = async (
           following: [],
           notifications: [],
           posts: [],
-          ProfileUrl: "",
-          BackUrl: "",
+          ProfileUrl: '',
+          BackUrl: '',
         };
         userHandle(data);
-        await setDoc(doc(db, "companies", response.user.uid), {
+        await setDoc(doc(db, 'companies', response.user.uid), {
           email: email,
           type: 2,
           companyname: companyname,
@@ -138,16 +140,16 @@ export const companyRegister = async (
           following: [],
           notifications: [],
           posts: [],
-          ProfileUrl: "",
-          BackUrl: "",
+          ProfileUrl: '',
+          BackUrl: '',
         });
         console.log(response);
       }
       return response.user;
     }
   } catch (error) {
-    toast.error("This E-Mail Is Already Used");
-    throw new Error("E-Mail!");
+    toast.error('This E-Mail Is Already Used');
+    throw new Error('E-Mail!');
   }
 };
 export const userRegister = async (
@@ -157,7 +159,7 @@ export const userRegister = async (
   email,
   country,
   addressline1,
-  addressline2 = " ",
+  addressline2 = ' ',
   tnumber,
   jobfunct,
   longabout,
@@ -165,7 +167,7 @@ export const userRegister = async (
   password
 ) => {
   try {
-    const user = await getDoc(doc(db, "usernames", username));
+    const user = await getDoc(doc(db, 'usernames', username));
     if (user.exists()) {
       toast.error(` The username "${username}" is being used by someone else.`);
     } else {
@@ -175,7 +177,7 @@ export const userRegister = async (
         password
       );
       if (response.user) {
-        await setDoc(doc(db, "usernames", username), {
+        await setDoc(doc(db, 'usernames', username), {
           user_id: response.user.uid,
         });
 
@@ -194,13 +196,13 @@ export const userRegister = async (
           notifications: [],
           following: [],
           wmatchTests: [],
-          ProfileUrl: "",
-          BackUrl: "",
-          CVdoc: "",
+          ProfileUrl: '',
+          BackUrl: '',
+          CVdoc: '',
           longabout: longabout,
         };
         userHandle(data);
-        await setDoc(doc(db, "users", response.user.uid), {
+        await setDoc(doc(db, 'users', response.user.uid), {
           type: 1,
           name: name,
           lastname: lastname,
@@ -215,9 +217,9 @@ export const userRegister = async (
           notifications: [],
           following: [],
           wmatchTests: [],
-          ProfileUrl: "",
-          BackUrl: "",
-          CVdoc: "",
+          ProfileUrl: '',
+          BackUrl: '',
+          CVdoc: '',
           longabout: longabout,
         });
         //console.log(response);
@@ -225,16 +227,16 @@ export const userRegister = async (
       return response.user;
     }
   } catch (error) {
-    toast.error("This E-Mail Is Already Used");
-    throw new Error("E-Mail!");
+    toast.error('This E-Mail Is Already Used');
+    throw new Error('E-Mail!');
   }
 };
 export const createLevel = async (username, level) => {
-  const userID = await getDoc(doc(db, "usernames", username));
+  const userID = await getDoc(doc(db, 'usernames', username));
   const user = userID.data();
-  const dbUser = await getDoc(doc(db, "users", user.user_id));
+  const dbUser = await getDoc(doc(db, 'users', user.user_id));
   if (level.length > 0) {
-    await setDoc(doc(db, "users", user.user_id), {
+    await setDoc(doc(db, 'users', user.user_id), {
       ...dbUser.data(),
       level,
     });
@@ -242,56 +244,56 @@ export const createLevel = async (username, level) => {
 };
 
 export const updateExam = async (userid, test) => {
-  const dbUser = doc(db, "users", userid);
+  const dbUser = doc(db, 'users', userid);
   await updateDoc(dbUser, {
     wmatchTests: arrayUnion(test),
   });
 };
 
 export const getUserInfo = async (uname) => {
-  const username = await getDoc(doc(db, "usernames", uname));
+  const username = await getDoc(doc(db, 'usernames', uname));
   if (username.exists()) {
     const res = (
-      await getDoc(doc(db, "users", username.data().user_id))
+      await getDoc(doc(db, 'users', username.data().user_id))
     ).data();
     if (res === undefined) {
       const res2 = (
-        await getDoc(doc(db, "companies", username.data().user_id))
+        await getDoc(doc(db, 'companies', username.data().user_id))
       ).data();
 
       return res2;
     }
     return res;
   } else {
-    toast.error("User not found!");
-    throw new Error("User not found!");
+    toast.error('User not found!');
+    throw new Error('User not found!');
   }
 };
 
 export const getCompanyInfo = async (uname) => {
-  const username = await getDoc(doc(db, "usernames", uname));
+  const username = await getDoc(doc(db, 'usernames', uname));
   if (username.exists()) {
     const res2 = (
-      await getDoc(doc(db, "companies", username.data().user_id))
+      await getDoc(doc(db, 'companies', username.data().user_id))
     ).data();
     return res2;
   } else {
-    toast.error("User not found!");
-    throw new Error("User not found!");
+    toast.error('User not found!');
+    throw new Error('User not found!');
   }
 };
 
 export const createPost = async (userid, test) => {
-  const dbUser = doc(db, "companies", userid);
+  const dbUser = doc(db, 'companies', userid);
   await updateDoc(dbUser, {
     posts: arrayUnion(test),
   });
 };
 
 export const createComment = async (cusername, test, time) => {
-  const compdataid = await getDoc(doc(db, "usernames", cusername));
+  const compdataid = await getDoc(doc(db, 'usernames', cusername));
   const companydataid = compdataid.data();
-  const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
+  const dbUser = await getDoc(doc(db, 'companies', companydataid.user_id));
   const postlar = dbUser.data().posts;
   for (let i = 0; i < postlar.length; i++) {
     if (postlar[i].time === time) {
@@ -299,7 +301,7 @@ export const createComment = async (cusername, test, time) => {
       break;
     }
   }
-  await setDoc(doc(db, "companies", companydataid.user_id), {
+  await setDoc(doc(db, 'companies', companydataid.user_id), {
     ...dbUser.data(),
     posts: postlar,
   });
@@ -310,9 +312,9 @@ export const createLike = async (username, test, time) => {
   let index = 0;
   let dindex = 0;
 
-  const compdataid = await getDoc(doc(db, "usernames", username));
+  const compdataid = await getDoc(doc(db, 'usernames', username));
   const companydataid = compdataid.data();
-  const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
+  const dbUser = await getDoc(doc(db, 'companies', companydataid.user_id));
   const postlar = await dbUser.data().posts;
 
   for (let i = 0; i < postlar.length; i++) {
@@ -333,7 +335,7 @@ export const createLike = async (username, test, time) => {
   } else {
     postlar[index].likes.push(test);
   }
-  await setDoc(doc(db, "companies", companydataid.user_id), {
+  await setDoc(doc(db, 'companies', companydataid.user_id), {
     ...dbUser.data(),
     posts: postlar,
   });
@@ -341,13 +343,13 @@ export const createLike = async (username, test, time) => {
 
 export const fallowUser = async (companyname, username, test) => {
   let flag = 0;
-  const usedataid = await getDoc(doc(db, "usernames", username));
+  const usedataid = await getDoc(doc(db, 'usernames', username));
   const userdataid = usedataid.data();
-  const compdataid = await getDoc(doc(db, "usernames", companyname));
+  const compdataid = await getDoc(doc(db, 'usernames', companyname));
   const companydataid = compdataid.data();
-  const dbUser = await getDoc(doc(db, "users", userdataid.user_id));
+  const dbUser = await getDoc(doc(db, 'users', userdataid.user_id));
   const dbCompanyUser = await getDoc(
-    doc(db, "companies", companydataid.user_id)
+    doc(db, 'companies', companydataid.user_id)
   );
 
   const followers = dbCompanyUser.data().followers;
@@ -362,7 +364,7 @@ export const fallowUser = async (companyname, username, test) => {
   if (flag !== -1) {
     followers.push(username);
   }
-  await setDoc(doc(db, "companies", companydataid.user_id), {
+  await setDoc(doc(db, 'companies', companydataid.user_id), {
     ...dbCompanyUser.data(),
     followers: followers,
   });
@@ -380,7 +382,7 @@ export const fallowUser = async (companyname, username, test) => {
   if (flag !== -1) {
     following.push(companyname);
   }
-  await setDoc(doc(db, "users", userdataid.user_id), {
+  await setDoc(doc(db, 'users', userdataid.user_id), {
     ...dbUser.data(),
     following: following,
   });
@@ -388,7 +390,7 @@ export const fallowUser = async (companyname, username, test) => {
 
 export const getCompany = async () => {
   let temp = [];
-  const querySnapshot = await getDocs(collection(db, "companies"));
+  const querySnapshot = await getDocs(collection(db, 'companies'));
   querySnapshot.forEach((doc) => {
     temp.push(doc.data());
   });
@@ -397,11 +399,11 @@ export const getCompany = async () => {
 
 export const getRandomCompany = async (username) => {
   let temp = [];
-  const querySnapshot = await getDocs(collection(db, "companies"));
+  const querySnapshot = await getDocs(collection(db, 'companies'));
   querySnapshot.forEach((doc) => {
     let temp2 = doc.data();
     let flag = temp2.followers?.find((element) => element === username);
-    if (typeof flag === "undefined") {
+    if (typeof flag === 'undefined') {
       temp.push(temp2);
     }
   });
@@ -413,18 +415,18 @@ export const getAllPost = async (userInfo) => {
 
   //when company want to see their own posts
   if (type === 2) {
-    const company = await getDoc(doc(db, "companies", uid));
+    const company = await getDoc(doc(db, 'companies', uid));
     nposts = company.data().posts;
   }
 
   //when user wants to see their  posts
   if (type === 1) {
-    const user = await getDoc(doc(db, "users", uid));
+    const user = await getDoc(doc(db, 'users', uid));
     const companyUsername = user.data().following;
     for (let i = 0; i < companyUsername.length; i++) {
-      const companyID = await getDoc(doc(db, "usernames", companyUsername[i]));
+      const companyID = await getDoc(doc(db, 'usernames', companyUsername[i]));
       const company = await getDoc(
-        doc(db, "companies", companyID.data().user_id)
+        doc(db, 'companies', companyID.data().user_id)
       ).then((company) => company);
       company.data().posts.map((post) => nposts.push(post));
     }
@@ -439,9 +441,9 @@ export const getAllPostbyname = async (userInfo) => {
 
   //when company want to see their own posts
   if (type === 2) {
-    const compdataid = await getDoc(doc(db, "usernames", username));
+    const compdataid = await getDoc(doc(db, 'usernames', username));
     const companydataid = compdataid.data();
-    const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
+    const dbUser = await getDoc(doc(db, 'companies', companydataid.user_id));
     nposts = dbUser.data().posts;
   }
 
@@ -451,41 +453,41 @@ export const getAllPostbyname = async (userInfo) => {
 
 export const createCompanyTest = async (companyid, data) => {
   try {
-    const dbUser = await getDoc(doc(db, "companies", companyid));
+    const dbUser = await getDoc(doc(db, 'companies', companyid));
     const posts = dbUser.data().posts;
     posts.push(data);
 
-    await setDoc(doc(db, "companies", companyid), {
+    await setDoc(doc(db, 'companies', companyid), {
       ...dbUser.data(),
       posts: posts,
     });
-    toast.success("The test has been successfully created.");
+    toast.success('The test has been successfully created.');
   } catch (error) {
-    toast.error("Oops! Something went wrong!");
+    toast.error('Oops! Something went wrong!');
   }
 };
 
 //In the future, different operations can be performed according to the above function.
 export const createCompanyJob = async (companyid, data) => {
   try {
-    const dbUser = await getDoc(doc(db, "companies", companyid));
+    const dbUser = await getDoc(doc(db, 'companies', companyid));
     const posts = dbUser.data().posts;
     posts.push(data);
 
-    await setDoc(doc(db, "companies", companyid), {
+    await setDoc(doc(db, 'companies', companyid), {
       ...dbUser.data(),
       posts: posts,
     });
-    toast.success("The job has been successfully created.");
+    toast.success('The job has been successfully created.');
   } catch (error) {
-    toast.error("Oops! Something went wrong!");
+    toast.error('Oops! Something went wrong!');
   }
 };
 
 export const getUserInfobyID = async (userid) => {
-  const res = (await getDoc(doc(db, "users", userid))).data();
+  const res = (await getDoc(doc(db, 'users', userid))).data();
   if (res === undefined) {
-    const res2 = (await getDoc(doc(db, "companies", userid))).data();
+    const res2 = (await getDoc(doc(db, 'companies', userid))).data();
 
     return res2;
   }
@@ -494,69 +496,69 @@ export const getUserInfobyID = async (userid) => {
 
 export const changeCompanyProfilePhoto = async (username, url) => {
   try {
-    const compdataid = await getDoc(doc(db, "usernames", username));
+    const compdataid = await getDoc(doc(db, 'usernames', username));
     const companydataid = compdataid.data();
-    const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
-    await setDoc(doc(db, "companies", companydataid.user_id), {
+    const dbUser = await getDoc(doc(db, 'companies', companydataid.user_id));
+    await setDoc(doc(db, 'companies', companydataid.user_id), {
       ...dbUser.data(),
       ProfileUrl: url,
     });
-    toast.success("Profile photo has been successfully changed.");
+    toast.success('Profile photo has been successfully changed.');
   } catch (error) {
-    toast.error("Oops! Something went wrong!");
+    toast.error('Oops! Something went wrong!');
   }
 };
 
 export const changeUserProfilePhoto = async (username, url) => {
   try {
-    const userdataid = await getDoc(doc(db, "usernames", username));
+    const userdataid = await getDoc(doc(db, 'usernames', username));
     const ruserdataid = userdataid.data();
-    const dbUser = await getDoc(doc(db, "users", ruserdataid.user_id));
-    await setDoc(doc(db, "users", ruserdataid.user_id), {
+    const dbUser = await getDoc(doc(db, 'users', ruserdataid.user_id));
+    await setDoc(doc(db, 'users', ruserdataid.user_id), {
       ...dbUser.data(),
       ProfileUrl: url,
     });
-    toast.success("Profile photo has been successfully changed.");
+    toast.success('Profile photo has been successfully changed.');
   } catch (error) {
-    toast.error("Oops! Something went wrong!");
+    toast.error('Oops! Something went wrong!');
   }
 };
 
 export const changeCompanyBackProfilePhoto = async (username, url) => {
-  const compdataid = await getDoc(doc(db, "usernames", username));
+  const compdataid = await getDoc(doc(db, 'usernames', username));
   const companydataid = compdataid.data();
-  const dbUser = await getDoc(doc(db, "companies", companydataid.user_id));
-  await setDoc(doc(db, "companies", companydataid.user_id), {
+  const dbUser = await getDoc(doc(db, 'companies', companydataid.user_id));
+  await setDoc(doc(db, 'companies', companydataid.user_id), {
     ...dbUser.data(),
     BackUrl: url,
   });
 };
 
 export const changeUserBackProfilePhoto = async (username, url) => {
-  const userdataid = await getDoc(doc(db, "usernames", username));
+  const userdataid = await getDoc(doc(db, 'usernames', username));
   const ruserdataid = userdataid.data();
-  const dbUser = await getDoc(doc(db, "users", ruserdataid.user_id));
-  await setDoc(doc(db, "users", ruserdataid.user_id), {
+  const dbUser = await getDoc(doc(db, 'users', ruserdataid.user_id));
+  await setDoc(doc(db, 'users', ruserdataid.user_id), {
     ...dbUser.data(),
     BackUrl: url,
   });
 };
 
 export const changeUserCV = async (username, url) => {
-  const userdataid = await getDoc(doc(db, "usernames", username));
+  const userdataid = await getDoc(doc(db, 'usernames', username));
   const ruserdataid = userdataid.data();
-  const dbUser = await getDoc(doc(db, "users", ruserdataid.user_id));
-  await setDoc(doc(db, "users", ruserdataid.user_id), {
+  const dbUser = await getDoc(doc(db, 'users', ruserdataid.user_id));
+  await setDoc(doc(db, 'users', ruserdataid.user_id), {
     ...dbUser.data(),
     CVdoc: url,
   });
 };
 
 export const getCompanyTest = async (companyname, testid) => {
-  const compdataid = await getDoc(doc(db, "usernames", companyname));
+  const compdataid = await getDoc(doc(db, 'usernames', companyname));
   const companydataid = compdataid.data();
   const dbCompanyUser = await getDoc(
-    doc(db, "companies", companydataid.user_id)
+    doc(db, 'companies', companydataid.user_id)
   );
 
   const posts = dbCompanyUser.data().posts;
@@ -577,10 +579,10 @@ export const updateCompanyTestScore = async (
     userid: userid,
     score: score,
   };
-  const compdataid = await getDoc(doc(db, "usernames", companyname));
+  const compdataid = await getDoc(doc(db, 'usernames', companyname));
   const companydataid = compdataid.data();
   const dbCompanyUser = await getDoc(
-    doc(db, "companies", companydataid.user_id)
+    doc(db, 'companies', companydataid.user_id)
   );
 
   const posts = dbCompanyUser.data().posts;
@@ -591,17 +593,17 @@ export const updateCompanyTestScore = async (
     }
   }
 
-  await setDoc(doc(db, "companies", companydataid.user_id), {
+  await setDoc(doc(db, 'companies', companydataid.user_id), {
     ...dbCompanyUser.data(),
     posts: posts,
   });
 };
 
 export const applyJob = async (companyname, userid, time) => {
-  const compdataid = await getDoc(doc(db, "usernames", companyname));
+  const compdataid = await getDoc(doc(db, 'usernames', companyname));
   const companydataid = compdataid.data();
   const dbCompanyUser = await getDoc(
-    doc(db, "companies", companydataid.user_id)
+    doc(db, 'companies', companydataid.user_id)
   );
 
   const posts = dbCompanyUser.data().posts;
@@ -612,7 +614,7 @@ export const applyJob = async (companyname, userid, time) => {
       break;
     }
   }
-  await setDoc(doc(db, "companies", companydataid.user_id), {
+  await setDoc(doc(db, 'companies', companydataid.user_id), {
     ...dbCompanyUser.data(),
     posts: posts,
   });
@@ -626,11 +628,11 @@ export const userEditInformation = async (
   address2,
   username
 ) => {
-  const userid = await getDoc(doc(db, "usernames", username));
+  const userid = await getDoc(doc(db, 'usernames', username));
   const userdata = userid.data();
-  const dbUser = await getDoc(doc(db, "users", userdata.user_id));
+  const dbUser = await getDoc(doc(db, 'users', userdata.user_id));
 
-  await setDoc(doc(db, "users", userdata.user_id), {
+  await setDoc(doc(db, 'users', userdata.user_id), {
     ...dbUser.data(),
     jobfunct: jobfunct,
     longabout: longabout,
@@ -649,10 +651,10 @@ export const companyEditInformation = async (
   address2,
   username
 ) => {
-  const userid = await getDoc(doc(db, "usernames", username));
+  const userid = await getDoc(doc(db, 'usernames', username));
   const userdata = userid.data();
-  const dbUser = await getDoc(doc(db, "companies", userdata.user_id));
-  await setDoc(doc(db, "companies", userdata.user_id), {
+  const dbUser = await getDoc(doc(db, 'companies', userdata.user_id));
+  await setDoc(doc(db, 'companies', userdata.user_id), {
     ...dbUser.data(),
     companyname: companyname,
     about: about,
@@ -672,23 +674,9 @@ export const searchCompany = async (companydata, search) => {
   return temp;
 };
 
-export const fetchQuestions = async () => {
-  let questions = [];
-  try {
-    const docsSnap = await getDocs(collection(db, "questions"));
-    if (docsSnap.docs.length > 0) {
-      docsSnap.forEach(async (doc) => {
-        const question = await getDoc(doc(db, "questions", doc.id));
-        questions.push(question.data());
-      });
-    }
-    return questions;
-  } catch (error) {}
-};
-
 export const getRandomCompanyJobs = async (userid) => {
   let temp = [];
-  const querySnapshot = await getDocs(collection(db, "companies"));
+  const querySnapshot = await getDocs(collection(db, 'companies'));
   querySnapshot.forEach((doc) => {
     let temp2 = doc.data();
     for (let i = 0; i < temp2.posts?.length; i++) {
@@ -696,7 +684,7 @@ export const getRandomCompanyJobs = async (userid) => {
         let flag = temp2.posts[i].candidates.find(
           (element) => element === userid
         );
-        if (typeof flag === "undefined") {
+        if (typeof flag === 'undefined') {
           temp.push(temp2.posts[i]);
         }
       }
@@ -707,19 +695,19 @@ export const getRandomCompanyJobs = async (userid) => {
 };
 
 export const deletePostdata = async (username, time) => {
-  const compdataid = await getDoc(doc(db, "usernames", username));
+  const compdataid = await getDoc(doc(db, 'usernames', username));
   const companydataid = compdataid.data();
   const dbCompanyUser = await getDoc(
-    doc(db, "companies", companydataid.user_id)
+    doc(db, 'companies', companydataid.user_id)
   );
 
   const posts = dbCompanyUser.data().posts;
 
   const result = posts.filter((element) => element.time !== time);
 
-  toast.success("The post is deleted!");
+  toast.success('The post is deleted!');
 
-  await setDoc(doc(db, "companies", companydataid.user_id), {
+  await setDoc(doc(db, 'companies', companydataid.user_id), {
     ...dbCompanyUser.data(),
     posts: result,
   });
@@ -729,10 +717,10 @@ export const deleteCommentdata = async (username, ptime, ctime) => {
   let foundPost = null;
   const tempdata = [];
   try {
-    const compdataid = await getDoc(doc(db, "usernames", username));
+    const compdataid = await getDoc(doc(db, 'usernames', username));
     const companydataid = compdataid.data();
     const dbCompanyUser = await getDoc(
-      doc(db, "companies", companydataid.user_id)
+      doc(db, 'companies', companydataid.user_id)
     );
 
     console.log(username, ptime, ctime);
@@ -757,26 +745,53 @@ export const deleteCommentdata = async (username, ptime, ctime) => {
     posts[index].comments = tempdata;
     console.log(tempdata);
 
-    await setDoc(doc(db, "companies", companydataid.user_id), {
+    await setDoc(doc(db, 'companies', companydataid.user_id), {
       ...dbCompanyUser.data(),
       posts: posts,
     });
-    toast.success("The comment is deleted!");
+    toast.success('The comment is deleted!');
   } catch (error) {
-    toast.error("Oops! Something went wrong!");
+    toast.error('Oops! Something went wrong!');
   }
 };
 
 export const forgetPassword = async (email) => {
   try {
     return await sendPasswordResetEmail(auth, email).then((data) => {
-      toast.success("Password reset email sent!");
+      toast.success('Password reset email sent!');
     });
   } catch (err) {
-    if (err.code === "auth/user-not-found") {
-      toast.error("User not found!");
+    if (err.code === 'auth/user-not-found') {
+      toast.error('User not found!');
     } else {
-      toast.error("Missing Email!");
+      toast.error('Missing Email!');
     }
+  }
+};
+
+/*export const fetchQuestions = async () => {
+  const questionsCollection = collection(db, 'questions');
+  const questionsSnapshot = await getDocs(questionsCollection);
+  const formattedQuestions = questionsSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+  return formattedQuestions;
+};
+*/
+export const addQuestionsToFirestore = async (questions) => {
+  // const getQuestions = await fetchQuestions();
+  try {
+    const questionsCollection = collection(db, 'questions');
+    for (let i = 0; i < questions.length; i++) {
+      const questionData = questions[i];
+
+      await addDoc(questionsCollection, questionData);
+    }
+
+    return { success: true, questions };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: error.message };
   }
 };

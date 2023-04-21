@@ -1,110 +1,562 @@
 [
   {
-    "question": "What is the scientific name of a butterfly?",
-    "a": "Apis",
-    "b": "Coleoptera",
-    "c": "Formicidae",
-    "d": "Rhopalocera",
-    "correct": "d",
-   "level":"hard"
+    "section": "HTML",
+    "questions": [
+      {
+        "question": "What does HTML stand for?",
+        "a": "HyperText Markup Language",
+        "b": "Hyper Technical Markup Language",
+        "c": "HyperText Material Language",
+        "d": "Hyper Technical Material Language",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "Which HTML tag is used to define a hyperlink?",
+        "a": "<link>",
+        "b": "<a>",
+        "c": "<href>",
+        "d": "<url>",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "Which tag is used to define a paragraph in HTML?",
+        "a": "<paragraph>",
+        "b": "<p>",
+        "c": "<div>",
+        "d": "<text>",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "What is the correct HTML element for inserting a line break?",
+        "a": "<break>",
+        "b": "<lb>",
+        "c": "<br>",
+        "d": "<newline>",
+        "correct": "c",
+        "level": "easy"
+      },
+      {
+        "question": "Which of these elements are all table elements?",
+        "a": "<table>, <thead>, <tbody>, <tfoot>, <tr>, <th>, <td>",
+        "b": "<table>, <head>, <body>, <tfoot>, <row>, <header>, <data>",
+        "c": "<table>, <header>, <body>, <footer>, <tr>, <th>, <td>",
+        "d": "<table>, <caption>, <colgroup>, <col>, <tr>, <th>, <td>",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What does the 'alt' attribute in an <img> tag specify?",
+        "a": "The source URL of the image",
+        "b": "The width of the image in pixels",
+        "c": "The height of the image in pixels",
+        "d": "A description of the image for accessibility purposes",
+        "correct": "d",
+        "level": "normal"
+      },
+      {
+        "question": "Which HTML element is used to specify a header for a document or section?",
+        "a": "<header>",
+        "b": "<head>",
+        "c": "<h1>",
+        "d": "<section>",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the correct HTML for making a drop-down list?",
+        "a": "<list><option>Item 1</option><option>Item 2</option></list>",
+        "b": "<select><option>Item 1</option><option>Item 2</option></select>",
+        "c": "<dropdown><option>Item 1</option><option>Item 2</option></dropdown>",
+        "d": "<menu><option>Item 1</option><option>Item 2</option></menu>",
+        "correct": "b",
+        "level": "normal"
+      },
+      {
+        "question": "Which HTML attribute specifies an alternate text for an image if the image cannot be displayed?",
+        "a": "src",
+        "b": "title",
+        "c": "alt",
+        "d": "tooltip",
+        "correct": "c",
+        "level": "normal"
+      },
+      {
+        "question": "Which input type defines a slider control?",
+        "a": "range",
+        "b": "slider",
+        "c": "scroll",
+        "d": "control",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the purpose of the 'data-*' attribute in HTML?",
+        "a": "To store custom data private to the page or application",
+        "b": "To define the type of data stored in an element",
+        "c": "To display additional information about an element",
+        "d": "To define default values for input elements",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "Which HTML element is used to provide a caption for a figure?",
+        "a": "<caption>",
+        "b": "<figcaption>",
+        "c": "<legend>",
+        "d": "<label>",
+        "correct": "b",
+        "level": "difficult"
+      },
+      {
+        "question": "Which attribute is used to define the character encoding for an HTML document?",
+        "a": "encoding",
+        "b": "charset",
+        "c": "character-set",
+        "d": "language",
+        "correct": "b",
+        "level": "difficult"
+      },
+      {
+        "question": "Which attribute is used with the <ol> element to reverse the numbering order of the list?",
+        "a": "order",
+        "b": "reversed",
+        "c": "start",
+        "d": "count",
+        "correct": "b",
+        "level": "difficult"
+      },
+      {
+        "question": "Which of the following HTML elements can be used as a container for navigation links?",
+        "a": "<nav>",
+        "b": "<navigate>",
+        "c": "<navbar>",
+        "d": "<links>",
+        "correct": "a",
+        "level": "difficult"
+      }
+    ]
   },
   {
-    "question": "How hot is the surface of the sun?",
-    "a": "1,233 K",
-    "b": "5,778 K",
-    "c": "12,130 K",
-    "d": "101,300 K",
-    "correct": "b",
-    "level":"easy"
+    "section": "CSS",
+    "questions": [
+      {
+        "question": "What does CSS stand for?",
+        "a": "Computer Style Sheets",
+        "b": "Cascading Style Sheets",
+        "c": "Creative Style Sheets",
+        "d": "Colorful Style Sheets",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "Which HTML attribute is used to define inline styles?",
+        "a": "style",
+        "b": "font",
+        "c": "styles",
+        "d": "color",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "Which property is used to change the font of an element?",
+        "a": "font-style",
+        "b": "font-family",
+        "c": "text-style",
+        "d": "text-family",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "How do you add a background color for all <h1> elements?",
+        "a": "h1.all {background-color: #FFFFFF;}",
+        "b": "h1 {background-color: #FFFFFF;}",
+        "c": "all.h1 {background-color: #FFFFFF;}",
+        "d": "h1.background {color: #FFFFFF;}",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "Which CSS property controls the text size?",
+        "a": "text-size",
+        "b": "font-size",
+        "c": "text-style",
+        "d": "font-style",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "How do you select an element with the ID 'demo'?",
+        "a": ".demo",
+        "b": "demo",
+        "c": "#demo",
+        "d": "*demo",
+        "correct": "c",
+        "level": "normal"
+      },
+      {
+        "question": "How do you select elements with class name 'test'?",
+        "a": "#test",
+        "b": "test",
+        "c": ".test",
+        "d": "*test",
+        "correct": "c",
+        "level": "normal"
+      },
+      {
+        "question": "What is the default value of the position property?",
+        "a": "relative",
+        "b": "absolute",
+        "c": "fixed",
+        "d": "static",
+        "correct": "d",
+        "level": "normal"
+      },
+      {
+        "question": "Which property is used to set the spacing in between lines of text?",
+        "a": "line-spacing",
+        "b": "line-height",
+        "c": "text-spacing",
+        "d": "text-height",
+        "correct": "b",
+        "level": "normal"
+      },
+      {
+        "question": "Which property is used to set the stack order of an element?",
+        "a": "z-axis",
+        "b": "x-index",
+        "c": "z-index",
+        "d": "stack-order",
+        "correct": "c",
+        "level": "normal"
+      },
+      {
+        "question": "Which pseudo-class targets only the first child of an element?",
+        "a": ":first-child",
+        "b": ":last-child",
+        "c": ":nth-child",
+        "d": ":only-child",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "Which property specifies how an element should be rendered when it is too big for its container?",
+        "a": "overflow",
+        "b": "clip",
+        "c": "size",
+        "d": "resize",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "Which of these is NOT a valid value for the 'display' property?",
+        "a": "block",
+        "b": "inline",
+        "c": "run-in",
+        "d": "visible",
+        "correct": "d",
+        "level": "difficult"
+      },
+      {
+        "question": "Which CSS property specifies the transparency of an element?",
+        "a": "filter",
+        "b": "visibility",
+        "c": "transparency",
+        "d": "opacity",
+        "correct": "d",
+        "level": "difficult"
+      },
+      {
+        "question": "What does the 'vmin' unit represent?",
+        "a": "1% of viewport width",
+        "b": "1% of viewport height",
+        "c": "The smallest value between viewport width and height",
+        "d": "The largest value between viewport width and height",
+        "correct": "c",
+        "level": "difficult"
+      }
+    ]
   },
   {
-    "question": "Who are the actors in The Internship?",
-    "a": "Ben Stiller, Jonah Hill",
-    "b": "Courteney Cox, Matt LeBlanc",
-    "c": "Kaley Cuoco, Jim Parsons",
-    "d": "Vince Vaughn, Owen Wilson",
-    "correct": "d",
-    "level":"normal"
+    "section": "JavaScript",
+    "questions": [
+      {
+        "question": "What keyword is used to declare a variable in JavaScript?",
+        "a": "var",
+        "b": "let",
+        "c": "const",
+        "d": "set",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the result of the expression '2' + 2 in JavaScript?",
+        "a": "22",
+        "b": "4",
+        "c": "NaN",
+        "d": "undefined",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the result of the expression 'typeof []' in JavaScript?",
+        "a": "'array'",
+        "b": "'object'",
+        "c": "'undefined'",
+        "d": "'string'",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "What is the result of the expression '3 < 2' in JavaScript?",
+        "a": "true",
+        "b": "false",
+        "c": "undefined",
+        "d": "NaN",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "What is an example of a comparison operator in JavaScript?",
+        "a": "&&",
+        "b": "||",
+        "c": "==",
+        "d": "++",
+        "correct": "c",
+        "level": "easy"
+      },
+      {
+        "question": "What is the difference between '==' and '===' in JavaScript?",
+        "a": "'==' checks for value equality, while '===' checks for value and type equality",
+        "b": "'===' checks for value equality, while '==' checks for value and type equality",
+        "c": "'==' and '===' are interchangeable and have the same behavior",
+        "d": "There is no difference between '==' and '==='",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the difference between 'let' and 'var' in JavaScript?",
+        "a": "'let' is block-scoped, while 'var' is function-scoped",
+        "b": "'var' is block-scoped, while 'let' is function-scoped",
+        "c": "'let' and 'var' are interchangeable and have the same behavior",
+        "d": "There is no difference between 'let' and 'var'",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the result of the expression 'typeof null' in JavaScript?",
+        "a": "'object'",
+        "b": "'null'",
+        "c": "'undefined'",
+        "d": "'boolean'",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is a closure in JavaScript?",
+        "a": "A function that has access to variables in its outer scope",
+        "b": "A type of loop that repeats a block of code a certain number of times",
+        "c": "A method for converting strings to numbers in JavaScript",
+        "d": "A way to declare variables without a specific type in JavaScript",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the 'this' keyword in JavaScript?",
+        "a": "A reference to the current function or object",
+        "b": "A keyword that declares a new variable",
+        "c": "A keyword that specifies the access level of a property or method",
+        "d": "A way to declare a class in JavaScript",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is a generator function in JavaScript?",
+        "a": "A function that returns a sequence of values",
+        "b": "A function that creates new objects based on a prototype",
+        "c": "A function that can pause and resume its execution",
+        "d": "A function that converts data types in JavaScript",
+        "correct": "c",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the difference between 'null' and 'undefined' in JavaScript?",
+        "a": "'null' is a value that represents the intentional absence of any object value, while 'undefined' is a value that represents an uninitialized, non-existent, or undefined value",
+        "b": "'undefined' is a value that represents the intentional absence of any object value, while 'null' is a value that represents an uninitialized, non-existent, or undefined value",
+        "c": "'null' and 'undefined' are interchangeable and have the same behavior",
+        "d": "There is no difference between 'null' and 'undefined'",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is a pure function in JavaScript?",
+        "a": "A function that has no side effects and always returns the same output for the same input",
+        "b": "A function that modifies its input arguments",
+        "c": "A function that can access variables outside its scope",
+        "d": "A function that can cause side effects outside its scope",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the event loop in JavaScript?",
+        "a": "A queue that manages the order in which functions are executed in JavaScript",
+        "b": "A method for handling errors in JavaScript",
+        "c": "A way to declare custom events in JavaScript",
+        "d": "A method for creating animations in JavaScript",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the difference between 'call' and 'apply' in JavaScript?",
+        "a": "'call' and 'apply' are interchangeable and have the same behavior",
+        "b": "'call' is used to invoke a function with a given 'this' value and arguments provided as an array, while 'apply' is used to invoke a function with a given 'this' value and arguments provided individually",
+        "c": "'apply' is used to invoke a function with a given 'this' value and arguments provided as an array, while 'call' is used to invoke a function with a given 'this' value and arguments provided individually",
+        "d": "There is no difference between 'call' and 'apply'",
+        "correct": "b",
+        "level": "difficult"
+      }
+    ]
   },
   {
-    "question": "What is the capital of Spain?",
-    "a": "Berlin",
-    "b": "Buenos Aires",
-    "c": "Madrid",
-    "d": "San Juan",
-    "correct": "c",
-    "level":"hard"
-  },
-  {
-    "question": "What are the school colors of the University of Texas at Austin?",
-    "a": "Black, Red",
-    "b": "Blue, Orange",
-    "c": "White, Burnt Orange",
-    "d": "White, Old gold, Gold",
-    "correct": "c",
-    "level":"easy"
-  },
-  {
-    "question": "What is 70 degrees Fahrenheit in Celsius?",
-    "a": "18.8889",
-    "b": "20",
-    "c": "21.1111",
-    "d": "158",
-    "correct": "c",
-    "level":"normal"
-  },
-  {
-    "question": "When was Mahatma Gandhi born?",
-    "a": "October 2, 1869",
-    "b": "December 15, 1872",
-    "c": "July 18, 1918",
-    "d": "January 15, 1929",
-    "correct": "a",
-    "level":"hard"
-  },
-  {
-    "question": "How far is the moon from Earth?",
-    "a": "7,918 miles (12,742 km)",
-    "b": "86,881 miles (139,822 km)",
-    "c": "238,400 miles (384,400 km)",
-    "d": "35,980,000 miles (57,910,000 km)",
-    "correct": "c",
-    "level":"easy"
-  },
-  {
-    "question": "What is 65 times 52?",
-    "a": "117",
-    "b": "3120",
-    "c": "3380",
-    "d": "3520",
-    "correct": "c",
-    "level":"normal"
-  },
-  {
-    "question": "How tall is Mount Everest?",
-    "a": "6,683 ft (2,037 m)",
-    "b": "7,918 ft (2,413 m)",
-    "c": "19,341 ft (5,895 m)",
-    "d": "29,029 ft (8,847 m)",
-    "correct": "d",
-    "level":"hard"
-  },
-  {
-    "question": "When did The Avengers come out?",
-    "a": "May 2, 2008",
-    "b": "May 4, 2012",
-    "c": "May 3, 2013",
-    "d": "April 4, 2014",
-    "correct": "b",
-    "level":"easy"
-  },
-  {
-    "question": "What is 48,879 in hexidecimal?",
-    "a": "0x18C1",
-    "b": "0xBEEF",
-    "c": "0xDEAD",
-    "d": "0x12D591",
-    "correct": "b",
-    "level":"normal"
+    "section": "React",
+    "questions": [
+      {
+        "question": "What is JSX in React?",
+        "a": "A syntax extension for JavaScript that allows you to write HTML-like code in your JavaScript",
+        "b": "A JavaScript library for building user interfaces",
+        "c": "A tool for compiling React code to browser-readable JavaScript",
+        "d": "A module bundler for React applications",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is a component in React?",
+        "a": "A small piece of reusable UI that can be composed with other components to build complex interfaces",
+        "b": "A class or function that returns HTML-like code to be rendered on the page",
+        "c": "A file that contains all the JavaScript and CSS needed for a single feature in your application",
+        "d": "A database table that stores information about your application's users",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the state in React?",
+        "a": "An object that contains data that can be used by a component or its children",
+        "b": "A list of props passed down from a component's parent",
+        "c": "A function that takes input and returns a UI element",
+        "d": "An attribute that is used to style a component",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the virtual DOM in React?",
+        "a": "A lightweight representation of the actual DOM that React uses to optimize updates and speed up rendering",
+        "b": "A way to write CSS that is scoped to a single component in your React application",
+        "c": "A way to create dynamic forms in React without writing any JavaScript",
+        "d": "A tool for creating animations in React applications",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the difference between 'props' and 'state' in React?",
+        "a": "'props' is used to pass data down from a parent component to a child component, while 'state' is used to manage internal component data",
+        "b": "'state' is used to pass data down from a parent component to a child component, while 'props' is used to manage internal component data",
+        "c": "'props' and 'state' are interchangeable and have the same behavior",
+        "d": "There is no difference between 'props' and 'state'",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the 'key' prop in React and why is it important?",
+        "a": "A special prop that is used to assign a unique identifier to a component when it is rendered in a list, to help React efficiently update the DOM when the list changes",
+        "b": "A way to pass down functions from a parent component to a child component",
+        "c": "A prop that is used to specify the CSS class to be applied to a component",
+        "d": "A way to create reusable styles in React applications",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is a higher-order component (HOC) in React?",
+        "a": "A function that takes a component and returns a new component with additional functionality",
+        "b": "A component that is used to wrap other components and provide them with common functionality or state",
+        "c": "A way to create dynamic forms in React without writing any JavaScript",
+        "d": "A tool for creating animations in React applications",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the context API in React and when should you use it?",
+        "a": "A way to share data between components without passing it down through props, useful for data that is needed by many components at different levels of the component tree",
+        "b": "A way to declare custom events in React that can be used to communicate between components",
+        "c": "A tool for managing asynchronous data fetching in React applications",
+        "d": "A way to optimize the performance of React applications by reducing the number of re-renders",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is Redux and how does it work with React?",
+        "a": "A state management library for JavaScript applications, used to manage complex or shared state in React applications",
+        "b": "A testing framework for React applications, used to write unit tests for components",
+        "c": "A tool for creating server-side rendering (SSR) of React applications",
+        "d": "A way to create reusable components in React applications",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is server-side rendering (SSR) in React and why is it important?",
+        "a": "A technique for rendering React components on the server, so that the initial page load is faster and more SEO-friendly",
+        "b": "A way to optimize the performance of React applications by reducing the number of re-renders",
+        "c": "A way to share data between components without passing it down through props",
+        "d": "A tool for managing asynchronous data fetching in React applications",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the difference between server-side rendering (SSR) and client-side rendering (CSR) in React?",
+        "a": "SSR renders components on the server and sends HTML to the browser, while CSR renders components in the browser using JavaScript",
+        "b": "SSR is faster than CSR for complex applications, while CSR is faster for simple applications",
+        "c": "SSR is more SEO-friendly than CSR, while CSR is better for dynamic content",
+        "d": "There is no difference between SSR and CSR",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the difference between a controlled component and an uncontrolled component in React?",
+        "a": "A controlled component is a component where the state is managed by React, while an uncontrolled component is a component where the state is managed by the DOM",
+        "b": "A controlled component is a component that requires user input to update its state, while an uncontrolled component is a component that updates its state automatically",
+        "c": "A controlled component is a component that is managed by Redux, while an uncontrolled component is a component that is not connected to Redux",
+        "d": "There is no difference between a controlled component and an uncontrolled component",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the render prop pattern in React and how does it work?",
+        "a": "A pattern where a component passes a function as a prop to another component, which then calls the function and returns its result as part of its own rendering",
+        "b": "A pattern where a component passes its own rendering logic as a prop to another component, which then uses that logic to render itself",
+        "c": "A pattern where a component renders multiple children using a loop or map function, passing down a prop to each child",
+        "d": "A pattern where a component renders a list of items using a separate component for each item, passing down a prop to each component",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the difference between shallow rendering and full rendering in React testing?",
+        "a": "Shallow rendering only renders a component and its direct children, while full rendering renders the entire component tree",
+        "b": "Shallow rendering is faster than full rendering, but less accurate",
+        "c": "Full rendering is useful for testing complex components, while shallow rendering is useful for testing simple components",
+        "d": "There is no difference between shallow rendering and full rendering",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the React Fiber architecture and why was it developed?",
+        "a": "A new reconciliation algorithm and rendering engine for React, developed to improve the performance and flexibility of the framework",
+        "b": "A tool for generating documentation for React applications, using the JSDoc syntax",
+        "c": "A library for writing unit tests for React components, developed by Facebook",
+        "d": "A set of best practices for React development, developed by the React team at Facebook",
+        "correct": "a",
+        "level": "difficult"
+      }
+    ]
   }
 ]
