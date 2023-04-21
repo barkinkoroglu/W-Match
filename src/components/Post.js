@@ -92,29 +92,46 @@ function Post(prop) {
               <h3 className="text-xs">{prop.post.email}</h3>
             </div>
           </div>
-          <div className="relative">
-            <h1 className="text-base">
-              {isTest
-                ? `Test Name: ${prop.post.information}`
-                : prop.post.information}
+          <div className="relative flex flex-col gap-2">
+            <h1 className="text-base ">
+              {isTest ? `${prop.post.testname}` : prop.post.information}
             </h1>
-
-            <h1 className="text-sm">
-              Test Time : <span className="font-medium">{prop.post.qtime}</span>{" "}
-            </h1>
+            <p className="text-sm">{prop.post.information}</p>
+            <div className="flex justify-between">
+              <h1 className="text-xs">
+                Test Time :{" "}
+                <span className="font-medium">{prop.post.qtime}</span>{" "}
+              </h1>
+              <h1 className="text-xs">
+                Number of questions :{" "}
+                <span className="font-medium">
+                  {prop.post.questions.length}
+                </span>{" "}
+              </h1>
+            </div>
             <a
-              className="absolute right-0 bottom-0"
+              className="flex justify-end"
               href={`test/${prop.post.username}/${prop.post.id}`}
             >
               {prop.user?.type === 1 &&
                 prop.post.scores?.find(
                   (element) => element.userid === prop.user.uid
                 ) === undefined && (
-                  <button className="bg-slate-200 p-1 rounded-lg">
+                  <button className="cursor-pointer text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200">
                     Take the exam.
                   </button>
                 )}
             </a>
+            {prop.post.username === prop.user.username && (
+              <div className="flex justify-end">
+                <button
+                  onClick={() => setshowtresults(true)}
+                  className=" cursor-pointer text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200 "
+                >
+                  Show Results
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <h1
@@ -132,14 +149,6 @@ function Post(prop) {
           >
             <CloseIcon />
           </div>
-        )}
-        {prop.post.username === prop.user.username && (
-          <button
-            onClick={() => setshowtresults(true)}
-            className="absolute right-2 bottom-2 cursor-pointer text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200 "
-          >
-            Show Results
-          </button>
         )}
 
         {showtresults && prop.post.scores.sort((a, b) => b.score - a.score) && (
