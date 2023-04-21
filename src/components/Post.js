@@ -6,7 +6,7 @@ import Like from "./Like";
 import TestResultElement from "./TestResultElement";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSelector } from "react-redux";
-
+import AddIcon from "@mui/icons-material/Add";
 import {
   createComment,
   createLike,
@@ -25,7 +25,24 @@ function Post(prop) {
   const [commentValue, setCommentValue] = useState("");
   const isTest =
     (prop.post.questions && prop.post.questions.length > 0) || false;
+  const [commentsToShow, setCommentsToShow] = useState(3);
+  const [flagshowmore, setFlagshowmore] = useState(true);
+
+  const handleShowMoreComments = () => {
+    setCommentsToShow((prevValue) => prevValue + 3);
+  };
+  const commentsToRender = prop.post.comments?.slice(0, commentsToShow);
+
   const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (prop.post.comments?.length > commentsToShow) {
+      setFlagshowmore(true);
+    } else {
+      setFlagshowmore(false);
+    }
+  }, [commentsToShow, prop.post.comments?.length]);
+
   const findPassedDay = () => {
     const al = Date.now();
     const temp = al / 86400000;
@@ -339,7 +356,7 @@ function Post(prop) {
             </div>
             <div>
               {/* Bu kisim fallow sistemi gelidiginde güncellenecek */}
-              {prop.post.comments.map((comm, index) => {
+              {commentsToRender.map((comm, index) => {
                 return (
                   <div>
                     <Comment
@@ -353,6 +370,17 @@ function Post(prop) {
                 );
               })}
             </div>
+            {flagshowmore && prop.post.comments.length > 3 && (
+              <div className="flex justify-center hover:text-blue-300">
+                <AddIcon />
+                <button
+                  onClick={() => handleShowMoreComments()}
+                  className="text-sm"
+                >
+                  Show More
+                </button>
+              </div>
+            )}
           </div>
         )}
         {showlikes && (
