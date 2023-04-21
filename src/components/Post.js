@@ -17,7 +17,6 @@ import Comment from "./Comment";
 function Post(prop) {
   const [data, setData] = useState(null);
   const [datetime, setDatetime] = useState(null);
-
   // console.log("DATA PROBLARI", prop.post);
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
@@ -31,7 +30,6 @@ function Post(prop) {
     const temp = al / 86400000;
     const temp2 = prop.post.time / 86400000;
     const diff = Math.floor(temp - temp2);
-
     const dayDiff = diff;
     if (dayDiff !== 0) {
       setDatetime(`${dayDiff}d`);
@@ -52,7 +50,7 @@ function Post(prop) {
   useEffect(() => {
     getUserInfo(prop.post.username).then((temp) => setData(temp));
     findPassedDay();
-  }, [prop.post.username]);
+  }, [prop.post]);
 
   const deletePost = async () => {
     await deletePostdata(prop.post.username, prop.post.time).then(async () => {

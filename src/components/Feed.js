@@ -17,7 +17,7 @@ function Feed() {
   const user = useSelector((state) => state.auth.user);
   const groupSize = 5;
   const [visiblePostCount, setVisiblePostCount] = useState(5);
-
+  const [flag, setFlag] = useState(false);
   const getVisiblePosts = (posts, visiblePostCount) => {
     return posts.slice(0, visiblePostCount);
   };
@@ -51,7 +51,8 @@ function Feed() {
         .then((data) => setAllPost(data))
         .catch((error) => console.log("ERROR", error));
     })();
-  }, [user, inputValue]);
+  }, [user, flag]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -68,6 +69,7 @@ function Feed() {
       };
       console.log(att);
       await createPost(user.uid, att);
+      setFlag(!flag);
       setInputValue("");
     }
   };
