@@ -117,19 +117,25 @@ function Post(prop) {
                 prop.post.scores?.find(
                   (element) => element.userid === prop.user.uid
                 ) === undefined && (
-                  <button className="cursor-pointer text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200">
-                    Take the exam.
-                  </button>
+                  <div className="border-t-2 w-full">
+                    <div className="flex justify-end">
+                      <button className="cursor-pointer mt-2 text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200">
+                        Take the exam.
+                      </button>
+                    </div>
+                  </div>
                 )}
             </a>
             {prop.post.username === prop.user.username && (
-              <div className="flex justify-end">
-                <button
-                  onClick={() => setshowtresults(true)}
-                  className=" cursor-pointer text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200 "
-                >
-                  Show Results
-                </button>
+              <div className="border-t-2 w-full -mt-1">
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => setshowtresults(true)}
+                    className=" cursor-pointer text-gray-700 mt-2 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200 "
+                  >
+                    Show Results
+                  </button>
+                </div>
               </div>
             )}
           </div>
