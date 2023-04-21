@@ -5,6 +5,8 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import Like from "./Like";
 import TestResultElement from "./TestResultElement";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
+
 import {
   createComment,
   createLike,
@@ -24,7 +26,7 @@ function Post(prop) {
   const [commentValue, setCommentValue] = useState("");
   const isTest =
     (prop.post.questions && prop.post.questions.length > 0) || false;
-  console.log("KENDİM", data);
+  const user = useSelector((state) => state.auth.user);
   const findPassedDay = () => {
     const al = Date.now();
     const temp = al / 86400000;
@@ -234,7 +236,7 @@ function Post(prop) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (data.type === 1) {
+    if (user.type === 1) {
       if (commentValue !== "") {
         const att = {
           name: prop.uname,
@@ -243,6 +245,7 @@ function Post(prop) {
           comment: commentValue,
           ctime: Date.now(),
         };
+
         await createComment(prop.post.username, att, prop.post.time).then(
           async () => await prop.refreshData()
         );
@@ -340,7 +343,13 @@ function Post(prop) {
               {prop.post.comments.map((comm, index) => {
                 return (
                   <div>
-                    <Comment key={index} val={comm} />
+                    <Comment
+                      key={index}
+                      val={comm}
+                      ptime={prop.post.time}
+                      refreshData={prop.refreshData}
+                      pusername={prop.post.username}
+                    />
                   </div>
                 );
               })}

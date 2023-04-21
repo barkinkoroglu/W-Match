@@ -725,6 +725,48 @@ export const deletePostdata = async (username, time) => {
   });
 };
 
+export const deleteCommentdata = async (username, ptime, ctime) => {
+  let foundPost = null;
+  const tempdata = [];
+  try {
+    const compdataid = await getDoc(doc(db, "usernames", username));
+    const companydataid = compdataid.data();
+    const dbCompanyUser = await getDoc(
+      doc(db, "companies", companydataid.user_id)
+    );
+
+    console.log(username, ptime, ctime);
+    const posts = dbCompanyUser.data().posts;
+    const pindex = (post) => post.time === ptime;
+    const index = posts.findIndex(pindex);
+    console.log(index);
+
+    for (let i = 0; i < posts.length; i++) {
+      if (posts[i].time === ptime) {
+        foundPost = posts[i];
+        break;
+      }
+    }
+    console.log(foundPost);
+
+    for (let i = 0; i < foundPost.comments.length; i++) {
+      if (foundPost.comments[i].ctime !== ctime) {
+        tempdata.push(foundPost.comments[i]);
+      }
+    }
+    posts[index].comments = tempdata;
+    console.log(tempdata);
+
+    await setDoc(doc(db, "companies", companydataid.user_id), {
+      ...dbCompanyUser.data(),
+      posts: posts,
+    });
+    toast.success("The comment is deleted!");
+  } catch (error) {
+    toast.error("Oops! Something went wrong!");
+  }
+};
+
 export const forgetPassword = async (email) => {
   try {
     return await sendPasswordResetEmail(auth, email).then((data) => {
