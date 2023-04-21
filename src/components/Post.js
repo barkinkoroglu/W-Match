@@ -19,7 +19,6 @@ import Comment from "./Comment";
 function Post(prop) {
   const [data, setData] = useState(null);
   const [datetime, setDatetime] = useState(null);
-  // console.log("DATA PROBLARI", prop.post);
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [showtresults, setshowtresults] = useState(false);

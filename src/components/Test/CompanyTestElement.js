@@ -15,7 +15,6 @@ function CompanyTestElement({ record, index, score, setScore, questpoint }) {
   };
 
   useEffect(() => {
-    console.log(chosen);
     handleScore();
   }, [chosen]);
 

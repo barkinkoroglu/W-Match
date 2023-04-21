@@ -17,7 +17,6 @@ function Like({ likeid }) {
   if (data === null) {
     return <div>Loading</div>;
   }
-  console.log(data);
   return (
     <div className="flex gap-x-2 border-b-2 pb-3 border-gray-100">
       <div>

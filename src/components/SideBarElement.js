@@ -5,7 +5,6 @@ import { useState } from "react";
 import { getUserInfo } from "../firebase";
 
 function SideBarElement(prop) {
-  console.log(prop.data);
   const [data, setData] = useState({});
   const getData = async () => {
     await getUserInfo(prop.data).then((temp) => setData(temp));

@@ -7,7 +7,6 @@ import { deleteCommentdata } from "../firebase";
 function Comment({ val, pusername, ptime, refreshData }) {
   const [data, setData] = useState(null);
   const user = useSelector((state) => state.auth.user);
-  console.log("com", val);
   const handleDeleteComment = async () => {
     await deleteCommentdata(pusername, ptime, val.ctime).then(async () => {
       await refreshData();

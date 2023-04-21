@@ -48,7 +48,6 @@ function UserProfile({ user, param }) {
     refreshData();
   }, [ruser.username]);
 
-  console.log("PROFİLE USER", user);
   const handleEdit = async (values, actions) => {
     if (ruser.type === 1) {
       await userEditInformation(
