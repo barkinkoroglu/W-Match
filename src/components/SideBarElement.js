@@ -16,7 +16,6 @@ function SideBarElement(prop) {
   if (data === null) {
     return <div>Loading</div>;
   }
-
   return (
     <div className="flex gap-x-2 border-b-2 pb-3 border-gray-100">
       <div>
@@ -24,18 +23,26 @@ function SideBarElement(prop) {
       </div>
       {prop.type === 2}
       {
-        <div className="flex  ">
-          <a href={`/profile/${data?.username}`} className=" hover:underline ">
+        <div className="flex flex-col  ">
+          <a
+            href={`/profile/${data?.username}`}
+            className=" hover:underline font-medium "
+          >
             {data?.name} {data?.lastname}
           </a>
+          <p className="text-sm italic ">{data.jobfunct} </p>
         </div>
       }
       {prop.type === 1}
       {
-        <div className="flex  ">
-          <a href={`/profile/${data?.username}`} className=" hover:underline ">
+        <div className="flex flex-col ">
+          <a
+            href={`/profile/${data?.username}`}
+            className=" hover:underline font-medium "
+          >
             {data?.companyname}
           </a>
+          <p className="text-sm italic ">{data.about} </p>
         </div>
       }
     </div>
