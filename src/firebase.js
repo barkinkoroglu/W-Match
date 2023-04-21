@@ -799,3 +799,21 @@ export const addQuestionsToFirestore = async (questions) => {
     return { success: false, error: error.message };
   }
 };
+
+export const getWmatchTests = async (userid) => {
+  const dbUser = doc(db, 'users', userid);
+  const userSnapshot = await getDoc(dbUser);
+
+  if (userSnapshot.exists()) {
+    const userData = userSnapshot.data();
+    if (userData.wmatchTests) {
+      return userData.wmatchTests;
+    } else {
+      console.log("wmatchTests field not found in the user's document");
+      return {};
+    }
+  } else {
+    console.log('User not found');
+    return {};
+  }
+};

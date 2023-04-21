@@ -1,16 +1,25 @@
-import { Avatar } from "@mui/material";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { getUserInfobyID } from "../firebase";
+import { Avatar } from '@mui/material';
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { getUserInfobyID, getWmatchTests } from '../firebase';
 
 function TestResultElement(prop) {
   const [data, setData] = useState({});
+  const [wmatchTests, setWmatchTests] = useState({});
+  const [sum, setSum] = useState(0);
   const getData = async () => {
     setData(await getUserInfobyID(prop.data.userid));
   };
+
   useEffect(() => {
+    const fetchData = async () => {
+      const testsData = await getWmatchTests(prop.data.userid);
+      setWmatchTests(testsData[data.JobCategory]);
+      setSum(wmatchTests + prop.data.score / 2);
+    };
     getData();
+    fetchData();
   }, []);
 
   if (data === null) {
@@ -18,15 +27,15 @@ function TestResultElement(prop) {
   }
 
   return (
-    <div className="flex gap-x-2 border-b-2 pb-3 border-gray-100">
+    <div className='flex gap-x-2 border-b-2 pb-3 border-gray-100'>
       <div>
         <Avatar src={data.ProfileUrl} />
       </div>
-      <div className="flex items-center justify-between w-full pr-6 ">
-        <a href={`/profile/${data?.username}`} className=" hover:underline ">
+      <div className='flex items-center justify-between w-full pr-6 '>
+        <a href={`/profile/${data?.username}`} className=' hover:underline '>
           {data?.name} {data?.lastname}
         </a>
-        <h1 className="text-lg font-semibold">{prop.data.score}</h1>
+        <h1 className='text-lg font-semibold'>{sum}</h1>
       </div>
     </div>
   );
