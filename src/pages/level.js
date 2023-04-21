@@ -5,6 +5,7 @@ import { createLevel } from '../firebase';
 import { addQuestionsBySection } from '../helpers/utils';
 import { useDispatch } from 'react-redux';
 import { setQuestions } from '../store/questions';
+
 function Level() {
   const [dlevel, setDLevel] = useState('Select your level');
   const [showTooltip, setShowTooltip] = useState(true);
@@ -19,9 +20,11 @@ function Level() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('bb', dlevel, user?.JobCategory);
+
     if (dlevel !== 'Select your level' && user?.JobCategory) {
       setShowTooltip(false);
-      await createLevel(user?.username, dlevel);
+      const a = await createLevel(user?.username, dlevel);
       navigate(`/test/${user?.JobCategory}`);
       addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
         setShowTooltip(!result.success);

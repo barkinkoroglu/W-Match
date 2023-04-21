@@ -243,10 +243,14 @@ export const createLevel = async (username, level) => {
   }
 };
 
-export const updateExam = async (userid, test) => {
+export const updateExam = async (userid, testCategory, score) => {
   const dbUser = doc(db, 'users', userid);
+
+  const scoreData = {
+    [testCategory]: score,
+  };
   await updateDoc(dbUser, {
-    wmatchTests: arrayUnion(test),
+    wmatchTests: { ...scoreData },
   });
 };
 

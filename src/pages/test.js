@@ -13,6 +13,7 @@ function Test() {
   const [cquestion, setCquestion] = useState(0);
   const [examtime, setExamtime] = useState(7200);
   const { questions } = useSelector((state) => state.questions);
+
   const timerId = useRef();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
@@ -66,12 +67,19 @@ function Test() {
   };
   useEffect(() => {
     if (cquestion + 1 > 15) {
-      if (score >= 45) {
-        updateExam(user.uid, param.id);
+      if (60 > calculateScore(score) >= 42) {
+        updateExam(user.uid, param.id, calculateScore(score + 10));
+      }
+      if (80 > calculateScore(score) >= 60) {
+        updateExam(user.uid, param.id, calculateScore(score + 30));
+      }
+      if (calculateScore(score) < 42) {
+        updateExam(user.uid, param.id, calculateScore(score + 1));
       }
       navigate(`/home`);
     }
   }, [cquestion]);
+
   return (
     <div className='h-screen bg-gray-200 relative flex flex-col items-center gap-y-3'>
       <div className='absolute right-4 top-1 bg-slate-300 px-4 py-2 rounded-full font-medium text-lg text-center z-10 w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56 2xl:w-64'>
