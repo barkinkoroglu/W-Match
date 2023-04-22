@@ -805,7 +805,6 @@ export const getWmatchTests = async (userid) => {
   const userSnapshot = await getDoc(dbUser);
   if (userSnapshot.exists()) {
     const userData = userSnapshot.data();
-    console.log('www', userData.wmatchTests);
     if (userData.wmatchTests) {
       return userData.wmatchTests;
     } else {
