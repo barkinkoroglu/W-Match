@@ -16,7 +16,7 @@ function TestResultElement(prop) {
     const fetchData = async () => {
       const testsData = await getWmatchTests(prop.data.userid);
       setWmatchTests(testsData[data.JobCategory]);
-      setSum(wmatchTests + prop.data.score / 2);
+      setSum(Math.floor((wmatchTests + prop.data.score) / 2));
     };
     getData();
     fetchData();
