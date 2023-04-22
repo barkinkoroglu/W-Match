@@ -10,7 +10,6 @@ function TestResultElement(prop) {
   const getData = async () => {
     setData(await getUserInfobyID(prop.data.userid));
   };
-  console.log('props', prop);
   useEffect(() => {
     getData();
   }, []);
