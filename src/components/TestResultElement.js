@@ -6,19 +6,20 @@ import { getUserInfobyID, getWmatchTests } from '../firebase';
 
 function TestResultElement(prop) {
   const [data, setData] = useState({});
-  const [wmatchTests, setWmatchTests] = useState({});
   const [sum, setSum] = useState(0);
   const getData = async () => {
     setData(await getUserInfobyID(prop.data.userid));
   };
-
+  console.log('props', prop);
+  useEffect(() => {
+    getData();
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       const testsData = await getWmatchTests(prop.data.userid);
-      setWmatchTests(testsData[data.JobCategory]);
-      setSum(Math.floor((wmatchTests + prop.data.score) / 2));
+      const point = +Object.values(testsData).toString();
+      setSum(Math.floor((point + prop.data.score) / 2));
     };
-    getData();
     fetchData();
   }, []);
 
