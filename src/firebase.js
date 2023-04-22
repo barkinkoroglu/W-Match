@@ -24,12 +24,12 @@ import toast from 'react-hot-toast';
 import { shuffle, userHandle } from './utils';
 import { getStorage } from 'firebase/storage';
 const firebaseConfig = {
-  apiKey: 'AIzaSyA79zkWyGOwlIsJeG1z0RW3GA4bk1I4b70',
-  authDomain: 'w-match-11cdf.firebaseapp.com',
-  projectId: 'w-match-11cdf',
-  storageBucket: 'w-match-11cdf.appspot.com',
-  messagingSenderId: '1058663068949',
-  appId: '1:1058663068949:web:ae8a630b7692abc5f0651c',
+  apiKey: 'AIzaSyDye5cZ1SUj2NU4amRvK9uVxWtm_AVI7rU',
+  authDomain: 'w-match-4f47d.firebaseapp.com',
+  projectId: 'w-match-4f47d',
+  storageBucket: 'w-match-4f47d.appspot.com',
+  messagingSenderId: '30956022016',
+  appId: '1:30956022016:web:527a4c29144642b1726be5',
 };
 
 // Initialize Firebase
