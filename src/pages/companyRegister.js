@@ -234,28 +234,28 @@ function CompanyRegister() {
           </Formik>
           <div className='text-center text-sm text-grey-dark mt-4'>
             By signing up, you agree to the{' '}
-            <Link
+            <a
               className='no-underline border-b border-grey-dark text-grey-dark text-blue-600'
-              to='#'
+              href='#'
             >
               Terms of Service{' '}
-            </Link>
+            </a>
             and{' '}
-            <Link
+            <a
               className='no-underline border-b border-grey-dark text-grey-dark text-blue-600'
-              to='#'
+              href='#'
             >
               Privacy Policy
-            </Link>
+            </a>
           </div>
         </div>
 
         <div className='text-grey-dark mt-6'>
           Already have an account?
-          <Link className=' no-underline text-blue-600 ' to='../login/'>
+          <a className=' no-underline text-blue-600 ' href='../login/'>
             {' '}
             Log in
-          </Link>
+          </a>
           .
         </div>
       </div>
