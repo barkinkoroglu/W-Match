@@ -15,7 +15,7 @@ import {
   deletePostdata,
 } from '../firebase';
 import Comment from './Comment';
-
+import { Link } from 'react-router-dom';
 function Post(prop) {
   const [data, setData] = useState(null);
   const [datetime, setDatetime] = useState(null);
@@ -83,12 +83,12 @@ function Post(prop) {
           <div className=' flex gap-x-3 '>
             <Avatar src={data?.ProfileUrl} />
             <div>
-              <a
-                href={`profile/${data?.username}`}
+              <Link
+                to={`profile/${data?.username}`}
                 className=' text-lg font-medium hover:underline'
               >
                 {data?.companyname}
-              </a>
+              </Link>
               <h3 className='text-xs'>{prop.post.email}</h3>
             </div>
           </div>
@@ -109,9 +109,9 @@ function Post(prop) {
                 </span>{' '}
               </h1>
             </div>
-            <a
+            <Link
               className='flex justify-end'
-              href={`test/${prop.post.username}/${prop.post.id}`}
+              to={`test/${prop.post.username}/${prop.post.id}`}
             >
               {prop.user?.type === 1 &&
                 prop.post.scores?.find(
@@ -125,7 +125,7 @@ function Post(prop) {
                     </div>
                   </div>
                 )}
-            </a>
+            </Link>
             {prop.post.username === prop.user.username && (
               <div className='border-t-2 w-full -mt-1'>
                 <div className='flex justify-end'>
@@ -157,39 +157,40 @@ function Post(prop) {
           </div>
         )}
 
-        {showtresults && prop.post.scores.sort((a, b) => b.score - a.score) && (
-          <div>
-            <div className='fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75'></div>
-            <div className='fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white'>
-              <div className='flex flex-col items-center border-b-2 relative'>
-                <h1 className=' text-lg '>Test Results</h1>
-                <div className='border-b-4 -mb-[1.7px] border-slate-500'>
-                  <h1 className='p-2'>
-                    All{' '}
-                    <span className='font-medium 	'>
-                      {prop.post.scores.length}
-                    </span>
-                  </h1>
+        {showtresults &&
+          prop.post.scores.sort((Link, b) => b.score - Link.score) && (
+            <div>
+              <div className='fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75'></div>
+              <div className='fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white'>
+                <div className='flex flex-col items-center border-b-2 relative'>
+                  <h1 className=' text-lg '>Test Results</h1>
+                  <div className='border-b-4 -mb-[1.7px] border-slate-500'>
+                    <h1 className='p-2'>
+                      All{' '}
+                      <span className='font-medium 	'>
+                        {prop.post.scores.length}
+                      </span>
+                    </h1>
+                  </div>
+                  <button
+                    onClick={() => setshowtresults(false)}
+                    className='absolute hover:bg-slate-400 rounded-lg p-1 right-0'
+                  >
+                    <CloseIcon />
+                  </button>
                 </div>
-                <button
-                  onClick={() => setshowtresults(false)}
-                  className='absolute hover:bg-slate-400 rounded-lg p-1 right-0'
-                >
-                  <CloseIcon />
-                </button>
-              </div>
-              <div className='flex flex-col gap-y-3 py-3 overflow-y-auto'>
-                {prop.post.scores !== null ? (
-                  prop.post.scores.map((element, index) => {
-                    return <TestResultElement key={index} data={element} />;
-                  })
-                ) : (
-                  <div>Loading </div>
-                )}
+                <div className='flex flex-col gap-y-3 py-3 overflow-y-auto'>
+                  {prop.post.scores !== null ? (
+                    prop.post.scores.map((element, index) => {
+                      return <TestResultElement key={index} data={element} />;
+                    })
+                  ) : (
+                    <div>Loading </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   };
@@ -204,12 +205,12 @@ function Post(prop) {
           <div className=' flex gap-x-3 '>
             <Avatar src={data?.ProfileUrl} />
             <div>
-              <a
-                href={`profile/${data?.username}`}
+              <Link
+                to={`profile/${data?.username}`}
                 className=' text-lg font-medium hover:underline'
               >
                 {data?.companyname}
-              </a>
+              </Link>
               <h3 className='text-xs'>{prop.post.email}</h3>
             </div>
           </div>
@@ -302,12 +303,12 @@ function Post(prop) {
         <div className=' flex gap-x-3 '>
           <Avatar src={data?.ProfileUrl} />
           <div>
-            <a
-              href={`profile/${data?.username}`}
+            <Link
+              to={`profile/${data?.username}`}
               className=' text-lg font-medium hover:underline'
             >
               {data?.companyname}
-            </a>
+            </Link>
             <h3 className='text-xs'>{prop.post.email}</h3>
           </div>
         </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { getUserInfobyID, getWmatchTests } from '../firebase';
+import { Link } from 'react-router-dom';
 
 function TestResultElement(prop) {
   const [data, setData] = useState({});
@@ -32,9 +33,9 @@ function TestResultElement(prop) {
         <Avatar src={data.ProfileUrl} />
       </div>
       <div className='flex items-center justify-between w-full pr-6 '>
-        <a href={`/profile/${data?.username}`} className=' hover:underline '>
+        <Link to={`/profile/${data?.username}`} className=' hover:underline '>
           {data?.name} {data?.lastname}
-        </a>
+        </Link>
         <h1 className='text-lg font-semibold'>{sum}</h1>
       </div>
     </div>

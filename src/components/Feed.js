@@ -5,16 +5,18 @@ import WorkIcon from '@mui/icons-material/Work';
 import Post from './Post';
 import Createtest from './Createtest';
 import CreateJob from './CreateJob';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { createPost, getAllPost } from '../firebase';
 import DiscoverBtn from './DiscoverBtn';
 import StartPostBtn from './StartPost/StartPostBtn';
+import { getPosts } from '../store/post';
 function Feed() {
   const [showCreateTest, setShowCreateTest] = useState(false);
   const [showCreateJob, setShowCreateJob] = useState(false);
   const [allposts, setAllPost] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
   const groupSize = 5;
   const [visiblePostCount, setVisiblePostCount] = useState(5);
   const [flag, setFlag] = useState(false);
@@ -48,7 +50,10 @@ function Feed() {
   useEffect(() => {
     (async () => {
       await getAllPost(user)
-        .then((data) => setAllPost(data))
+        .then((data) => {
+          dispatch(getPosts(data));
+          setAllPost(data);
+        })
         .catch((error) => console.log('ERROR', error));
     })();
   }, [user, flag]);
