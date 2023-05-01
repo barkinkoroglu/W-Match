@@ -224,36 +224,80 @@ function UserRegister() {
                 {errors.longabout && touched.longabout && (
                   <div className='text-red-600'>{errors.longabout}</div>
                 )}
+                <div class='w-full p-4'>
+                  <label
+                    htmlFor='fileUpload'
+                    class='block text-sm font-medium text-gray-700'
+                  >
+                    CV
+                  </label>
+                  <div class='mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
+                    <input
+                      id='fileUpload'
+                      type='file'
+                      class='hidden'
+                      onChange={(e) => {
+                        setCvUpload(e.target.files[0]);
+                      }}
+                    />
+                    <div class='text-center'>
+                      <svg
+                        class='mx-auto h-12 w-12 text-gray-400'
+                        stroke='currentColor'
+                        fill='none'
+                        viewBox='0 0 48 48'
+                        aria-hidden='true'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth='2'
+                          d='M15 10.996H9a2 2 0 00-2 2v22a2 2 0 002 2h30a2 2 0 002-2v-22a2 2 0 00-2-2h-6m-3-5v5m0 0V5m0 5h5m-5 0H7'
+                        />
+                      </svg>
+                      <p class='mt-1 text-sm text-gray-600'>
+                        <label
+                          htmlFor='fileUpload'
+                          class='font-medium text-blue-600 hover:text-blue-500 cursor-pointer'
+                        >
+                          Upload a file
+                        </label>
+                      </p>
+                      <p class='mt-1 text-xs text-gray-500'>
+                        PDF, DOC, DOCX, TXT up to 10MB
+                      </p>
+                    </div>
+                  </div>
+                </div>
 
-                <input
-                  type='file'
-                  class='block border border-grey-light w-full p-3 rounded mt-4'
-                  onChange={(e) => {
-                    setCvUpload(e.target.files[0]);
-                  }}
-                />
                 {errors.jobfunct && touched.jobfunct && (
                   <div className='text-red-600'>{errors.jobfunct}</div>
                 )}
                 {/* <p>{`You selected ${values.jobfunct}`}</p> */}
                 <div className='w-full flex flex-col gap-y-3 justify-center mt-4 '>
                   <label className='block' for='jobs'>
-                    Choose a Job Category:
+                    Technologies:
                   </label>
                   <select
                     value={values.JobCategory}
                     onChange={handleChange}
                     name='JobCategory'
-                    className='w-full block p-2 outline-none  border border-grey-light rounded appearance-none bg-gray-50  border-gray-300 text-gray-900  text-sm  focus:ring-blue-500 focus:border-blue-500 '
-                    //value={jobcategory}
-                    //onChange={(e) => setJobcategory(e.target.value)}
+                    className='w-full block p-2 outline-none border border-grey-light rounded appearance-none bg-gray-50 border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500'
                   >
-                    <option value=''>Choose a test</option>
+                    <option
+                      value=''
+                      disabled
+                      hidden
+                      style={{ color: 'transparent' }}
+                    >
+                      Choose a Programming Language
+                    </option>
                     <option value='HTML'>HTML</option>
                     <option value='CSS'>CSS</option>
                     <option value='JavaScript'>JavaScript</option>
                     <option value='React'>React.js</option>
                   </select>
+
                   {/* <p>{`You selected ${jobcategory}`}</p> */}
                   {/* <p>{`You selected ${values.JobCategory}`}</p> */}
                 </div>
