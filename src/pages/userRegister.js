@@ -18,6 +18,8 @@ function UserRegister() {
   const options = useMemo(() => countryList().getData(), []);
   const [cvUpload, setCvUpload] = useState(null);
   const [phoneCodeCountry, setPhoneCodeCountry] = useState('us');
+  const [fileName, setFileName] = useState('');
+  const [inputKey, setInputKey] = useState(Date.now());
 
   const navigate = useNavigate();
 
@@ -64,6 +66,21 @@ function UserRegister() {
       setPhoneCodeCountry(country.value.toLowerCase());
     }
   }, [country]);
+
+  const handleFileUpload = (e) => {
+    setCvUpload(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+
+  const removeFile = () => {
+    setCvUpload(null);
+    setFileName('');
+    setInputKey(Date.now());
+  };
+  const resetFileInput = (e) => {
+    e.target.value = null;
+  };
+
   return (
     <div className='bg-grey-lighter h-full flex flex-col relative'>
       <img
@@ -224,25 +241,24 @@ function UserRegister() {
                 {errors.longabout && touched.longabout && (
                   <div className='text-red-600'>{errors.longabout}</div>
                 )}
-                <div class='w-full p-4'>
+                <div className='w-full p-4'>
                   <label
                     htmlFor='fileUpload'
-                    class='block text-sm font-medium text-gray-700'
+                    className='block text-sm font-medium text-gray-700'
                   >
                     CV
                   </label>
-                  <div class='mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
+                  <div className='mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
                     <input
                       id='fileUpload'
                       type='file'
-                      class='hidden'
-                      onChange={(e) => {
-                        setCvUpload(e.target.files[0]);
-                      }}
+                      className='hidden'
+                      onChange={handleFileUpload}
+                      onClick={resetFileInput}
                     />
-                    <div class='text-center'>
+                    <div className='text-center'>
                       <svg
-                        class='mx-auto h-12 w-12 text-gray-400'
+                        className='mx-auto h-12 w-12 text-gray-400'
                         stroke='currentColor'
                         fill='none'
                         viewBox='0 0 48 48'
@@ -255,17 +271,30 @@ function UserRegister() {
                           d='M15 10.996H9a2 2 0 00-2 2v22a2 2 0 002 2h30a2 2 0 002-2v-22a2 2 0 00-2-2h-6m-3-5v5m0 0V5m0 5h5m-5 0H7'
                         />
                       </svg>
-                      <p class='mt-1 text-sm text-gray-600'>
+                      <p className='mt-1 text-sm text-gray-600'>
                         <label
                           htmlFor='fileUpload'
-                          class='font-medium text-blue-600 hover:text-blue-500 cursor-pointer'
+                          className='font-medium text-blue-600 hover:text-blue-500 cursor-pointer'
                         >
                           Upload a file
                         </label>
                       </p>
-                      <p class='mt-1 text-xs text-gray-500'>
+                      <p className='mt-1 text-xs text-gray-500'>
                         PDF, DOC, DOCX, TXT up to 10MB
                       </p>
+                      {fileName && (
+                        <div className='mt-2'>
+                          <p className='text-sm text-gray-900'>
+                            Uploaded file: {fileName}
+                          </p>
+                          <button
+                            className='text-sm text-white bg-red-600 px-3 py-1 rounded hover:bg-red-500 transition-all duration-200 ease-in-out cursor-pointer'
+                            onClick={removeFile}
+                          >
+                            Remove file
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
