@@ -1,17 +1,18 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import UserProfile from "../components/Profile/UserProfile";
-import Widget from "../components/Widget";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getUserInfo } from "../firebase";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import Navbar from '../components/Navbar';
+import UserProfile from '../components/Profile/UserProfile';
+import Widget from '../components/Widget';
+import TestInfo from '../components/TestInfo';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getUserInfo } from '../firebase';
+import { useParams } from 'react-router-dom';
 
 function Profile() {
   const [user, setUser] = useState(null);
   const param = useParams();
-  console.log("Param bilgisi", param.id);
-  console.log("USERRR", user);
+  console.log('Param bilgisi', param.id);
+  console.log('USERRR', user);
   useEffect(() => {
     const callValue = async () => {
       await getUserInfo(param.id)
@@ -32,11 +33,12 @@ function Profile() {
   }
 
   return (
-    <div className="">
+    <div className=''>
       <Navbar />
-      <div className=" bg-gray-50">
-        <div className="flex flex-col md:flex-row max-w-6xl px-3 pt-3 mx-auto  ">
+      <div className=' bg-gray-50'>
+        <div className='flex flex-col md:flex-row max-w-6xl px-3 pt-3 mx-auto  '>
           <UserProfile user={user} param={param} />
+          <TestInfo user={user} />
           <Widget />
         </div>
       </div>
