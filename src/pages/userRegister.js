@@ -6,7 +6,7 @@ import 'react-phone-input-2/lib/style.css';
 import { RegionDropdown } from 'react-country-region-selector';
 import { Helmet } from 'react-helmet';
 import { RegisterSchema } from '../validation/index';
-import { Formik, Form, ErrorMessage } from 'formik';
+import { Formik, Form, ErrorMessage, Field } from 'formik';
 import { userRegister } from '../firebase';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { v4 } from 'uuid';
@@ -20,6 +20,8 @@ function UserRegister() {
   const [phoneCodeCountry, setPhoneCodeCountry] = useState('us');
   const [fileName, setFileName] = useState('');
   const [inputKey, setInputKey] = useState(Date.now());
+  const [isTest, setIsTest] = useState(false);
+  const [clickedButton, setClickedButton] = useState(null);
 
   const navigate = useNavigate();
 
@@ -36,6 +38,7 @@ function UserRegister() {
       jobfunct,
       longabout,
       JobCategory,
+      isTest,
     } = values;
     const response = await userRegister(
       firstname,
@@ -49,10 +52,16 @@ function UserRegister() {
       jobfunct,
       longabout,
       JobCategory,
-      password
+      password,
+      isTest
     );
     if (response) {
-      if (cvUpload == null) return navigate(`/level`);
+      if (isTest) {
+        return navigate(`/level`);
+      }
+      if (!isTest) {
+        return navigate(`/profile/${username}`);
+      }
       const imageRef = ref(storage, `CV/${username}/${cvUpload.name + v4()}`);
       uploadBytes(imageRef, cvUpload).then((snaphsot) => {
         getDownloadURL(snaphsot.ref).then((url) => {
@@ -102,6 +111,7 @@ function UserRegister() {
               adressline2: '',
               jobfunct: '',
               longabout: '',
+              isTest: '',
               JobCategory: '',
               password: '',
               confirmpassword: '',
@@ -303,33 +313,80 @@ function UserRegister() {
                   <div className='text-red-600'>{errors.jobfunct}</div>
                 )}
                 {/* <p>{`You selected ${values.jobfunct}`}</p> */}
-                <div className='w-full flex flex-col gap-y-3 justify-center mt-4 '>
-                  <label className='block' for='jobs'>
-                    Technologies:
-                  </label>
-                  <select
-                    value={values.JobCategory}
-                    onChange={handleChange}
-                    name='JobCategory'
-                    className='w-full block p-2 outline-none border border-grey-light rounded appearance-none bg-gray-50 border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500'
-                  >
-                    <option
-                      value=''
-                      disabled
-                      hidden
-                      style={{ color: 'transparent' }}
-                    >
-                      Choose a Programming Language
-                    </option>
-                    <option value='HTML'>HTML</option>
-                    <option value='CSS'>CSS</option>
-                    <option value='JavaScript'>JavaScript</option>
-                    <option value='React'>React.js</option>
-                  </select>
+                <div className='text-sm font-medium text-gray-700 mt-4'>
+                  <h3>Do you want to take test now or later?</h3>
 
-                  {/* <p>{`You selected ${jobcategory}`}</p> */}
-                  {/* <p>{`You selected ${values.JobCategory}`}</p> */}
+                  <div className='flex gap-x-4 mt-2'>
+                    <Field name='isTest'>
+                      {({ field, form }) => (
+                        <>
+                          <label className='flex items-center cursor-pointer hover:bg-blue-100 hover:text-blue-600 rounded px-2 py-1 transition-colors duration-200'>
+                            <input
+                              type='radio'
+                              {...field}
+                              value='true'
+                              className='form-radio text-blue-600'
+                              checked={clickedButton === 'now'}
+                              onChange={(e) => {
+                                setIsTest(true);
+                                setClickedButton('now');
+                                form.setFieldValue('isTest', true);
+                              }}
+                            />
+                            <span className='ml-2 font-normal'>Now</span>
+                          </label>
+                          <label className='flex items-center cursor-pointer hover:bg-blue-100 hover:text-blue-600 rounded px-2 py-1 transition-colors duration-200'>
+                            <input
+                              type='radio'
+                              {...field}
+                              value='false'
+                              className='form-radio text-blue-600'
+                              checked={clickedButton === 'later'}
+                              onChange={(e) => {
+                                setIsTest(false);
+                                setClickedButton('later');
+                                form.setFieldValue('isTest', false);
+                              }}
+                            />
+                            <span className='ml-2 font-normal'>Later</span>
+                          </label>
+                        </>
+                      )}
+                    </Field>
+                  </div>
                 </div>
+                {errors.isTest && touched.isTest && (
+                  <div className='text-red-600'>{errors.isTest}</div>
+                )}
+                {isTest && (
+                  <div className='w-full flex flex-col gap-y-3 justify-center mt-4 '>
+                    <label className='block' for='jobs'>
+                      Technologies:
+                    </label>
+                    <select
+                      value={values.JobCategory}
+                      onChange={handleChange}
+                      name='JobCategory'
+                      className='w-full block p-2 outline-none border border-grey-light rounded appearance-none bg-gray-50 border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500'
+                    >
+                      <option
+                        value=''
+                        disabled
+                        hidden
+                        style={{ color: 'transparent' }}
+                      >
+                        Choose a Programming Language
+                      </option>
+                      <option value='HTML'>HTML</option>
+                      <option value='CSS'>CSS</option>
+                      <option value='JavaScript'>JavaScript</option>
+                      <option value='React'>React.js</option>
+                    </select>
+
+                    {/* <p>{`You selected ${jobcategory}`}</p> */}
+                    {/* <p>{`You selected ${values.JobCategory}`}</p> */}
+                  </div>
+                )}
 
                 <input
                   type='password'
