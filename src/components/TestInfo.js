@@ -19,7 +19,7 @@ const TestInfo = ({ user }) => {
       ) : (
         <div className='text-center'>
           <h2 className='text-xl font-semibold text-gray-800 mb-2'>
-            Test Score
+            Skill Score
           </h2>
           <p className='text-lg font-medium text-gray-700'>
             {user.wmatchTests}

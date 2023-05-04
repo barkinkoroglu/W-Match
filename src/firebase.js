@@ -19,6 +19,7 @@ import {
   arrayUnion,
   collection,
   addDoc,
+  onSnapshot,
 } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 import { shuffle, userHandle } from './utils';
@@ -818,4 +819,24 @@ export const getWmatchTests = async (userid) => {
     console.log('User not found');
     return {};
   }
+};
+export const updateSkill = async (username, jc) => {
+  const userdataid = await getDoc(doc(db, 'usernames', username));
+  const user = userdataid.data();
+  const userDocRef = doc(db, 'users', user.user_id);
+  const dbUser = await getDoc(userDocRef);
+
+  await setDoc(doc(db, 'users', user.user_id), {
+    ...dbUser.data(),
+    JobCategory: jc,
+  });
+  const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+    if (docSnapshot.exists()) {
+      const updatedUserData = docSnapshot.data();
+      userHandle(updatedUserData);
+
+      // Unsubscribe the listener after the data is updated and handled
+      unsubscribe();
+    }
+  });
 };
