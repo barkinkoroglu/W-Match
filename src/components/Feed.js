@@ -7,7 +7,6 @@ import Createtest from './Createtest';
 import CreateJob from './CreateJob';
 import { useSelector } from 'react-redux';
 import { createPost, getAllPost } from '../firebase';
-import DiscoverBtn from './DiscoverBtn';
 import StartPostBtn from './StartPost/StartPostBtn';
 function Feed() {
   const [showCreateTest, setShowCreateTest] = useState(false);
@@ -75,9 +74,6 @@ function Feed() {
   };
   return (
     <div className='flex-[0.5]  flex-col mx-12'>
-      {user?.type === 1 && user?.following && user.following.length === 0 && (
-        <DiscoverBtn />
-      )}
       {user?.type === 2 && user?.posts && user.posts.length === 0 && (
         <StartPostBtn />
       )}

@@ -31,14 +31,14 @@ function Profile() {
   if (user === null) {
     return <div>Loading...</div>;
   }
-
+  console.log('user1', user);
   return (
     <div className=''>
       <Navbar />
       <div className=' bg-gray-50'>
         <div className='flex flex-col md:flex-row max-w-6xl px-3 pt-3 mx-auto  '>
           <UserProfile user={user} param={param} />
-          <TestInfo user={user} />
+          {user && user?.type !== 2 && <TestInfo user={user} />}
           <Widget />
         </div>
       </div>
