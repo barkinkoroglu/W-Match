@@ -7,9 +7,15 @@ const TestInfo = ({ user }) => {
   const handleStartClick = () => {
     navigate(`/level`);
   };
+  console.log('user.JobCategory', user.JobCategory);
+  console.log(
+    'user.wmatchTests[user.JobCategory]',
+    user.wmatchTests[user.JobCategory]
+  );
+
   return (
     <>
-      {user.isTest === false ? (
+      {!user.wmatchTests[user.JobCategory] ? (
         <button
           onClick={handleStartClick}
           className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-150'
@@ -17,12 +23,12 @@ const TestInfo = ({ user }) => {
           Start test
         </button>
       ) : (
-        <div className='text-center'>
-          <h2 className='text-xl font-semibold text-gray-800 mb-2'>
+        <div className='text-center p-6 rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:from-purple-300 hover:via-pink-400 hover:to-red-400 transition duration-500 ease-in-out'>
+          <h2 className='text-3xl font-bold text-white mb-4 tracking-tighter'>
             Skill Score
           </h2>
-          <p className='text-lg font-medium text-gray-700'>
-            {user.wmatchTests}
+          <p className='text-2xl font-semibold text-white tracking-normal'>
+            {user.wmatchTests[user.JobCategory]}
           </p>
         </div>
       )}

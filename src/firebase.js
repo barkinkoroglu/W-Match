@@ -249,7 +249,7 @@ export const createLevel = async (username, level) => {
 
 export const updateExam = async (userid, testCategory, score) => {
   const dbUser = doc(db, 'users', userid);
-
+  console.log('KEKW2', userid, testCategory, score);
   const scoreData = {
     [testCategory]: score,
   };
@@ -862,4 +862,8 @@ export const updateSkill = async (username, jc) => {
       unsubscribe();
     }
   });
+};
+
+export const getUserId = async (username) => {
+  return (await getDoc(doc(db, 'usernames', username))).data().user_id;
 };

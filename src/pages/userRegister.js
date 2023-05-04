@@ -40,6 +40,7 @@ function UserRegister() {
       JobCategory,
       isTest,
     } = values;
+    console.log('VALL', values);
     const response = await userRegister(
       firstname,
       lastname,
@@ -346,6 +347,7 @@ function UserRegister() {
                                 setIsTest(false);
                                 setClickedButton('later');
                                 form.setFieldValue('isTest', false);
+                                form.setFieldValue('JobCategory', '');
                               }}
                             />
                             <span className='ml-2 font-normal'>Later</span>

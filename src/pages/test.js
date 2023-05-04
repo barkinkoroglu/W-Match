@@ -3,7 +3,7 @@ import TestElement from '../components/Test/TestElement';
 import Data2 from '../questions/examquestion.json';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { updateExam, fetchQuestions } from '../firebase';
+import { updateExam, fetchQuestions, getUserId } from '../firebase';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function Test() {
@@ -28,21 +28,26 @@ function Test() {
     console.log(data);
   };
 
-  //useEffect(() => {
-  //timerId.current = setInterval(() => {
-  //setExamtime((examtime) => examtime - 1);
-  //}, 1000);
-  //return () => clearInterval(timerId.current);
-  //}, []);
+  useEffect(() => {
+    timerId.current = setInterval(() => {
+      setExamtime((examtime) => examtime - 1);
+    }, 1000);
+    return () => clearInterval(timerId.current);
+  }, []);
 
   useEffect(() => {
-    if (examtime === 0) {
-      if (score >= 45) {
-        updateExam(user.uid, param.id);
+    const handleTime = async () => {
+      if (examtime === 0) {
+        if (score >= 45) {
+          const id = await getUserId(user.username);
+
+          await updateExam(id, param.id);
+        }
+        clearInterval(timerId.current);
+        navigate(`/home`);
       }
-      clearInterval(timerId.current);
-      navigate(`/home`);
-    }
+    };
+    handleTime();
   }, [examtime]);
 
   const handleCurrentIndex = () => {
@@ -65,19 +70,26 @@ function Test() {
     const score = totalPoint > 100 ? totalPoint - kalan : totalPoint;
     return Math.ceil(score);
   };
+
   useEffect(() => {
-    if (cquestion + 1 > 15) {
-      if (60 > calculateScore(score) >= 42) {
-        updateExam(user.uid, param.id, calculateScore(score + 10));
+    const handleExam = async () => {
+      const id = await getUserId(user.username);
+      if (id) {
+        if (cquestion + 1 > 15) {
+          if (60 > calculateScore(score) >= 42) {
+            await updateExam(id, param.id, calculateScore(score + 10));
+          }
+          if (80 > calculateScore(score) >= 60) {
+            await updateExam(id, param.id, calculateScore(score + 30));
+          }
+          if (calculateScore(score) < 42) {
+            await updateExam(id, param.id, calculateScore(score + 1));
+          }
+          navigate(`/home`);
+        }
       }
-      if (80 > calculateScore(score) >= 60) {
-        updateExam(user.uid, param.id, calculateScore(score + 30));
-      }
-      if (calculateScore(score) < 42) {
-        updateExam(user.uid, param.id, calculateScore(score + 1));
-      }
-      navigate(`/home`);
-    }
+    };
+    handleExam();
   }, [cquestion]);
 
   return (

@@ -33,13 +33,19 @@ function Profile() {
   }
   console.log('user1', user);
   return (
-    <div className=''>
+    <div>
       <Navbar />
-      <div className=' bg-gray-50'>
-        <div className='flex flex-col md:flex-row max-w-6xl px-3 pt-3 mx-auto  '>
-          <UserProfile user={user} param={param} />
-          {user && user?.type !== 2 && <TestInfo user={user} />}
-          <Widget />
+      <div className='bg-gray-50'>
+        <div className='flex max-w-6xl px-3 pt-3 mx-auto'>
+          <div style={{ width: '70%' }}>
+            <UserProfile user={user} param={param} />
+          </div>
+          <div className='flex flex-col' style={{ width: '30%' }}>
+            <Widget />
+            {user && user?.type !== 2 && (
+              <TestInfo user={user} className='mt-0' />
+            )}
+          </div>
         </div>
       </div>
     </div>

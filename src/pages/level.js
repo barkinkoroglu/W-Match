@@ -44,10 +44,10 @@ function Level() {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
   console.log('s', values);
-  const handleSelect = (e) => {
-    e.preventDefault();
+  const handleSelect = () => {
     if (values.JobCategory) {
       const fetchData = async () => {
+        console.log('fetch');
         await updateSkill(user?.username, values.JobCategory);
       };
       fetchData();
@@ -144,8 +144,7 @@ function Level() {
                   justifyContent: 'center',
                   fontSize: '1.2rem',
                 }}
-                onClick={(e) => handleSelect(e)}
-                type='submit'
+                onClick={handleSelect}
                 className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4'
               >
                 Select <FaCheck className='ml-2' size={20} />
