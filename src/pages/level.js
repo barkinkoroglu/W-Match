@@ -6,6 +6,8 @@ import { addQuestionsBySection } from '../helpers/utils';
 import { useDispatch } from 'react-redux';
 import { setQuestions } from '../store/questions';
 import LeaveBtn from '../components/LeaveBtn';
+import { FaCheck } from 'react-icons/fa';
+
 function Level() {
   const [dlevel, setDLevel] = useState('Select your level');
   const [showTooltip, setShowTooltip] = useState(true);
@@ -41,14 +43,16 @@ function Level() {
     const { name, value } = e.target;
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
-  useEffect(() => {
+  console.log('s', values);
+  const handleSelect = (e) => {
+    e.preventDefault();
     if (values.JobCategory) {
       const fetchData = async () => {
         await updateSkill(user?.username, values.JobCategory);
       };
       fetchData();
     }
-  }, [values.JobCategory, user?.username]);
+  };
   return (
     <div className='min-h-screen flex items-center justify-center bg-[#e5e7eb] dark:bg-gray-800'>
       <div className='flex flex-col items-center w-full'>
@@ -58,7 +62,7 @@ function Level() {
         <h2 className='text-center text-lg font-medium text-gray-500 dark:text-gray-400 mt-2 mb-10'>
           This test will determine your programming skill score.
         </h2>
-        {user && !user?.isTest && user?.JobCategory ? (
+        {user && user?.JobCategory ? (
           <form
             onSubmit={handleSubmit}
             className='bg-white dark:bg-gray-700 p-10 rounded-lg shadow-md w-full max-w-lg'
@@ -110,20 +114,43 @@ function Level() {
             >
               Your Programming Language
             </label>
-            <select
-              value={values.JobCategory}
-              onChange={handleChange}
-              name='JobCategory'
-              className='w-full block p-2 outline-none border border-grey-light rounded appearance-none bg-gray-50 border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500'
-            >
-              <option value='' disabled hidden style={{ color: 'transparent' }}>
-                Choose a Programming Language
-              </option>
-              <option value='HTML'>HTML</option>
-              <option value='CSS'>CSS</option>
-              <option value='JavaScript'>JavaScript</option>
-              <option value='React'>React.js</option>
-            </select>
+            <div className='flex items-center justify-center flex-col'>
+              <select
+                style={{ width: '100%' }}
+                value={values.JobCategory}
+                onChange={handleChange}
+                name='JobCategory'
+                className='w-full block p-2 outline-none border border-grey-light rounded appearance-none bg-gray-50 border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 mr-2'
+              >
+                <option
+                  value=''
+                  disabled
+                  hidden
+                  style={{ color: 'transparent' }}
+                >
+                  Choose a Programming Language
+                </option>
+                <option value='HTML'>HTML</option>
+                <option value='CSS'>CSS</option>
+                <option value='JavaScript'>JavaScript</option>
+                <option value='React'>React.js</option>
+              </select>
+              <button
+                style={{
+                  width: '100%',
+
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.2rem',
+                }}
+                onClick={(e) => handleSelect(e)}
+                type='submit'
+                className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4'
+              >
+                Select <FaCheck className='ml-2' size={20} />
+              </button>
+            </div>
           </div>
         )}
         <LeaveBtn />
