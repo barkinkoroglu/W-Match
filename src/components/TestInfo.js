@@ -7,11 +7,6 @@ const TestInfo = ({ user }) => {
   const handleStartClick = () => {
     navigate(`/level`);
   };
-  console.log('user.JobCategory', user.JobCategory);
-  console.log(
-    'user.wmatchTests[user.JobCategory]',
-    user.wmatchTests[user.JobCategory]
-  );
 
   return (
     <>

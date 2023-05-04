@@ -867,3 +867,18 @@ export const updateSkill = async (username, jc) => {
 export const getUserId = async (username) => {
   return (await getDoc(doc(db, 'usernames', username))).data().user_id;
 };
+
+export const getCurrUser = async (type, username) => {
+  const userdataid = await getDoc(doc(db, 'usernames', username));
+  const user = userdataid.data();
+  const docRef = doc(db, type, user.user_id);
+  const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
+    if (docSnapshot.exists()) {
+      const updatedUserData = docSnapshot.data();
+      userHandle(updatedUserData);
+
+      // Unsubscribe the listener after the data is updated and handled
+      unsubscribe();
+    }
+  });
+};

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { createLevel, updateSkill } from '../firebase';
+import { createLevel, updateSkill, getCurrUser } from '../firebase';
 import { addQuestionsBySection } from '../helpers/utils';
 import { useDispatch } from 'react-redux';
 import { setQuestions } from '../store/questions';
@@ -53,6 +53,14 @@ function Level() {
       fetchData();
     }
   };
+  useEffect(() => {
+    const getUsr = async () => {
+      if (user?.username) {
+        await getCurrUser('users', user?.username);
+      }
+      getUsr();
+    };
+  }, [user?.username]);
   return (
     <div className='min-h-screen flex items-center justify-center bg-[#e5e7eb] dark:bg-gray-800'>
       <div className='flex flex-col items-center w-full'>
