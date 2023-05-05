@@ -222,13 +222,13 @@ function Post(prop) {
           </div>
           <div className='relative p-4'>
             <h1 className='text-xl font-medium mb-5 flex items-center gap-2'>
-              <AiOutlineAppstoreAdd className='text-blue-500' />
+              <AiOutlineAppstoreAdd className='text-blue-500 mt-1' />
               {prop.post.jobname}
             </h1>
 
             <div className='mb-2 flex items-start gap-2'>
-              <AiOutlineFileText className='text-gray-500' />
-              <div className='flex flex-col'>
+              <AiOutlineFileText className='text-gray-500 mt-1' />
+              <div className='flex flex-col items-start'>
                 <p className='text-md font-semibold'>Description</p>
                 <h1 className='text-sm ml-2 font-medium text-gray-700'>
                   {prop.post.information}
@@ -237,8 +237,8 @@ function Post(prop) {
             </div>
 
             <div className='mb-2 flex items-start gap-2'>
-              <AiOutlineDollar className='text-green-500' />
-              <div className='flex flex-col'>
+              <AiOutlineDollar className='text-green-500 mt-1' />
+              <div className='flex flex-col items-start'>
                 <p className='text-md font-semibold'>Salary</p>
                 <h1 className='text-sm ml-2 font-medium text-gray-700'>
                   {prop.post.salary}
@@ -247,8 +247,8 @@ function Post(prop) {
             </div>
 
             <div className='mb-2 flex items-start gap-2'>
-              <AiOutlineClockCircle className='text-blue-500' />
-              <div className='flex flex-col'>
+              <AiOutlineClockCircle className='text-blue-500 mt-1' />
+              <div className='flex flex-col items-center'>
                 <p className='text-md font-semibold'>Experience</p>
                 <h1 className='text-sm ml-2 font-medium text-gray-700'>
                   {prop.post.experience}
@@ -257,8 +257,8 @@ function Post(prop) {
             </div>
 
             <div className='mb-2 flex items-start gap-2'>
-              <AiOutlineBook className='text-purple-500' />
-              <div className='flex flex-col'>
+              <AiOutlineBook className='text-purple-500 mt-1' />
+              <div className='flex flex-col items-center'>
                 <p className='text-md font-semibold'>Education</p>
                 <h1 className='text-sm ml-2 font-medium text-gray-700'>
                   {prop.post.major}
