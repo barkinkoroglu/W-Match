@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Form, Formik, Field } from 'formik';
 import { CompanyjobSchema } from '../validation/index';
@@ -8,10 +8,12 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
+  const [clickedButton, setClickedButton] = useState(null);
+
   const user = useSelector((state) => state.auth.user);
   const handleSubmit = async (values, actions) => {
     const milliseconds = values.startDate.getTime();
-    //console.log("Milliseconds:", milliseconds);
+
     const data = {
       jobname: values.job,
       information: values.information,
@@ -30,6 +32,10 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
       candidates: [],
       numberRec: values.recomnumber,
       type: 3,
+      experience: values.experience,
+      major: values.major,
+      gender: values.gender,
+      militaryService: values.militaryService,
     };
     //console.log(data);
     const id = await getUserId(user?.username);
@@ -61,6 +67,9 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
           startDate: new Date(),
           recomnumber: '',
           salary: '',
+          experience: '',
+          major: '',
+          isMilitaryServiceCompleted: false,
         }}
         onSubmit={handleSubmit}
       >
@@ -192,7 +201,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
               </div>
 
               <div className='flex justify-between whitespace-nowrap gap-3'>
-                <h1>How many people do you want recommended?</h1>
+                <h1>How many people do you want recommended ?</h1>
 
                 <Field
                   className='w-full text-center border '
@@ -215,6 +224,113 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
               </div>
               {errors.salary && touched.salary && (
                 <div className=' text-red-600'>{errors.salary}</div>
+              )}
+              <div className='flex gap-x-3 '>
+                <h1>Experience:</h1>
+                <input
+                  className='w-full outline-none border px-2 '
+                  name='experience'
+                  value={values.experience}
+                  onChange={handleChange}
+                  type='text'
+                />
+              </div>
+              <div className='flex gap-x-3 '>
+                <h1>Major:</h1>
+                <input
+                  className='w-full outline-none border px-2 '
+                  name='major'
+                  value={values.major}
+                  onChange={handleChange}
+                  type='text'
+                />
+              </div>
+              <div className='text-sm font-medium mt-4'>
+                <h3>Gender ?</h3>
+
+                <div className='flex gap-x-4 mt-2'>
+                  <Field name='isMilitary'>
+                    {({ field, form }) => (
+                      <>
+                        <label className='flex items-center cursor-pointer hover:bg-blue-100 hover:text-blue-600 rounded px-2 py-1 transition-colors duration-200'>
+                          <input
+                            type='radio'
+                            {...field}
+                            value='Male'
+                            className='form-radio text-blue-600'
+                            checked={clickedButton === 'Male'}
+                            onChange={(e) => {
+                              setClickedButton('Male');
+                            }}
+                          />
+                          <span className='ml-2 font-normal'>Male</span>
+                        </label>
+                        <label className='flex items-center cursor-pointer hover:bg-blue-100 hover:text-blue-600 rounded px-2 py-1 transition-colors duration-200'>
+                          <input
+                            type='radio'
+                            {...field}
+                            value='Female'
+                            className='form-radio text-blue-600'
+                            checked={clickedButton === 'Female'}
+                            onChange={(e) => {
+                              setClickedButton('Female');
+                              form.setFieldValue(
+                                'isMilitaryServiceCompleted',
+                                false
+                              );
+                            }}
+                          />
+                          <span className='ml-2 font-normal'>Female</span>
+                        </label>
+                      </>
+                    )}
+                  </Field>
+                </div>
+              </div>
+              {errors.gender && touched.gender && (
+                <div className='text-red-600'>{errors.gender}</div>
+              )}
+              {clickedButton === 'Male' && (
+                <div className='w-full flex flex-col gap-y-3 justify-center mt-4 '>
+                  <label className='block'>
+                    Is employee obliged to complete military service?
+                  </label>
+                  <div className='flex items-center gap-x-4'>
+                    <div className='flex items-center mr-6 pl-2 '>
+                      <input
+                        type='radio'
+                        id='completed'
+                        name='isMilitaryServiceCompleted'
+                        value={true}
+                        onChange={handleChange}
+                        className='form-radio text-blue-600 h-3 w-3 cursor-pointer'
+                      />
+                      <label
+                        htmlFor='completed'
+                        className='ml-2 text-gray-700 cursor-pointer font-normal'
+                      >
+                        Yes
+                      </label>
+                    </div>
+
+                    <div lassName='flex items-center gap-x-4  '>
+                      <input
+                        type='radio'
+                        id='notCompleted'
+                        name='isMilitaryServiceCompleted'
+                        value={false}
+                        onChange={handleChange}
+                        className='form-radio text-blue-600 h-3 w-3 cursor-pointer'
+                      />
+                      <label
+                        htmlFor='notCompleted'
+                        className='ml-2 text-gray-700 cursor-pointer font-normal'
+                      >
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
             <div className='flex  '>
