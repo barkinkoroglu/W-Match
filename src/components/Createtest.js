@@ -5,7 +5,7 @@ import Question from './Question';
 import { useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
 function Createtest({ showCreateTest, setShowCreateTest, refreshData }) {
-  const [nquestions, setNquestions] = useState();
+  const [nquestions, setNquestions] = useState(0);
   const [time, setTime] = useState();
   const [qindex, setQindex] = useState(0);
   const [tname, setTname] = useState('');
@@ -38,7 +38,10 @@ function Createtest({ showCreateTest, setShowCreateTest, refreshData }) {
               placeholder='Number of Question'
               className='border p-1 rounded-lg'
               type='number'
-              onChange={(e) => setNquestions(e.currentTarget.value)}
+              onChange={(e) => {
+                const newValue = e.currentTarget.value;
+                setNquestions(newValue < 0 ? 0 : newValue);
+              }}
               value={nquestions}
             />
           </div>
@@ -60,7 +63,10 @@ function Createtest({ showCreateTest, setShowCreateTest, refreshData }) {
               placeholder='Question Score'
               className=' border p-1 rounded-lg'
               type='number'
-              onChange={(e) => setQscore(e.currentTarget.value)}
+              onChange={(e) => {
+                const newValue = e.currentTarget.value;
+                setQscore(newValue < 0 ? 0 : newValue);
+              }}
               value={qscore}
             />
           </div>
@@ -113,7 +119,7 @@ function Createtest({ showCreateTest, setShowCreateTest, refreshData }) {
         <button
           onClick={() => setQindex(1)}
           className='p-1 hover:bg-slate-500 rounded-full flex items-center justify-center disabled:opacity-10 disabled:hover:bg-white'
-          disabled={qindex === 1 && true}
+          disabled={(+nquestions === 0 || qindex === 1) && true}
         >
           <ArrowForwardIosIcon />
         </button>
