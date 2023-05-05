@@ -227,7 +227,6 @@ function Post(prop) {
             </h1>
 
             <div className='mb-2 flex items-start gap-2'>
-              <AiOutlineFileText className='text-gray-500 mt-1' />
               <div className='flex flex-col'>
                 <p className='text-md font-semibold'>Description</p>
                 <h1 className='text-sm ml-2 font-medium text-gray-700'>
@@ -237,7 +236,6 @@ function Post(prop) {
             </div>
 
             <div className='mb-2 flex items-start gap-2'>
-              <AiOutlineDollar className='text-green-500 mt-1' />
               <div className='flex flex-col'>
                 <p className='text-md font-semibold'>Salary</p>
                 <h1 className='text-sm ml-2 font-medium text-gray-700'>
@@ -247,7 +245,6 @@ function Post(prop) {
             </div>
 
             <div className='mb-2 flex items-start gap-2'>
-              <AiOutlineClockCircle className='text-blue-500 mt-1' />
               <div className='flex flex-col'>
                 <p className='text-md font-semibold'>Experience</p>
                 <h1 className='text-sm ml-2 font-medium text-gray-700'>
@@ -257,7 +254,6 @@ function Post(prop) {
             </div>
 
             <div className='mb-2 flex items-start gap-2'>
-              <AiOutlineBook className='text-purple-500 mt-1' />
               <div className='flex flex-col'>
                 <p className='text-md font-semibold'>Education</p>
                 <h1 className='text-sm ml-2 font-medium text-gray-700'>

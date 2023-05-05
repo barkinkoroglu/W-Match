@@ -6,7 +6,7 @@ import Post from './Post';
 import Createtest from './Createtest';
 import CreateJob from './CreateJob';
 import { useSelector } from 'react-redux';
-import { createPost, getAllPost } from '../firebase';
+import { createPost, getAllPost, getUserId } from '../firebase';
 import StartPostBtn from './StartPost/StartPostBtn';
 function Feed() {
   const [showCreateTest, setShowCreateTest] = useState(false);
@@ -54,6 +54,7 @@ function Feed() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const id = await getUserId(user?.username);
 
     if (inputValue !== '') {
       const att = {
@@ -67,7 +68,7 @@ function Feed() {
         type: 1,
       };
       console.log(att);
-      await createPost(user.uid, att);
+      await createPost(id, att);
       setFlag(!flag);
       setInputValue('');
     }
