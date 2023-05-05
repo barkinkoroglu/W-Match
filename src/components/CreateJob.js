@@ -13,6 +13,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
   const user = useSelector((state) => state.auth.user);
   const handleSubmit = async (values, actions) => {
     const milliseconds = values.startDate.getTime();
+    console.log('submit');
 
     const data = {
       jobname: values.job,
@@ -35,9 +36,9 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
       experience: values.experience,
       major: values.major,
       gender: values.gender,
-      militaryService: values.militaryService,
+      isMilitaryServiceCompleted: values.isMilitaryServiceCompleted,
     };
-    //console.log(data);
+    console.log('dd', data);
     const id = await getUserId(user?.username);
     createCompanyJob(id, data).then(async () => await refreshData());
     setShowCreateJob(false);
@@ -54,7 +55,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
         </button>
       </div>
       <Formik
-        validationSchema={CompanyjobSchema}
+        //validationSchema={CompanyjobSchema}
         initialValues={{
           job: '',
           information: '',
@@ -69,7 +70,8 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
           salary: '',
           experience: '',
           major: '',
-          isMilitaryServiceCompleted: false,
+          gender: '',
+          isMilitaryServiceCompleted: '',
         }}
         onSubmit={handleSubmit}
       >
@@ -83,6 +85,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
           handleChange,
         }) => (
           <Form>
+            {console.log('values', values)}
             <div className='flex flex-col gap-y-3 p-2 justify-start'>
               <div className='flex gap-x-3  '>
                 <h1>Job:</h1>
@@ -256,11 +259,12 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
                           <input
                             type='radio'
                             {...field}
-                            value='Male'
+                            value={values.gender}
                             className='form-radio text-blue-600'
                             checked={clickedButton === 'Male'}
                             onChange={(e) => {
                               setClickedButton('Male');
+                              form.setFieldValue('gender', 'Male');
                             }}
                           />
                           <span className='ml-2 font-normal'>Male</span>
@@ -269,7 +273,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
                           <input
                             type='radio'
                             {...field}
-                            value='Female'
+                            value={values.gender}
                             className='form-radio text-blue-600'
                             checked={clickedButton === 'Female'}
                             onChange={(e) => {
@@ -278,6 +282,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
                                 'isMilitaryServiceCompleted',
                                 false
                               );
+                              form.setFieldValue('gender', 'Female');
                             }}
                           />
                           <span className='ml-2 font-normal'>Female</span>
