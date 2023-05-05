@@ -145,7 +145,7 @@ function Navbar() {
               Notifications
             </h3>
           </a>
-          {user.type !== 2 && (
+          {user && user?.type !== 2 && (
             <a
               className='flex flex-col items-center sm:w-10 lg:w-20'
               href='/jobs'
@@ -177,8 +177,10 @@ function Navbar() {
                     </div>
                     <div className='pl-3 '>
                       <h1 className='text-xl font-semibold leading-6 '>
-                        {user.type === 2 && user.companyname}
-                        {user.type === 1 && `${user.name} ${user.lastname}`}
+                        {user && user?.type === 2 && user.companyname}
+                        {user &&
+                          user?.type === 1 &&
+                          `${user.name} ${user.lastname}`}
                       </h1>
                       <p className='text-xs'>{user.country}</p>
                     </div>
