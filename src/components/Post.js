@@ -19,6 +19,8 @@ import {
   AiOutlineDollar,
   AiOutlineFileText,
   AiOutlineAppstoreAdd,
+  AiOutlineClockCircle,
+  AiOutlineBook,
 } from 'react-icons/ai';
 function Post(prop) {
   const [data, setData] = useState(null);
@@ -219,19 +221,40 @@ function Post(prop) {
             </div>
           </div>
           <div className='relative p-4'>
-            <h1 className='text-xl font-medium mb-2 flex items-center gap-2'>
+            <h1 className='text-xl font-medium mb-5 flex items-center gap-2'>
               <AiOutlineAppstoreAdd className='text-blue-500' />
               {prop.post.jobname}
             </h1>
 
             <div className='mb-2 flex items-center gap-2'>
-              <AiOutlineFileText className='text-gray-500' />
+              <div className='flex items-center gap-2'>
+                <AiOutlineFileText className='text-gray-500' />
+                <p className='text-md font-semibold'>Description:</p>
+              </div>
               <h1 className='text-base'>{prop.post.information}</h1>
             </div>
             <div className='mb-2 flex items-center gap-2'>
-              <AiOutlineDollar className='text-green-500' />
+              <div className='flex items-center gap-2'>
+                <AiOutlineDollar className='text-green-500' />
+                <p className='text-md font-semibold'>Salary:</p>
+              </div>
               <h1 className='text-sm'>{prop.post.salary}</h1>
             </div>
+            <div className='mb-2 flex items-center gap-2'>
+              <div className='flex items-center gap-2'>
+                <AiOutlineClockCircle className='text-blue-500' />
+                <p className='text-md font-semibold'>Experience:</p>
+              </div>
+              <h1 className='text-sm'>{prop.post.experience}</h1>
+            </div>
+            <div className='mb-2 flex items-center gap-2'>
+              <div className='flex items-center gap-2'>
+                <AiOutlineBook className='text-purple-500' />
+                <p className='text-md font-semibold'>Education:</p>
+              </div>
+              <h1 className='text-sm'>{prop.post.major}</h1>
+            </div>
+
             {prop.user?.type === 1 &&
               prop.post.candidates?.find(
                 (element) => element === prop.user.uid
