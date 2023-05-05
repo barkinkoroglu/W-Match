@@ -226,33 +226,44 @@ function Post(prop) {
               {prop.post.jobname}
             </h1>
 
-            <div className='mb-2 flex items-center gap-2'>
-              <div className='flex items-center gap-2'>
-                <AiOutlineFileText className='text-gray-500' />
-                <p className='text-md font-semibold'>Description:</p>
+            <div className='mb-2 flex items-start gap-2'>
+              <AiOutlineFileText className='text-gray-500' />
+              <div className='flex flex-col'>
+                <p className='text-md font-semibold'>Description</p>
+                <h1 className='text-sm ml-2 font-medium text-gray-700'>
+                  {prop.post.information}
+                </h1>
               </div>
-              <h1 className='text-base'>{prop.post.information}</h1>
             </div>
-            <div className='mb-2 flex items-center gap-2'>
-              <div className='flex items-center gap-2'>
-                <AiOutlineDollar className='text-green-500' />
-                <p className='text-md font-semibold'>Salary:</p>
+
+            <div className='mb-2 flex items-start gap-2'>
+              <AiOutlineDollar className='text-green-500' />
+              <div className='flex flex-col'>
+                <p className='text-md font-semibold'>Salary</p>
+                <h1 className='text-sm ml-2 font-medium text-gray-700'>
+                  {prop.post.salary}
+                </h1>
               </div>
-              <h1 className='text-sm'>{prop.post.salary}</h1>
             </div>
-            <div className='mb-2 flex items-center gap-2'>
-              <div className='flex items-center gap-2'>
-                <AiOutlineClockCircle className='text-blue-500' />
-                <p className='text-md font-semibold'>Experience:</p>
+
+            <div className='mb-2 flex items-start gap-2'>
+              <AiOutlineClockCircle className='text-blue-500' />
+              <div className='flex flex-col'>
+                <p className='text-md font-semibold'>Experience</p>
+                <h1 className='text-sm ml-2 font-medium text-gray-700'>
+                  {prop.post.experience}
+                </h1>
               </div>
-              <h1 className='text-sm'>{prop.post.experience}</h1>
             </div>
-            <div className='mb-2 flex items-center gap-2'>
-              <div className='flex items-center gap-2'>
-                <AiOutlineBook className='text-purple-500' />
-                <p className='text-md font-semibold'>Education:</p>
+
+            <div className='mb-2 flex items-start gap-2'>
+              <AiOutlineBook className='text-purple-500' />
+              <div className='flex flex-col'>
+                <p className='text-md font-semibold'>Education</p>
+                <h1 className='text-sm ml-2 font-medium text-gray-700'>
+                  {prop.post.major}
+                </h1>
               </div>
-              <h1 className='text-sm'>{prop.post.major}</h1>
             </div>
 
             {prop.user?.type === 1 &&
