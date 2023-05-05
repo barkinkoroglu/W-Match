@@ -137,7 +137,7 @@ function Post(prop) {
                 <div className='flex justify-end'>
                   <button
                     onClick={() => setshowtresults(true)}
-                    className=' cursor-pointer text-gray-700 mt-2 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200 '
+                    className='cursor-pointer text-gray-700 mt-2 hover:text-gray-600 hover:bg-slate-300 text-sm py-1 px-2 rounded-full bg-slate-200'
                   >
                     Show Results
                   </button>

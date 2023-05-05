@@ -114,7 +114,7 @@ function Question({
         qscore: qscore,
         username: username,
       };
-      await createCompanyTest(user.uid, finaldata).then(
+      await createCompanyTest(uid, finaldata).then(
         async () => await refreshData()
       );
       // console.log("Fınal", finaldata);
@@ -238,7 +238,7 @@ function Question({
             </div>
             <div className='flex  gap-x-10 mt-3 w-full relative justify-center'>
               <button
-                className='p-1 hover:bg-slate-500 rounded-full flex items-center justify-center'
+                className='p-2 hover:bg-slate-500 hover:text-white rounded-full flex items-center justify-center cursor-pointer'
                 disabled={nindex === 0 ? true : false}
                 onClick={() => handleBack()}
                 type='button'
@@ -247,7 +247,7 @@ function Question({
               </button>
 
               <button
-                className='p-1 hover:bg-slate-500 rounded-full flex items-center justify-center'
+                className='p-2 hover:bg-slate-500 hover:text-white rounded-full flex items-center justify-center cursor-pointer'
                 type='submit'
                 // disabled={nindex + 1 === parseInt(nquestions) ? true : false}
               >
