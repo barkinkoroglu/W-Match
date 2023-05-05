@@ -13,7 +13,6 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
   const user = useSelector((state) => state.auth.user);
   const handleSubmit = async (values, actions) => {
     const milliseconds = values.startDate.getTime();
-    console.log('submit');
 
     const data = {
       jobname: values.job,
@@ -38,7 +37,6 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
       gender: values.gender,
       isMilitaryServiceCompleted: values.isMilitaryServiceCompleted,
     };
-    console.log('dd', data);
     const id = await getUserId(user?.username);
     createCompanyJob(id, data).then(async () => await refreshData());
     setShowCreateJob(false);
@@ -280,7 +278,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
                               setClickedButton('Female');
                               form.setFieldValue(
                                 'isMilitaryServiceCompleted',
-                                false
+                                'false'
                               );
                               form.setFieldValue('gender', 'Female');
                             }}
