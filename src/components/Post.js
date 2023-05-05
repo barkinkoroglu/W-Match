@@ -15,7 +15,11 @@ import {
   deletePostdata,
 } from '../firebase';
 import Comment from './Comment';
-
+import {
+  AiOutlineDollar,
+  AiOutlineFileText,
+  AiOutlineAppstoreAdd,
+} from 'react-icons/ai';
 function Post(prop) {
   const [data, setData] = useState(null);
   const [datetime, setDatetime] = useState(null);
@@ -198,8 +202,9 @@ function Post(prop) {
     const handleApply = async () => {
       await applyJob(prop.post.username, prop.user.uid, prop.post.time);
     };
+    console.log('post', prop.post);
     return (
-      <div className='relative group/edit '>
+      <div className='relative group/edit  bg-white shadow-md rounded-lg'>
         <div className='  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4  border border-gray-200'>
           <div className=' flex gap-x-3 '>
             <Avatar src={data?.ProfileUrl} />
@@ -213,18 +218,27 @@ function Post(prop) {
               <h3 className='text-xs'>{prop.post.email}</h3>
             </div>
           </div>
-          <div className='relative'>
-            <h1 className='text- font-medium'> {prop.post.jobname} </h1>
+          <div className='relative p-4'>
+            <h1 className='text-xl font-medium mb-2 flex items-center gap-2'>
+              <AiOutlineAppstoreAdd className='text-blue-500' />
+              {prop.post.jobname}
+            </h1>
 
-            <h1 className='text-base'> {prop.post.information} </h1>
-            <h1 className='text-sm'>{prop.post.salary} </h1>
+            <div className='mb-2 flex items-center gap-2'>
+              <AiOutlineFileText className='text-gray-500' />
+              <h1 className='text-base'>{prop.post.information}</h1>
+            </div>
+            <div className='mb-2 flex items-center gap-2'>
+              <AiOutlineDollar className='text-green-500' />
+              <h1 className='text-sm'>{prop.post.salary}</h1>
+            </div>
             {prop.user?.type === 1 &&
               prop.post.candidates?.find(
                 (element) => element === prop.user.uid
               ) === undefined && (
                 <button
                   onClick={() => handleApply()}
-                  className='bg-slate-200 p-1 rounded-lg absolute right-0 bottom-0'
+                  className='bg-blue-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold hover:bg-blue-600 transition-colors duration-200'
                 >
                   Apply
                 </button>
