@@ -494,6 +494,7 @@ export const createCompanyTest = async (companyid, data) => {
     });
     toast.success('The test has been successfully created.');
   } catch (error) {
+    console.log('err', error);
     toast.error('Oops! Something went wrong!');
   }
 };
