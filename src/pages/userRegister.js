@@ -40,7 +40,6 @@ function UserRegister() {
       JobCategory,
       isTest,
     } = values;
-    console.log('VALL', values);
     const response = await userRegister(
       firstname,
       lastname,
