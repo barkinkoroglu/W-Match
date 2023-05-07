@@ -221,7 +221,7 @@ function Post(prop) {
             </div>
           </div>
           <div className='relative p-4'>
-            <h1 className='text-xl font-medium mb-5 flex items-center gap-2'>
+            <h1 className='text-2xl font-medium mb-5 flex items-center gap-2'>
               <AiOutlineAppstoreAdd className='text-blue-500 mt-1' />
               {prop.post.jobname}
             </h1>

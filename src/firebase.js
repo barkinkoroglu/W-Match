@@ -259,41 +259,21 @@ export const updateExam = async (userid, testCategory, score) => {
 };
 
 export const getUserInfo = async (uname) => {
+  console.log('UNAME', uname);
   const username = await getDoc(doc(db, 'usernames', uname));
+  console.log('UNAME12', username.data());
   if (username.exists()) {
     const res = (
       await getDoc(doc(db, 'users', username.data().user_id))
     ).data();
+    console.log('resss', res);
     if (res === undefined) {
       const res2 = (
         await getDoc(doc(db, 'companies', username.data().user_id))
       ).data();
-      const unsubscribe = onSnapshot(
-        doc(db, 'companies', username.data().user_id),
-        (docSnapshot) => {
-          if (docSnapshot.exists()) {
-            const updatedUserData = docSnapshot.data();
-            userHandle(updatedUserData);
 
-            // Unsubscribe the listener after the data is updated and handled
-            unsubscribe();
-          }
-        }
-      );
       return res2;
     }
-    const unsubscribe = onSnapshot(
-      doc(db, 'users', username.data().user_id),
-      (docSnapshot) => {
-        if (docSnapshot.exists()) {
-          const updatedUserData = docSnapshot.data();
-          userHandle(updatedUserData);
-
-          // Unsubscribe the listener after the data is updated and handled
-          unsubscribe();
-        }
-      }
-    );
     return res;
   } else {
     toast.error('User not found!');

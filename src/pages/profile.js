@@ -11,8 +11,6 @@ import { useParams } from 'react-router-dom';
 function Profile() {
   const [user, setUser] = useState(null);
   const param = useParams();
-  console.log('Param bilgisi', param.id);
-  console.log('USERRR', user);
   useEffect(() => {
     const callValue = async () => {
       await getUserInfo(param.id)
