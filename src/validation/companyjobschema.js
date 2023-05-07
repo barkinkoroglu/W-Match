@@ -14,10 +14,5 @@ export const CompanyjobSchema = Yup.object().shape({
   salary: Yup.string().required(),
   experience: Yup.number().required(),
   major: Yup.string().required(),
-  gender: Yup.string().required(),
-  isMilitaryServiceCompleted: Yup.boolean().when('gender', {
-    is: 'Male',
-    then: Yup.boolean().required(),
-    otherwise: Yup.boolean(),
-  }),
+  isMilitaryService: Yup.boolean().required(),
 });

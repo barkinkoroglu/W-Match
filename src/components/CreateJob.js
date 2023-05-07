@@ -8,8 +8,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
-  const [clickedButton, setClickedButton] = useState(null);
-
   const user = useSelector((state) => state.auth.user);
   const handleSubmit = async (values, actions) => {
     const milliseconds = values.startDate.getTime();
@@ -34,9 +32,9 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
       type: 3,
       experience: values.experience,
       major: values.major,
-      gender: values.gender,
-      isMilitaryServiceCompleted: values.isMilitaryServiceCompleted,
+      isMilitaryService: values.isMilitaryService,
     };
+    console.log('data', data);
     const id = await getUserId(user?.username);
     createCompanyJob(id, data).then(async () => await refreshData());
     setShowCreateJob(false);
@@ -53,7 +51,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
         </button>
       </div>
       <Formik
-        //validationSchema={CompanyjobSchema}
+        validationSchema={CompanyjobSchema}
         initialValues={{
           job: '',
           information: '',
@@ -68,8 +66,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
           salary: '',
           experience: '',
           major: '',
-          gender: '',
-          isMilitaryServiceCompleted: '',
+          isMilitaryService: '',
         }}
         onSubmit={handleSubmit}
       >
@@ -246,95 +243,46 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
                   type='text'
                 />
               </div>
-              <div className='text-sm font-medium mt-4'>
-                <h3>Gender ?</h3>
+              <div className='w-full flex flex-col gap-y-3 justify-center mt-4 '>
+                <label className='block'>
+                  Is employee obliged to complete military service?
+                </label>
+                <div className='flex items-center gap-x-4'>
+                  <div className='flex items-center mr-6 pl-2 '>
+                    <input
+                      id='tm'
+                      type='radio'
+                      name='isMilitaryService'
+                      value='true'
+                      onChange={handleChange}
+                      className='form-radio text-blue-600 h-3 w-3 cursor-pointer'
+                    />
+                    <label
+                      htmlFor='tm'
+                      className='ml-2 text-gray-700 cursor-pointer font-normal'
+                    >
+                      Yes
+                    </label>
+                  </div>
 
-                <div className='flex gap-x-4 mt-2'>
-                  <Field name='isMilitary'>
-                    {({ field, form }) => (
-                      <>
-                        <label className='flex items-center cursor-pointer hover:bg-blue-100 hover:text-blue-600 rounded px-2 py-1 transition-colors duration-200'>
-                          <input
-                            type='radio'
-                            {...field}
-                            value={values.gender}
-                            className='form-radio text-blue-600'
-                            checked={clickedButton === 'Male'}
-                            onChange={(e) => {
-                              setClickedButton('Male');
-                              form.setFieldValue('gender', 'Male');
-                            }}
-                          />
-                          <span className='ml-2 font-normal'>Male</span>
-                        </label>
-                        <label className='flex items-center cursor-pointer hover:bg-blue-100 hover:text-blue-600 rounded px-2 py-1 transition-colors duration-200'>
-                          <input
-                            type='radio'
-                            {...field}
-                            value={values.gender}
-                            className='form-radio text-blue-600'
-                            checked={clickedButton === 'Female'}
-                            onChange={(e) => {
-                              setClickedButton('Female');
-                              form.setFieldValue(
-                                'isMilitaryServiceCompleted',
-                                'false'
-                              );
-                              form.setFieldValue('gender', 'Female');
-                            }}
-                          />
-                          <span className='ml-2 font-normal'>Female</span>
-                        </label>
-                      </>
-                    )}
-                  </Field>
-                </div>
-              </div>
-              {errors.gender && touched.gender && (
-                <div className='text-red-600'>{errors.gender}</div>
-              )}
-              {clickedButton === 'Male' && (
-                <div className='w-full flex flex-col gap-y-3 justify-center mt-4 '>
-                  <label className='block'>
-                    Is employee obliged to complete military service?
-                  </label>
-                  <div className='flex items-center gap-x-4'>
-                    <div className='flex items-center mr-6 pl-2 '>
-                      <input
-                        type='radio'
-                        id='completed'
-                        name='isMilitaryServiceCompleted'
-                        value={true}
-                        onChange={handleChange}
-                        className='form-radio text-blue-600 h-3 w-3 cursor-pointer'
-                      />
-                      <label
-                        htmlFor='completed'
-                        className='ml-2 text-gray-700 cursor-pointer font-normal'
-                      >
-                        Yes
-                      </label>
-                    </div>
-
-                    <div lassName='flex items-center gap-x-4  '>
-                      <input
-                        type='radio'
-                        id='notCompleted'
-                        name='isMilitaryServiceCompleted'
-                        value={false}
-                        onChange={handleChange}
-                        className='form-radio text-blue-600 h-3 w-3 cursor-pointer'
-                      />
-                      <label
-                        htmlFor='notCompleted'
-                        className='ml-2 text-gray-700 cursor-pointer font-normal'
-                      >
-                        No
-                      </label>
-                    </div>
+                  <div lassName='flex items-center gap-x-4  '>
+                    <input
+                      id='fm'
+                      type='radio'
+                      name='isMilitaryService'
+                      value='false'
+                      onChange={handleChange}
+                      className='form-radio text-blue-600 h-3 w-3 cursor-pointer'
+                    />
+                    <label
+                      htmlFor='fm'
+                      className='ml-2 text-gray-700 cursor-pointer font-normal'
+                    >
+                      No
+                    </label>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
             <div className='flex  '>
               <button
