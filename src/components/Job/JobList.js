@@ -82,7 +82,7 @@ function JobList({ data }) {
           </div>
         </div>
 
-        {data?.type === 1 && (
+        {user?.type === 1 && (
           <button
             onClick={() => handleApply()}
             className='bg-blue-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold hover:bg-blue-600 transition-colors duration-200'
