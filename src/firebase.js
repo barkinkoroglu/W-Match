@@ -166,7 +166,8 @@ export const userRegister = async (
   longabout,
   JobCategory,
   password,
-  isTest
+  isTest,
+  skill
 ) => {
   try {
     const user = await getDoc(doc(db, 'usernames', username));
@@ -203,6 +204,7 @@ export const userRegister = async (
           CVdoc: '',
           longabout: longabout,
           isTest,
+          skill,
         };
         userHandle(data);
         await setDoc(doc(db, 'users', response.user.uid), {
@@ -225,6 +227,7 @@ export const userRegister = async (
           CVdoc: '',
           longabout: longabout,
           isTest,
+          skill,
         });
         //console.log(response);
       }

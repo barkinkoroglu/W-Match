@@ -40,7 +40,7 @@ function Profile() {
           </div>
           <div className='flex flex-col' style={{ width: '30%' }}>
             <Widget />
-            {user && user?.type !== 2 && (
+            {!user.skill && user && user?.type !== 2 && (
               <TestInfo user={user} className='mt-0' />
             )}
           </div>

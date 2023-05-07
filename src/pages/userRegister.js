@@ -22,7 +22,8 @@ function UserRegister() {
   const [inputKey, setInputKey] = useState(Date.now());
   const [isTest, setIsTest] = useState(false);
   const [clickedButton, setClickedButton] = useState(null);
-
+  const [add, setAdd] = useState(false);
+  const [skill, SetSkill] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (values, actions) => {
@@ -39,6 +40,7 @@ function UserRegister() {
       longabout,
       JobCategory,
       isTest,
+      skill,
     } = values;
     const response = await userRegister(
       firstname,
@@ -53,10 +55,15 @@ function UserRegister() {
       longabout,
       JobCategory,
       password,
-      isTest
+      isTest,
+      skill
     );
     if (response) {
       if (isTest) {
+        console.log('skill', values.skill);
+        if (values.skill) {
+          return navigate(`/profile/${username}`);
+        }
         return navigate(`/level`);
       }
       if (!isTest) {
@@ -101,7 +108,7 @@ function UserRegister() {
       <div className='container max-w-xl mx-auto flex-1 flex flex-col items-center justify-center px-2 z-10 my-4'>
         <div className='bg-white px-6 py-8 rounded shadow-md text-black w-full'>
           <Formik
-            validationSchema={RegisterSchema}
+            //validationSchema={RegisterSchema}
             initialValues={{
               firstname: '',
               lastname: '',
@@ -115,6 +122,7 @@ function UserRegister() {
               JobCategory: '',
               password: '',
               confirmpassword: '',
+              skill: '',
             }}
             onSubmit={handleSubmit}
           >
@@ -347,6 +355,7 @@ function UserRegister() {
                                 setClickedButton('later');
                                 form.setFieldValue('isTest', false);
                                 form.setFieldValue('JobCategory', '');
+                                setAdd(false);
                               }}
                             />
                             <span className='ml-2 font-normal'>Later</span>
@@ -383,9 +392,29 @@ function UserRegister() {
                       <option value='JavaScript'>JavaScript</option>
                       <option value='React'>React.js</option>
                     </select>
-
-                    {/* <p>{`You selected ${jobcategory}`}</p> */}
-                    {/* <p>{`You selected ${values.JobCategory}`}</p> */}
+                    <p className='text-gray-600'>
+                      If you can't find your skill{' '}
+                      <span
+                        onClick={() => setAdd(true)}
+                        className='text-blue-500 cursor-pointer hover:underline'
+                      >
+                        click here
+                      </span>{' '}
+                      to add your
+                    </p>
+                    {add && (
+                      <>
+                        <input
+                          type='text'
+                          name='skill'
+                          value={values.skill}
+                          required={add}
+                          onChange={handleChange}
+                          placeholder='Type your skill'
+                          className='w-full p-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200'
+                        />
+                      </>
+                    )}
                   </div>
                 )}
 
