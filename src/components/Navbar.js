@@ -73,13 +73,13 @@ function Navbar() {
     <nav className='bg-slate-100 sticky top-0 z-50'>
       <div className='flex max-w-6xl px-3 sm: py-3 lg:py-1  mx-auto justify-between items-center   '>
         <div className=' flex flex-1 items-center gap-x-4 '>
-          <Link to='/home' className=' font-bold  '>
+          <a href='/home' className=' font-bold  '>
             <img
               src={require('../images/logo.png')}
               className=' w-[160px] h-12 object-cover border-none outline-none'
               alt=''
             />
-          </Link>
+          </a>
           <form
             ref={ref}
             className=' flex w-full relative   '
