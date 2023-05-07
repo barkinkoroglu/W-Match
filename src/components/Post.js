@@ -16,13 +16,7 @@ import {
   getUserId,
 } from '../firebase';
 import Comment from './Comment';
-import {
-  AiOutlineDollar,
-  AiOutlineFileText,
-  AiOutlineAppstoreAdd,
-  AiOutlineClockCircle,
-  AiOutlineBook,
-} from 'react-icons/ai';
+import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 function Post(prop) {
   const [data, setData] = useState(null);
   const [datetime, setDatetime] = useState(null);

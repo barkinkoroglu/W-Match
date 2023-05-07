@@ -1,10 +1,10 @@
-import { Avatar } from "@mui/material";
-import React from "react";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import { useState, useEffect } from "react";
-import { getCompanyInfo, applyJob } from "../../firebase";
-import { useSelector } from "react-redux";
-
+import { Avatar } from '@mui/material';
+import React from 'react';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { useState, useEffect } from 'react';
+import { getCompanyInfo, applyJob } from '../../firebase';
+import { useSelector } from 'react-redux';
+import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 function JobList({ data }) {
   const [company, setCompany] = useState(null);
   const [isapply, setIsapply] = useState(false);
@@ -19,7 +19,7 @@ function JobList({ data }) {
     if (result !== 0) {
       setDatetime(result);
     } else {
-      setDatetime("Today");
+      setDatetime('Today');
     }
   };
   useEffect(() => {
@@ -39,39 +39,57 @@ function JobList({ data }) {
     setIsapply(true);
   };
   return (
-    <div className="relative last:border-none border-b-2 ">
-      <div className="flex  justify-between pt-3 group  pb-2 ">
-        <div className="flex gap-x-2   ">
-          <div className="flex-1  j">
-            <Avatar
-              src={company?.ProfileUrl}
-              sx={{ height: 50, width: 50 }}
-              variant="square"
-            />
-          </div>
-          <div className="flex flex-col gap-y-1">
-            <h1 className="group-hover:underline font-medium">
-              {data.jobname}
-            </h1>
-            <h1 className="text-sm -mt-1 ">{data.name} </h1>
-            <h1 className="text-xs text-gray-700 "> {data.information} </h1>
+    <div className='relative group/edit  bg-white shadow-md rounded-lg mb-4 mt-5'>
+      <div className='relative p-4'>
+        <h1 className='text-2xl font-medium mb-5 flex items-center gap-2'>
+          <AiOutlineAppstoreAdd className='text-blue-500 mt-1' />
+          {data.jobname}
+        </h1>
 
-            <h1 className="text-xs text-gray-400 ">
-              {" "}
-              {datetime !== 0 ? `${datetime} days ago` : `${datetime}`}{" "}
+        <div className='mb-2 flex items-start gap-2'>
+          <div className='flex flex-col'>
+            <p className='text-md font-semibold'>Description</p>
+            <h1 className='text-sm ml-2 font-medium text-gray-700'>
+              {data.information}
             </h1>
           </div>
         </div>
-        {/* <div className="flex p-1 rounded-full h-min hover:bg-slate-400 ">
-          <BookmarkBorderIcon />
-        </div> */}
-        <button
-          onClick={() => handleApply()}
-          className="absolute bottom-1 right-0 px-2 py-1 text-sm bg-slate-300 rounded-lg disabled:bg-gray-100 disabled:text-gray-300 hover:bg-slate-400 transition-colors duration-300"
-          disabled={isapply}
-        >
-          Apply
-        </button>
+
+        <div className='mb-2 flex items-start gap-2'>
+          <div className='flex flex-col'>
+            <p className='text-md font-semibold'>Salary</p>
+            <h1 className='text-sm ml-2 font-medium text-gray-700'>
+              {data.salary}
+            </h1>
+          </div>
+        </div>
+
+        <div className='mb-2 flex items-start gap-2'>
+          <div className='flex flex-col'>
+            <p className='text-md font-semibold'>Experience</p>
+            <h1 className='text-sm ml-2 font-medium text-gray-700'>
+              {data.experience}
+            </h1>
+          </div>
+        </div>
+
+        <div className='mb-2 flex items-start gap-2'>
+          <div className='flex flex-col'>
+            <p className='text-md font-semibold'>Education</p>
+            <h1 className='text-sm ml-2 font-medium text-gray-700'>
+              {data.major}
+            </h1>
+          </div>
+        </div>
+
+        {data?.type === 1 && (
+          <button
+            onClick={() => handleApply()}
+            className='bg-blue-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold hover:bg-blue-600 transition-colors duration-200'
+          >
+            Apply
+          </button>
+        )}
       </div>
     </div>
   );
