@@ -34,7 +34,6 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
       major: values.major,
       isMilitaryService: values.isMilitaryService,
     };
-    console.log('data', data);
     const id = await getUserId(user?.username);
     createCompanyJob(id, data).then(async () => await refreshData());
     setShowCreateJob(false);

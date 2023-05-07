@@ -28,7 +28,7 @@ function Post(prop) {
     (prop.post.questions && prop.post.questions.length > 0) || false;
   const [commentsToShow, setCommentsToShow] = useState(3);
   const [flagshowmore, setFlagshowmore] = useState(true);
-
+  const [id, setID] = useState('');
   const handleShowMoreComments = () => {
     setCommentsToShow((prevValue) => prevValue + 3);
   };
@@ -76,7 +76,16 @@ function Post(prop) {
       await prop.refreshData();
     });
   };
-
+  useEffect(() => {
+    const getid = async () => {
+      const id = await getUserId(username);
+      if (id) {
+        setID(id);
+      }
+    };
+    getid();
+  }, [user]);
+  console.log('IDD', id);
   const TestPost = () => {
     return (
       <div className='relative group/edit'>
@@ -198,10 +207,9 @@ function Post(prop) {
   const JobPost = () => {
     const handleApply = async () => {
       const id = await getUserId(username);
-      console.log('id', id);
       await applyJob(prop.post.username, id, prop.post.time);
     };
-    console.log('post', prop.post);
+
     return (
       <div className='relative group/edit  bg-white shadow-md rounded-lg'>
         <div className='  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4  border border-gray-200'>
@@ -259,17 +267,21 @@ function Post(prop) {
               </div>
             </div>
 
-            {prop.user?.type === 1 &&
-              prop.post.candidates?.find(
-                (element) => element === prop.user.uid
-              ) === undefined && (
-                <button
-                  onClick={() => handleApply()}
-                  className='bg-blue-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold hover:bg-blue-600 transition-colors duration-200'
-                >
-                  Apply
-                </button>
-              )}
+            {prop.user?.type === 1 && prop.post.candidates?.indexOf(id) > -1 ? (
+              <button
+                disabled
+                className='bg-gray-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold'
+              >
+                Applied
+              </button>
+            ) : (
+              <button
+                onClick={() => handleApply()}
+                className='bg-blue-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold hover:bg-blue-600 transition-colors duration-200'
+              >
+                Apply
+              </button>
+            )}
           </div>
         </div>
         <h1
