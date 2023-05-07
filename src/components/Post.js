@@ -13,6 +13,7 @@ import {
   getUserInfo,
   applyJob,
   deletePostdata,
+  getUserId,
 } from '../firebase';
 import Comment from './Comment';
 import {
@@ -199,10 +200,12 @@ function Post(prop) {
       </div>
     );
   };
-
+  const { username } = user;
   const JobPost = () => {
     const handleApply = async () => {
-      await applyJob(prop.post.username, prop.user.uid, prop.post.time);
+      const id = await getUserId(username);
+      console.log('id', id);
+      await applyJob(prop.post.username, id, prop.post.time);
     };
     console.log('post', prop.post);
     return (
