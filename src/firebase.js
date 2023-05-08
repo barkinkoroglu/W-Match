@@ -262,14 +262,12 @@ export const updateExam = async (userid, testCategory, score) => {
 };
 
 export const getUserInfo = async (uname) => {
-  console.log('UNAME', uname);
   const username = await getDoc(doc(db, 'usernames', uname));
-  console.log('UNAME12', username.data());
   if (username.exists()) {
     const res = (
       await getDoc(doc(db, 'users', username.data().user_id))
     ).data();
-    console.log('resss', res);
+    if (res) return res;
     if (res === undefined) {
       const res2 = (
         await getDoc(doc(db, 'companies', username.data().user_id))
