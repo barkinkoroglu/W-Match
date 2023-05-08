@@ -214,6 +214,22 @@ function Post(prop) {
         setIsGender(true);
       }
     };
+    const ShowApply = () =>
+      prop.post.candidates?.indexOf(id) > -1 ? (
+        <button
+          disabled
+          className='bg-gray-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold'
+        >
+          Applied
+        </button>
+      ) : (
+        <button
+          onClick={() => handleApply()}
+          className='bg-blue-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold hover:bg-blue-600 transition-colors duration-200'
+        >
+          Apply
+        </button>
+      );
 
     return (
       <>
@@ -273,23 +289,8 @@ function Post(prop) {
                   </h1>
                 </div>
               </div>
-
-              {prop.user?.type === 1 &&
-              prop.post.candidates?.indexOf(id) > -1 ? (
-                <button
-                  disabled
-                  className='bg-gray-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold'
-                >
-                  Applied
-                </button>
-              ) : (
-                <button
-                  onClick={() => handleApply()}
-                  className='bg-blue-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold hover:bg-blue-600 transition-colors duration-200'
-                >
-                  Apply
-                </button>
-              )}
+              {console.log('ss', user)}
+              {user?.type === 1 && ShowApply()}
             </div>
           </div>
           <h1

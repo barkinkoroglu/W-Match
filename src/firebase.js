@@ -444,6 +444,7 @@ export const getAllPost = async (userInfo) => {
     }
   }
   nposts.sort((a, b) => b.time - a.time);
+
   return nposts;
 };
 
