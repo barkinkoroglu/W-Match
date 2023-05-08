@@ -38,11 +38,11 @@ function Profile() {
     <div>
       <Navbar />
       <div className='bg-gray-50'>
-        <div className='flex max-w-6xl px-3 pt-3 mx-auto'>
-          <div style={{ width: '70%' }}>
+        <div className='md:flex max-w-6xl px-3 pt-3 md:mx-auto'>
+          <div className='w-full md:w-[70%]'>
             <UserProfile user={user} param={param} />
           </div>
-          <div className='flex flex-col' style={{ width: '30%' }}>
+          <div className='flex flex-col w-full md:w-[30%]'>
             <Widget />
             <div className='mt-3  '>
               {!user.skill &&
