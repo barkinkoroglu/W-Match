@@ -17,6 +17,7 @@ import {
 } from '../firebase';
 import Comment from './Comment';
 import { AiOutlineAppstoreAdd } from 'react-icons/ai';
+import JobPortal from './JobPortal';
 function Post(prop) {
   const [data, setData] = useState(null);
   const [datetime, setDatetime] = useState(null);
@@ -29,6 +30,7 @@ function Post(prop) {
   const [commentsToShow, setCommentsToShow] = useState(3);
   const [flagshowmore, setFlagshowmore] = useState(true);
   const [id, setID] = useState('');
+  const [isGender, setIsGender] = useState(false);
   const handleShowMoreComments = () => {
     setCommentsToShow((prevValue) => prevValue + 3);
   };
@@ -85,7 +87,7 @@ function Post(prop) {
     };
     getid();
   }, [user]);
-  console.log('IDD', id);
+
   const TestPost = () => {
     return (
       <div className='relative group/edit'>
@@ -208,99 +210,106 @@ function Post(prop) {
     const handleApply = async () => {
       const id = await getUserId(username);
       await applyJob(prop.post.username, id, prop.post.time);
+      if (prop.post.isMilitaryService === 'true') {
+        setIsGender(true);
+      }
     };
 
     return (
-      <div className='relative group/edit  bg-white shadow-md rounded-lg'>
-        <div className='  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4  border border-gray-200'>
-          <div className=' flex gap-x-3 '>
-            <Avatar src={data?.ProfileUrl} />
-            <div>
-              <a
-                href={`profile/${data?.username}`}
-                className=' text-lg font-medium hover:underline'
-              >
-                {data?.companyname}
-              </a>
-              <h3 className='text-xs'>{prop.post.email}</h3>
+      <>
+        {isGender && <JobPortal setIsGender={setIsGender} />}
+        <div className='relative group/edit  bg-white shadow-md rounded-lg'>
+          <div className='  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4  border border-gray-200'>
+            <div className=' flex gap-x-3 '>
+              <Avatar src={data?.ProfileUrl} />
+              <div>
+                <a
+                  href={`profile/${data?.username}`}
+                  className=' text-lg font-medium hover:underline'
+                >
+                  {data?.companyname}
+                </a>
+                <h3 className='text-xs'>{prop.post.email}</h3>
+              </div>
+            </div>
+            <div className='relative p-4'>
+              <h1 className='text-2xl font-medium mb-5 flex items-center gap-2'>
+                <AiOutlineAppstoreAdd className='text-blue-500 mt-1' />
+                {prop.post.jobname}
+              </h1>
+
+              <div className='mb-2 flex items-start gap-2'>
+                <div className='flex flex-col'>
+                  <p className='text-md font-semibold'>Description</p>
+                  <h1 className='text-sm ml-2 font-medium text-gray-700'>
+                    {prop.post.information}
+                  </h1>
+                </div>
+              </div>
+
+              <div className='mb-2 flex items-start gap-2'>
+                <div className='flex flex-col'>
+                  <p className='text-md font-semibold'>Salary</p>
+                  <h1 className='text-sm ml-2 font-medium text-gray-700'>
+                    {prop.post.salary}
+                  </h1>
+                </div>
+              </div>
+
+              <div className='mb-2 flex items-start gap-2'>
+                <div className='flex flex-col'>
+                  <p className='text-md font-semibold'>Experience</p>
+                  <h1 className='text-sm ml-2 font-medium text-gray-700'>
+                    {prop.post.experience}
+                  </h1>
+                </div>
+              </div>
+
+              <div className='mb-2 flex items-start gap-2'>
+                <div className='flex flex-col'>
+                  <p className='text-md font-semibold'>Education</p>
+                  <h1 className='text-sm ml-2 font-medium text-gray-700'>
+                    {prop.post.major}
+                  </h1>
+                </div>
+              </div>
+
+              {prop.user?.type === 1 &&
+              prop.post.candidates?.indexOf(id) > -1 ? (
+                <button
+                  disabled
+                  className='bg-gray-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold'
+                >
+                  Applied
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleApply()}
+                  className='bg-blue-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold hover:bg-blue-600 transition-colors duration-200'
+                >
+                  Apply
+                </button>
+              )}
             </div>
           </div>
-          <div className='relative p-4'>
-            <h1 className='text-2xl font-medium mb-5 flex items-center gap-2'>
-              <AiOutlineAppstoreAdd className='text-blue-500 mt-1' />
-              {prop.post.jobname}
-            </h1>
-
-            <div className='mb-2 flex items-start gap-2'>
-              <div className='flex flex-col'>
-                <p className='text-md font-semibold'>Description</p>
-                <h1 className='text-sm ml-2 font-medium text-gray-700'>
-                  {prop.post.information}
-                </h1>
-              </div>
-            </div>
-
-            <div className='mb-2 flex items-start gap-2'>
-              <div className='flex flex-col'>
-                <p className='text-md font-semibold'>Salary</p>
-                <h1 className='text-sm ml-2 font-medium text-gray-700'>
-                  {prop.post.salary}
-                </h1>
-              </div>
-            </div>
-
-            <div className='mb-2 flex items-start gap-2'>
-              <div className='flex flex-col'>
-                <p className='text-md font-semibold'>Experience</p>
-                <h1 className='text-sm ml-2 font-medium text-gray-700'>
-                  {prop.post.experience}
-                </h1>
-              </div>
-            </div>
-
-            <div className='mb-2 flex items-start gap-2'>
-              <div className='flex flex-col'>
-                <p className='text-md font-semibold'>Education</p>
-                <h1 className='text-sm ml-2 font-medium text-gray-700'>
-                  {prop.post.major}
-                </h1>
-              </div>
-            </div>
-
-            {prop.user?.type === 1 && prop.post.candidates?.indexOf(id) > -1 ? (
-              <button
-                disabled
-                className='bg-gray-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold'
-              >
-                Applied
-              </button>
-            ) : (
-              <button
-                onClick={() => handleApply()}
-                className='bg-blue-500 p-2 rounded-lg absolute right-4 bottom-4 text-white font-semibold hover:bg-blue-600 transition-colors duration-200'
-              >
-                Apply
-              </button>
-            )}
-          </div>
-        </div>
-        <h1
-          className={`${
-            prop.post.username === prop.user.username &&
-            `group-hover/edit:hidden`
-          } absolute right-4 top-3 text-sm c text-gray-400  inline `}
-        >
-          {datetime}
-        </h1>
-        {prop.post.username === prop.user.username && (
-          <div
-            onClick={() => deletePost()}
-            className='absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline '
+          <h1
+            className={`${
+              prop.post.username === prop.user.username &&
+              `group-hover/edit:hidden`
+            } absolute right-4 top-3 text-sm c text-gray-400  inline `}
           >
-            <CloseIcon />
-          </div>
-        )}
-      </div>
+            {datetime}
+          </h1>
+          {prop.post.username === prop.user.username && (
+            <div
+              onClick={() => deletePost()}
+              className='absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline '
+            >
+              <CloseIcon />
+            </div>
+          )}
+        </div>
+      </>
     );
   };
 
