@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 function Profile() {
   const [user, setUser] = useState(null);
   const param = useParams();
-  const username = useSelector((state) => state.auth.user.username);
+  const userr = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     const callValue = async () => {
@@ -43,9 +43,10 @@ function Profile() {
           </div>
           <div className='flex flex-col' style={{ width: '30%' }}>
             <Widget />
-            {!user.skill && user && user?.username === username && (
-              <TestInfo user={user} className='mt-0' />
-            )}
+            {!user.skill &&
+              user &&
+              user?.username === userr &&
+              userr?.username && <TestInfo user={user} className='mt-0' />}
           </div>
         </div>
       </div>
