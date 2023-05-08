@@ -7,7 +7,10 @@ const TestInfo = ({ user }) => {
   const handleStartClick = () => {
     navigate(`/level`);
   };
-
+  const cptl = () => {
+    const str = user.JobCategory;
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
   return (
     <>
       {user?.type === 1 && !user.wmatchTests[user.JobCategory] ? (
@@ -20,7 +23,7 @@ const TestInfo = ({ user }) => {
       ) : (
         <div className='text-center p-6 rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:from-purple-300 hover:via-pink-400 hover:to-red-400 transition duration-500 ease-in-out'>
           <h2 className='text-3xl font-bold text-white mb-4 tracking-tighter'>
-            Skill Score
+            You W-Match {cptl()} Skill Score
           </h2>
           <p className='text-2xl font-semibold text-white tracking-normal'>
             {user.wmatchTests[user.JobCategory]}
