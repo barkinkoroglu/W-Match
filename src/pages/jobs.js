@@ -14,9 +14,9 @@ function Jobs() {
     <div>
       <Navbar />
       <div className="bg-gray-50">
-        <div className="flex max-w-6xl px-3 pt-3 mx-auto  min-h-[calc(100vh-60px)] ">
+        <div className="md:flex  max-w-6xl px-3 pt-3 mx-auto  min-h-[calc(100vh-60px)] ">
           <div className="flex-[0.25]">
-            <div className="bg-white rounded-lg mr-2 flex flex-col justify-start items-start gap-y-3 p-2 shadow-sm ">
+            <div className="bg-white mb-2 md:mb-0 rounded-lg mr-2 flex flex-col justify-start items-start gap-y-3 p-2 shadow-sm ">
               <button
                 onClick={() => setSelectFunction(0)}
                 className="flex items-center gap-x-2 hover:underline cursor-pointer"
