@@ -1,12 +1,12 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
-import UserProfile from '../components/Profile/UserProfile';
-import Widget from '../components/Widget';
-import TestInfo from '../components/TestInfo';
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { getUserInfo } from '../firebase';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import Navbar from "../components/Navbar";
+import UserProfile from "../components/Profile/UserProfile";
+import Widget from "../components/Widget";
+import TestInfo from "../components/TestInfo";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getUserInfo } from "../firebase";
+import { useParams } from "react-router-dom";
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -32,21 +32,21 @@ function Profile() {
   if (user === null) {
     return <div>Loading...</div>;
   }
-  console.log('user1', user);
+  console.log("user1", user);
   return (
     <div>
       <Navbar />
-      <div className='bg-gray-50'>
-        <div className='flex max-w-6xl px-3 pt-3 mx-auto'>
-          <div style={{ width: '70%' }}>
+      <div className="bg-gray-50">
+        <div className="md:flex max-w-6xl px-3 pt-3 md:mx-auto">
+          <div className="w-full md:w-[70%]">
             <UserProfile user={user} param={param} />
           </div>
-          <div className='flex flex-col' style={{ width: '30%' }}>
+          <div className="flex flex-col w-full md:w-[30%]">
             <Widget />
             {!user.skill &&
               user &&
               user?.username === userr &&
-              userr?.username && <TestInfo user={user} className='mt-0' />}
+              userr?.username && <TestInfo user={user} className="mt-0" />}
           </div>
         </div>
       </div>

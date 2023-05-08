@@ -36,8 +36,14 @@ function UserProfile({ user, param }) {
   const [openSettingProfile, setOpenSettingProfile] = useState(false);
   const [prodata, setProdata] = useState(null);
   const [allposts, setAllPost] = useState([]);
+  const [visiblePostCount, setVisiblePostCount] = useState(5);
+  const groupSize = 5;
+  console.log("BÜTÜN POSTLAR", allposts);
+  const getVisiblePosts = (posts, visiblePostCount) => {
+    return posts.slice(0, visiblePostCount);
+  };
+  const visiblePosts = getVisiblePosts(allposts, visiblePostCount);
 
-  console.log("BÜTÜN POSTLAR", user.uid);
   const refreshData = async () => {
     await getAllPostbyname(user)
       .then((data) => setAllPost(data))
@@ -47,6 +53,13 @@ function UserProfile({ user, param }) {
     getUserInfo(ruser.username).then((temp) => setProdata(temp));
     refreshData();
   }, [ruser.username]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleEdit = async (values, actions) => {
     if (ruser.type === 1) {
@@ -140,6 +153,12 @@ function UserProfile({ user, param }) {
   const handleEmailClick = (event) => {
     event.preventDefault();
     window.location.href = `mailto:${user.email}`;
+  };
+
+  const handleScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      setVisiblePostCount((prevCount) => prevCount + groupSize);
+    }
   };
   return (
     <div className="flex flex-[0.7]   md:min-h-screen   flex-col mx-12 gap-y-3 pb-3 ">
@@ -628,9 +647,9 @@ function UserProfile({ user, param }) {
         <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
           <h1 className="text-lg">Posts</h1>
           <div>
-            {allposts.length > 0 ? (
-              allposts.sort((a, b) => b.time - a.time) &&
-              allposts.map((post, index) => {
+            {visiblePosts.length > 0 ? (
+              visiblePosts.sort((a, b) => b.time - a.time) &&
+              visiblePosts.map((post, index) => {
                 return (
                   <Post
                     key={index}
