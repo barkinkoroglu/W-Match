@@ -8,7 +8,7 @@ const TestInfo = ({ user }) => {
     navigate(`/level`);
   };
   const cptl = () => {
-    const str = user.JobCategory;
+    const str = user.JobCategory.toLowerCase();
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
   return (
