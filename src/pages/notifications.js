@@ -13,7 +13,7 @@ function Notifications() {
     <div className="w-full  ">
       <Navbar />
       <div className="bg-gray-50">
-        <div className="flex max-w-6xl px-3 pt-3 mx-auto ">
+        <div className="md:flex max-w-6xl px-3 pt-3 mx-auto ">
           <Sidebar />
           <NotificationFeed />
           <Widget />
