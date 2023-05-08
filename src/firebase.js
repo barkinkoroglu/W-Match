@@ -250,6 +250,35 @@ export const createLevel = async (username, level) => {
   }
 };
 
+export const createTestRight = async (username, testname) => {
+  const userID = await getDoc(doc(db, 'usernames', username));
+  const user = userID.data();
+  const dbUserRef = doc(db, 'users', user.user_id);
+
+  await updateDoc(dbUserRef, {
+    [`testRight.${testname}`]: 1,
+  });
+};
+
+export const reduceTestRight = async (username) => {
+  const userID = await getDoc(doc(db, 'usernames', username));
+  const user = userID.data();
+  const dbUserRef = doc(db, 'users', user.user_id);
+  const dbUser = await getDoc(dbUserRef);
+
+  await updateDoc(dbUserRef, {
+    userTestRight: dbUser.data().userTestRight - 1,
+  });
+};
+
+export const getTestRight = async (username) => {
+  const userID = await getDoc(doc(db, 'usernames', username));
+  const user = userID.data();
+  const dbUser = await getDoc(doc(db, 'users', user.user_id));
+
+  return dbUser.data().testRight;
+};
+
 export const updateExam = async (userid, testCategory, score) => {
   const dbUser = doc(db, 'users', userid);
   console.log('KEKW2', userid, testCategory, score);

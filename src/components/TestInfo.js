@@ -22,7 +22,7 @@ const TestInfo = ({ user }) => {
         </button>
       ) : (
         <div className='text-center p-6 rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:from-purple-300 hover:via-pink-400 hover:to-red-400 transition duration-500 ease-in-out'>
-          <h2 className='text-3xl font-bold text-white mb-4 tracking-tighter'>
+          <h2 className='text-2xl font-bold text-white mb-4 tracking-tighter'>
             Your W-Match {cptl()} Skill Score
           </h2>
           <p className='text-2xl font-semibold text-white tracking-normal'>

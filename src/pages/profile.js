@@ -4,6 +4,7 @@ import UserProfile from '../components/Profile/UserProfile';
 import Widget from '../components/Widget';
 import TestInfo from '../components/TestInfo';
 import { useSelector } from 'react-redux';
+import TestRightInfo from '../components/TestRightInfo';
 import { useEffect, useState } from 'react';
 import { getUserInfo } from '../firebase';
 import { useParams } from 'react-router-dom';
@@ -32,7 +33,7 @@ function Profile() {
   if (user === null) {
     return <div>Loading...</div>;
   }
-  console.log('user1', user);
+
   return (
     <div>
       <Navbar />
@@ -43,10 +44,17 @@ function Profile() {
           </div>
           <div className='flex flex-col' style={{ width: '30%' }}>
             <Widget />
-            {!user.skill &&
-              user &&
-              user?.username === userr &&
-              userr?.username && <TestInfo user={user} className='mt-0' />}
+            <div className='mt-3  '>
+              {!user.skill &&
+                user &&
+                userr?.username &&
+                user?.username === userr.username && <TestInfo user={user} />}
+            </div>
+            <div className='mt-3'>
+              {user && userr?.username && user?.username === userr.username && (
+                <TestRightInfo user={user} />
+              )}
+            </div>
           </div>
         </div>
       </div>

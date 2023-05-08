@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { createLevel, updateSkill, getCurrUser } from '../firebase';
+import {
+  createLevel,
+  updateSkill,
+  getCurrUser,
+  reduceTestRight,
+  createTestRight,
+} from '../firebase';
 import { addQuestionsBySection } from '../helpers/utils';
 import { useDispatch } from 'react-redux';
 import { setQuestions } from '../store/questions';
@@ -25,11 +31,11 @@ function Level() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('bb', dlevel, user?.JobCategory);
 
     if (dlevel !== 'Select your level' && user?.JobCategory) {
       setShowTooltip(false);
       await createLevel(user?.username, dlevel);
+      await createTestRight(user?.username, user?.JobCategory);
       navigate(`/test/${user?.JobCategory}`);
       addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
         setShowTooltip(!result.success);
@@ -47,7 +53,6 @@ function Level() {
   const handleSelect = () => {
     if (values.JobCategory) {
       const fetchData = async () => {
-        console.log('fetch');
         await updateSkill(user?.username, values.JobCategory);
       };
       fetchData();

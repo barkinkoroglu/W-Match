@@ -322,7 +322,10 @@ function UserRegister() {
                 )}
                 {/* <p>{`You selected ${values.jobfunct}`}</p> */}
                 <div className='text-sm font-medium text-gray-700 mt-4'>
-                  <h3>Do you want to take test now or later?</h3>
+                  <h3>
+                    Do you want to take test now or later? (You only have 2 test
+                    right)
+                  </h3>
 
                   <div className='flex gap-x-4 mt-2'>
                     <Field name='isTest'>
