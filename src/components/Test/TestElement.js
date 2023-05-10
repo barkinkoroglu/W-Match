@@ -5,9 +5,6 @@ function TestElement({ record, index, setScore, handleCurrentIndex }) {
     if (chosen === record?.correct) {
       setScore((prevScore) => prevScore + 6.67);
     }
-    if (chosen !== record?.correct) {
-      setScore((prevScore) => (prevScore - 6.67 > 0 ? prevScore - 6.67 : 0));
-    }
   };
 
   return (

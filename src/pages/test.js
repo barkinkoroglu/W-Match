@@ -11,7 +11,7 @@ function Test() {
   const [score, setScore] = useState(0);
   const [disButton, setdisButton] = useState(false);
   const [cquestion, setCquestion] = useState(0);
-  const [examtime, setExamtime] = useState(7200);
+  const [examtime, setExamtime] = useState(300);
   const { questions } = useSelector((state) => state.questions);
 
   const timerId = useRef();
@@ -20,13 +20,6 @@ function Test() {
   console.log('User bilgisi', user);
   const param = useParams();
   console.log('Param bilgisi', param.id);
-  const fetchJson = () => {
-    fetch('../questions/examquestion.json')
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch((e) => console.log(e));
-    console.log(data);
-  };
 
   useEffect(() => {
     timerId.current = setInterval(() => {
