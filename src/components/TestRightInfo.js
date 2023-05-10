@@ -23,7 +23,7 @@ const TestRightInfo = ({ user }) => {
   return (
     <>
       {user?.type === 1 && (
-        <div className='text-center p-6 rounded-lg bg-gradient-to-r from-blue-400 via-indigo-500 to-cyan-500 hover:from-blue-300 hover:via-indigo-400 hover:to-cyan-400 transition duration-500 ease-in-out'>
+        <div className='max-h-64 overflow-y-auto text-center p-6 rounded-lg bg-gradient-to-r from-blue-400 via-indigo-500 to-cyan-500 hover:from-blue-300 hover:via-indigo-400 hover:to-cyan-400 transition duration-500 ease-in-out'>
           {handleRight()}
         </div>
       )}
