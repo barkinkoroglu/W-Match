@@ -50,7 +50,6 @@ function Level() {
     const { name, value } = e.target;
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
-  console.log('s', values);
   const handleSelect = () => {
     if (values.JobCategory) {
       const fetchData = async () => {
