@@ -22,12 +22,19 @@ const TestInfo = ({ user }) => {
         </button>
       ) : (
         <div className='text-center p-6 rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:from-purple-300 hover:via-pink-400 hover:to-red-400 transition duration-500 ease-in-out'>
-          <h2 className='text-2xl font-bold text-white mb-4 tracking-tighter'>
-            Your W-Match {cptl()} Skill Score
-          </h2>
-          <p className='text-2xl font-semibold text-white tracking-normal'>
-            {user.wmatchTests[user.JobCategory]}
-          </p>
+          <div className='max-h-64 overflow-y-auto'>
+            <div>
+              <h2 className='text-2xl font-bold text-white tracking-tighter mb-1'>
+                Your W-Match {cptl()} Skill Score -{' '}
+                <span className='font-extrabold text-yellow-300'>
+                  {' '}
+                  <span className='font-extrabold text-yellow-300'>
+                    {user.wmatchTests[user.JobCategory]}
+                  </span>
+                </span>
+              </h2>
+            </div>
+          </div>
         </div>
       )}
     </>
