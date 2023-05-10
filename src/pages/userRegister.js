@@ -59,6 +59,12 @@ function UserRegister() {
       skill
     );
     if (response) {
+      const imageRef = ref(storage, `CV/${username}/${cvUpload.name + v4()}`);
+      await uploadBytes(imageRef, cvUpload).then((snaphsot) => {
+        getDownloadURL(snaphsot.ref).then((url) => {
+          changeUserCV(username, url);
+        });
+      });
       if (isTest) {
         console.log("skill", values.skill);
         if (values.skill) {
@@ -69,12 +75,6 @@ function UserRegister() {
       if (!isTest) {
         return navigate(`/profile/${username}`);
       }
-      const imageRef = ref(storage, `CV/${username}/${cvUpload.name + v4()}`);
-      uploadBytes(imageRef, cvUpload).then((snaphsot) => {
-        getDownloadURL(snaphsot.ref).then((url) => {
-          changeUserCV(username, url).then(() => navigate(`/level`));
-        });
-      });
     }
   };
   useEffect(() => {
