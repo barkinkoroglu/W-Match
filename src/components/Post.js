@@ -112,7 +112,7 @@ function Post(prop) {
             <div className="flex justify-between">
               <h1 className="text-xs">
                 Test Time :{" "}
-                <span className="font-medium">{prop.post.qtime}</span>{" "}
+                <span className="font-medium">{prop.post.qtime}</span> Seconds
               </h1>
               <h1 className="text-xs">
                 Number of questions :{" "}

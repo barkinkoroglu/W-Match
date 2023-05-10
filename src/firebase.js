@@ -251,9 +251,9 @@ export const createLevel = async (username, level) => {
 };
 
 export const createTestRight = async (username, testname) => {
-  const userID = await getDoc(doc(db, 'usernames', username));
+  const userID = await getDoc(doc(db, "usernames", username));
   const user = userID.data();
-  const dbUserRef = doc(db, 'users', user.user_id);
+  const dbUserRef = doc(db, "users", user.user_id);
 
   await updateDoc(dbUserRef, {
     [`testRight.${testname}`]: 1,
@@ -261,9 +261,9 @@ export const createTestRight = async (username, testname) => {
 };
 
 export const reduceTestRight = async (username) => {
-  const userID = await getDoc(doc(db, 'usernames', username));
+  const userID = await getDoc(doc(db, "usernames", username));
   const user = userID.data();
-  const dbUserRef = doc(db, 'users', user.user_id);
+  const dbUserRef = doc(db, "users", user.user_id);
   const dbUser = await getDoc(dbUserRef);
 
   await updateDoc(dbUserRef, {
@@ -272,9 +272,9 @@ export const reduceTestRight = async (username) => {
 };
 
 export const getTestRight = async (username) => {
-  const userID = await getDoc(doc(db, 'usernames', username));
+  const userID = await getDoc(doc(db, "usernames", username));
   const user = userID.data();
-  const dbUser = await getDoc(doc(db, 'users', user.user_id));
+  const dbUser = await getDoc(doc(db, "users", user.user_id));
 
   return dbUser.data().testRight;
 };
@@ -856,6 +856,7 @@ export const getWmatchTests = async (userid) => {
   }
 };
 export const updateSkill = async (username, jc) => {
+  //console.log(username, jc);
   const userdataid = await getDoc(doc(db, "usernames", username));
   const user = userdataid.data();
   const userDocRef = doc(db, "users", user.user_id);

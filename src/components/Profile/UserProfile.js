@@ -38,7 +38,7 @@ function UserProfile({ user, param }) {
   const [allposts, setAllPost] = useState([]);
   const [visiblePostCount, setVisiblePostCount] = useState(5);
   const groupSize = 5;
-  console.log("BÜTÜN POSTLAR", allposts);
+  console.log("BÜTÜN POSTLAR", user);
   const getVisiblePosts = (posts, visiblePostCount) => {
     return posts.slice(0, visiblePostCount);
   };
@@ -270,25 +270,27 @@ function UserProfile({ user, param }) {
             </button>
           )}
 
-          {ruser.type === 1 && ruser.username !== param.id && (
-            <button
-              className="absolute right-3 bottom-3 flex items-center text-gray-100 bg-slate-400 py-1 px-2 rounded-full hover:bg-slate-500 cursor-pointer transition-colors duration-300"
-              onClick={() => handleFollowProfile()}
-            >
-              {prodata?.following.find((element) => element === param.id) ===
-              undefined ? (
-                <div className="flex items-center">
-                  <AddIcon />
-                  <h1>Follow</h1>
-                </div>
-              ) : (
-                <div className="flex items-center">
-                  <RemoveIcon />
-                  <h1>Unfollow</h1>
-                </div>
-              )}
-            </button>
-          )}
+          {ruser.type === 1 &&
+            ruser.username !== param.id &&
+            user?.type === 2 && (
+              <button
+                className="absolute right-3 bottom-3 flex items-center text-gray-100 bg-slate-400 py-1 px-2 rounded-full hover:bg-slate-500 cursor-pointer transition-colors duration-300"
+                onClick={() => handleFollowProfile()}
+              >
+                {prodata?.following.find((element) => element === param.id) ===
+                undefined ? (
+                  <div className="flex items-center">
+                    <AddIcon />
+                    <h1>Follow</h1>
+                  </div>
+                ) : (
+                  <div className="flex items-center">
+                    <RemoveIcon />
+                    <h1>Unfollow</h1>
+                  </div>
+                )}
+              </button>
+            )}
 
           {openSettingProfile && (
             <div className=" ">
