@@ -39,6 +39,7 @@ function UserProfile({ user, param }) {
   const [visiblePostCount, setVisiblePostCount] = useState(5);
   const groupSize = 5;
   console.log("BÜTÜN POSTLAR", user);
+
   const getVisiblePosts = (posts, visiblePostCount) => {
     return posts.slice(0, visiblePostCount);
   };
@@ -50,9 +51,9 @@ function UserProfile({ user, param }) {
       .catch((error) => console.log("ERROR", error));
   };
   useEffect(() => {
-    getUserInfo(ruser.username).then((temp) => setProdata(temp));
+    getUserInfo(user.username).then((temp) => setProdata(temp));
     refreshData();
-  }, [ruser.username]);
+  }, [user.username]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -70,6 +71,8 @@ function UserProfile({ user, param }) {
         values.adressline1,
         values.adressline2,
         ruser.username
+      ).then(() =>
+        getUserInfo(ruser.username).then((temp) => setProdata(temp))
       );
     } else {
       console.log(values);
@@ -81,6 +84,8 @@ function UserProfile({ user, param }) {
         values.adressline1,
         values.adressline2,
         ruser.username
+      ).then(() =>
+        getUserInfo(ruser.username).then((temp) => setProdata(temp))
       );
     }
 
@@ -160,6 +165,10 @@ function UserProfile({ user, param }) {
       setVisiblePostCount((prevCount) => prevCount + groupSize);
     }
   };
+
+  if (!prodata) {
+    return;
+  }
   return (
     <div className="flex flex-[0.7]   md:min-h-screen   flex-col mx-12 gap-y-3 pb-3 ">
       <div className="max-h-[490px] bg-white rounded-lg flex flex-col ">
@@ -412,12 +421,12 @@ function UserProfile({ user, param }) {
                     <Formik
                       validationSchema={UpdateCompanySchema}
                       initialValues={{
-                        companyname: ruser.companyname,
-                        about: ruser.about,
-                        longabout: ruser.longabout,
-                        email: ruser.email,
-                        adressline1: ruser.addressline1,
-                        adressline2: ruser.addressline2,
+                        companyname: prodata.companyname,
+                        about: prodata.about,
+                        longabout: prodata.longabout,
+                        email: prodata.email,
+                        adressline1: prodata.addressline1,
+                        adressline2: prodata.addressline2,
                       }}
                       onSubmit={handleEdit}
                     >
@@ -562,27 +571,31 @@ function UserProfile({ user, param }) {
         <div className="flex flex-1 p-2">
           {user.type === 1 ? (
             <div>
-              <h1 className="text-lg font-medium">{`${user.name} ${user.lastname}`}</h1>
-              <h1 className="text-gray-500 font-light">{user.jobfunct}</h1>
-              <p className="text-gray-500 font-light text-sm">{user.country}</p>
+              <h1 className="text-lg font-medium">{`${prodata?.name} ${prodata?.lastname}`}</h1>
+              <h1 className="text-gray-500 font-light">{prodata?.jobfunct}</h1>
+              <p className="text-gray-500 font-light text-sm">
+                {prodata?.country}
+              </p>
             </div>
           ) : (
             <div>
-              <h1 className="text-lg font-medium">{user.companyname}</h1>
-              <h1 className="text-gray-500 font-light">{user.about}</h1>
-              <p className="text-gray-500 font-light text-sm">{user.country}</p>
+              <h1 className="text-lg font-medium">{prodata?.companyname}</h1>
+              <h1 className="text-gray-500 font-light">{prodata?.about}</h1>
+              <p className="text-gray-500 font-light text-sm">
+                {prodata?.country}
+              </p>
             </div>
           )}
         </div>
       </div>
       <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
         <h1 className="text-lg">About</h1>
-        <p className="text-sm">{user?.longabout}</p>
+        <p className="text-sm">{prodata?.longabout}</p>
       </div>
       <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
         <h1 className="text-lg">E-Mail</h1>
         <a
-          href={`mailto:${user?.email}`}
+          href={`mailto:${prodata?.email}`}
           onClick={handleEmailClick}
           className="text-sm"
         >
@@ -591,7 +604,7 @@ function UserProfile({ user, param }) {
       </div>
       <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
         <h1 className="text-lg">Address</h1>
-        <h1 className="text-sm">{user?.addressline1}</h1>
+        <h1 className="text-sm">{prodata?.addressline1}</h1>
       </div>
       {user.type === 1 && (
         <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2  relative group ">

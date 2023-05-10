@@ -671,18 +671,23 @@ export const userEditInformation = async (
   address2,
   username
 ) => {
-  const userid = await getDoc(doc(db, "usernames", username));
-  const userdata = userid.data();
-  const dbUser = await getDoc(doc(db, "users", userdata.user_id));
+  try {
+    const userid = await getDoc(doc(db, "usernames", username));
+    const userdata = userid.data();
+    const dbUser = await getDoc(doc(db, "users", userdata.user_id));
 
-  await setDoc(doc(db, "users", userdata.user_id), {
-    ...dbUser.data(),
-    jobfunct: jobfunct,
-    longabout: longabout,
-    email: email,
-    addressline1: address,
-    addressline2: address2,
-  });
+    await setDoc(doc(db, "users", userdata.user_id), {
+      ...dbUser.data(),
+      jobfunct: jobfunct,
+      longabout: longabout,
+      email: email,
+      addressline1: address,
+      addressline2: address2,
+    });
+    toast.success("The information has been successfully updated.");
+  } catch (error) {
+    toast.error("Something went wrong.");
+  }
 };
 
 export const companyEditInformation = async (
@@ -694,18 +699,23 @@ export const companyEditInformation = async (
   address2,
   username
 ) => {
-  const userid = await getDoc(doc(db, "usernames", username));
-  const userdata = userid.data();
-  const dbUser = await getDoc(doc(db, "companies", userdata.user_id));
-  await setDoc(doc(db, "companies", userdata.user_id), {
-    ...dbUser.data(),
-    companyname: companyname,
-    about: about,
-    longabout: longabout,
-    email: email,
-    addressline1: address,
-    addressline2: address2,
-  });
+  try {
+    const userid = await getDoc(doc(db, "usernames", username));
+    const userdata = userid.data();
+    const dbUser = await getDoc(doc(db, "companies", userdata.user_id));
+    await setDoc(doc(db, "companies", userdata.user_id), {
+      ...dbUser.data(),
+      companyname: companyname,
+      about: about,
+      longabout: longabout,
+      email: email,
+      addressline1: address,
+      addressline2: address2,
+    });
+    toast.success("The information has been successfully updated.");
+  } catch (error) {
+    toast.error("Something went wrong.");
+  }
 };
 
 export const searchCompany = async (companydata, search) => {
