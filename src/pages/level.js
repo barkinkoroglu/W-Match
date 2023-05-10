@@ -38,7 +38,7 @@ function Level() {
     if (values.JobCategory) {
       const fetchData = async () => {
         await getCurrUserById(user.uid);
-        if (user?.username)
+        if (user && user?.username)
           await updateSkill(user?.username, values.JobCategory);
       };
       fetchData();
