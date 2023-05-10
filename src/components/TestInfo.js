@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const TestInfo = ({ user }) => {
-  console.log('usr', user);
   const navigate = useNavigate();
   const handleStartClick = () => {
     navigate(`/level`);
@@ -16,7 +15,7 @@ const TestInfo = ({ user }) => {
       {user?.type === 1 && !user.wmatchTests[user.JobCategory] ? (
         <button
           onClick={handleStartClick}
-          className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-150'
+          className='w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-150'
         >
           Start test
         </button>
