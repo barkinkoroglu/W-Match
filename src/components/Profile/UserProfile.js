@@ -253,7 +253,7 @@ function UserProfile({ user, param }) {
           )}
 
           <img
-            className="absolute top-0 left-0 w-full h-3/4 rounded-t-lg  "
+            className="absolute top-0 left-0 w-full h-3/4 rounded-t-lg object-fill "
             src={
               (ruser.username === param.id ? ruser.BackUrl : user.BackUrl) ||
               require("../../images/defaultcover2.jpg")
@@ -586,6 +586,10 @@ function UserProfile({ user, param }) {
         >
           {user?.email}
         </a>
+      </div>
+      <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2">
+        <h1 className="text-lg">Address</h1>
+        <h1 className="text-sm">{user?.addressline1}</h1>
       </div>
       {user.type === 1 && (
         <div className="p-2 bg-white rounded-lg flex flex-col gap-y-2  relative group ">
