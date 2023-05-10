@@ -58,7 +58,7 @@ function CompanyTest() {
   };
 
   return (
-    <div className="h-screen   bg-gray-200 relative flex flex-col  items-center gap-y-3   ">
+    <div className="min-h-screen   bg-gray-200 relative flex flex-col  items-center gap-y-3   ">
       <div className="absolute right-4 top-1 bg-slate-300 px-4 py-2 rounded-full font-medium text-lg text-center z-10  w-24">
         {examtime}
       </div>
