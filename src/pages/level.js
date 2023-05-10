@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   createLevel,
@@ -7,10 +6,9 @@ import {
   getCurrUser,
   reduceTestRight,
   createTestRight,
+  getCurrUserById,
 } from '../firebase';
-import { addQuestionsBySection } from '../helpers/utils';
-import { useDispatch } from 'react-redux';
-import { setQuestions } from '../store/questions';
+
 import LeaveBtn from '../components/LeaveBtn';
 import { FaCheck } from 'react-icons/fa';
 
@@ -21,8 +19,7 @@ function Level() {
     JobCategory: '',
   });
   const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const handleSelection = (e) => {
     if (e.target.value !== 'Select your level') {
       setDLevel(e.target.value);
@@ -31,19 +28,6 @@ function Level() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (dlevel !== 'Select your level' && user?.JobCategory) {
-      setShowTooltip(false);
-      await createLevel(user?.username, dlevel);
-      await createTestRight(user?.username, user?.JobCategory);
-      navigate(`/test/${user?.JobCategory}`);
-      addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
-        setShowTooltip(!result.success);
-        dispatch(setQuestions(result.questions));
-      });
-    } else {
-      setShowTooltip(true);
-    }
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,7 +37,9 @@ function Level() {
   const handleSelect = () => {
     if (values.JobCategory) {
       const fetchData = async () => {
-        await updateSkill(user?.username, values.JobCategory);
+        await getCurrUserById(user.uid);
+        if (user?.username)
+          await updateSkill(user?.username, values.JobCategory);
       };
       fetchData();
     }
