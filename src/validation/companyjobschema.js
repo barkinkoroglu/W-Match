@@ -1,4 +1,4 @@
-import Yup from "./validate";
+import Yup from './validate';
 
 export const CompanyjobSchema = Yup.object().shape({
   job: Yup.string().required(),
@@ -12,7 +12,7 @@ export const CompanyjobSchema = Yup.object().shape({
   data: Yup.date(),
   recomnumber: Yup.number(),
   salary: Yup.string().required(),
-  experience: Yup.number().required(),
+  experience: Yup.required(),
   major: Yup.string().required(),
   isMilitaryService: Yup.boolean().required(),
 });
