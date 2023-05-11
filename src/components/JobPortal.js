@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux';
 
-const JobPortal = ({ setIsObliged, setIsAnswered }) => {
+const JobPortal = ({ setIsObliged, setIsAnswered, setExtraScore }) => {
   const [obligation, setObligation] = useState('');
   const [isMlDone, setIsMlDone] = useState(false);
-  const [extraScore, setExtraScore] = useState(0);
 
   return ReactDOM.createPortal(
     <>

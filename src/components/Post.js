@@ -14,6 +14,7 @@ import {
   applyJob,
   deletePostdata,
   getUserId,
+  addMlScore,
 } from '../firebase';
 import Comment from './Comment';
 import { AiOutlineAppstoreAdd } from 'react-icons/ai';
@@ -32,6 +33,7 @@ function Post(prop) {
   const [id, setID] = useState('');
   const [isObliged, setIsObliged] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [extraScore, setExtraScore] = useState(0);
   const handleShowMoreComments = () => {
     setCommentsToShow((prevValue) => prevValue + 3);
   };
@@ -208,6 +210,18 @@ function Post(prop) {
   };
   const { username } = user;
   const JobPost = () => {
+    useEffect(() => {
+      const addScore = async () => {
+        if (username) {
+          const id = await getUserId(username);
+          if (id) {
+            await addMlScore(id, extraScore);
+          }
+        }
+      };
+      addScore();
+    }, [extraScore, user]);
+    console.log('extra', extraScore);
     const handleApply = async () => {
       const id = await getUserId(username);
       await applyJob(prop.post.username, id, prop.post.time);
@@ -236,6 +250,7 @@ function Post(prop) {
       <>
         {isObliged && !isAnswered && (
           <JobPortal
+            setExtraScore={setExtraScore}
             setIsObliged={setIsObliged}
             setIsAnswered={setIsAnswered}
           />

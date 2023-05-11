@@ -281,7 +281,6 @@ export const getTestRight = async (username) => {
 
 export const updateExam = async (userid, testCategory, score) => {
   const dbUser = doc(db, 'users', userid);
-  console.log('KEKW2', userid, testCategory, score);
   const scoreData = {
     [testCategory]: score,
   };
@@ -911,5 +910,12 @@ export const getCurrUserById = async (id) => {
       // Unsubscribe the listener after the data is updated and handled
       unsubscribe();
     }
+  });
+};
+
+export const addMlScore = async (userid, score) => {
+  const dbUser = doc(db, 'users', userid);
+  await updateDoc(dbUser, {
+    militaryServiceScore: score,
   });
 };
