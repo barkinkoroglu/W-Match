@@ -19,6 +19,7 @@ import {
 import Comment from './Comment';
 import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 import JobPortal from './JobPortal';
+import JobRanking from './JobRanking';
 function Post(prop) {
   const [data, setData] = useState(null);
   const [datetime, setDatetime] = useState(null);
@@ -34,6 +35,7 @@ function Post(prop) {
   const [isObliged, setIsObliged] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
   const [extraScore, setExtraScore] = useState(0);
+  const [showRnk, setShowRnk] = useState(false);
   const handleShowMoreComments = () => {
     setCommentsToShow((prevValue) => prevValue + 3);
   };
@@ -311,9 +313,44 @@ function Post(prop) {
                 </div>
               </div>
               <div className='border-t-2 w-full'>
-                <div className='flex justify-end'>
+                <div className='flex justify-between items-center p-2'>
                   {console.log('ss', user)}
                   {user?.type === 1 && ShowApply()}
+                  {user && user?.type === 2 && (
+                    <button
+                      className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded'
+                      onClick={() => setShowRnk(true)}
+                    >
+                      Show Ranking Results
+                    </button>
+                  )}
+                  {showRnk && (
+                    <div>
+                      <div className='fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75'></div>
+                      <div className='fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white'>
+                        <div className='flex flex-col items-center border-b-2 relative'>
+                          <h1 className=' text-lg '>
+                            Candidates Ranking Results
+                          </h1>
+                          <div className='border-b-4 -mb-[1.7px] border-slate-500'>
+                            <h1 className='p-2'>
+                              All
+                              <span className='font-medium'>HAHA</span>
+                            </h1>
+                          </div>
+                          <button
+                            onClick={() => setShowRnk(false)}
+                            className='absolute hover:bg-slate-400 rounded-lg p-1 right-0'
+                          >
+                            <CloseIcon />
+                          </button>
+                        </div>
+                        <div className='flex flex-col gap-y-3 py-3 overflow-y-auto'>
+                          {<JobRanking />}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

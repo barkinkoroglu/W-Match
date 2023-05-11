@@ -919,3 +919,30 @@ export const addMlScore = async (userid, score) => {
     militaryServiceScore: score,
   });
 };
+
+export const getJobTestInfos = async (userid) => {
+  const dbUser = doc(db, 'companies', userid);
+
+  const docSnap = await getDoc(dbUser);
+
+  if (docSnap.exists()) {
+    const userData = docSnap.data().posts;
+    if (userData) return userData;
+  } else {
+    console.log('No such document!');
+    return null;
+  }
+};
+
+export const getCandidateById = async (userid) => {
+  const dbUser = doc(db, 'users', userid);
+
+  const docSnap = await getDoc(dbUser);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    console.log('No such user!');
+    return null;
+  }
+};
