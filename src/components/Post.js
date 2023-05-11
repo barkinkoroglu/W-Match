@@ -333,10 +333,7 @@ function Post(prop) {
                             Candidates Ranking Results
                           </h1>
                           <div className='border-b-4 -mb-[1.7px] border-slate-500'>
-                            <h1 className='p-2'>
-                              All
-                              <span className='font-medium'>HAHA</span>
-                            </h1>
+                            <h1 className='p-2 font-medium'>Candidates</h1>
                           </div>
                           <button
                             onClick={() => setShowRnk(false)}
