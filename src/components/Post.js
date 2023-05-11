@@ -214,7 +214,7 @@ function Post(prop) {
       const addScore = async () => {
         if (username) {
           const id = await getUserId(username);
-          if (id) {
+          if (id && extraScore > 0) {
             await addMlScore(id, extraScore);
           }
         }
