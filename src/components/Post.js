@@ -31,6 +31,7 @@ function Post(prop) {
   const [flagshowmore, setFlagshowmore] = useState(true);
   const [id, setID] = useState('');
   const [isObliged, setIsObliged] = useState(false);
+  const [isAnswered, setIsAnswered] = useState(false);
   const handleShowMoreComments = () => {
     setCommentsToShow((prevValue) => prevValue + 3);
   };
@@ -233,7 +234,12 @@ function Post(prop) {
 
     return (
       <>
-        {isObliged && <JobPortal setIsObliged={setIsObliged} />}
+        {isObliged && !isAnswered && (
+          <JobPortal
+            setIsObliged={setIsObliged}
+            setIsAnswered={setIsAnswered}
+          />
+        )}
         <div className='relative group/edit  bg-white shadow-md rounded-lg'>
           <div className='  px-4 py-2 bg-white flex flex-col rounded-lg  mb-4  border border-gray-200'>
             <div className=' flex gap-x-3 '>

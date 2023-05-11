@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-const JobPortal = ({ setIsObliged }) => {
+const JobPortal = ({ setIsObliged, setIsAnswered }) => {
   const [obligation, setObligation] = useState('');
   const [isMlDone, setIsMlDone] = useState(false);
+  const [extraScore, setExtraScore] = useState(0);
+
   return ReactDOM.createPortal(
     <>
       <div className='fixed inset-0 bg-blue-500 opacity-50 z-40'></div>
@@ -23,6 +25,7 @@ const JobPortal = ({ setIsObliged }) => {
               onClick={() => {
                 setIsObliged(false);
                 setObligation('no');
+                setIsAnswered(true);
               }}
               className='w-32 bg-pink-500 px-4 py-2 rounded-lg text-white font-semibold hover:bg-pink-600 transition-colors duration-200'
             >
@@ -36,13 +39,20 @@ const JobPortal = ({ setIsObliged }) => {
               </h4>
               <div className='flex justify-center space-x-4'>
                 <button
-                  onClick={() => setIsMlDone(true)}
+                  onClick={() => {
+                    setExtraScore(15);
+                    setIsMlDone(true);
+                    setIsAnswered(true);
+                  }}
                   className='w-32 bg-green-500 px-4 py-2 rounded-lg text-white font-semibold hover:bg-green-600 transition-colors duration-200'
                 >
                   Yes
                 </button>
                 <button
-                  onClick={() => setIsMlDone(false)}
+                  onClick={() => {
+                    setIsAnswered(true);
+                    setIsMlDone(false);
+                  }}
                   className='w-32 bg-red-500 px-4 py-2 rounded-lg text-white font-semibold hover:bg-red-600 transition-colors duration-200'
                 >
                   No
