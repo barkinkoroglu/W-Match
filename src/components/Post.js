@@ -1,12 +1,12 @@
-import { Avatar } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import Like from "./Like";
-import TestResultElement from "./TestResultElement";
-import CloseIcon from "@mui/icons-material/Close";
-import { useSelector } from "react-redux";
-import AddIcon from "@mui/icons-material/Add";
+import { Avatar } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import Like from './Like';
+import TestResultElement from './TestResultElement';
+import CloseIcon from '@mui/icons-material/Close';
+import { useSelector } from 'react-redux';
+import AddIcon from '@mui/icons-material/Add';
 import {
   createComment,
   createLike,
@@ -14,23 +14,23 @@ import {
   applyJob,
   deletePostdata,
   getUserId,
-} from "../firebase";
-import Comment from "./Comment";
-import { AiOutlineAppstoreAdd } from "react-icons/ai";
-import JobPortal from "./JobPortal";
+} from '../firebase';
+import Comment from './Comment';
+import { AiOutlineAppstoreAdd } from 'react-icons/ai';
+import JobPortal from './JobPortal';
 function Post(prop) {
   const [data, setData] = useState(null);
   const [datetime, setDatetime] = useState(null);
   const [showComments, setShowComments] = useState(false);
   const [showlikes, setshowLikes] = useState(false);
   const [showtresults, setshowtresults] = useState(false);
-  const [commentValue, setCommentValue] = useState("");
+  const [commentValue, setCommentValue] = useState('');
   const isTest =
     (prop.post.questions && prop.post.questions.length > 0) || false;
   const [commentsToShow, setCommentsToShow] = useState(3);
   const [flagshowmore, setFlagshowmore] = useState(true);
-  const [id, setID] = useState("");
-  const [isGender, setIsGender] = useState(false);
+  const [id, setID] = useState('');
+  const [isObliged, setIsObliged] = useState(false);
   const handleShowMoreComments = () => {
     setCommentsToShow((prevValue) => prevValue + 3);
   };
@@ -63,7 +63,7 @@ function Post(prop) {
         if (minuteDiff !== 0) {
           setDatetime(`${minuteDiff}m`);
         } else {
-          setDatetime("Now");
+          setDatetime('Now');
         }
       }
     }
@@ -90,48 +90,48 @@ function Post(prop) {
 
   const TestPost = () => {
     return (
-      <div className="relative group/edit">
-        <div className="  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4 border border-gray-200">
-          <div className=" flex gap-x-3 ">
+      <div className='relative group/edit'>
+        <div className='  px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4 border border-gray-200'>
+          <div className=' flex gap-x-3 '>
             <Avatar src={data?.ProfileUrl} />
             <div>
               <a
                 href={`profile/${data?.username}`}
-                className=" text-lg font-medium hover:underline"
+                className=' text-lg font-medium hover:underline'
               >
                 {data?.companyname}
               </a>
-              <h3 className="text-xs">{prop.post.email}</h3>
+              <h3 className='text-xs'>{prop.post.email}</h3>
             </div>
           </div>
-          <div className="relative flex flex-col gap-2">
-            <h1 className="text-base ">
+          <div className='relative flex flex-col gap-2'>
+            <h1 className='text-base '>
               {isTest ? `${prop.post.testname}` : prop.post.information}
             </h1>
-            <p className="text-sm">{prop.post.information}</p>
-            <div className="flex justify-between">
-              <h1 className="text-xs">
-                Test Time :{" "}
-                <span className="font-medium">{prop.post.qtime}</span> Seconds
+            <p className='text-sm'>{prop.post.information}</p>
+            <div className='flex justify-between'>
+              <h1 className='text-xs'>
+                Test Time :{' '}
+                <span className='font-medium'>{prop.post.qtime}</span> Seconds
               </h1>
-              <h1 className="text-xs">
-                Number of questions :{" "}
-                <span className="font-medium">
+              <h1 className='text-xs'>
+                Number of questions :{' '}
+                <span className='font-medium'>
                   {prop.post.questions.length}
-                </span>{" "}
+                </span>{' '}
               </h1>
             </div>
             <a
-              className="flex justify-end"
+              className='flex justify-end'
               href={`test/${prop.post.username}/${prop.post.id}`}
             >
               {prop.user?.type === 1 &&
                 prop.post.scores?.find(
                   (element) => element.userid === prop.user.uid
                 ) === undefined && (
-                  <div className="border-t-2 w-full">
-                    <div className="flex justify-end">
-                      <button className="cursor-pointer mt-2 text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200">
+                  <div className='border-t-2 w-full'>
+                    <div className='flex justify-end'>
+                      <button className='cursor-pointer mt-2 text-gray-700 hover:text-gray-600  text-sm py-1 px-2 rounded-full bg-slate-200'>
                         Take the exam
                       </button>
                     </div>
@@ -139,11 +139,11 @@ function Post(prop) {
                 )}
             </a>
             {prop.post.username === prop.user.username && (
-              <div className="border-t-2 w-full -mt-1">
-                <div className="flex justify-end">
+              <div className='border-t-2 w-full -mt-1'>
+                <div className='flex justify-end'>
                   <button
                     onClick={() => setshowtresults(true)}
-                    className="cursor-pointer text-gray-700 mt-2 hover:text-gray-600 hover:bg-slate-300 text-sm py-1 px-2 rounded-full bg-slate-200"
+                    className='cursor-pointer text-gray-700 mt-2 hover:text-gray-600 hover:bg-slate-300 text-sm py-1 px-2 rounded-full bg-slate-200'
                   >
                     Show Results
                   </button>
@@ -163,7 +163,7 @@ function Post(prop) {
         {prop.post.username === prop.user.username && (
           <div
             onClick={() => deletePost()}
-            className="absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline "
+            className='absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline '
           >
             <CloseIcon />
           </div>
@@ -171,26 +171,26 @@ function Post(prop) {
 
         {showtresults && prop.post.scores.sort((a, b) => b.score - a.score) && (
           <div>
-            <div className="fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75"></div>
-            <div className="fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white">
-              <div className="flex flex-col items-center border-b-2 relative">
-                <h1 className=" text-lg ">Test Results</h1>
-                <div className="border-b-4 -mb-[1.7px] border-slate-500">
-                  <h1 className="p-2">
-                    All{" "}
-                    <span className="font-medium 	">
+            <div className='fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75'></div>
+            <div className='fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white'>
+              <div className='flex flex-col items-center border-b-2 relative'>
+                <h1 className=' text-lg '>Test Results</h1>
+                <div className='border-b-4 -mb-[1.7px] border-slate-500'>
+                  <h1 className='p-2'>
+                    All{' '}
+                    <span className='font-medium 	'>
                       {prop.post.scores.length}
                     </span>
                   </h1>
                 </div>
                 <button
                   onClick={() => setshowtresults(false)}
-                  className="absolute hover:bg-slate-400 rounded-lg p-1 right-0"
+                  className='absolute hover:bg-slate-400 rounded-lg p-1 right-0'
                 >
                   <CloseIcon />
                 </button>
               </div>
-              <div className="flex flex-col gap-y-3 py-3 overflow-y-auto">
+              <div className='flex flex-col gap-y-3 py-3 overflow-y-auto'>
                 {prop.post.scores !== null ? (
                   prop.post.scores.map((element, index) => {
                     return <TestResultElement key={index} data={element} />;
@@ -210,23 +210,22 @@ function Post(prop) {
     const handleApply = async () => {
       const id = await getUserId(username);
       await applyJob(prop.post.username, id, prop.post.time);
-      if (prop.post.isMilitaryService === "true") {
-        setIsGender(true);
+      if (prop.post.isMilitaryService === 'true') {
+        setIsObliged(true);
       }
     };
-
     const ShowApply = () =>
       prop.post.candidates?.indexOf(id) > -1 ? (
         <button
           disabled
-          className="bg-slate-200 cursor-pointer text-sm mt-2 rounded-full  py-1 px-2  text-gray-700 hover:text-gray-600  transition-colors duration-200"
+          className='bg-slate-200 cursor-pointer text-sm mt-2 rounded-full  py-1 px-2  text-gray-700 hover:text-gray-600  transition-colors duration-200'
         >
           Applied
         </button>
       ) : (
         <button
           onClick={() => handleApply()}
-          className="bg-slate-200 text-sm cursor-pointer mt-2 rounded-full  py-1 px-4  text-gray-700 hover:text-gray-600  transition-colors duration-200"
+          className='text-white bg-blue-400 hover:bg-blue-300 text-sm cursor-pointer mt-2 rounded-full py-1 px-4 text-gray-700 hover:text-white-600 transition-colors duration-200'
         >
           Apply
         </button>
@@ -234,65 +233,65 @@ function Post(prop) {
 
     return (
       <>
-        {isGender && <JobPortal setIsGender={setIsGender} />}
-        <div className="relative group/edit  bg-white shadow-md rounded-lg">
-          <div className="  px-4 py-2 bg-white flex flex-col rounded-lg  mb-4  border border-gray-200">
-            <div className=" flex gap-x-3 ">
+        {isObliged && <JobPortal setIsObliged={setIsObliged} />}
+        <div className='relative group/edit  bg-white shadow-md rounded-lg'>
+          <div className='  px-4 py-2 bg-white flex flex-col rounded-lg  mb-4  border border-gray-200'>
+            <div className=' flex gap-x-3 '>
               <Avatar src={data?.ProfileUrl} />
               <div>
                 <a
                   href={`profile/${data?.username}`}
-                  className=" text-lg font-medium hover:underline"
+                  className=' text-lg font-medium hover:underline'
                 >
                   {data?.companyname}
                 </a>
-                <h3 className="text-xs">{prop.post.email}</h3>
+                <h3 className='text-xs'>{prop.post.email}</h3>
               </div>
             </div>
-            <div className="relative pt-2 ">
-              <h1 className="text-2xl font-medium mb-3 flex  items-center gap-2">
-                <AiOutlineAppstoreAdd className="text-blue-500 mt-1" />
+            <div className='relative pt-2 '>
+              <h1 className='text-2xl font-medium mb-3 flex  items-center gap-2'>
+                <AiOutlineAppstoreAdd className='text-blue-500 mt-1' />
                 {prop.post.jobname}
               </h1>
 
-              <div className="mb-2 flex items-start gap-2">
-                <div className="flex flex-col">
-                  <p className="text-md font-semibold">Description</p>
-                  <h1 className="text-sm ml-2 font-medium text-gray-700">
+              <div className='mb-2 flex items-start gap-2'>
+                <div className='flex flex-col'>
+                  <p className='text-md font-semibold'>Description</p>
+                  <h1 className='text-sm ml-2 font-medium text-gray-700'>
                     {prop.post.information}
                   </h1>
                 </div>
               </div>
 
-              <div className="mb-2 flex items-start gap-2">
-                <div className="flex flex-col">
-                  <p className="text-md font-semibold">Salary</p>
-                  <h1 className="text-sm ml-2 font-medium text-gray-700">
+              <div className='mb-2 flex items-start gap-2'>
+                <div className='flex flex-col'>
+                  <p className='text-md font-semibold'>Salary</p>
+                  <h1 className='text-sm ml-2 font-medium text-gray-700'>
                     {prop.post.salary}
                   </h1>
                 </div>
               </div>
 
-              <div className="mb-2 flex items-start gap-2">
-                <div className="flex flex-col">
-                  <p className="text-md font-semibold">Experience</p>
-                  <h1 className="text-sm ml-2 font-medium text-gray-700">
+              <div className='mb-2 flex items-start gap-2'>
+                <div className='flex flex-col'>
+                  <p className='text-md font-semibold'>Experience</p>
+                  <h1 className='text-sm ml-2 font-medium text-gray-700'>
                     {prop.post.experience}
                   </h1>
                 </div>
               </div>
 
-              <div className="mb-2 flex items-start gap-2">
-                <div className="flex flex-col">
-                  <p className="text-md font-semibold">Education</p>
-                  <h1 className="text-sm ml-2 font-medium text-gray-700">
+              <div className='mb-2 flex items-start gap-2'>
+                <div className='flex flex-col'>
+                  <p className='text-md font-semibold'>Education</p>
+                  <h1 className='text-sm ml-2 font-medium text-gray-700'>
                     {prop.post.major}
                   </h1>
                 </div>
               </div>
-              <div className="border-t-2 w-full">
-                <div className="flex justify-end">
-                  {console.log("ss", user)}
+              <div className='border-t-2 w-full'>
+                <div className='flex justify-end'>
+                  {console.log('ss', user)}
                   {user?.type === 1 && ShowApply()}
                 </div>
               </div>
@@ -309,7 +308,7 @@ function Post(prop) {
           {prop.post.username === prop.user.username && (
             <div
               onClick={() => deletePost()}
-              className="absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline "
+              className='absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline '
             >
               <CloseIcon />
             </div>
@@ -336,7 +335,7 @@ function Post(prop) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user.type === 1) {
-      if (commentValue !== "") {
+      if (commentValue !== '') {
         const att = {
           name: prop.uname,
           username: prop.user.username,
@@ -362,76 +361,76 @@ function Post(prop) {
       );
     }
 
-    setCommentValue("");
+    setCommentValue('');
   };
   return (
-    <div className="relative group/edit">
-      <div className="px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4 border border-gray-200">
-        <div className=" flex gap-x-3 ">
+    <div className='relative group/edit'>
+      <div className='px-4 py-2 bg-white flex flex-col rounded-lg gap-y-3 mb-4 border border-gray-200'>
+        <div className=' flex gap-x-3 '>
           <Avatar src={data?.ProfileUrl} />
           <div>
             <a
               href={`profile/${data?.username}`}
-              className=" text-lg font-medium hover:underline"
+              className=' text-lg font-medium hover:underline'
             >
               {data?.companyname}
             </a>
-            <h3 className="text-xs">{prop.post.email}</h3>
+            <h3 className='text-xs'>{prop.post.email}</h3>
           </div>
         </div>
         <div>
           <p>{prop.post.data}</p>
         </div>
-        <div className="flex justify-between items-center text-xs">
-          <div className="flex items-center gap-x-1">
+        <div className='flex justify-between items-center text-xs'>
+          <div className='flex items-center gap-x-1'>
             <ThumbUpOffAltIcon
-              className="text-blue-400 "
-              style={{ width: "16px", height: "16px" }}
+              className='text-blue-400 '
+              style={{ width: '16px', height: '16px' }}
             />
             <p
               onClick={() => setshowLikes(true)}
-              className="hover:underline cursor-pointer "
+              className='hover:underline cursor-pointer '
             >
               {prop.post.likes.length} likes
             </p>
           </div>
           <h3
             onClick={() => setShowComments(!showComments)}
-            className="hover:underline cursor-pointer"
+            className='hover:underline cursor-pointer'
           >
             {prop.post.comments.length} comments
           </h3>
         </div>
         {(prop.user?.type === 1 || prop.user?.type === 2) && (
-          <div className="flex justify-evenly border-t-2 pt-2   ">
+          <div className='flex justify-evenly border-t-2 pt-2   '>
             <div
               onClick={() => handleLike()}
-              className=" flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center cursor-pointer "
+              className=' flex gap-x-2 hover:bg-slate-200 py-1 px-2 rounded-lg group items-center justify-center cursor-pointer '
             >
-              <ThumbUpOffAltIcon className="group-hover:text-blue-400" />
+              <ThumbUpOffAltIcon className='group-hover:text-blue-400' />
               <h3>Like</h3>
             </div>
             <div
               onClick={() => setShowComments(!showComments)}
-              className="flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-lg group items-center  justify-center cursor-pointer "
+              className='flex gap-x-2 hover:bg-slate-200 py-1 px-3 rounded-lg group items-center  justify-center cursor-pointer '
             >
-              <ChatBubbleOutlineIcon className="group-hover:text-blue-400" />
+              <ChatBubbleOutlineIcon className='group-hover:text-blue-400' />
               <h3>Comment</h3>
             </div>
           </div>
         )}
         {showComments && (
-          <div className="flex flex-col gap-y-3">
-            <div className="flex gap-x-2">
+          <div className='flex flex-col gap-y-3'>
+            <div className='flex gap-x-2'>
               <Avatar src={prop.user.ProfileUrl} />
               <form
                 onSubmit={(e) => handleSubmit(e)}
-                className="flex w-full    "
+                className='flex w-full    '
               >
                 <input
-                  className="w-full border rounded-lg  outline-none px-2 focus:border-gray-500 "
-                  type="text"
-                  placeholder="Add a comment..."
+                  className='w-full border rounded-lg  outline-none px-2 focus:border-gray-500 '
+                  type='text'
+                  placeholder='Add a comment...'
                   value={commentValue}
                   onChange={(e) => setCommentValue(e.target.value)}
                 />
@@ -454,11 +453,11 @@ function Post(prop) {
               })}
             </div>
             {flagshowmore && prop.post.comments.length > 3 && (
-              <div className="flex justify-center hover:text-blue-300">
+              <div className='flex justify-center hover:text-blue-300'>
                 <AddIcon />
                 <button
                   onClick={() => handleShowMoreComments()}
-                  className="text-sm"
+                  className='text-sm'
                 >
                   Show More
                 </button>
@@ -468,26 +467,26 @@ function Post(prop) {
         )}
         {showlikes && (
           <div>
-            <div className="fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75"></div>
-            <div className="fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white">
-              <div className="flex flex-col items-center border-b-2 relative">
-                <h1 className=" text-lg ">Reactions</h1>
-                <div className="border-b-4 -mb-[1.7px] border-slate-500">
-                  <h1 className="p-2">
-                    All{" "}
-                    <span className="font-medium 	">
+            <div className='fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75'></div>
+            <div className='fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white'>
+              <div className='flex flex-col items-center border-b-2 relative'>
+                <h1 className=' text-lg '>Reactions</h1>
+                <div className='border-b-4 -mb-[1.7px] border-slate-500'>
+                  <h1 className='p-2'>
+                    All{' '}
+                    <span className='font-medium 	'>
                       {prop.post.likes.length}
                     </span>
                   </h1>
                 </div>
                 <button
                   onClick={() => setshowLikes(false)}
-                  className="absolute hover:bg-slate-400 rounded-lg p-1 right-0"
+                  className='absolute hover:bg-slate-400 rounded-lg p-1 right-0'
                 >
                   <CloseIcon />
                 </button>
               </div>
-              <div className="flex flex-col gap-y-3 py-3 overflow-y-auto">
+              <div className='flex flex-col gap-y-3 py-3 overflow-y-auto'>
                 {prop.post.likes !== null ? (
                   prop.post.likes.map((element, index) => {
                     return <Like key={index} likeid={element} />;
@@ -511,7 +510,7 @@ function Post(prop) {
       {prop.post.username === prop.user.username && (
         <div
           onClick={() => deletePost()}
-          className="absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline "
+          className='absolute right-2 top-2 cursor-pointer text-gray-400 hover:text-gray-600 hidden group-hover/edit:inline '
         >
           <CloseIcon />
         </div>
