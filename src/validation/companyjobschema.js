@@ -12,7 +12,7 @@ export const CompanyjobSchema = Yup.object().shape({
   data: Yup.date(),
   recomnumber: Yup.number(),
   salary: Yup.string().required(),
-  experience: Yup.required(),
+  experience: Yup.string().required(),
   major: Yup.string().required(),
   isMilitaryService: Yup.boolean().required(),
 });
