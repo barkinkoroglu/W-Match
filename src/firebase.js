@@ -742,7 +742,9 @@ export const getRandomCompanyJobs = async (userid) => {
       }
     }
   });
+
   const result = temp.slice(0, 5);
+  console.log(result);
   return shuffle(result);
 };
 

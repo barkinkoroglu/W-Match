@@ -16,14 +16,15 @@ function RecommendedJob() {
         }
       });
     };
+    console.log(ruser);
     callRec();
   }, [ruser?.uid]);
   return (
-    <div className='flex-[0.5]'>
-      <div className='bg-white p-4 rounded-lg mx-4 shadow-sm'>
-        <div className='border-b border-gray-200 pb-2'>
-          <h1 className='font-medium text-lg leading-5'>Recommended for you</h1>
-          <h1 className='font-light text-sm text-gray-400'>
+    <div className="flex-[0.5]">
+      <div className="bg-white p-4 rounded-lg mx-4 shadow-sm">
+        <div className="border-b border-gray-200 pb-2">
+          <h1 className="font-medium text-lg leading-5">Recommended for you</h1>
+          <h1 className="font-light text-sm text-gray-400">
             Based on your profile and search history
           </h1>
         </div>

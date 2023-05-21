@@ -212,17 +212,17 @@ function Post(prop) {
   };
   const { username } = user;
   const JobPost = () => {
-    useEffect(() => {
-      const addScore = async () => {
-        if (username) {
-          const id = await getUserId(username);
-          if (id && extraScore > 0) {
-            await addMlScore(id, extraScore);
-          }
-        }
-      };
-      addScore();
-    }, [extraScore, user]);
+    // useEffect(() => {
+    //   const addScore = async () => {
+    //     if (username) {
+    //       const id = await getUserId(username);
+    //       if (id && extraScore > 0) {
+    //         await addMlScore(id, extraScore);
+    //       }
+    //     }
+    //   };
+    //   addScore();
+    // }, [extraScore, user]);
     console.log('extra', extraScore);
     const handleApply = async () => {
       const id = await getUserId(username);
