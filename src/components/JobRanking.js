@@ -60,20 +60,30 @@ const JobRanking = () => {
               candidate.militaryServiceScore > 0
                 ? candidate.militaryServiceScore
                 : 0;
+
             if (info.isMilitaryService === 'true') {
-              candidate.lastScore =
-                aMilitaryScore + candidate.wmatchTests[info.wtestvalue];
+              candidate = {
+                ...candidate,
+                lastScore:
+                  aMilitaryScore + candidate.wmatchTests[info.wtestvalue],
+              };
+              console.log('2', candidate);
             } else {
-              candidate.lastScore = candidate.wmatchTests[info.wtestvalue];
+              candidate = {
+                ...candidate,
+                lastScore: candidate.wmatchTests[info.wtestvalue],
+              };
             }
+            console.log('returned', candidate);
             return candidate;
           })
+          .filter((el) => el.lastScore)
           .sort((a, b) => b.lastScore - a.lastScore)
     );
 
     return [...new Set(sortedCandidates)];
   };
-  console.log('HADİ AMK', sortCandidates());
+
   useEffect(() => {
     handleCandidate();
   }, [infos]);
@@ -83,7 +93,6 @@ const JobRanking = () => {
       setSorted(sortCandidates());
     }
   }, [candidates]);
-
   return (
     <>
       {sorted.map((s) => (
