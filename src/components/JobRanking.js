@@ -60,28 +60,36 @@ const JobRanking = () => {
               candidate.militaryServiceScore > 0
                 ? candidate.militaryServiceScore
                 : 0;
-
             if (info.isMilitaryService === 'true') {
               candidate = {
                 ...candidate,
                 lastScore:
-                  aMilitaryScore + candidate.wmatchTests[info.wtestvalue],
+                  aMilitaryScore + info.wtestvalue
+                    ? candidate.wmatchTests[info.wtestvalue]
+                    : 0,
               };
-              console.log('2', candidate);
             } else {
               candidate = {
                 ...candidate,
-                lastScore: candidate.wmatchTests[info.wtestvalue],
+                lastScore: info.wtestvalue
+                  ? candidate.wmatchTests[info.wtestvalue]
+                  : 0,
               };
             }
-            console.log('returned', candidate);
             return candidate;
           })
-          .filter((el) => el.lastScore)
+          .filter((el) => typeof el.lastScore === 'number')
           .sort((a, b) => b.lastScore - a.lastScore)
     );
 
-    return [...new Set(sortedCandidates)];
+    const newArr = sortedCandidates.reduce((acc, current) => {
+      if (!acc.some((el) => el.username === current.username)) {
+        acc.push(current);
+      }
+      return acc;
+    }, []);
+
+    return newArr;
   };
 
   useEffect(() => {
