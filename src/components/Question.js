@@ -166,8 +166,13 @@ function Question({
                   name='question'
                   value={values.question}
                   onChange={handleChange}
+                  style={{ height: 'auto', minHeight: '50px' }}
+                  onInput={(e) =>
+                    (e.target.style.height = `${e.target.scrollHeight}px`)
+                  }
                 ></textarea>
               </div>
+
               <div className='flex gap-x-3 '>
                 <h1>{`Question ${nindex + 1}`}'s Time</h1>
                 <input
