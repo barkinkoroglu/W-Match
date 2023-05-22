@@ -47,17 +47,6 @@ function Createtest({ showCreateTest, setShowCreateTest, refreshData }) {
           </div>
 
           <div className='flex items-center gap-x-2 justify-between'>
-            <h1>How long will the test take?</h1>
-            <input
-              placeholder='Time (in seconds)'
-              className='border p-1 rounded-lg'
-              type='text'
-              onChange={(e) => setTime(e.currentTarget.value)}
-              value={time}
-            />
-          </div>
-
-          <div className='flex items-center gap-x-2 justify-between'>
             <h1>How many points will each question be?</h1>
             <input
               placeholder='Question Score'

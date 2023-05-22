@@ -77,6 +77,7 @@ function Question({
     }
     const data = {
       question: values.question,
+      questionTime: values.questionTime,
       option1: values.option1,
       option2: values.option2,
       option3: values.option3,
@@ -85,8 +86,9 @@ function Question({
     };
 
     darray.push(data);
-    console.log(darray);
+
     values.question = '';
+    values.questionTime = '';
     values.option1 = '';
     values.option2 = '';
     values.option3 = '';
@@ -96,7 +98,6 @@ function Question({
     setvalue3(false);
     setvalue4(false);
     const uid = await getUserId(user?.username);
-    console.log('uid', uid);
     if (nindex + 1 === parseInt(nquestions)) {
       //await createCompanyTest(user.uid, darray);
       const finaldata = {
@@ -104,7 +105,6 @@ function Question({
         id: v4(),
         questions: darray,
         time: Date.now(),
-        qtime: time,
         scores: [],
         uid,
         name: companyname,
@@ -140,6 +140,7 @@ function Question({
         validationSchema={QuestionSchema}
         initialValues={{
           question: '',
+          questionTime: 0,
           option1: '',
           option2: '',
           option3: '',
@@ -166,6 +167,17 @@ function Question({
                   value={values.question}
                   onChange={handleChange}
                 ></textarea>
+              </div>
+              <div className='flex gap-x-3 '>
+                <h1>{`Question ${nindex + 1}`}'s Time</h1>
+                <input
+                  className='flex flex-1 px-2 py-1 outline-none border rounded-lg  overflow-y-auto resize-none scrollbar-hide text-sm'
+                  name='questionTime'
+                  value={values.questionTime}
+                  placeholder={`in seconds`}
+                  onChange={handleChange}
+                  type='number'
+                />
               </div>
 
               <div className='flex gap-x-3 '>

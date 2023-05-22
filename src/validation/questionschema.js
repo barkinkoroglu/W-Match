@@ -1,7 +1,8 @@
-import Yup from "./validate";
+import Yup from './validate';
 
 export const QuestionSchema = Yup.object().shape({
   question: Yup.string().required(),
+  questionTime: Yup.number().required(),
   option1: Yup.string().required(),
   option2: Yup.string().required(),
   option3: Yup.string().required(),
