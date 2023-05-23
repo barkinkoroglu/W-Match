@@ -67,17 +67,10 @@ function Test() {
   useEffect(() => {
     const handleExam = async () => {
       const id = await getUserId(user.username);
+
       if (id) {
         if (cquestion + 1 > 15) {
-          if (60 > calculateScore(score) >= 42) {
-            await updateExam(id, param.id, calculateScore(score + 10));
-          }
-          if (80 > calculateScore(score) >= 60) {
-            await updateExam(id, param.id, calculateScore(score + 30));
-          }
-          if (calculateScore(score) < 42) {
-            await updateExam(id, param.id, calculateScore(score + 1));
-          }
+          await updateExam(id, param.id, calculateScore(score));
           navigate(`/home`);
         }
       }
