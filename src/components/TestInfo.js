@@ -31,18 +31,20 @@ const TestInfo = ({ user }) => {
           <div className='max-h-64 overflow-y-auto'>
             <div>
               <h2 className='text-2xl font-bold text-white tracking-tighter mb-1'>
-                {tests.map((test) => (
-                  <div>
-                    {' '}
-                    Your W-Match {cptl(test[0])} Skill Score -{' '}
-                    <span className='font-extrabold text-yellow-300'>
+                {tests &&
+                  tests.length > 0 &&
+                  tests.map((test) => (
+                    <div>
                       {' '}
+                      Your W-Match {cptl(test[0])} Skill Score -{' '}
                       <span className='font-extrabold text-yellow-300'>
-                        {test[1]}
+                        {' '}
+                        <span className='font-extrabold text-yellow-300'>
+                          {test[1]}
+                        </span>
                       </span>
-                    </span>
-                  </div>
-                ))}
+                    </div>
+                  ))}
               </h2>
             </div>
           </div>
