@@ -26,9 +26,9 @@ function Widget() {
   }, []);
 
   return (
-    <div className='flex-[0.3]  mx-12 mb-6 md:mx-0 md:mb-0'>
+    <div className='flex-[0.3] flex flex-col justify-start mx-12 mb-6 md:mx-0 md:mb-0'>
       {user.type === 1 && (
-        <div className='flex flex-col h-[500px] overflow-y-auto scrollbar-hide  z-40 p-2 gap-y-2 rounded-lg shadow-lg bg-white'>
+        <div className='flex-grow flex flex-col min-h-0 max-h-[500px] overflow-y-auto scrollbar-hide  z-40 p-2 gap-y-2 rounded-lg shadow-lg bg-white'>
           <h1 className=' border-b-2 p-2 w-full text-center font-medium border-gray-100'>
             Companies that you can follow
           </h1>
