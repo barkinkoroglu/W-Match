@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const TestInfo = ({ user }) => {
+  const [tests, setTests] = useState();
+  console.log('🚀 ~ file: TestInfo.js:6 ~ TestInfo ~ tests:', tests);
   const navigate = useNavigate();
   const handleStartClick = () => {
     navigate(`/level`);
   };
-  const cptl = () => {
-    const str = user.JobCategory.toLowerCase();
+  const cptl = (name) => {
+    const str = name.toLowerCase();
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
+  useEffect(() => {
+    if (user) {
+      setTests(Object.entries(user.wmatchTests));
+    }
+  }, [user]);
   return (
     <>
       {user?.type === 1 && !user.wmatchTests[user.JobCategory] ? (
@@ -24,13 +31,18 @@ const TestInfo = ({ user }) => {
           <div className='max-h-64 overflow-y-auto'>
             <div>
               <h2 className='text-2xl font-bold text-white tracking-tighter mb-1'>
-                Your W-Match {cptl()} Skill Score -{' '}
-                <span className='font-extrabold text-yellow-300'>
-                  {' '}
-                  <span className='font-extrabold text-yellow-300'>
-                    {user.wmatchTests[user.JobCategory]}
-                  </span>
-                </span>
+                {tests.map((test) => (
+                  <div>
+                    {' '}
+                    Your W-Match {cptl(test[0])} Skill Score -{' '}
+                    <span className='font-extrabold text-yellow-300'>
+                      {' '}
+                      <span className='font-extrabold text-yellow-300'>
+                        {test[1]}
+                      </span>
+                    </span>
+                  </div>
+                ))}
               </h2>
             </div>
           </div>
