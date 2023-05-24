@@ -6,6 +6,7 @@ import { updateSkill, getTestRight } from '../../firebase';
 function MyTestList({ data }) {
   const [testR, setTestR] = useState();
   const { name, src } = data;
+  console.log('🚀 ~ file: MyTestList.js:9 ~ MyTestList ~ name:', name);
 
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
@@ -22,7 +23,16 @@ function MyTestList({ data }) {
     getR();
   }, [user]);
   console.log('🚀 ~ file: MyTestList.js:8 ~ MyTestList ~ testR:', testR);
-
+  const handleD = () => {
+    const a =
+      testR &&
+      testR.length > 0 &&
+      testR.find((r) => r[0] === name && r[1] === 0);
+    if (a) {
+      return name;
+    }
+  };
+  console.log('ww', handleD());
   return (
     <div className='relative last:border-none border-b-2'>
       <div className='flex justify-between pt-3 group pb-2'>
@@ -42,13 +52,15 @@ function MyTestList({ data }) {
           </div>
         </div>
         <button
-          disabled={
-            testR &&
-            testR.length > 0 &&
-            testR.find((r) => r[0] === name && r[1] === 0)
-          }
+          disabled={handleD() === name ? true : false}
           onClick={() => handleMyTest(name)}
-          className='text-white absolute bottom-1 right-0 px-2 py-1 text-sm font-semibold bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 rounded-lg hover:from-blue-500 hover:via-indigo-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl'
+          className={`text-white absolute bottom-1 right-0 px-2 py-1 text-sm font-semibold 
+    ${
+      handleD() === name
+        ? 'bg-gray-400 opacity-50 cursor-not-allowed'
+        : 'bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 rounded-lg hover:from-blue-500 hover:via-indigo-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl'
+    }
+  `}
         >
           Take the test
         </button>
