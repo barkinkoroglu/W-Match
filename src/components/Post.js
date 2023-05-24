@@ -128,7 +128,7 @@ function Post(prop) {
             </div>
             <a
               className='flex justify-end'
-              href={`test/${prop.post.username}/${prop.post.id}`}
+              href={`/profile/test/${prop.post.username}/${prop.post.id}`}
             >
               {prop.user?.type === 1 &&
                 prop.post.scores?.find(

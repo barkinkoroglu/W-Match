@@ -74,7 +74,7 @@ const AppRoutes = [
     isPrivate: true,
   },
   {
-    path: '/test/:id/:id2',
+    path: '/profile/test/:id/:id2',
     Component: CompanyTest,
     isPrivate: true,
   },
