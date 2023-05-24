@@ -41,14 +41,6 @@ function Level() {
       await createLevel(user?.username, dlevel);
       if (tstRght && user?.JobCategory) {
         const right = tstRght.find((r) => r[0] === user?.JobCategory);
-        if (!right) {
-          await createTestRight(user?.username, user?.JobCategory);
-          navigate(`/test/${user?.JobCategory}`);
-          addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
-            setShowTooltip(!result.success);
-            dispatch(setQuestions(result.questions));
-          });
-        }
         if (right && right[1] > 0) {
           await reduceTestRight(user?.username, right[0]);
           navigate(`/test/${user?.JobCategory}`);
@@ -60,6 +52,14 @@ function Level() {
         if (right && right[1] === 0) {
           navigate(`/home`);
         }
+      }
+      if (!tstRght) {
+        await createTestRight(user?.username, user?.JobCategory);
+        navigate(`/test/${user?.JobCategory}`);
+        addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
+          setShowTooltip(!result.success);
+          dispatch(setQuestions(result.questions));
+        });
       }
     } else {
       setShowTooltip(true);
