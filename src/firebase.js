@@ -19,6 +19,7 @@ import {
   collection,
   addDoc,
   onSnapshot,
+  increment,
 } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 import { shuffle, userHandle } from './utils';
@@ -260,15 +261,20 @@ export const createTestRight = async (username, testname) => {
   });
 };
 
-export const reduceTestRight = async (username) => {
+export const reduceTestRight = async (username, right) => {
   const userID = await getDoc(doc(db, 'usernames', username));
   const user = userID.data();
   const dbUserRef = doc(db, 'users', user.user_id);
   const dbUser = await getDoc(dbUserRef);
+  const currentTestRight = dbUser.data().testRight[right];
 
-  await updateDoc(dbUserRef, {
-    userTestRight: dbUser.data().userTestRight - 1,
-  });
+  if (currentTestRight > 0) {
+    await updateDoc(dbUserRef, {
+      [`testRight.${right}`]: increment(-1),
+    });
+  } else {
+    console.error('No more test right for ', right);
+  }
 };
 
 export const getTestRight = async (username) => {

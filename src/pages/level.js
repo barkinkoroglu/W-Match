@@ -8,6 +8,7 @@ import {
   reduceTestRight,
   createTestRight,
   getCurrUserById,
+  getTestRight,
 } from '../firebase';
 import { addQuestionsBySection } from '../helpers/utils';
 import { useDispatch } from 'react-redux';
@@ -18,6 +19,8 @@ import { FaCheck } from 'react-icons/fa';
 function Level() {
   const [dlevel, setDLevel] = useState('Select your level');
   const [showTooltip, setShowTooltip] = useState(true);
+  const [tstRght, setTestRight] = useState();
+  const [disable, setDisable] = useState(false);
   const [values, setValues] = useState({
     JobCategory: '',
   });
@@ -36,12 +39,28 @@ function Level() {
     if (dlevel !== 'Select your level' && user?.JobCategory) {
       setShowTooltip(false);
       await createLevel(user?.username, dlevel);
-      await createTestRight(user?.username, user?.JobCategory);
-      navigate(`/test/${user?.JobCategory}`);
-      addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
-        setShowTooltip(!result.success);
-        dispatch(setQuestions(result.questions));
-      });
+      if (tstRght && user?.JobCategory) {
+        const right = tstRght.find((r) => r[0] === user?.JobCategory);
+        if (!right) {
+          await createTestRight(user?.username, user?.JobCategory);
+          navigate(`/test/${user?.JobCategory}`);
+          addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
+            setShowTooltip(!result.success);
+            dispatch(setQuestions(result.questions));
+          });
+        }
+        if (right && right[1] > 0) {
+          await reduceTestRight(user?.username, right[0]);
+          navigate(`/test/${user?.JobCategory}`);
+          addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
+            setShowTooltip(!result.success);
+            dispatch(setQuestions(result.questions));
+          });
+        }
+        if (right && right[1] === 0) {
+          navigate(`/home`);
+        }
+      }
     } else {
       setShowTooltip(true);
     }
@@ -68,6 +87,18 @@ function Level() {
       getUsr();
     };
   }, [user?.username]);
+
+  useEffect(() => {
+    const getrght = async () => {
+      const rights = await getTestRight(user?.username);
+      if (rights) {
+        setTestRight(Object.entries(rights));
+      }
+    };
+    getrght();
+  }, [user]);
+  console.log('🚀 ~ file: level.js:23 ~ Level ~ tstRght:', tstRght);
+
   return (
     <div className='min-h-screen flex items-center justify-center bg-[#e5e7eb] dark:bg-gray-800'>
       <div className='flex flex-col items-center w-full'>

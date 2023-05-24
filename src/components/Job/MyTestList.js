@@ -21,6 +21,8 @@ function MyTestList({ data }) {
     };
     getR();
   }, [user]);
+  console.log('🚀 ~ file: MyTestList.js:8 ~ MyTestList ~ testR:', testR);
+
   return (
     <div className='relative last:border-none border-b-2'>
       <div className='flex justify-between pt-3 group pb-2'>
