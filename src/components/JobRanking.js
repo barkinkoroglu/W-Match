@@ -86,6 +86,9 @@ const JobRanking = () => {
       if (!acc.some((el) => el.username === current.username)) {
         acc.push(current);
       }
+      if (acc.find((el) => el.username === current.username)) {
+        acc.push(current);
+      }
       return acc;
     }, []);
 
@@ -98,8 +101,24 @@ const JobRanking = () => {
 
   useEffect(() => {
     if (candidates && candidates.length > 0) {
-      setSorted(sortCandidates());
+      const rr = sortCandidates();
+      let resultArr = rr.reduce((acc, curr) => {
+        let existing = acc.find((user) => user.username === curr.username);
+
+        if (!existing) {
+          acc.push(curr);
+        } else if (existing.lastScore < curr.lastScore) {
+          existing.lastScore = curr.lastScore;
+        }
+
+        return acc;
+      }, []);
+      setSorted(resultArr);
     }
+    console.log(
+      '🚀 ~ file: JobRanking.js:103 ~ useEffect ~ sortCandidates():',
+      sortCandidates()
+    );
   }, [candidates]);
   return (
     <>
