@@ -39,27 +39,39 @@ function Level() {
     if (dlevel !== 'Select your level' && user?.JobCategory) {
       setShowTooltip(false);
       await createLevel(user?.username, dlevel);
-      if (tstRght && user?.JobCategory) {
-        const right = tstRght.find((r) => r[0] === user?.JobCategory);
-        if (right && right[1] > 0) {
-          await reduceTestRight(user?.username, right[0]);
-          navigate(`/test/${user?.JobCategory}`);
-          addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
-            setShowTooltip(!result.success);
-            dispatch(setQuestions(result.questions));
-          });
-        }
-        if (right && right[1] === 0) {
-          navigate(`/home`);
-        }
-      }
-      if (!tstRght) {
+      const right = tstRght.find((r) => r[0] === user?.JobCategory);
+      console.log('🚀 ~ file: level.js:43 ~ handleSubmit ~ right:', right);
+
+      if (!right && user?.JobCategory) {
         await createTestRight(user?.username, user?.JobCategory);
         navigate(`/test/${user?.JobCategory}`);
         addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
           setShowTooltip(!result.success);
           dispatch(setQuestions(result.questions));
         });
+        return;
+      }
+      if (right && user?.JobCategory) {
+        await reduceTestRight(user?.username, right[0]);
+        navigate(`/test/${user?.JobCategory}`);
+        addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
+          setShowTooltip(!result.success);
+          dispatch(setQuestions(result.questions));
+        });
+        return;
+      }
+      if (right && right[1] > 0 && user?.JobCategory) {
+        await reduceTestRight(user?.username, right[0]);
+        navigate(`/test/${user?.JobCategory}`);
+        addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
+          setShowTooltip(!result.success);
+          dispatch(setQuestions(result.questions));
+        });
+        return;
+      }
+      if (right && right[1] === 0 && user?.JobCategory) {
+        navigate(`/home`);
+        return;
       }
     } else {
       setShowTooltip(true);
