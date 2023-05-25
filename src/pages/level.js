@@ -40,7 +40,6 @@ function Level() {
       setShowTooltip(false);
       await createLevel(user?.username, dlevel);
       const right = tstRght.find((r) => r[0] === user?.JobCategory);
-      console.log('🚀 ~ file: level.js:43 ~ handleSubmit ~ right:', right);
 
       if (!right && user?.JobCategory) {
         await createTestRight(user?.username, user?.JobCategory);
