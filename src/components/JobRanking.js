@@ -50,11 +50,6 @@ const JobRanking = () => {
   const handlePoint = () => {};
   const sortCandidates = () => {
     if (!infos || infos.length === 0) return;
-    console.log('🚀 ~ file: JobRanking.js:88 ~ sortCandidates ~ infos:', infos);
-    console.log(
-      '🚀 ~ file: JobRanking.js:9 ~ JobRanking ~ candidates:',
-      candidates
-    );
     const sortedCandidates = infos.flatMap(
       (info) =>
         candidates &&
