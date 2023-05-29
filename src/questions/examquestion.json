@@ -558,5 +558,565 @@
         "level": "difficult"
       }
     ]
+  },
+  {
+    "section": "Java",
+    "questions": [
+      {
+        "question": "What is the correct syntax to declare a variable in Java?",
+        "a": "int x;",
+        "b": "x = 5;",
+        "c": "int x = 5;",
+        "d": "variable x;",
+        "correct": "c",
+        "level": "easy"
+      },
+      {
+        "question": "Which of the following is a valid identifier in Java?",
+        "a": "123abc",
+        "b": "_abc",
+        "c": "$abc",
+        "d": "abc-123",
+        "correct": "c",
+        "level": "easy"
+      },
+      {
+        "question": "What is the output of the following code?\n\n```\nint x = 5;\nSystem.out.println(x++);\n```",
+        "a": "5",
+        "b": "6",
+        "c": "Compilation error",
+        "d": "Runtime error",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the purpose of the `static` keyword in Java?",
+        "a": "To create multiple instances of a class",
+        "b": "To define a class as abstract",
+        "c": "To indicate that a method or variable belongs to the class and not to an instance of the class",
+        "d": "To prevent inheritance from a class",
+        "correct": "c",
+        "level": "easy"
+      },
+      {
+        "question": "Which of the following is NOT a primitive data type in Java?",
+        "a": "int",
+        "b": "float",
+        "c": "boolean",
+        "d": "String",
+        "correct": "d",
+        "level": "easy"
+      },
+      {
+        "question": "What is the difference between `ArrayList` and `LinkedList` in Java?",
+        "a": "`ArrayList` is implemented as a resizable array, while `LinkedList` is implemented as a doubly linked list.",
+        "b": "`ArrayList` is more efficient for accessing elements by index, while `LinkedList` is more efficient for adding and removing elements.",
+        "c": "`ArrayList` can only store objects of a specific type, while `LinkedList` can store objects of different types.",
+        "d": "`ArrayList` and `LinkedList` are equivalent and can be used interchangeably.",
+        "correct": "b",
+        "level": "normal"
+      },
+      {
+        "question": "What is the output of the following code?\n\n```\nint x = 10;\nSystem.out.println(x > 5 ? \"Hello\" : \"Goodbye\");\n```",
+        "a": "Hello",
+        "b": "Goodbye",
+        "c": "10",
+        "d": "Compilation error",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the purpose of the `final` keyword in Java?",
+        "a": "To indicate that a variable cannot be changed once assigned a value",
+        "b": "To indicate that a method cannot be overridden in a subclass",
+        "c": "To indicate that a class cannot be inherited",
+        "d": "To indicate that an exception must be caught or declared",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the difference between `String`, `StringBuilder`, and `StringBuffer` in Java?",
+        "a": "`String` is immutable, while `StringBuilder` and `StringBuffer` are mutable.",
+        "b": "`String` is synchronized, while `StringBuilder` and `StringBuffer` are not.",
+        "c": "`StringBuilder` and `StringBuffer` are more efficient for concatenating strings than `String`.",
+        "d": "All of the above",
+        "correct": "d",
+        "level": "normal"
+      },
+      {
+        "question": "What is the purpose of the `equals()` method in Java?",
+        "a": "To compare two objects for reference equality",
+        "b": "To compare two objects for value equality",
+        "c": "To convert a string to uppercase",
+        "d": "To concatenate two strings",
+        "correct": "b",
+        "level": "normal"
+      },
+      {
+        "question": "What is the difference between checked exceptions and unchecked exceptions in Java?",
+        "a": "Checked exceptions are checked at compile-time and must be handled or declared, while unchecked exceptions do not need to be handled or declared.",
+        "b": "Checked exceptions are more severe than unchecked exceptions.",
+        "c": "Checked exceptions can be caught using a `try-catch` block, while unchecked exceptions cannot.",
+        "d": "Checked exceptions are only thrown by methods in the Java standard library.",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the output of the following code?\n\n```\nint x = 5;\nSystem.out.println(x++);\n```",
+        "a": "5",
+        "b": "6",
+        "c": "Compilation error",
+        "d": "Runtime error",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the purpose of the `transient` keyword in Java?",
+        "a": "To indicate that a variable should not be serialized",
+        "b": "To indicate that a method should not be overridden",
+        "c": "To indicate that a class cannot be extended",
+        "d": "To indicate that a method should be implemented by a subclass",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the difference between `HashMap` and `Hashtable` in Java?",
+        "a": "`HashMap` allows `null` values and is not synchronized, while `Hashtable` does not allow `null` values and is synchronized.",
+        "b": "`HashMap` is faster than `Hashtable` for most operations.",
+        "c": "`Hashtable` is a legacy class and should not be used in new code.",
+        "d": "All of the above",
+        "correct": "d",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the purpose of the `@Override` annotation in Java?",
+        "a": "To indicate that a method is overridden from a superclass",
+        "b": "To indicate that a method is final and cannot be overridden",
+        "c": "To indicate that a variable is constant and cannot be changed",
+        "d": "To indicate that a class is a subclass of another class",
+        "correct": "a",
+        "level": "difficult"
+      }
+    ]
+  },
+  {
+    "section": "Python",
+    "questions": [
+      {
+        "question": "What is the correct way to declare a variable in Python?",
+        "a": "var x = 5",
+        "b": "let x = 5",
+        "c": "x = 5",
+        "d": "int x = 5",
+        "correct": "c",
+        "level": "easy"
+      },
+      {
+        "question": "What is the output of the following code?\n\n```\nprint(2 + 2 * 3)\n```",
+        "a": "8",
+        "b": "10",
+        "c": "12",
+        "d": "14",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "Which of the following is not a valid data type in Python?",
+        "a": "int",
+        "b": "float",
+        "c": "string",
+        "d": "boolean",
+        "correct": "d",
+        "level": "easy"
+      },
+      {
+        "question": "What is the purpose of the `len()` function in Python?",
+        "a": "To calculate the length of a string",
+        "b": "To convert a value to an integer",
+        "c": "To check if a variable is defined",
+        "d": "To generate random numbers",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "Which of the following is the correct way to comment a single line in Python?",
+        "a": "// This is a comment",
+        "b": "# This is a comment",
+        "c": "/* This is a comment */",
+        "d": "<!-- This is a comment -->",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "What is the result of the following code?\n\n```\nmy_list = [1, 2, 3]\nprint(my_list[1])\n```",
+        "a": "1",
+        "b": "2",
+        "c": "3",
+        "d": "Error",
+        "correct": "b",
+        "level": "normal"
+      },
+      {
+        "question": "Which of the following methods can be used to remove an element from a list in Python?",
+        "a": "remove()",
+        "b": "delete()",
+        "c": "pop()",
+        "d": "exclude()",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the output of the following code?\n\n```\nx = [1, 2, 3]\ny = x\nx.append(4)\nprint(y)\n```",
+        "a": "[1, 2, 3, 4]",
+        "b": "[1, 2, 3]",
+        "c": "[4]",
+        "d": "Error",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the purpose of the `range()` function in Python?",
+        "a": "To iterate over a sequence of numbers",
+        "b": "To generate random numbers",
+        "c": "To check if a variable is defined",
+        "d": "To convert a value to a string",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "Which of the following statements is true about Python's `for` loop?",
+        "a": "It can only iterate over numbers",
+        "b": "It can only iterate over strings",
+        "c": "It can iterate over any iterable object",
+        "d": "It can iterate over a specific range of values",
+        "correct": "c",
+        "level": "normal"
+      },
+      {
+        "question": "What is the result of the following code?\n\n```\ndef my_function(x):\n    if x <= 1:\n        return 1\n    else:\n        return x * my_function(x - 1)\n\nprint(my_function(5))\n```",
+        "a": "5",
+        "b": "10",
+        "c": "15",
+        "d": "120",
+        "correct": "d",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the purpose of the `__init__` method in a Python class?",
+        "a": "To initialize the class attributes",
+        "b": "To define the class methods",
+        "c": "To create an instance of the class",
+        "d": "To destroy an instance of the class",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "Which of the following is true about Python's global variables?",
+        "a": "They can be accessed only within the function where they are defined",
+        "b": "They can be accessed from any function or module",
+        "c": "They can be accessed only within the module where they are defined",
+        "d": "They can be accessed only within the class where they are defined",
+        "correct": "b",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the output of the following code?\n\n```\ndef my_function():\n    x = 10\n    def inner_function():\n        nonlocal x\n        x += 5\n    inner_function()\n    return x\n\nprint(my_function())\n```",
+        "a": "10",
+        "b": "15",
+        "c": "20",
+        "d": "Error",
+        "correct": "c",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the purpose of the `yield` keyword in Python?",
+        "a": "To define a generator function",
+        "b": "To exit a loop or function",
+        "c": "To raise an exception",
+        "d": "To create a decorator",
+        "correct": "a",
+        "level": "difficult"
+      }
+    ]
+  },
+  {
+    "section": "PHP",
+    "questions": [
+      {
+        "question": "What does PHP stand for?",
+        "a": "Personal Hypertext Processor",
+        "b": "PHP: Hypertext Preprocessor",
+        "c": "Private Home Page",
+        "d": "Public Hosting Platform",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "Which of the following is NOT a PHP data type?",
+        "a": "String",
+        "b": "Integer",
+        "c": "Float",
+        "d": "Boolean",
+        "correct": "d",
+        "level": "easy"
+      },
+      {
+        "question": "How do you concatenate two strings in PHP?",
+        "a": "Using the `+` operator",
+        "b": "Using the `.` operator",
+        "c": "Using the `&` operator",
+        "d": "Using the `=` operator",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "What is the correct way to start a PHP block of code?",
+        "a": "&lt;php&gt;",
+        "b": "&lt;?php",
+        "c": "&lt;?php&gt;",
+        "d": "&lt;?ph",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "Which of the following is used to comment a single line in PHP?",
+        "a": "//",
+        "b": "#",
+        "c": "--",
+        "d": "/* */",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the difference between `include` and `require` in PHP?",
+        "a": "`include` will only produce a warning if the file is not found, while `require` will produce a fatal error",
+        "b": "`include` and `require` are interchangeable and can be used interchangeably",
+        "c": "`include` is used for including PHP files, while `require` is used for including non-PHP files",
+        "d": "`include` and `require` both behave the same way and have the same error handling",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the difference between single quotes (`'`) and double quotes (`\"`) in PHP?",
+        "a": "Single quotes do not parse variables or special characters, while double quotes do",
+        "b": "Double quotes do not parse variables or special characters, while single quotes do",
+        "c": "There is no difference between single quotes and double quotes in PHP",
+        "d": "Single quotes are used for strings, while double quotes are used for characters",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the `echo` statement used for in PHP?",
+        "a": "To output data to the web page",
+        "b": "To define a constant",
+        "c": "To declare a variable",
+        "d": "To include another PHP file",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the purpose of the `$_SESSION` superglobal in PHP?",
+        "a": "To store and retrieve session-specific data",
+        "b": "To access server-specific information",
+        "c": "To handle file uploads",
+        "d": "To encrypt and decrypt data",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the correct way to check if a variable is set in PHP?",
+        "a": "Using the `isset()` function",
+        "b": "Using the `empty()` function",
+        "c": "Using the `is_null()` function",
+        "d": "Using the `is_set()` function",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the purpose of namespaces in PHP?",
+        "a": "To avoid naming conflicts between classes, functions, and variables",
+        "b": "To improve the performance of PHP scripts",
+        "c": "To provide a way to organize and group related classes and functions",
+        "d": "To enable automatic loading of PHP classes",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What are traits in PHP and how are they used?",
+        "a": "Traits are a mechanism for code reuse in single inheritance languages like PHP",
+        "b": "Traits are used to define interfaces for classes",
+        "c": "Traits are used to create abstract classes",
+        "d": "Traits are used to implement multiple inheritance in PHP",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the purpose of the `spl_autoload_register` function in PHP?",
+        "a": "To register a function that will be called automatically when a class is undefined",
+        "b": "To load PHP extensions dynamically",
+        "c": "To register a function that will be called automatically when a script is included or required",
+        "d": "To enable the use of namespaces in PHP",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the use of the `__toString` magic method in PHP?",
+        "a": "To convert an object to a string when it is treated as a string",
+        "b": "To override the behavior of the `echo` statement for an object",
+        "c": "To convert an object to an array when it is treated as an array",
+        "d": "To enable method chaining for an object",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the purpose of the `final` keyword in PHP?",
+        "a": "To prevent a class from being extended or overridden",
+        "b": "To indicate that a class or method is abstract",
+        "c": "To define a constant",
+        "d": "To enable static binding in PHP",
+        "correct": "a",
+        "level": "difficult"
+      }
+    ]
+  },
+  {
+    "section": "Ruby",
+    "questions": [
+      {
+        "question": "What is the syntax for defining a method in Ruby?",
+        "a": "def method_name",
+        "b": "function method_name",
+        "c": "define method_name",
+        "d": "method method_name",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the output of the following code?\n\n```\nx = 5\nputs x + 2\n```",
+        "a": "7",
+        "b": "5",
+        "c": "2",
+        "d": "Compilation error",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the symbol used to represent a line comment in Ruby?",
+        "a": "//",
+        "b": "#",
+        "c": "--",
+        "d": "//",
+        "correct": "b",
+        "level": "easy"
+      },
+      {
+        "question": "Which of the following is a valid way to create an empty array in Ruby?",
+        "a": "array = []",
+        "b": "array = {}",
+        "c": "array = ()",
+        "d": "array = ''",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What does the `puts` method do in Ruby?",
+        "a": "Prints the output to the console with a new line",
+        "b": "Performs a mathematical calculation",
+        "c": "Defines a new class",
+        "d": "Reads input from the user",
+        "correct": "a",
+        "level": "easy"
+      },
+      {
+        "question": "What is the difference between `puts` and `print` in Ruby?",
+        "a": "`puts` adds a new line after printing, while `print` does not",
+        "b": "`print` adds a new line after printing, while `puts` does not",
+        "c": "`puts` prints the output to the console, while `print` returns a value",
+        "d": "`print` prints the output to the console, while `puts` returns a value",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the output of the following code?\n\n```\nputs 'Hello'.reverse\n```",
+        "a": "'olleH'",
+        "b": "'Hello'",
+        "c": "Error",
+        "d": "Compilation error",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What does the `%w` notation do in Ruby?",
+        "a": "Creates an array of strings, with each string delimited by spaces",
+        "b": "Creates an array of symbols, with each symbol delimited by spaces",
+        "c": "Creates an array of numbers, with each number delimited by spaces",
+        "d": "Creates an array of words, with each word delimited by spaces",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is the purpose of the `elsif` statement in Ruby?",
+        "a": "To define a new method",
+        "b": "To handle multiple conditions in an `if` statement",
+        "c": "To loop through a collection",
+        "d": "To raise an exception",
+        "correct": "b",
+        "level": "normal"
+      },
+      {
+        "question": "What is the result of the following code?\n\n```\n5.times do |i|\n  puts i\nend\n```",
+        "a": "0\n1\n2\n3\n4",
+        "b": "1\n2\n3\n4\n5",
+        "c": "0\n1\n2\n3\n4\n5",
+        "d": "1\n2\n3\n4",
+        "correct": "a",
+        "level": "normal"
+      },
+      {
+        "question": "What is a lambda in Ruby?",
+        "a": "A block of code that can be passed around and executed later",
+        "b": "A data structure that stores key-value pairs",
+        "c": "A method that can be called without an object",
+        "d": "A loop construct for iterating over a collection",
+        "correct": "a",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the purpose of the `yield` keyword in Ruby?",
+        "a": "To end the execution of a method",
+        "b": "To pass control from a method to a block",
+        "c": "To define a local variable",
+        "d": "To raise an exception",
+        "correct": "b",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the difference between `include` and `extend` in Ruby?",
+        "a": "`include` is used to mix in instance methods, while `extend` is used to mix in class methods",
+        "b": "`include` is used to mix in class methods, while `extend` is used to mix in instance methods",
+        "c": "`include` is used to mix in instance methods, while `extend` is used to mix in module methods",
+        "d": "`include` is used to mix in module methods, while `extend` is used to mix in instance methods",
+        "correct": "c",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the purpose of the `super` keyword in Ruby?",
+        "a": "To call the parent class constructor",
+        "b": "To exit the current block of code",
+        "c": "To define a subclass",
+        "d": "To invoke the method of the same name in the parent class",
+        "correct": "d",
+        "level": "difficult"
+      },
+      {
+        "question": "What is the result of the following code?\n\n```\ndef foo(a, b, *c)\n  puts a\n  puts b\n  puts c.inspect\nend\n\nfoo(1, 2, 3, 4, 5)\n```",
+        "a": "1\n2\n[3, 4, 5]",
+        "b": "1\n2\n[3]",
+        "c": "1\n2\n[4, 5]",
+        "d": "Error",
+        "correct": "a",
+        "level": "difficult"
+      }
+    ]
   }
 ]

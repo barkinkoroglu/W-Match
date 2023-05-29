@@ -165,6 +165,10 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
                   <option value='HTML'>HTML</option>
                   <option value='JavaScript'>JavaScript</option>
                   <option value='React'>React.js</option>
+                  <option value='Java'>Java</option>
+                  <option value='Python'>Python</option>
+                  <option value='PHP'>PHP</option>
+                  <option value='Ruby'>Ruby</option>
                 </Field>
                 <div className='flex'>
                   <h1>If greater than</h1>

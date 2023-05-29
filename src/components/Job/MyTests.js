@@ -21,6 +21,22 @@ function MyTests() {
       name: 'React',
       src: 'https://www.freecodecamp.org/news/content/images/2021/06/Ekran-Resmi-2019-11-18-18.08.13.png',
     },
+    {
+      name: 'Java',
+      src: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/1200px-Java_programming_language_logo.svg.png',
+    },
+    {
+      name: 'Python',
+      src: 'https://img.freepik.com/free-icon/snakes_318-368381.jpg',
+    },
+    {
+      name: 'PHP',
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png',
+    },
+    {
+      name: 'Ruby',
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/2048px-Ruby_logo.svg.png',
+    },
   ];
   return (
     <div className='flex-[0.5]'>
@@ -31,7 +47,7 @@ function MyTests() {
             These tests are done by W-Match.
           </h1>
         </div>
-        <div className=''>
+        <div className='h-80 overflow-auto'>
           {tests.map((element, index) => {
             return <MyTestList key={index} data={element} />;
           })}
