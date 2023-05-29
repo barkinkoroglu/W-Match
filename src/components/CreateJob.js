@@ -100,6 +100,9 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
                 <h1>Description:</h1>
                 <textarea
                   className='flex flex-1 px-2 py-1 outline-none border rounded-lg  overflow-y-auto resize-none scrollbar-hide text-sm'
+                  onInput={(e) =>
+                    (e.target.style.height = `${e.target.scrollHeight}px`)
+                  }
                   name='information'
                   value={values.information}
                   onChange={handleChange}
