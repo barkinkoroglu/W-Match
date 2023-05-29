@@ -41,6 +41,10 @@ function Level() {
       await createLevel(user?.username, dlevel);
       const right = tstRght.find((r) => r[0] === user?.JobCategory);
 
+      if (right && right[1] === 0 && user?.JobCategory) {
+        navigate(`/home`);
+        return;
+      }
       if (!right && user?.JobCategory) {
         await createTestRight(user?.username, user?.JobCategory);
         navigate(`/test/${user?.JobCategory}`);
@@ -66,10 +70,6 @@ function Level() {
           setShowTooltip(!result.success);
           dispatch(setQuestions(result.questions));
         });
-        return;
-      }
-      if (right && right[1] === 0 && user?.JobCategory) {
-        navigate(`/home`);
         return;
       }
     } else {
