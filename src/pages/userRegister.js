@@ -392,6 +392,7 @@ function UserRegister() {
                       <option value='CSS'>CSS</option>
                       <option value='JavaScript'>JavaScript</option>
                       <option value='React'>React.js</option>
+                      <option value='C#'>C#</option>
                     </select>
                     <p className='text-gray-600'>
                       If you can't find your skill{' '}
