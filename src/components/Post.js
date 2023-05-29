@@ -231,7 +231,19 @@ function Post(prop) {
     };
     addScore();
   }, [extraScore, user]);
+  const outerDivRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (outerDivRef.current && !outerDivRef.current.contains(event.target)) {
+        setOpenSettingProfile(false);
+      }
+    };
 
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   const JobPost = () => {
     const handleApply = async () => {
       const id = await getUserId(username);
@@ -290,24 +302,6 @@ function Post(prop) {
       );
       setOpenSettingProfile(false);
     };
-    const outerDivRef = useRef(null);
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (
-          outerDivRef.current &&
-          !outerDivRef.current.contains(event.target)
-        ) {
-          setOpenSettingProfile(false);
-        }
-      };
-
-      // Bind the event listener
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        // Unbind the event listener on clean up
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, []);
 
     return (
       <>
