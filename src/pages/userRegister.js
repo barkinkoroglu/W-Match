@@ -372,7 +372,7 @@ function UserRegister() {
                 {isTest && (
                   <div className='w-full flex flex-col gap-y-3 justify-center mt-4 '>
                     <label className='block' for='jobs'>
-                      Technologies:
+                      Information Technologies:
                     </label>
                     <select
                       value={values.JobCategory}
@@ -386,7 +386,7 @@ function UserRegister() {
                         hidden
                         style={{ color: 'transparent' }}
                       >
-                        Choose a Programming Language
+                        Programming Languages
                       </option>
                       <option value='HTML'>HTML</option>
                       <option value='CSS'>CSS</option>
