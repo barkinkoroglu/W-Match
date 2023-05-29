@@ -145,7 +145,6 @@ export const companyRegister = async (
           ProfileUrl: '',
           BackUrl: '',
         });
-        console.log(response);
       }
       return response.user;
     }

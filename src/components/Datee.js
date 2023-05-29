@@ -11,7 +11,6 @@ const CustomInput = ({ value, onClick }) => (
 
 const Datee = () => {
   const [startDate, setStartDate] = useState(new Date());
-  console.log('🚀 ~ file: Datee.js:15 ~ Datee ~ startDate:', startDate);
 
   return (
     <div className='w-full'>

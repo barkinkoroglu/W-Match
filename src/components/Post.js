@@ -313,7 +313,6 @@ function Post(prop) {
               </div>
               <div className='border-t-2 w-full'>
                 <div className='flex justify-end items-center p-2'>
-                  {console.log('ss', user)}
                   {user?.type === 1 && ShowApply()}
                   {user && user?.type === 2 && (
                     <button

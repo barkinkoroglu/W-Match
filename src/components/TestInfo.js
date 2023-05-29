@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 const TestInfo = ({ user }) => {
   const [tests, setTests] = useState();
-  console.log('🚀 ~ file: TestInfo.js:6 ~ TestInfo ~ tests:', tests);
   const navigate = useNavigate();
   const handleStartClick = () => {
     navigate(`/level`);

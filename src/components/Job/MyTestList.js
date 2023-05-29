@@ -6,7 +6,6 @@ import { updateSkill, getTestRight } from '../../firebase';
 function MyTestList({ data }) {
   const [testR, setTestR] = useState();
   const { name, src } = data;
-  console.log('🚀 ~ file: MyTestList.js:9 ~ MyTestList ~ name:', name);
 
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
@@ -22,7 +21,6 @@ function MyTestList({ data }) {
     };
     getR();
   }, [user]);
-  console.log('🚀 ~ file: MyTestList.js:8 ~ MyTestList ~ testR:', testR);
   const handleD = () => {
     const a =
       testR &&
@@ -32,7 +30,6 @@ function MyTestList({ data }) {
       return name;
     }
   };
-  console.log('ww', handleD());
   return (
     <div className='relative last:border-none border-b-2'>
       <div className='flex justify-between pt-3 group pb-2'>
