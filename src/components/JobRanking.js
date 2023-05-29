@@ -47,7 +47,6 @@ const JobRanking = () => {
         );
       });
   };
-  const handlePoint = () => {};
   const sortCandidates = () => {
     if (!infos || infos.length === 0) return;
     const sortedCandidates = infos.flatMap(
@@ -122,10 +121,6 @@ const JobRanking = () => {
       }, []);
       setSorted(resultArr);
     }
-    console.log(
-      '🚀 ~ file: JobRanking.js:103 ~ useEffect ~ sortCandidates():',
-      sortCandidates()
-    );
   }, [candidates]);
   return (
     <>
