@@ -6,6 +6,7 @@ import { Avatar } from '@mui/material';
 const JobRanking = () => {
   const [infos, setInfos] = useState();
   const [candidates, setCandidates] = useState([]);
+
   const [sorted, setSorted] = useState([]);
   const user = useSelector((state) => state.auth.user);
 
@@ -46,10 +47,14 @@ const JobRanking = () => {
         );
       });
   };
-
+  const handlePoint = () => {};
   const sortCandidates = () => {
     if (!infos || infos.length === 0) return;
-
+    console.log('🚀 ~ file: JobRanking.js:88 ~ sortCandidates ~ infos:', infos);
+    console.log(
+      '🚀 ~ file: JobRanking.js:9 ~ JobRanking ~ candidates:',
+      candidates
+    );
     const sortedCandidates = infos.flatMap(
       (info) =>
         candidates &&
@@ -64,16 +69,23 @@ const JobRanking = () => {
               candidate = {
                 ...candidate,
                 lastScore:
-                  aMilitaryScore + info.wtestvalue
-                    ? candidate.wmatchTests[info.wtestvalue]
+                  info.wtestvalue &&
+                  info.wtestvalue.length > 0 &&
+                  candidate.wmatchTests[info.wtestvalue] &&
+                  candidate.wmatchTests[info.wtestvalue] > info.wmintestvalue
+                    ? aMilitaryScore + info.wtestvaluescore
                     : 0,
               };
             } else {
               candidate = {
                 ...candidate,
-                lastScore: info.wtestvalue
-                  ? candidate.wmatchTests[info.wtestvalue]
-                  : 0,
+                lastScore:
+                  info.wtestvalue &&
+                  info.wtestvalue.length > 0 &&
+                  candidate.wmatchTests[info.wtestvalue] &&
+                  candidate.wmatchTests[info.wtestvalue] > info.wmintestvalue
+                    ? info.wtestvaluescore
+                    : 0,
               };
             }
             return candidate;
