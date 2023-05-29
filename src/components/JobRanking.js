@@ -68,7 +68,7 @@ const JobRanking = () => {
                   candidate.wmatchTests[info.wtestvalue] &&
                   candidate.wmatchTests[info.wtestvalue] > info.wmintestvalue
                     ? aMilitaryScore + info.wtestvaluescore
-                    : 0,
+                    : aMilitaryScore + 0,
               };
             } else {
               candidate = {
