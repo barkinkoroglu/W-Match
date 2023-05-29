@@ -6,7 +6,7 @@ const LeaveBtn = () => {
   const navigate = useNavigate();
 
   function handleGoBack() {
-    navigate(-1); // Go back one page in the history
+    navigate(-1);
   }
   return (
     <div

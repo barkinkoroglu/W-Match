@@ -19,9 +19,11 @@ function Notifications() {
             <div className='my-0 py-0 mb-4'>
               <Sidebar />
             </div>
-            <div className='my-0 py-0'>
-              <Datee />
-            </div>
+            {user.type === 2 && (
+              <div className='my-0 py-0'>
+                <Datee />
+              </div>
+            )}
           </div>
           <NotificationFeed />
           <Widget />
