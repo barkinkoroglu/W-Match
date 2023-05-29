@@ -21,10 +21,6 @@ function MyTests() {
       name: 'React',
       src: 'https://www.freecodecamp.org/news/content/images/2021/06/Ekran-Resmi-2019-11-18-18.08.13.png',
     },
-    {
-      name: 'C#',
-      src: 'https://miro.medium.com/v2/resize:fit:1188/format:webp/1*ymVNbsdd7KxHXHC4-LP7kw.png',
-    },
   ];
   return (
     <div className='flex-[0.5]'>
