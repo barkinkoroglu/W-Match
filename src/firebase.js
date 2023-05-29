@@ -537,6 +537,26 @@ export const createCompanyJob = async (companyid, data) => {
   }
 };
 
+export const editCompanyJob = async (companyid, jobId, data) => {
+  try {
+    const dbUser = await getDoc(doc(db, 'companies', companyid));
+    let posts = dbUser.data().posts;
+
+    let jobIndex = posts.findIndex((post) => post.jobid === jobId);
+
+    if (jobIndex !== -1) {
+      posts[jobIndex] = { ...posts[jobIndex], ...data };
+    }
+
+    await updateDoc(doc(db, 'companies', companyid), {
+      posts: posts,
+    });
+    toast.success('The job has been successfully updated.');
+  } catch (error) {
+    toast.error('Oops! Something went wrong!');
+  }
+};
+
 export const getUserInfobyID = async (userid) => {
   const res = (await getDoc(doc(db, 'users', userid))).data();
   if (res === undefined) {

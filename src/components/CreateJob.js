@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useId } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Form, Formik, Field } from 'formik';
 import { CompanyjobSchema } from '../validation/index';
@@ -9,6 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
   const user = useSelector((state) => state.auth.user);
+  const jobid = useId();
 
   const handleSubmit = async (values, actions) => {
     const milliseconds = values.startDate.getTime();
@@ -34,6 +35,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
       experience: values.experience,
       major: values.major,
       isMilitaryService: values.isMilitaryService,
+      jobid,
     };
 
     const id = await getUserId(user?.username);
@@ -275,7 +277,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
                     </label>
                   </div>
 
-                  <div lassName='flex items-center gap-x-4  '>
+                  <div className='flex items-center gap-x-4  '>
                     <input
                       id='fm'
                       type='radio'
