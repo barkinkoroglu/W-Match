@@ -30,7 +30,7 @@ function Widget() {
       {user.type === 1 && (
         <div className='flex-grow flex flex-col min-h-0 max-h-[500px] overflow-y-auto scrollbar-hide  z-40 p-2 gap-y-2 rounded-lg shadow-lg bg-white'>
           <h1 className=' border-b-2 p-2 w-full text-center font-medium border-gray-100'>
-            Companies that you can follow
+            Companies that you can follow - {companies && companies?.length}
           </h1>
           {companies?.slice(0, 10).map((widg, index) => {
             return <WidgetElement key={index} widg={widg} />;
