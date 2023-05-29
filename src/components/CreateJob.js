@@ -97,7 +97,7 @@ function CreateJob({ showCreateJob, setShowCreateJob, refreshData }) {
                 <div className=' text-red-600'>{errors.job}</div>
               )}
               <div className='flex gap-x-3 '>
-                <h1>Information:</h1>
+                <h1>Description:</h1>
                 <textarea
                   className='flex flex-1 px-2 py-1 outline-none border rounded-lg  overflow-y-auto resize-none scrollbar-hide text-sm'
                   name='information'
