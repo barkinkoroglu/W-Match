@@ -530,9 +530,10 @@ function Post(prop) {
                             <div className='flex justify-between gap-x-3 items-center whitespace-nowrap  h-8'>
                               <h1>W-MATCH Tests:</h1>
                               <Field
-                                className='w-full h-full border-2'
+                                className='border-2 flex-grow'
                                 as='select'
                                 name='wtestvalue'
+                                value={values.wtestvalue}
                               >
                                 <option value=''>Choose</option>
                                 <option value='CSS'>CSS</option>
