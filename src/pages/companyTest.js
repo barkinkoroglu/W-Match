@@ -33,10 +33,6 @@ function CompanyTest() {
     }, 1000);
     return () => clearInterval(timerId.current);
   }, [param]);
-  console.log(
-    '🚀 ~ file: companyTest.js:13 ~ CompanyTest ~ examtime:',
-    examtime
-  );
 
   useEffect(() => {
     if (examtime === 0) {
@@ -64,7 +60,6 @@ function CompanyTest() {
     updateCompanyTestScore(data.username, user.uid, param.id2, score);
     navigate(`/home`);
   };
-  console.log('🚀 ~ file: companyTest.js:59 ~ handleSubmit ~ handleSubmit:');
 
   return (
     <div className='min-h-screen   bg-gray-200 relative flex flex-col  items-center gap-y-3   '>

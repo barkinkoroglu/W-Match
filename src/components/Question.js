@@ -117,7 +117,7 @@ function Question({
       await createCompanyTest(uid, finaldata).then(
         async () => await refreshData()
       );
-      // console.log("Fınal", finaldata);
+
       setShowCreateTest(false);
     } else {
       setNindex(nindex + 1);

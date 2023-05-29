@@ -17,9 +17,7 @@ function Test() {
   const timerId = useRef();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
-  console.log('User bilgisi', user);
   const param = useParams();
-  console.log('Param bilgisi', param.id);
 
   useEffect(() => {
     timerId.current = setInterval(() => {

@@ -38,7 +38,7 @@ function UserProfile({ user, param }) {
   const [allposts, setAllPost] = useState([]);
   const [visiblePostCount, setVisiblePostCount] = useState(5);
   const groupSize = 5;
-  console.log('BÜTÜN POSTLAR', user);
+
   const getVisiblePosts = (posts, visiblePostCount) => {
     return posts.slice(0, visiblePostCount);
   };
@@ -72,7 +72,6 @@ function UserProfile({ user, param }) {
         ruser.username
       );
     } else {
-      console.log(values);
       await companyEditInformation(
         values.companyname,
         values.about,

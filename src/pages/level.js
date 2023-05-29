@@ -108,7 +108,6 @@ function Level() {
     };
     getrght();
   }, [user]);
-  console.log('🚀 ~ file: level.js:23 ~ Level ~ tstRght:', tstRght);
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-[#e5e7eb] dark:bg-gray-800'>

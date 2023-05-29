@@ -14,7 +14,6 @@ function Profile() {
   const [isRight, setIsRight] = useState(false);
   const param = useParams();
   const userr = useSelector((state) => state.auth.user);
-  console.log('param', param.id);
   useEffect(() => {
     const callValue = async () => {
       await getUserInfo(param.id)
@@ -33,7 +32,6 @@ function Profile() {
       if (user?.username) {
         const rg = await getTestRight(user?.username);
         if (rg) setIsRight(true);
-        console.log('rg', rg);
       }
     };
     gtRight();
