@@ -108,6 +108,15 @@ function Level() {
     };
     getrght();
   }, [user]);
+  useEffect(() => {
+    if (tstRght) {
+      const right = tstRght.find((r) => r[0] === user?.JobCategory);
+      if (right && right[1] === 0 && user?.JobCategory) {
+        setDisable(true);
+      }
+    }
+  }, [tstRght, user?.JobCategory]);
+  console.log(' ~ file: level.js:24 ~ Level ~ disable:', disable);
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-[#e5e7eb] dark:bg-gray-800'>
@@ -155,9 +164,13 @@ function Level() {
               </div>
             )}
             <button
+              disabled={disable}
               type='submit'
-              disabled={showTooltip}
-              className='bg-blue-500 text-white text-center py-3 rounded-md hover:bg-blue-400 focus:outline-none w-full transition duration-200 ease-in-out transform hover:-translate-y-1 shadow-md disabled:bg-gray-300 disabled:text-gray-500 disabled:hover:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none disabled:transform-none disabled:hover:-translate-y-0'
+              className={`bg-blue-500 text-white text-center py-3 rounded-md hover:bg-blue-400 focus:outline-none w-full transition duration-200 ease-in-out transform hover:-translate-y-1 shadow-md disabled:bg-gray-300 disabled:text-gray-500 disabled:hover:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none disabled:transform-none disabled:hover:-translate-y-0 ${
+                disable
+                  ? 'text-white bg-gray-400 opacity-70 cursor-not-allowed'
+                  : ''
+              }`}
             >
               Start Your Test!
             </button>
@@ -194,7 +207,6 @@ function Level() {
               <button
                 style={{
                   width: '100%',
-
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
