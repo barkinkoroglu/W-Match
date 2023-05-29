@@ -302,7 +302,6 @@ function Post(prop) {
       );
       setOpenSettingProfile(false);
     };
-
     return (
       <>
         {isObliged && !isAnswered && (
@@ -648,6 +647,9 @@ function Post(prop) {
                               <div className='flex items-center gap-x-4'>
                                 <div className='flex items-center mr-6 pl-2 '>
                                   <input
+                                    checked={
+                                      values.isMilitaryService === 'true'
+                                    }
                                     id='tm'
                                     type='radio'
                                     name='isMilitaryService'
@@ -666,6 +668,9 @@ function Post(prop) {
                                 <div className='flex items-center gap-x-4  '>
                                   <input
                                     id='fm'
+                                    checked={
+                                      values.isMilitaryService === 'false'
+                                    }
                                     type='radio'
                                     name='isMilitaryService'
                                     value='false'
