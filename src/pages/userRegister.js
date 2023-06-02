@@ -22,7 +22,6 @@ function UserRegister() {
   const [inputKey, setInputKey] = useState(Date.now());
   const [isTest, setIsTest] = useState(false);
   const [clickedButton, setClickedButton] = useState(null);
-  const [add, setAdd] = useState(false);
   const [skill, SetSkill] = useState('');
   const navigate = useNavigate();
 
@@ -356,7 +355,6 @@ function UserRegister() {
                                 setClickedButton('later');
                                 form.setFieldValue('isTest', false);
                                 form.setFieldValue('JobCategory', '');
-                                setAdd(false);
                               }}
                             />
                             <span className='ml-2 font-normal'>Later</span>
@@ -397,29 +395,17 @@ function UserRegister() {
                       <option value='PHP'>PHP</option>
                       <option value='Ruby'>Ruby</option>
                     </select>
-                    <p className='text-gray-600'>
-                      If you can't find your skill{' '}
-                      <span
-                        onClick={() => setAdd(true)}
-                        className='text-blue-500 cursor-pointer hover:underline'
-                      >
-                        click here
-                      </span>{' '}
-                      to add your
+                    <p className='text-gray-600 mt-5 mb-0'>
+                      If you can't find your skill you can add in below
                     </p>
-                    {add && (
-                      <>
-                        <input
-                          type='text'
-                          name='skill'
-                          value={values.skill}
-                          required={add}
-                          onChange={handleChange}
-                          placeholder='Type your skill'
-                          className='w-full p-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200'
-                        />
-                      </>
-                    )}
+                    <input
+                      type='text'
+                      name='skill'
+                      value={values.skill}
+                      onChange={handleChange}
+                      placeholder='Type your skill'
+                      className='w-full p-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200'
+                    />
                   </div>
                 )}
 
