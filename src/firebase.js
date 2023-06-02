@@ -287,15 +287,6 @@ export const getTestRight = async (username) => {
 export const updateExam = async (userid, testCategory, score) => {
   const dbUser = doc(db, 'users', userid);
   let scoreData = { [testCategory]: score };
-  if (score <= 40) {
-    scoreData = { [testCategory]: score + 5 };
-  }
-  if (40 < score <= 80) {
-    scoreData = { [testCategory]: score + 10 };
-  }
-  if (80 < score) {
-    scoreData = { [testCategory]: score + 15 };
-  }
 
   await setDoc(dbUser, { wmatchTests: scoreData }, { merge: true });
 };
