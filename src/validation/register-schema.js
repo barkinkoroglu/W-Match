@@ -22,6 +22,7 @@ export const RegisterSchema = Yup.object().shape({
     then: Yup.string().required('JobCategory is required'),
     otherwise: Yup.string(),
   }),
+  skill: Yup.string(),
   password: Yup.string()
     .required('Please Enter your password')
     .min(6, 'Minimum 6 Characters')
@@ -34,5 +35,4 @@ export const RegisterSchema = Yup.object().shape({
     [Yup.ref('password'), null],
     'Passwords must match'
   ),
-  skill: Yup.string(),
 });
