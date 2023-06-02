@@ -21,24 +21,24 @@ const TestInfo = ({ user }) => {
       {user?.type === 1 && !user.wmatchTests[user.JobCategory] ? (
         <button
           onClick={handleStartClick}
-          className='w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-150'
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-150"
         >
           Start test
         </button>
       ) : (
-        <div className='text-center p-6 rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:from-purple-300 hover:via-pink-400 hover:to-red-400 transition duration-500 ease-in-out'>
-          <div className='max-h-64 overflow-y-auto'>
+        <div className="text-center  p-6 rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:from-purple-300 hover:via-pink-400 hover:to-red-400 transition duration-500 ease-in-out">
+          <div className="max-h-64 overflow-y-auto scrollbar-hide">
             <div>
-              <h2 className='text-2xl font-bold text-white tracking-tighter mb-1'>
+              <h2 className="text-xl font-bold text-white tracking-tighter mb-1">
                 {tests &&
                   tests.length > 0 &&
                   tests.map((test) => (
-                    <div>
+                    <div className="text-xl font-bold text-white mb-4 tracking-tighter border-b-2 border-solid border-yellow-300 ">
                       {' '}
-                      Your W-Match {cptl(test[0])} Skill Score -{' '}
-                      <span className='font-extrabold text-yellow-300'>
+                      W-Match {cptl(test[0])} Score -{' '}
+                      <span className="font-extrabold text-yellow-300">
                         {' '}
-                        <span className='font-extrabold text-yellow-300'>
+                        <span className="font-extrabold text-yellow-300">
                           {test[1]}
                         </span>
                       </span>

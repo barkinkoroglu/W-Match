@@ -47,21 +47,21 @@ function Profile() {
   return (
     <div>
       <Navbar />
-      <div className='bg-gray-50'>
-        <div className='md:flex max-w-6xl px-3 pt-3 md:mx-auto'>
-          <div className='w-full md:w-[70%]'>
+      <div className="bg-gray-50">
+        <div className="md:flex max-w-6xl px-3 pt-3 md:mx-auto">
+          <div className="w-full md:w-[70%]">
             <UserProfile user={user} param={param} />
           </div>
-          <div className='flex flex-col w-full md:w-[30%]'>
+          <div className="flex flex-col w-full md:w-[30%]">
             <Widget />
-            <div className='mt-3'>
+            <div className="mt-3">
               {!user.skill &&
                 user &&
                 user.type === 1 &&
                 userr?.username &&
                 user?.username === userr.username && <TestInfo user={user} />}
             </div>
-            <div className='mt-3'>
+            <div className="mt-3 mb-1">
               {isRight &&
                 user &&
                 userr?.username &&
