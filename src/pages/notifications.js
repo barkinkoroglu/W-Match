@@ -11,22 +11,24 @@ function Notifications() {
     return <div>Loading...</div>;
   }
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <Navbar />
-      <div className='bg-gray-50'>
-        <div className='md:flex max-w-6xl px-3 pt-3 mx-auto'>
-          <div className='flex flex-col md:w-1/5 space-y-1'>
-            <div className='my-0 py-0 mb-4'>
+      <div className="bg-gray-50 min-h-screen">
+        <div className="md:flex max-w-6xl px-3 pt-3 mx-auto">
+          <div className="flex flex-col md:w-1/5 space-y-1">
+            <div className="my-0 py-0 mb-4">
               <Sidebar />
             </div>
             {user.type === 2 && (
-              <div className='my-0 py-0'>
+              <div className="my-0 py-0">
                 <Datee />
               </div>
             )}
           </div>
           <NotificationFeed />
-          <Widget />
+          <div className="flex-[0.4]">
+            <Widget />
+          </div>
         </div>
       </div>
     </div>
