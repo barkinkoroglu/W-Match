@@ -153,6 +153,7 @@ function UserRegister() {
                   placeholder='Last Name'
                   value={values.lastname}
                   onChange={handleChange}
+                  required
                 />
                 <input
                   type='text'
@@ -161,6 +162,7 @@ function UserRegister() {
                   placeholder='Username'
                   value={values.username}
                   onChange={handleChange}
+                  required
                 />
                 {errors.username && touched.username && (
                   <div className=' text-red-600'>{errors.username}</div>
@@ -172,6 +174,7 @@ function UserRegister() {
                   placeholder='Email'
                   value={values.email}
                   onChange={handleChange}
+                  required
                 />
                 {errors.email && touched.email && (
                   <div className=' text-red-600'>{errors.email}</div>
@@ -200,6 +203,7 @@ function UserRegister() {
                   id='adressline1'
                   value={values.adressline1}
                   onChange={handleChange}
+                  required
                 />
                 {errors.adressline1 && touched.adressline1 && (
                   <div className='text-red-600'>{errors.adressline1}</div>
@@ -240,6 +244,7 @@ function UserRegister() {
                   placeholder='Short About yourself (max 60 character) '
                   value={values.jobfunct}
                   onChange={handleChange}
+                  required
                 />
                 {errors.jobfunct && touched.jobfunct && (
                   <div className='text-red-600'>{errors.jobfunct}</div>
@@ -416,6 +421,7 @@ function UserRegister() {
                   placeholder='Password'
                   value={values.password}
                   onChange={handleChange}
+                  required
                 />
                 {errors.password && touched.password && (
                   <div className='text-red-600'>{errors.password}</div>
@@ -427,6 +433,7 @@ function UserRegister() {
                   placeholder='Confirm Password'
                   value={values.confirmpassword}
                   onChange={handleChange}
+                  required
                 />
                 {errors.confirmpassword && touched.confirmpassword && (
                   <div className='text-red-600'>{errors.confirmpassword}</div>
