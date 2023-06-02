@@ -39,13 +39,13 @@ function Level() {
     if (dlevel !== 'Select your level' && user?.JobCategory) {
       setShowTooltip(false);
       await createLevel(user?.username, dlevel);
-      const right = tstRght.find((r) => r[0] === user?.JobCategory);
+      const right = tstRght?.find((r) => r[0] === user?.JobCategory);
 
       if (right && right[1] === 0 && user?.JobCategory) {
         navigate(`/home`);
         return;
       }
-      if (!right && user?.JobCategory) {
+      if ((!right || !tstRght) && user?.JobCategory) {
         await createTestRight(user?.username, user?.JobCategory);
         navigate(`/test/${user?.JobCategory}`);
         addQuestionsBySection(user?.JobCategory, dlevel).then((result) => {
@@ -116,7 +116,6 @@ function Level() {
       }
     }
   }, [tstRght, user?.JobCategory]);
-  console.log(' ~ file: level.js:24 ~ Level ~ disable:', disable);
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-[#e5e7eb] dark:bg-gray-800'>
