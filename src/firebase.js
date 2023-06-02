@@ -752,7 +752,7 @@ export const searchCompany = async (companydata, search) => {
   const result = companydata.filter(
     (element) => element?.companyname?.toLowerCase().includes(search) === true
   );
-  const temp = result.slice(0, 3);
+  const temp = result.slice(0, 5);
   console.log(temp);
   return temp;
 };
