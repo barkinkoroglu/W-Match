@@ -49,8 +49,8 @@ const JobRanking = () => {
   };
   const calulatee = () => {
     infos.map((i) => {
-      if (i.scores) {
-        i.scores.map(async (s) => {
+      if (i.scores && i.scores.length > 0) {
+        i.scores?.map(async (s) => {
           const user = await getCandidateById(s.userid);
           const newusr = { ...user, companyscore: s.score || 0 };
           setSuser((prev) => [...prev, newusr]);
@@ -60,7 +60,6 @@ const JobRanking = () => {
   };
   const sortCandidates = () => {
     if (!infos || infos.length === 0) return;
-    console.log('🚀 ~ file: JobRanking.js:68 ~ suser.reduce ~ suser:', suser);
 
     const sortedCandidates = infos.flatMap(
       (info) =>
