@@ -6,7 +6,7 @@ import { Avatar } from '@mui/material';
 const JobRanking = () => {
   const [infos, setInfos] = useState();
   const [candidates, setCandidates] = useState([]);
-
+  const [suser, setSuser] = useState([]);
   const [sorted, setSorted] = useState([]);
   const user = useSelector((state) => state.auth.user);
 
@@ -47,8 +47,21 @@ const JobRanking = () => {
         );
       });
   };
+  const calulatee = () => {
+    infos.map((i) => {
+      if (i.scores) {
+        i.scores.map(async (s) => {
+          const user = await getCandidateById(s.userid);
+          const newusr = { ...user, companyscore: s.score || 0 };
+          setSuser((prev) => [...prev, newusr]);
+        });
+      }
+    });
+  };
   const sortCandidates = () => {
     if (!infos || infos.length === 0) return;
+    console.log('🚀 ~ file: JobRanking.js:68 ~ suser.reduce ~ suser:', suser);
+
     const sortedCandidates = infos.flatMap(
       (info) =>
         candidates &&
@@ -68,7 +81,11 @@ const JobRanking = () => {
                   candidate.wmatchTests[info.wtestvalue] &&
                   candidate.wmatchTests[info.wtestvalue] > info.wmintestvalue
                     ? aMilitaryScore + info.wtestvaluescore
-                    : aMilitaryScore + 0,
+                    : aMilitaryScore +
+                      suser.find(
+                        (u) =>
+                          u.username === candidate.username && u.companyscore
+                      ).companyscore,
               };
             } else {
               candidate = {
@@ -79,7 +96,10 @@ const JobRanking = () => {
                   candidate.wmatchTests[info.wtestvalue] &&
                   candidate.wmatchTests[info.wtestvalue] > info.wmintestvalue
                     ? info.wtestvaluescore
-                    : 0,
+                    : suser.find(
+                        (u) =>
+                          u.username === candidate.username && u.companyscore
+                      ).companyscore,
               };
             }
             return candidate;
@@ -103,6 +123,9 @@ const JobRanking = () => {
 
   useEffect(() => {
     handleCandidate();
+    if (infos) {
+      calulatee();
+    }
   }, [infos]);
 
   useEffect(() => {
