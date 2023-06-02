@@ -203,6 +203,10 @@ function Level() {
                 <option value='CSS'>CSS</option>
                 <option value='JavaScript'>JavaScript</option>
                 <option value='React'>React.js</option>
+                <option value='Java'>Java</option>
+                <option value='Python'>Python</option>
+                <option value='PHP'>PHP</option>
+                <option value='Ruby'>Ruby</option>
               </select>
               <button
                 style={{
