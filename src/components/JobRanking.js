@@ -58,6 +58,24 @@ const JobRanking = () => {
       }
     });
   };
+  const select = (c, b, info) => {
+    if (c && b) {
+      return info.wtestvaluescore + b;
+    }
+    if (c && !b) {
+      return info.wtestvaluescore;
+    }
+    return b;
+  };
+  const select2 = (c, b, aMilitaryScore, info) => {
+    if (c && b) {
+      return aMilitaryScore + info.wtestvaluescore + b;
+    }
+    if (c && !b) {
+      return aMilitaryScore + info.wtestvaluescore;
+    }
+    return aMilitaryScore + b;
+  };
   const sortCandidates = () => {
     if (!infos || infos.length === 0) return;
 
@@ -72,33 +90,31 @@ const JobRanking = () => {
                 ? candidate.militaryServiceScore
                 : 0;
             if (info.isMilitaryService === 'true') {
+              const c =
+                info.wtestvalue &&
+                info.wtestvalue.length > 0 &&
+                candidate.wmatchTests[info.wtestvalue] &&
+                candidate.wmatchTests[info.wtestvalue] > info.wmintestvalue;
+              const b = suser.find(
+                (u) => u.username === candidate.username && u.companyscore
+              ).companyscore;
               candidate = {
                 ...candidate,
-                lastScore:
-                  info.wtestvalue &&
-                  info.wtestvalue.length > 0 &&
-                  candidate.wmatchTests[info.wtestvalue] &&
-                  candidate.wmatchTests[info.wtestvalue] > info.wmintestvalue
-                    ? aMilitaryScore + info.wtestvaluescore
-                    : aMilitaryScore +
-                      suser.find(
-                        (u) =>
-                          u.username === candidate.username && u.companyscore
-                      ).companyscore,
+                lastScore: select2(c, b, aMilitaryScore, info),
               };
             } else {
+              const c =
+                info.wtestvalue &&
+                info.wtestvalue.length > 0 &&
+                candidate.wmatchTests[info.wtestvalue] &&
+                candidate.wmatchTests[info.wtestvalue] > info.wmintestvalue;
+              const b = suser.find(
+                (u) => u.username === candidate.username && u.companyscore
+              ).companyscore;
+
               candidate = {
                 ...candidate,
-                lastScore:
-                  info.wtestvalue &&
-                  info.wtestvalue.length > 0 &&
-                  candidate.wmatchTests[info.wtestvalue] &&
-                  candidate.wmatchTests[info.wtestvalue] > info.wmintestvalue
-                    ? info.wtestvaluescore
-                    : suser.find(
-                        (u) =>
-                          u.username === candidate.username && u.companyscore
-                      ).companyscore,
+                lastScore: select(c, b, info),
               };
             }
             return candidate;
