@@ -1,10 +1,10 @@
-import { Avatar, Tooltip } from "@mui/material";
-import React from "react";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import { useState, useEffect } from "react";
-import { getCompanyInfo, applyJob } from "../../firebase";
-import { useSelector } from "react-redux";
-import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import { Avatar, Tooltip } from '@mui/material';
+import React from 'react';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { useState, useEffect } from 'react';
+import { getCompanyInfo, applyJob } from '../../firebase';
+import { useSelector } from 'react-redux';
+import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 function JobList({ data }) {
   const [company, setCompany] = useState(null);
   const [isapply, setIsapply] = useState(false);
@@ -19,7 +19,7 @@ function JobList({ data }) {
     if (result !== 0) {
       setDatetime(result);
     } else {
-      setDatetime("Today");
+      setDatetime('Today');
     }
   };
   useEffect(() => {

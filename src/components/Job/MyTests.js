@@ -23,7 +23,7 @@ function MyTests() {
     },
     {
       name: 'Java',
-      src: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/1200px-Java_programming_language_logo.svg.png',
+      src: 'https://thekingsacademy.info/wp-content/uploads/2020/10/java1.jpeg',
     },
     {
       name: 'Python',
@@ -31,7 +31,7 @@ function MyTests() {
     },
     {
       name: 'PHP',
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png',
+      src: 'https://logowik.com/content/uploads/images/php.jpg',
     },
     {
       name: 'Ruby',
@@ -39,15 +39,15 @@ function MyTests() {
     },
   ];
   return (
-    <div className='flex-[0.5]'>
-      <div className='bg-white p-4 rounded-lg mx-4 shadow-sm '>
+    <div className="flex-[0.5]">
+      <div className="bg-white p-4 rounded-lg mx-4 shadow-sm  ">
         <div>
-          <h1 className='font-medium text-lg leading-5	 '>W-MATCH Tests</h1>
-          <h1 className='font-light text-sm text-gray-400'>
+          <h1 className="font-medium text-lg leading-5	 ">W-MATCH Tests</h1>
+          <h1 className="font-light text-sm text-gray-400">
             These tests are done by W-Match.
           </h1>
         </div>
-        <div className='h-80 overflow-auto'>
+        <div className=" h-[440px] overflow-auto scrollbar-hide">
           {tests.map((element, index) => {
             return <MyTestList key={index} data={element} />;
           })}
