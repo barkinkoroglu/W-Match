@@ -77,8 +77,6 @@ const JbRnk = () => {
             setCalculatedUsers((prev) => [...prev, newUsr]);
           }
           scores.map((score) => {
-            console.log('hello');
-
             allCandidatesId &&
               allCandidatesId.map((id) => {
                 if (
