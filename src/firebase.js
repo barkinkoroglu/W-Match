@@ -495,10 +495,18 @@ export const getAllPostbyname = async (userInfo) => {
 };
 
 export const createCompanyTest = async (companyid, data) => {
+  const totalTime =
+    data && data.questions && data.questions.length > 0
+      ? data.questions.reduce((acc, curr) => acc + curr.questionTime, 0)
+      : 0;
+  const newData = {
+    ...data,
+    totalTime,
+  };
   try {
     const dbUser = await getDoc(doc(db, 'companies', companyid));
     const posts = dbUser.data().posts;
-    posts.push(data);
+    posts.push(newData);
 
     await setDoc(doc(db, 'companies', companyid), {
       ...dbUser.data(),
