@@ -59,7 +59,10 @@ function Notification({ cname, jname, desc, username, post }) {
                   }}
                   className='px-3 py-1 border rounded-full hover:bg-slate-400'
                 >
-                  See who applied
+                  {post?.candidates?.length < post.numberRec &&
+                    `See applied best ${post?.candidates?.length} candidates`}
+                  {post?.candidates?.length >= post.numberRec &&
+                    `See applied best ${post.numberRec} candidates`}
                 </button>
               </div>
             </div>
@@ -81,7 +84,7 @@ function Notification({ cname, jname, desc, username, post }) {
                   </button>
                 </div>
                 <div className='flex flex-col gap-y-3 py-3 overflow-y-auto'>
-                  {<JbRnk />}
+                  {<JbRnk rec={post.numberRec} />}
                 </div>
               </div>
             </div>

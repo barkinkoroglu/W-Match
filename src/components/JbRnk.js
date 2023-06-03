@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { getCandidateById } from '../firebase';
 import { Avatar } from '@mui/material';
 
-const JbRnk = () => {
+const JbRnk = ({ rec }) => {
   const [allCandidatesId, setAllCandidatesId] = useState([]);
 
   const [candidateObj, setCandidateObj] = useState([]);
@@ -204,22 +204,40 @@ const JbRnk = () => {
   }, [calculatedUsers]);
   return (
     <>
-      {sortedUsers.map((s) => (
-        <div
-          className='flex gap-x-2 border-b-2 pb-3 border-gray-100'
-          key={s?.username}
-        >
-          <div>
-            <Avatar src={s.ProfileUrl} />
+      {!rec &&
+        sortedUsers.map((s) => (
+          <div
+            className='flex gap-x-2 border-b-2 pb-3 border-gray-100'
+            key={s?.username}
+          >
+            <div>
+              <Avatar src={s.ProfileUrl} />
+            </div>
+            <div className='flex items-center justify-between w-full pr-6 '>
+              <a href={`/profile/${s?.username}`} className=' hover:underline '>
+                {s?.name} {s?.lastname}
+              </a>
+              <h1 className='text-lg font-semibold'>{s.totalScore}</h1>
+            </div>
           </div>
-          <div className='flex items-center justify-between w-full pr-6 '>
-            <a href={`/profile/${s?.username}`} className=' hover:underline '>
-              {s?.name} {s?.lastname}
-            </a>
-            <h1 className='text-lg font-semibold'>{s.totalScore}</h1>
+        ))}
+      {rec &&
+        sortedUsers.slice(0, rec).map((s) => (
+          <div
+            className='flex gap-x-2 border-b-2 pb-3 border-gray-100'
+            key={s?.username}
+          >
+            <div>
+              <Avatar src={s.ProfileUrl} />
+            </div>
+            <div className='flex items-center justify-between w-full pr-6 '>
+              <a href={`/profile/${s?.username}`} className=' hover:underline '>
+                {s?.name} {s?.lastname}
+              </a>
+              <h1 className='text-lg font-semibold'>{s.totalScore}</h1>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </>
   );
 };
