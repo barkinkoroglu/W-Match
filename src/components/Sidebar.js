@@ -63,7 +63,11 @@ function Sidebar() {
           <div className='fixed top-0 left-0 bottom-0 right-0 z-50  bg-slate-900 opacity-75'></div>
           <div className='fixed flex flex-col  z-50 top-5 left-0 right-0 mx-auto max-w-xl max-h-[556px] px-4 py-3 rounded bg-white'>
             <div className='flex flex-col items-center border-b-2 relative'>
-              <h1 className=' text-lg '>Reactions</h1>
+              <h1 className=' text-lg '>
+                {user && user?.type === 2
+                  ? 'Followers'
+                  : 'Followed Companies by you'}
+              </h1>
               <div className='border-b-4 -mb-[1.7px] border-slate-500'>
                 <h1 className='p-2'>
                   All{' '}
