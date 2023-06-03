@@ -9,10 +9,7 @@ const JbRnk = () => {
   const [candidateObj, setCandidateObj] = useState([]);
   const [scores, setScores] = useState([]);
   const [calculatedUsers, setCalculatedUsers] = useState([]);
-  console.log(
-    '🚀 ~ file: JbRnk.js:12 ~ JbRnk ~ calculatedUsers:',
-    calculatedUsers
-  );
+
   const [sortedUsers, setSortedUsers] = useState([]);
 
   const { jobpost } = useSelector((state) => state.jobpost);
