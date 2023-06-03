@@ -763,7 +763,7 @@ export const getRandomCompanyJobs = async (userid) => {
     let temp2 = doc.data();
     for (let i = 0; i < temp2.posts?.length; i++) {
       if (temp2.posts[i].type === 3) {
-        let flag = temp2.posts[i].candidates.find(
+        let flag = temp2.posts[i].candidates?.find(
           (element) => element === userid
         );
         if (typeof flag === 'undefined') {
