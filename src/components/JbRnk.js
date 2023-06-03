@@ -84,10 +84,15 @@ const JbRnk = () => {
                   score.score >= jobpost.mintestvalue
                 ) {
                   const usr = await getCandidateById(id);
+                  const usrWPoint =
+                    usr.wmatchTests[jobpost.wtestvalue] &&
+                    usr.wmatchTests[jobpost.wtestvalue] >= jobpost.wmintestvalue
+                      ? jobpost.wmintestvalue
+                      : 0;
                   const newUsr = {
                     ...usr,
                     totalScore:
-                      candidateWPoint +
+                      usrWPoint +
                       candidateMilitaryPoint +
                       jobpost.testvaluescore,
                   };
@@ -134,9 +139,15 @@ const JbRnk = () => {
                   score.score >= jobpost.mintestvalue
                 ) {
                   const usr = await getCandidateById(id);
+                  const usrWPoint =
+                    usr.wmatchTests[jobpost.wtestvalue] &&
+                    usr.wmatchTests[jobpost.wtestvalue] >= jobpost.wmintestvalue
+                      ? jobpost.wmintestvalue
+                      : 0;
+
                   const newUsr = {
                     ...usr,
-                    totalScore: candidateWPoint + jobpost.testvaluescore,
+                    totalScore: usrWPoint + jobpost.testvaluescore,
                   };
                   setCalculatedUsers((prev) => [...prev, newUsr]);
                 }
