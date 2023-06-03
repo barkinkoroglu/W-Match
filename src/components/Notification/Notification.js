@@ -2,7 +2,7 @@ import { Avatar } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Notification({ cname, jname, desc, username }) {
+function Notification({ cname, jname, desc, username, followersName, user }) {
   const navigate = useNavigate();
 
   return (
@@ -10,22 +10,32 @@ function Notification({ cname, jname, desc, username }) {
       <div className='flex pt-1'>
         <Avatar />
       </div>
-      <div className='w-full flex flex-col gap-y-2'>
-        <p className='text-sm'>
-          <span className='font-semibold'> {cname || ''} </span> is hiring{' '}
-          <span className='font-semibold'> {jname || ''} </span>
-          <br />
-          {desc || ''}
-        </p>
-        <div>
-          <button
-            onClick={() => navigate(`/profile/${username}`)}
-            className='px-3 py-1 border rounded-full hover:bg-slate-400'
-          >
-            See this job
-          </button>
+      {user.type !== 2 && (
+        <div className='w-full flex flex-col gap-y-2'>
+          <p className='text-sm'>
+            <span className='font-semibold'> {cname || ''} </span> is hiring{' '}
+            <span className='font-semibold'> {jname || ''} </span>
+            <br />
+            {desc || ''}
+          </p>
+          <div>
+            <button
+              onClick={() => navigate(`/profile/${username}`)}
+              className='px-3 py-1 border rounded-full hover:bg-slate-400'
+            >
+              See this job
+            </button>
+          </div>
         </div>
-      </div>
+      )}
+      {user.type === 2 && (
+        <div className='w-full flex flex-col gap-y-2'>
+          <p className='text-sm'>
+            <span className='font-semibold'> {followersName || ''} </span> is
+            started to following you <br />
+          </p>
+        </div>
+      )}
     </div>
   );
 }

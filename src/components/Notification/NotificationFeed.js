@@ -8,6 +8,7 @@ function NotificationFeed() {
 
   const companyUsernames = useSelector((state) => state.auth.user.following);
   const userType = useSelector((state) => state.auth.user.type);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     if (companyUsernames) {
@@ -34,9 +35,15 @@ function NotificationFeed() {
       )
     );
   };
+  const handleComp = () => {
+    return user.followers.map((p) => (
+      <Notification followersName={p} user={user} />
+    ));
+  };
   return (
-    <div className="flex-[0.6] flex-col md:mx-12">
+    <div className='flex-[0.6] flex-col md:mx-12'>
       {userType === 1 && handleJob()}
+      {userType === 2 && handleComp()}
     </div>
   );
 }
