@@ -430,7 +430,7 @@ function Post(prop) {
 
           {openSettingProfile && (
             <div ref={outerDivRef}>
-              <div className='fixed flex flex-col z-[51] top-5 left-0 right-0 mx-auto max-w-md max-h-[calc(100vh-64px)] px-4 py-3 gap-y-3 rounded bg-white items-center bg-gray-100 border-2 border-gray-300'>
+              <div className='fixed flex flex-col z-[51] top-5 left-0 right-0 mx-auto max-w-xl max-h-[calc(100vh-64px)] px-4 py-3 gap-y-3 rounded bg-white items-center bg-gray-100 border-2 border-gray-300'>
                 <div className='relative py-2  w-full text-center items-center '>
                   <h1 className='text-lg font-medium border-b-2'>Edit</h1>
                   {user && user?.type === 2 && (
@@ -531,7 +531,7 @@ function Post(prop) {
                                 {errors.testvalue}
                               </div>
                             )}
-                            <div className='flex justify-between gap-x-3 items-center whitespace-nowrap  h-8'>
+                            <div className='flex justify-between gap-x-3 items-center whitespace-nowrap  h-8 flex-wrap'>
                               <h1>W-MATCH Tests:</h1>
                               <Field
                                 className='border-2 flex-grow'
