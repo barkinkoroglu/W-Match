@@ -9,6 +9,10 @@ const JbRnk = () => {
   const [candidateObj, setCandidateObj] = useState([]);
   const [scores, setScores] = useState([]);
   const [calculatedUsers, setCalculatedUsers] = useState([]);
+  console.log(
+    '🚀 ~ file: JbRnk.js:12 ~ JbRnk ~ calculatedUsers:',
+    calculatedUsers
+  );
   const [sortedUsers, setSortedUsers] = useState([]);
 
   const { jobpost } = useSelector((state) => state.jobpost);
@@ -84,11 +88,13 @@ const JbRnk = () => {
                   score.score >= jobpost.mintestvalue
                 ) {
                   const usr = await getCandidateById(id);
+
                   const usrWPoint =
                     usr.wmatchTests[jobpost.wtestvalue] &&
                     usr.wmatchTests[jobpost.wtestvalue] >= jobpost.wmintestvalue
-                      ? jobpost.wmintestvalue
+                      ? jobpost.wtestvaluescore
                       : 0;
+
                   const newUsr = {
                     ...usr,
                     totalScore:
@@ -96,6 +102,7 @@ const JbRnk = () => {
                       candidateMilitaryPoint +
                       jobpost.testvaluescore,
                   };
+
                   setCalculatedUsers((prev) => [...prev, newUsr]);
                 }
               });
@@ -142,7 +149,7 @@ const JbRnk = () => {
                   const usrWPoint =
                     usr.wmatchTests[jobpost.wtestvalue] &&
                     usr.wmatchTests[jobpost.wtestvalue] >= jobpost.wmintestvalue
-                      ? jobpost.wmintestvalue
+                      ? jobpost.wtestvaluescore
                       : 0;
 
                   const newUsr = {
