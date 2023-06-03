@@ -36,7 +36,7 @@ function NotificationFeed() {
     );
   };
   const handleComp = () => {
-    return user.followers.map((p) => (
+    return user.followers?.map((p) => (
       <Notification followersName={p} user={user} />
     ));
   };
