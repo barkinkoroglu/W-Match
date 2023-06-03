@@ -40,10 +40,17 @@ function Profile() {
   useEffect(() => {
     if (user) {
       const n =
-        user.wmatchTests &&
-        Object.keys(user.wmatchTests).map((a) => a.toLowerCase());
+        (user.type === 1 &&
+          user.wmatchTests &&
+          Object.keys(user.wmatchTests).map((a) => {
+            return a.toLowerCase();
+          })) ||
+        [];
+
       if (
-        n.indexOf(user.skill.toLowerCase() || '') !== -1 ||
+        (n &&
+          n.length > 0 &&
+          n.indexOf(user.skill.toLowerCase() || '') !== -1) ||
         user.skill === ''
       ) {
         setShow(true);
