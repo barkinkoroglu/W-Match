@@ -42,7 +42,10 @@ function Profile() {
       const n =
         user.wmatchTests &&
         Object.keys(user.wmatchTests).map((a) => a.toLowerCase());
-      if (n.indexOf(user.skill.toLowerCase() || '')) {
+      if (
+        n.indexOf(user.skill.toLowerCase() || '') !== -1 ||
+        user.skill === ''
+      ) {
         setShow(true);
       }
     }
