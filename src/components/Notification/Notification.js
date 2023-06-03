@@ -32,7 +32,7 @@ function Notification({ cname, jname, desc, username, post }) {
                 onClick={() => navigate(`/profile/${username}`)}
                 className='px-3 py-1 border rounded-full hover:bg-slate-400'
               >
-                See this job
+                See this Company
               </button>
             </div>
           </div>

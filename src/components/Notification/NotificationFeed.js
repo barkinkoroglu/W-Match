@@ -44,14 +44,16 @@ function NotificationFeed() {
     );
   };
   useEffect(() => {
-    const getPosts = async () => {
-      const posts = await getAllPostbyname(user);
-      const posts2 =
-        posts && posts.length > 0 && posts.filter((p) => p.type === 3);
+    if (user) {
+      const getPosts = async () => {
+        const posts = await getAllPostbyname(user);
+        const posts2 =
+          posts && posts.length > 0 && posts.filter((p) => p.type === 3);
 
-      setJobPosts(posts2);
-    };
-    getPosts();
+        setJobPosts(posts2);
+      };
+      getPosts();
+    }
   }, [user]);
 
   return (
