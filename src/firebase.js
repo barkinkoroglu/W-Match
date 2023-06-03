@@ -229,7 +229,6 @@ export const userRegister = async (
           isTest,
           skill,
         });
-        //console.log(response);
       }
       return response.user;
     }
@@ -752,7 +751,6 @@ export const searchCompany = async (companydata, search) => {
     (element) => element?.companyname?.toLowerCase().includes(search) === true
   );
   const temp = result.slice(0, 5);
-  console.log(temp);
   return temp;
 };
 
@@ -774,7 +772,7 @@ export const getRandomCompanyJobs = async (userid) => {
   });
 
   const result = temp.slice(0, 5);
-  console.log(result);
+
   return shuffle(result);
 };
 
