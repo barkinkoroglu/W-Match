@@ -5,6 +5,7 @@ import { Avatar } from '@mui/material';
 
 const JbRnk = () => {
   const [allCandidatesId, setAllCandidatesId] = useState([]);
+
   const [candidateObj, setCandidateObj] = useState([]);
   const [scores, setScores] = useState([]);
   const [calculatedUsers, setCalculatedUsers] = useState([]);
@@ -68,7 +69,16 @@ const JbRnk = () => {
         }
 
         if (jobpost.mintestvalue && jobpost.testvaluescore) {
+          if (scores.length === 0) {
+            const newUsr = {
+              ...candidate,
+              totalScore: candidateWPoint + candidateMilitaryPoint,
+            };
+            setCalculatedUsers((prev) => [...prev, newUsr]);
+          }
           scores.map((score) => {
+            console.log('hello');
+
             allCandidatesId &&
               allCandidatesId.map((id) => {
                 if (
@@ -84,6 +94,11 @@ const JbRnk = () => {
                   };
                   setCalculatedUsers((prev) => [...prev, newUsr]);
                 }
+                const newUsr = {
+                  ...candidate,
+                  totalScore: candidateWPoint + candidateMilitaryPoint,
+                };
+                setCalculatedUsers((prev) => [...prev, newUsr]);
               });
           });
         }
@@ -103,6 +118,13 @@ const JbRnk = () => {
         }
 
         if (jobpost.mintestvalue && jobpost.testvaluescore) {
+          if (scores.length === 0) {
+            const newUsr = {
+              ...candidate,
+              totalScore: candidateWPoint,
+            };
+            setCalculatedUsers((prev) => [...prev, newUsr]);
+          }
           scores.map((score) => {
             allCandidatesId &&
               allCandidatesId.map((id) => {
@@ -117,6 +139,11 @@ const JbRnk = () => {
                   setCalculatedUsers((prev) => [...prev, newUsr]);
                 }
               });
+            const newUsr = {
+              ...candidate,
+              totalScore: candidateWPoint,
+            };
+            setCalculatedUsers((prev) => [...prev, newUsr]);
           });
         }
       });
