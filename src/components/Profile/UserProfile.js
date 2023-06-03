@@ -595,6 +595,7 @@ function UserProfile({ user, param }) {
       {user.type === 1 && (
         <div className='p-2 bg-white rounded-lg flex flex-col gap-y-2  relative group '>
           <a
+            target='_blank'
             href={
               ruser.username === param.id
                 ? prodata?.CVdoc || ruser.CVdoc
