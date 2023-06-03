@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 function Profile() {
   const [user, setUser] = useState(null);
   const [isRight, setIsRight] = useState(false);
+  const [show, setShow] = useState(false);
   const param = useParams();
   const userr = useSelector((state) => state.auth.user);
   useEffect(() => {
@@ -36,7 +37,16 @@ function Profile() {
     };
     gtRight();
   }, [user]);
-
+  useEffect(() => {
+    if (user) {
+      const n =
+        user.wmatchTests &&
+        Object.keys(user.wmatchTests).map((a) => a.toLowerCase());
+      if (n.indexOf(user.skill.toLowerCase() || '')) {
+        setShow(true);
+      }
+    }
+  }, [user]);
   if (user === false) {
     return <div>Profile not found.</div>;
   }
@@ -47,21 +57,21 @@ function Profile() {
   return (
     <div>
       <Navbar />
-      <div className="bg-gray-50">
-        <div className="md:flex max-w-6xl px-3 pt-3 md:mx-auto">
-          <div className="w-full md:w-[70%]">
+      <div className='bg-gray-50'>
+        <div className='md:flex max-w-6xl px-3 pt-3 md:mx-auto'>
+          <div className='w-full md:w-[70%]'>
             <UserProfile user={user} param={param} />
           </div>
-          <div className="flex flex-col w-full md:w-[30%]">
+          <div className='flex flex-col w-full md:w-[30%]'>
             <Widget />
-            <div className="mt-3">
-              {!user.skill &&
+            <div className='mt-3'>
+              {show &&
                 user &&
                 user.type === 1 &&
                 userr?.username &&
                 user?.username === userr.username && <TestInfo user={user} />}
             </div>
-            <div className="mt-3 mb-1">
+            <div className='mt-3 mb-1'>
               {isRight &&
                 user &&
                 userr?.username &&
