@@ -164,7 +164,13 @@ const JbRnk = () => {
   };
   const eliminzeUsers = () => {
     return calculatedUsers.reduce((acc, current) => {
-      if (!acc.some((el) => el.username === current.username)) {
+      if (
+        !acc.some(
+          (el) =>
+            el.username === current.username &&
+            el.totalScore === current.totalScore
+        )
+      ) {
         acc.push(current);
       }
 
@@ -176,8 +182,20 @@ const JbRnk = () => {
     const b = a
       .filter((el) => typeof el.totalScore === 'number')
       .sort((a, b) => b.totalScore - a.totalScore);
+    const c = Object.values(
+      b.reduce((acc, user) => {
+        if (
+          !acc[user.username] ||
+          user.totalScore > acc[user.username].totalScore
+        ) {
+          acc[user.username] = user;
+        }
+        return acc;
+      }, {})
+    );
+
     if (b) {
-      setSortedUsers(b);
+      setSortedUsers(c);
     }
   }, [calculatedUsers]);
   return (
