@@ -287,7 +287,6 @@ function Post(prop) {
         name: user.companyname,
         username: user.username,
         email: user.email,
-        candidates: [],
         numberRec: values.recomnumber,
         type: 3,
         experience: values.experience,
