@@ -78,13 +78,14 @@ const JbRnk = () => {
           }
           scores.map((score) => {
             allCandidatesId &&
-              allCandidatesId.map((id) => {
+              allCandidatesId.map(async (id) => {
                 if (
                   score.userid === id &&
                   score.score >= jobpost.mintestvalue
                 ) {
+                  const usr = await getCandidateById(id);
                   const newUsr = {
-                    ...candidate,
+                    ...usr,
                     totalScore:
                       candidateWPoint +
                       candidateMilitaryPoint +
@@ -92,12 +93,13 @@ const JbRnk = () => {
                   };
                   setCalculatedUsers((prev) => [...prev, newUsr]);
                 }
-                const newUsr = {
-                  ...candidate,
-                  totalScore: candidateWPoint + candidateMilitaryPoint,
-                };
-                setCalculatedUsers((prev) => [...prev, newUsr]);
               });
+
+            const newUsr = {
+              ...candidate,
+              totalScore: candidateWPoint + candidateMilitaryPoint,
+            };
+            setCalculatedUsers((prev) => [...prev, newUsr]);
           });
         }
       });
@@ -123,15 +125,17 @@ const JbRnk = () => {
             };
             setCalculatedUsers((prev) => [...prev, newUsr]);
           }
+
           scores.map((score) => {
             allCandidatesId &&
-              allCandidatesId.map((id) => {
+              allCandidatesId.map(async (id) => {
                 if (
                   score.userid === id &&
                   score.score >= jobpost.mintestvalue
                 ) {
+                  const usr = await getCandidateById(id);
                   const newUsr = {
-                    ...candidate,
+                    ...usr,
                     totalScore: candidateWPoint + jobpost.testvaluescore,
                   };
                   setCalculatedUsers((prev) => [...prev, newUsr]);
