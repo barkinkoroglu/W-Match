@@ -10,7 +10,7 @@ function Notification({ cname, jname, desc, username, followersName, user }) {
       <div className='flex pt-1'>
         <Avatar />
       </div>
-      {user.type !== 2 && (
+      {!user && (
         <div className='w-full flex flex-col gap-y-2'>
           <p className='text-sm'>
             <span className='font-semibold'> {cname || ''} </span> is hiring{' '}
@@ -28,7 +28,7 @@ function Notification({ cname, jname, desc, username, followersName, user }) {
           </div>
         </div>
       )}
-      {user.type === 2 && (
+      {user && user.type === 2 && (
         <div className='w-full flex flex-col gap-y-2'>
           <p className='text-sm'>
             <span className='font-semibold'> {followersName || ''} </span> is
