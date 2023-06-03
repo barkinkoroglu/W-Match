@@ -57,7 +57,9 @@ function NotificationFeed() {
   return (
     <div className='flex-[0.6] flex-col md:mx-12'>
       {userType === 1 && handleJob()}
-      {userType === 2 && handleComp()}
+      {userType === 2 && (
+        <div className=' overflow-auto max-h-600 '> {handleComp()}</div>
+      )}
     </div>
   );
 }

@@ -40,7 +40,7 @@ function Notification({ cname, jname, desc, username, post }) {
       )}
       {post && post.candidates && post?.candidates?.length > 0 && (
         <>
-          <div className='w-full flex flex-col  '>
+          <div className=''>
             <div className='w-full flex flex-col gap-y-2'>
               <p className='text-sm'>
                 <span className='font-semibold'>
