@@ -84,7 +84,15 @@ function Notification({ cname, jname, desc, username, post }) {
                   </button>
                 </div>
                 <div className='flex flex-col gap-y-3 py-3 overflow-y-auto'>
-                  {<JbRnk rec={post.numberRec} />}
+                  {
+                    <JbRnk
+                      rec={
+                        post?.candidates?.length < post?.numberRec
+                          ? post?.candidates?.length
+                          : post.numberRec
+                      }
+                    />
+                  }
                 </div>
               </div>
             </div>
