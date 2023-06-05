@@ -77,5 +77,47 @@ In addition, both the company and the user can search for companies in the w-mat
 
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/29650ad2-eebb-47ce-bf72-0d037d538597)
 
+By the job seeker user, when he/she enters the system
 
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/4cc357c5-362e-4aff-9abe-ed0e01121ab0)
+
+Unlike the home company user, there are companies that you can follow. You can scroll down this widget and follow the companies that interest you.
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/c3be6eee-e57a-46de-bed9-84e10a4631ab)
+
+It can be applied once to the job post created by the company. And after it is applied, the button becomes inactive.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/556fb1eb-3679-453d-aa27-3c4c64ec9cf6)
+
+If asked about his military service status, after clink  apply, questions like the following are asked and the user earns extra points in the job ranking depending on the situation.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/e6a8083e-ee77-4886-893d-67884bcb8bfb)
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/531983d6-be99-4a71-bab9-c3a339406686)
+
+The user can earn points by taking the test of the companies.You can take these tests only once.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/b8c45986-913b-4543-abf1-2bfeb4afdf4c)
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/e60210df-dd23-43de-9a3f-f97851cb7b37)
+
+In addition, the user can take W-Match's own tests.You can take these tests a maximum of 2 times.
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/4d9a8765-4ac6-4b04-941d-ca8f7808694a)
+
+When you enter this test, you will see a screen like the one below.Here you can choose the difficulty of the test at the beginning.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/3403ba89-4802-4ed1-94f0-6b5d9d13c083)
+
+After taking the test for the 2nd time, the button becomes inactive.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/853e8bae-c975-48b4-a8d3-fddb3995e412)
+
+Test access rights and scores are displayed on the profile page. Only the user can see it.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/04a223e9-cad1-4bff-9fff-39e771bcf668)
+
+Notification Section:
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/05f75f8b-f341-4499-8323-65f4b9c48555)
+
+You can follow companies and show their posts on the homepage, or unfollow them.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/2007165e-cffd-4658-811b-c28816e5b1a8)
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/9df9fe26-473a-4ff9-9694-4a38de026b10)
+
+![Uploading image.png…]()
 
