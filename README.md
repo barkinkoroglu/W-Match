@@ -138,4 +138,9 @@ You can see the companies you are following by clicking on the 'Following' secti
 
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/db60a8d0-d79f-42dc-ae3a-f08e1ec139c2)
 
+The website is also responsive.
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/abad9a4d-e260-4c77-9aab-bc1ed1770dd3)
+
+
 
