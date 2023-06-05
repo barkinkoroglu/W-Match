@@ -43,6 +43,7 @@ Sample Job Posting
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/13281b12-22fd-4c87-bee2-6c57e24933a5)
 
 Users can edit or delete the post.
+
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/52d4aaea-8283-4af7-87f8-6c083fbc892e)
 
 Companies can view the results of both the tests and the created job postings.
@@ -103,12 +104,15 @@ In addition, the user can take W-Match's own tests.You can take these tests a ma
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/4d9a8765-4ac6-4b04-941d-ca8f7808694a)
 
 When you enter this test, you will see a screen like the one below.Here you can choose the difficulty of the test at the beginning.
+
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/3403ba89-4802-4ed1-94f0-6b5d9d13c083)
 
 After taking the test for the 2nd time, the button becomes inactive.
+
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/853e8bae-c975-48b4-a8d3-fddb3995e412)
 
 Test access rights and scores are displayed on the profile page. Only the user can see it.
+
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/04a223e9-cad1-4bff-9fff-39e771bcf668)
 
 Notification Section:
@@ -116,8 +120,20 @@ Notification Section:
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/05f75f8b-f341-4499-8323-65f4b9c48555)
 
 You can follow companies and show their posts on the homepage, or unfollow them.
+
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/2007165e-cffd-4658-811b-c28816e5b1a8)
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/9df9fe26-473a-4ff9-9694-4a38de026b10)
 
-![Uploading image.png…]()
+User can see current job posts
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/5deb09ad-289f-4725-b99c-7a7d7c724f03)
+
+Additionally, you can like or comment on posts.
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/aff52ff5-f009-4078-91c0-2d5e680f8794)
+
+You can see the companies you are following by clicking on the 'Following' section on the left-hand side
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/db60a8d0-d79f-42dc-ae3a-f08e1ec139c2)
+
 
