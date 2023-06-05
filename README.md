@@ -1,4 +1,4 @@
-[W-Match](https://w-match.vercel.app)
+# [W-MATCH](https://w-match.vercel.app)
 
 W-Match Employer and Employee Connection Platform is a project that allows people to get scores by doing test and creating CVs; matching people with company according to the needs of employer company; and applying recruitment procedures for the matching company.
 
