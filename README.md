@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+W-Match Employer and Employee Connection Platform is a project that allows people to get scores by doing test and creating CVs; matching people with company according to the needs of employer company; and applying recruitment procedures for the matching company.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/3d6d7f26-a8d1-40c5-a575-61243c90c1b0)
 
-## Available Scripts
+You can register on the site as a job seeker or a company.
 
-In the project directory, you can run:
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/f3b40c79-4e0f-4b29-a50f-f7e5bdbb0699)
 
-### `npm start`
+Job seekers can fill out their information, upload their resumes, and also take W-Match tests to measure their skills.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/b4c220bd-03ba-4999-a355-cef2395f5be6)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/ea1e634f-cb42-4b20-83f4-c44b0e774a6e)
 
-### `npm test`
+In addition, companies can register in the system by entering their own information.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Sample e-mail and password for job seeker user:
+email: cengizbalta@hotmail.com
+password: Barkin123#
 
-### `npm run build`
+Sample e-mail and password for company user:
+email: turkishairlines@hotmail.com
+password: Barkin123#
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/898299ef-5344-43db-803a-30c2d6f4d117)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Companies can create tests
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/b30bde70-ecd1-4969-8309-749932e38666)
 
-### `npm run eject`
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/27131a87-b95f-4ef7-bbfe-6025b2ea9c6b)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Furthermore, companies can create job opportunities. If job seekers achieve scores higher than the desired scores on the tests created by the company or on W-Match tests, they can earn extra points in the job ranking. Companies can specify the number of recommended candidates they would like to receive. These recommended candidates will be notified through the company's notification system to inform them about the company.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/6c3a5a14-1803-4dc3-afea-e173ae443847)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Sample Test Posting 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/244eeebc-2e2e-46cb-8aed-6c5e225ad7b7)
 
-## Learn More
+Sample Job Posting
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/13281b12-22fd-4c87-bee2-6c57e24933a5)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Users can edit or delete the post.
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/52d4aaea-8283-4af7-87f8-6c083fbc892e)
 
-### Code Splitting
+Companies can view the results of both the tests and the created job postings.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/8d00e166-9032-4066-a9c2-1762477ce79e)
 
-### Analyzing the Bundle Size
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/12b45fce-cda9-470a-be1e-95206a8a9a72)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Users can edit or delete the post. We also inform the user about whether the operation was successful or not.
 
-### Making a Progressive Web App
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/1119a279-3373-4dff-99f7-4f3040264c71)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/66ccc7af-db5b-4908-85de-21136b28ae4b)
 
-### Advanced Configuration
+The company can see who is following it from the sidebar on the left.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/85211ede-febc-4be2-b251-f156f49fac4d)
 
-### Deployment
+Notification:
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/e5c40743-36cc-4396-b816-490cac9b7134)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+Companies can upload profile photos and cover photos, and they can also update their own information.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/78d6e89b-90c3-4e07-91a8-018f285fe7bf)
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/94996ba1-5df8-454a-95be-80c92d621fa4)
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/47df5b8d-6060-4a84-a789-10c40163dbe8)
+
+In addition, both the company and the user can search for companies in the w-match system.
+
+![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/29650ad2-eebb-47ce-bf72-0d037d538597)
+
+
+
