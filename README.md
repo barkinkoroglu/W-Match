@@ -141,5 +141,42 @@ The website is also responsive.
 
 ![image](https://github.com/barkinkoroglu/W-Match/assets/54675420/7fc74c06-982e-4539-8b7c-79083a3c6ab9)
 
+## Dependencies
+- @emotion/react: ^11.10.5
+- @emotion/styled: ^11.10.5
+- @mui/icons-material: ^5.11.0
+- @mui/material: ^5.11.3
+- @reduxjs/toolkit: ^1.9.2
+- @testing-library/jest-dom: ^5.16.5
+- @testing-library/react: ^13.4.0
+- @testing-library/user-event: ^13.5.0
+- aos: ^2.3.4
+- dotenv: ^16.0.3
+- firebase: ^9.17.1
+- formik: ^2.2.9
+- lodash: ^4.17.21
+- moment: ^2.29.4
+- react: ^18.2.0
+- react-calendar: ^4.2.1
+- react-country-region-selector: ^3.6.1
+- react-datepicker: ^4.12.0
+- react-dom: ^18.2.0
+- react-helmet: ^6.1.0
+- react-hot-toast: ^2.4.0
+- react-icons: ^4.8.0
+- react-phone-input-2: ^2.15.1
+- react-phone-number-input: ^3.2.15
+- react-redux: ^8.0.5
+- react-router-dom: ^6.6.1
+- react-scripts: 5.0.1
+- react-select: ^5.7.0
+- react-select-country-list: ^2.2.3
+- tailwind-scrollbar-hide: ^1.1.7
+- uuid: ^9.0.0
+- web-vitals: ^2.1.4
+- yup: ^0.32.11
 
+## Development Dependencies
+- dotenv-webpack: ^8.0.1
+- tailwindcss: ^3.2.4
 
